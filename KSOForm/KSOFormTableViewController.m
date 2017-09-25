@@ -88,7 +88,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
+    if ([cell canBecomeFirstResponder]) {
+        [cell becomeFirstResponder];
+    }
+    else {
+        [self.tableView endEditing:NO];
+    }
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     

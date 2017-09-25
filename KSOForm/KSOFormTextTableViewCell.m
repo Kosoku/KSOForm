@@ -40,9 +40,23 @@
     [_textField setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_textField setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [_textField setTextAlignment:NSTextAlignmentRight];
+    [_textField setInputAccessoryView:[[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:_textField]];
     [self.contentView addSubview:_textField];
     
     return self;
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return [self.textField canBecomeFirstResponder];
+}
+- (BOOL)canResignFirstResponder {
+    return [self.textField canResignFirstResponder];
+}
+- (BOOL)becomeFirstResponder {
+    return [self.textField becomeFirstResponder];
+}
+- (BOOL)resignFirstResponder {
+    return [self.textField resignFirstResponder];
 }
 
 + (BOOL)requiresConstraintBasedLayout {
