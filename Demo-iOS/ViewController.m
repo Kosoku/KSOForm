@@ -57,15 +57,18 @@
                             KSOFormRowKeyPlaceholder: @"Enter your password",
                             KSOFormRowKeySecureTextEntry: @YES,
                             KSOFormRowKeyTextContentType: UITextContentTypePassword
+                            },
+                          @{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
+                            KSOFormRowKeyTitle: @"Secure Text Entry"
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: section1,
                                                               KSOFormSectionKeyHeaderTitle: @"Read only values",
-                                                              KSOFormSectionKeyFooterTitle: @"Additional info in the footer title"
+                                                              KSOFormSectionKeyFooterTitle: @"Section footer title"
                                                               },
                                                             @{KSOFormSectionKeyRows: section2,
                                                               KSOFormSectionKeyHeaderTitle: @"Login details",
-                                                              KSOFormSectionKeyFooterTitle: @"Info about the password field if relevant"
+                                                              KSOFormSectionKeyFooterTitle: @"Section footer title"
                                                               }]};
     
     [self.tableViewController setModel:[[KSOFormModel alloc] initWithDictionary:dictionary]];

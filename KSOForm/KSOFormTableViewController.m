@@ -16,6 +16,7 @@
 #import "KSOFormTableViewController.h"
 #import "KSOFormLabelTableViewCell.h"
 #import "KSOFormTextTableViewCell.h"
+#import "KSOFormSwitchTableViewCell.h"
 #import "KSOFormModel.h"
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
@@ -58,6 +59,7 @@
     [self.tableView setEstimatedRowHeight:44.0];
     [self.tableView registerClass:KSOFormLabelTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormLabelTableViewCell.class)];
     [self.tableView registerClass:KSOFormTextTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormTextTableViewCell.class)];
+    [self.tableView registerClass:KSOFormSwitchTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSwitchTableViewCell.class)];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -82,6 +84,9 @@
             break;
         case KSOFormRowTypeText:
             retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormTextTableViewCell.class) forIndexPath:indexPath];
+            break;
+        case KSOFormRowTypeSwitch:
+            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSwitchTableViewCell.class) forIndexPath:indexPath];
             break;
         default:
             break;
