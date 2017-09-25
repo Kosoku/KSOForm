@@ -20,9 +20,7 @@
 
 @interface KSOFormLabelTableViewCell ()
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
-@property (strong,nonatomic) UILabel *valueLabel;
-
-@property (copy,nonatomic) NSArray<NSLayoutConstraint *> *activeConstraints;
+@property (strong,nonatomic) UILabel *trailingView;
 @end
 
 @implementation KSOFormLabelTableViewCell
@@ -31,60 +29,41 @@
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
         return nil;
     
-    _leadingView = [[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero];
-    [_leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [self.contentView addSubview:_leadingView];
+    [self setLeadingView:[[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero]];
+    [self.leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.contentView addSubview:self.leadingView];
     
-    _valueLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_valueLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_valueLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [self.contentView addSubview:_valueLabel];
+    [self setTrailingView:[[UILabel alloc] initWithFrame:CGRectZero]];
+    [self.trailingView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.contentView addSubview:self.trailingView];
     
     return self;
 }
 
-+ (BOOL)requiresConstraintBasedLayout {
-    return YES;
-}
-- (void)updateConstraints {
-    [NSLayoutConstraint deactivateConstraints:self.activeConstraints];
-    
-    NSMutableArray *constraints = [[NSMutableArray alloc] init];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[view]" options:0 metrics:@{@"left": @(self.layoutMargins.left)} views:@{@"view": self.leadingView}]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.leadingView}]];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]-right-|" options:0 metrics:@{@"right": @(self.layoutMargins.right)} views:@{@"view": self.valueLabel, @"subview": self.leadingView}]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.valueLabel}]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.valueLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
-    
-    [NSLayoutConstraint activateConstraints:constraints];
-    
-    [self setActiveConstraints:constraints];
-    
-    [super updateConstraints];
-}
+@dynamic leadingView;
+@dynamic trailingView;
 
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
     
     [self.leadingView setFormRow:formRow];
-    [self.valueLabel setText:formRow.value];
+    [self.trailingView setText:formRow.value];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
     
     [self.leadingView setFormTheme:formTheme];
     
-    [self.valueLabel setFont:formTheme.valueFont];
-    [self.valueLabel setTextColor:formTheme.valueColor];
+    [self.trailingView setFont:formTheme.valueFont];
+    [self.trailingView setTextColor:formTheme.valueColor];
     
     if (formTheme.valueTextStyle == nil) {
-        [NSObject KDI_unregisterDynamicTypeObject:self.valueLabel];
+        [NSObject KDI_unregisterDynamicTypeObject:self.trailingView];
     }
     else {
-        [NSObject KDI_registerDynamicTypeObject:self.valueLabel forTextStyle:formTheme.valueTextStyle];
+        [NSObject KDI_registerDynamicTypeObject:self.trailingView forTextStyle:formTheme.valueTextStyle];
     }
 }
 

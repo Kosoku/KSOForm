@@ -21,7 +21,7 @@
 
 @interface KSOFormTextTableViewCell ()
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
-@property (strong,nonatomic) KDITextField *textField;
+@property (strong,nonatomic) KDITextField *trailingView;
 
 @property (copy,nonatomic) NSArray<NSLayoutConstraint *> *activeConstraints;
 @end
@@ -34,78 +34,59 @@
     
     kstWeakify(self);
     
-    _leadingView = [[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero];
-    [_leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [self.contentView addSubview:_leadingView];
+    [self setLeadingView:[[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero]];
+    [self.leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.contentView addSubview:self.leadingView];
     
-    _textField = [[KDITextField alloc] initWithFrame:CGRectZero];
-    [_textField setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_textField setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [_textField setTextAlignment:NSTextAlignmentRight];
-    [_textField setInputAccessoryView:[[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:_textField]];
-    [_textField KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+    [self setTrailingView:[[KDITextField alloc] initWithFrame:CGRectZero]];
+    [self.trailingView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.trailingView setTextAlignment:NSTextAlignmentRight];
+    [self.trailingView setInputAccessoryView:[[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:self.trailingView]];
+    [self.trailingView KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
-        [self.formRow setValue:self.textField.text];
+        [self.formRow setValue:self.trailingView.text];
     } forControlEvents:UIControlEventAllEditingEvents];
-    [self.contentView addSubview:_textField];
+    [self.contentView addSubview:self.trailingView];
     
     return self;
 }
 #pragma mark -
+@dynamic leadingView;
+@dynamic trailingView;
+#pragma mark -
 - (BOOL)canBecomeFirstResponder {
-    return [self.textField canBecomeFirstResponder];
+    return [self.trailingView canBecomeFirstResponder];
 }
 - (BOOL)canResignFirstResponder {
-    return [self.textField canResignFirstResponder];
+    return [self.trailingView canResignFirstResponder];
 }
 - (BOOL)becomeFirstResponder {
-    return [self.textField becomeFirstResponder];
+    return [self.trailingView becomeFirstResponder];
 }
 - (BOOL)resignFirstResponder {
-    return [self.textField resignFirstResponder];
-}
-#pragma mark -
-+ (BOOL)requiresConstraintBasedLayout {
-    return YES;
-}
-- (void)updateConstraints {
-    [NSLayoutConstraint deactivateConstraints:self.activeConstraints];
-    
-    NSMutableArray *constraints = [[NSMutableArray alloc] init];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[view]" options:0 metrics:@{@"left": @(self.layoutMargins.left)} views:@{@"view": self.leadingView}]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.leadingView}]];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]-right-|" options:0 metrics:@{@"right": @(self.layoutMargins.right)} views:@{@"view": self.textField, @"subview": self.leadingView}]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.textField}]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.textField attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
-    
-    [NSLayoutConstraint activateConstraints:constraints];
-    
-    [self setActiveConstraints:constraints];
-    
-    [super updateConstraints];
+    return [self.trailingView resignFirstResponder];
 }
 #pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
     
     [self.leadingView setFormRow:formRow];
-    [self.textField setText:formRow.value];
-    [self.textField setPlaceholder:formRow.placeholder];
-    [self.textField setKeyboardType:formRow.keyboardType];
-    [self.textField setAutocapitalizationType:formRow.autocapitalizationType];
-    [self.textField setAutocorrectionType:formRow.autocorrectionType];
-    [self.textField setSpellCheckingType:formRow.spellCheckingType];
-    [self.textField setSecureTextEntry:formRow.isSecureTextEntry];
+    [self.trailingView setText:formRow.value];
+    [self.trailingView setPlaceholder:formRow.placeholder];
+    [self.trailingView setKeyboardType:formRow.keyboardType];
+    [self.trailingView setAutocapitalizationType:formRow.autocapitalizationType];
+    [self.trailingView setAutocorrectionType:formRow.autocorrectionType];
+    [self.trailingView setSpellCheckingType:formRow.spellCheckingType];
+    [self.trailingView setSecureTextEntry:formRow.isSecureTextEntry];
     if (@available(iOS 10.0, *)) {
-        [self.textField setTextContentType:formRow.textContentType];
+        [self.trailingView setTextContentType:formRow.textContentType];
     }
     if (@available(iOS 11.0, *)) {
-        [self.textField setSmartQuotesType:formRow.smartQuotesType];
-        [self.textField setSmartDashesType:formRow.smartDashesType];
-        [self.textField setSmartInsertDeleteType:formRow.smartInsertDeleteType];
+        [self.trailingView setSmartQuotesType:formRow.smartQuotesType];
+        [self.trailingView setSmartDashesType:formRow.smartDashesType];
+        [self.trailingView setSmartInsertDeleteType:formRow.smartInsertDeleteType];
     }
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
@@ -113,20 +94,20 @@
     
     [self.leadingView setFormTheme:formTheme];
     
-    [self.textField setFont:formTheme.valueFont];
-    [self.textField setTextColor:formTheme.textColor ?: self.tintColor];
-    [self.textField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:self.formRow.placeholder attributes:@{NSForegroundColorAttributeName: formTheme.valueColor}]];
-    [self.textField setKeyboardAppearance:formTheme.keyboardAppearance];
+    [self.trailingView setFont:formTheme.valueFont];
+    [self.trailingView setTextColor:formTheme.textColor ?: self.tintColor];
+    [self.trailingView setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:self.formRow.placeholder attributes:@{NSForegroundColorAttributeName: formTheme.valueColor}]];
+    [self.trailingView setKeyboardAppearance:formTheme.keyboardAppearance];
     
     if (formTheme.textSelectionColor != nil) {
-        [self.textField setTintColor:formTheme.textSelectionColor];
+        [self.trailingView setTintColor:formTheme.textSelectionColor];
     }
     
     if (formTheme.valueTextStyle == nil) {
-        [NSObject KDI_unregisterDynamicTypeObject:self.textField];
+        [NSObject KDI_unregisterDynamicTypeObject:self.trailingView];
     }
     else {
-        [NSObject KDI_registerDynamicTypeObject:self.textField forTextStyle:formTheme.valueTextStyle];
+        [NSObject KDI_registerDynamicTypeObject:self.trailingView forTextStyle:formTheme.valueTextStyle];
     }
 }
 
