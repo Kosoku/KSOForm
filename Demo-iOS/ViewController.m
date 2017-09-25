@@ -50,7 +50,11 @@
                                                         @{KSOFormRowKeyTitle: @"Title",
                                                           KSOFormRowKeySubtitle: @"Subtitle",
                                                           KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
-                                                          KSOFormRowKeyValue: @"Value"}]};
+                                                          KSOFormRowKeyValue: @"Value"},
+                                                        @{KSOFormRowKeyType: @(KSOFormRowTypeText),
+                                                          KSOFormRowKeyTitle: @"Title",
+                                                          KSOFormRowKeyPlaceholder: @"Type something"
+                                                          }]};
     
     [self.tableViewController setModel:[[KSOFormModel alloc] initWithDictionary:dictionary]];
 }

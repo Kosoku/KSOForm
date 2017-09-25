@@ -34,6 +34,7 @@
     _image = dictionary[KSOFormRowKeyImage];
     _title = dictionary[KSOFormRowKeyTitle];
     _subtitle = dictionary[KSOFormRowKeySubtitle];
+    _placeholder = dictionary[KSOFormRowKeyPlaceholder];
     
     return self;
 }

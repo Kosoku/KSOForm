@@ -34,6 +34,7 @@ static KSOFormRowKey const KSOFormRowKeyDidChangeBlock = @"didChangeBlock";
 static KSOFormRowKey const KSOFormRowKeyImage = @"image";
 static KSOFormRowKey const KSOFormRowKeyTitle = @"title";
 static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
+static KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
 
 @interface KSOFormRow : NSObject
 
@@ -46,6 +47,7 @@ static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
 @property (strong,nonatomic,nullable) UIImage *image;
 @property (copy,nonatomic,nullable) NSString *title;
 @property (copy,nonatomic,nullable) NSString *subtitle;
+@property (copy,nonatomic,nullable) NSString *placeholder;
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
