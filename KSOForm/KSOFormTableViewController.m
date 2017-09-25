@@ -66,6 +66,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.model.sections[section].rows.count;
 }
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return self.model.sections[section].headerTitle;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return self.model.sections[section].footerTitle;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     KSOFormRow *formRow = self.model.sections[indexPath.section].rows[indexPath.row];
     KSOFormRowTableViewCell *retval = nil;

@@ -15,15 +15,22 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NSString* KSOFormSectionKey NS_STRING_ENUM;
 
 static KSOFormSectionKey const KSOFormSectionKeyRows = @"rows";
+static KSOFormSectionKey const KSOFormSectionKeyHeaderTitle = @"headerTitle";
+static KSOFormSectionKey const KSOFormSectionKeyFooterTitle = @"footerTitle";
 
 @class KSOFormRow,KSOFormModel;
 
 @interface KSOFormSection : NSObject
 
 @property (readonly,weak,nonatomic) KSOFormModel *model;
+
+@property (copy,nonatomic,nullable) NSString *headerTitle;
+@property (copy,nonatomic,nullable) NSString *footerTitle;
 
 @property (readonly,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 
@@ -33,3 +40,6 @@ static KSOFormSectionKey const KSOFormSectionKeyRows = @"rows";
 + (instancetype)new NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

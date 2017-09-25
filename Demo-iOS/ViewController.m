@@ -55,14 +55,25 @@
                             KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
                             KSOFormRowKeyValue: @"Value"}];
     NSArray *section2 = @[@{KSOFormRowKeyType: @(KSOFormRowTypeText),
-                            KSOFormRowKeyTitle: @"First Name",
-                            KSOFormRowKeyPlaceholder: @"Enter First Name"},
+                            KSOFormRowKeyTitle: @"Email",
+                            KSOFormRowKeyPlaceholder: @"Enter your email address",
+                            KSOFormRowKeyKeyboardType: @(UIKeyboardTypeEmailAddress),
+                            KSOFormRowKeyTextContentType: UITextContentTypeEmailAddress
+                            },
                           @{KSOFormRowKeyType: @(KSOFormRowTypeText),
-                            KSOFormRowKeyTitle: @"Last Name",
-                            KSOFormRowKeyPlaceholder: @"Enter Last Name"}];
+                            KSOFormRowKeyTitle: @"Password",
+                            KSOFormRowKeyPlaceholder: @"Enter your password",
+                            KSOFormRowKeySecureTextEntry: @YES
+                            }];
     
-    NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: section1},
-                                                            @{KSOFormSectionKeyRows: section2}]};
+    NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: section1,
+                                                              KSOFormSectionKeyHeaderTitle: @"Read only values",
+                                                              KSOFormSectionKeyFooterTitle: @"Additional info in the footer title"
+                                                              },
+                                                            @{KSOFormSectionKeyRows: section2,
+                                                              KSOFormSectionKeyHeaderTitle: @"Login details",
+                                                              KSOFormSectionKeyFooterTitle: @"Info about the password field if relevant"
+                                                              }]};
     
     [self.tableViewController setModel:[[KSOFormModel alloc] initWithDictionary:dictionary]];
 }

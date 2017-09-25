@@ -30,6 +30,8 @@
         return nil;
     
     _model = model;
+    _headerTitle = dictionary[KSOFormSectionKeyHeaderTitle];
+    _footerTitle = dictionary[KSOFormSectionKeyFooterTitle];
     _rows = [(NSArray *)dictionary[KSOFormSectionKeyRows] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
         return [[KSOFormRow alloc] initWithDictionary:object section:self];
     }];
