@@ -6,20 +6,240 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		07952D9D1F7892AE006C2A75 /* KSOForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952D9B1F7892AE006C2A75 /* KSOForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07952DA61F789627006C2A75 /* KSOFormSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952DA41F789627006C2A75 /* KSOFormSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07952DA71F789627006C2A75 /* KSOFormSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 07952DA51F789627006C2A75 /* KSOFormSection.m */; };
+		07952DAA1F789654006C2A75 /* KSOFormRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952DA81F789654006C2A75 /* KSOFormRow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07952DAB1F789654006C2A75 /* KSOFormRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 07952DA91F789654006C2A75 /* KSOFormRow.m */; };
+		07952DAE1F789681006C2A75 /* KSOFormTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952DAC1F789681006C2A75 /* KSOFormTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07952DAF1F789681006C2A75 /* KSOFormTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07952DAD1F789681006C2A75 /* KSOFormTableViewController.m */; };
+		07952DB11F789810006C2A75 /* KSOFormView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952DB01F789810006C2A75 /* KSOFormView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07952DBA1F789BD0006C2A75 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07952DB91F789BD0006C2A75 /* AppDelegate.m */; };
+		07952DBD1F789BD0006C2A75 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07952DBC1F789BD0006C2A75 /* ViewController.m */; };
+		07952DC01F789BD0006C2A75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07952DBE1F789BD0006C2A75 /* Main.storyboard */; };
+		07952DC21F789BD0006C2A75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07952DC11F789BD0006C2A75 /* Assets.xcassets */; };
+		07952DC51F789BD0006C2A75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07952DC31F789BD0006C2A75 /* LaunchScreen.storyboard */; };
+		07952DC81F789BD0006C2A75 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07952DC71F789BD0006C2A75 /* main.m */; };
+		07952DCC1F789C41006C2A75 /* KSOForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07952D981F7892AE006C2A75 /* KSOForm.framework */; };
+		07952DCD1F789C41006C2A75 /* KSOForm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07952D981F7892AE006C2A75 /* KSOForm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07952DD31F789D21006C2A75 /* KSOFormModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952DD11F789D21006C2A75 /* KSOFormModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07952DD41F789D21006C2A75 /* KSOFormModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07952DD21F789D21006C2A75 /* KSOFormModel.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		07952DCE1F789C41006C2A75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07952D8D1F789168006C2A75 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07952D971F7892AE006C2A75;
+			remoteInfo = "KSOForm-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		07952DD01F789C41006C2A75 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				07952DCD1F789C41006C2A75 /* KSOForm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		07952D981F7892AE006C2A75 /* KSOForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07952D9B1F7892AE006C2A75 /* KSOForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOForm.h; sourceTree = "<group>"; };
+		07952D9C1F7892AE006C2A75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07952DA21F789421006C2A75 /* KSOForm-Info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KSOForm-Info.h"; sourceTree = "<group>"; };
+		07952DA41F789627006C2A75 /* KSOFormSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormSection.h; sourceTree = "<group>"; };
+		07952DA51F789627006C2A75 /* KSOFormSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormSection.m; sourceTree = "<group>"; };
+		07952DA81F789654006C2A75 /* KSOFormRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormRow.h; sourceTree = "<group>"; };
+		07952DA91F789654006C2A75 /* KSOFormRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormRow.m; sourceTree = "<group>"; };
+		07952DAC1F789681006C2A75 /* KSOFormTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormTableViewController.h; sourceTree = "<group>"; };
+		07952DAD1F789681006C2A75 /* KSOFormTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormTableViewController.m; sourceTree = "<group>"; };
+		07952DB01F789810006C2A75 /* KSOFormView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormView.h; sourceTree = "<group>"; };
+		07952DB61F789BD0006C2A75 /* Demo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07952DB81F789BD0006C2A75 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		07952DB91F789BD0006C2A75 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		07952DBB1F789BD0006C2A75 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		07952DBC1F789BD0006C2A75 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		07952DBF1F789BD0006C2A75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		07952DC11F789BD0006C2A75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07952DC41F789BD0006C2A75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		07952DC61F789BD0006C2A75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07952DC71F789BD0006C2A75 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		07952DD11F789D21006C2A75 /* KSOFormModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormModel.h; sourceTree = "<group>"; };
+		07952DD21F789D21006C2A75 /* KSOFormModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormModel.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07952D941F7892AE006C2A75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07952DB31F789BD0006C2A75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07952DCC1F789C41006C2A75 /* KSOForm.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
 		07952D8C1F789168006C2A75 = {
 			isa = PBXGroup;
 			children = (
+				07952D9A1F7892AE006C2A75 /* KSOForm */,
+				07952DB71F789BD0006C2A75 /* Demo-iOS */,
+				07952D991F7892AE006C2A75 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
+		07952D991F7892AE006C2A75 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07952D981F7892AE006C2A75 /* KSOForm.framework */,
+				07952DB61F789BD0006C2A75 /* Demo-iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		07952D9A1F7892AE006C2A75 /* KSOForm */ = {
+			isa = PBXGroup;
+			children = (
+				07952D9B1F7892AE006C2A75 /* KSOForm.h */,
+				07952DA31F789573006C2A75 /* Source */,
+				07952DA11F78931C006C2A75 /* Supporting Files */,
+			);
+			path = KSOForm;
+			sourceTree = "<group>";
+		};
+		07952DA11F78931C006C2A75 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				07952D9C1F7892AE006C2A75 /* Info.plist */,
+				07952DA21F789421006C2A75 /* KSOForm-Info.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		07952DA31F789573006C2A75 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				07952DD11F789D21006C2A75 /* KSOFormModel.h */,
+				07952DD21F789D21006C2A75 /* KSOFormModel.m */,
+				07952DA41F789627006C2A75 /* KSOFormSection.h */,
+				07952DA51F789627006C2A75 /* KSOFormSection.m */,
+				07952DA81F789654006C2A75 /* KSOFormRow.h */,
+				07952DA91F789654006C2A75 /* KSOFormRow.m */,
+				07952DAC1F789681006C2A75 /* KSOFormTableViewController.h */,
+				07952DAD1F789681006C2A75 /* KSOFormTableViewController.m */,
+				07952DB01F789810006C2A75 /* KSOFormView.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		07952DB71F789BD0006C2A75 /* Demo-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				07952DB81F789BD0006C2A75 /* AppDelegate.h */,
+				07952DB91F789BD0006C2A75 /* AppDelegate.m */,
+				07952DBB1F789BD0006C2A75 /* ViewController.h */,
+				07952DBC1F789BD0006C2A75 /* ViewController.m */,
+				07952DBE1F789BD0006C2A75 /* Main.storyboard */,
+				07952DC11F789BD0006C2A75 /* Assets.xcassets */,
+				07952DC31F789BD0006C2A75 /* LaunchScreen.storyboard */,
+				07952DC61F789BD0006C2A75 /* Info.plist */,
+				07952DC71F789BD0006C2A75 /* main.m */,
+			);
+			path = "Demo-iOS";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		07952D951F7892AE006C2A75 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07952DA61F789627006C2A75 /* KSOFormSection.h in Headers */,
+				07952DB11F789810006C2A75 /* KSOFormView.h in Headers */,
+				07952D9D1F7892AE006C2A75 /* KSOForm.h in Headers */,
+				07952DAE1F789681006C2A75 /* KSOFormTableViewController.h in Headers */,
+				07952DD31F789D21006C2A75 /* KSOFormModel.h in Headers */,
+				07952DAA1F789654006C2A75 /* KSOFormRow.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		07952D971F7892AE006C2A75 /* KSOForm-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07952D9E1F7892AE006C2A75 /* Build configuration list for PBXNativeTarget "KSOForm-iOS" */;
+			buildPhases = (
+				07952D931F7892AE006C2A75 /* Sources */,
+				07952D941F7892AE006C2A75 /* Frameworks */,
+				07952D951F7892AE006C2A75 /* Headers */,
+				07952D961F7892AE006C2A75 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "KSOForm-iOS";
+			productName = KSOForm;
+			productReference = 07952D981F7892AE006C2A75 /* KSOForm.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		07952DB51F789BD0006C2A75 /* Demo-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07952DC91F789BD0006C2A75 /* Build configuration list for PBXNativeTarget "Demo-iOS" */;
+			buildPhases = (
+				07952DB21F789BD0006C2A75 /* Sources */,
+				07952DB31F789BD0006C2A75 /* Frameworks */,
+				07952DB41F789BD0006C2A75 /* Resources */,
+				07952DD01F789C41006C2A75 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07952DCF1F789C41006C2A75 /* PBXTargetDependency */,
+			);
+			name = "Demo-iOS";
+			productName = "Demo-iOS";
+			productReference = 07952DB61F789BD0006C2A75 /* Demo-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		07952D8D1F789168006C2A75 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = KSO;
 				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Kosoku Interactive, LLC.";
+				TargetAttributes = {
+					07952D971F7892AE006C2A75 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					07952DB51F789BD0006C2A75 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 07952D901F789168006C2A75 /* Build configuration list for PBXProject "KSOForm" */;
 			compatibilityVersion = "Xcode 8.0";
@@ -27,14 +247,89 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 07952D8C1F789168006C2A75;
+			productRefGroup = 07952D991F7892AE006C2A75 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				07952D971F7892AE006C2A75 /* KSOForm-iOS */,
+				07952DB51F789BD0006C2A75 /* Demo-iOS */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07952D961F7892AE006C2A75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07952DB41F789BD0006C2A75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07952DC51F789BD0006C2A75 /* LaunchScreen.storyboard in Resources */,
+				07952DC21F789BD0006C2A75 /* Assets.xcassets in Resources */,
+				07952DC01F789BD0006C2A75 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07952D931F7892AE006C2A75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07952DAB1F789654006C2A75 /* KSOFormRow.m in Sources */,
+				07952DAF1F789681006C2A75 /* KSOFormTableViewController.m in Sources */,
+				07952DA71F789627006C2A75 /* KSOFormSection.m in Sources */,
+				07952DD41F789D21006C2A75 /* KSOFormModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07952DB21F789BD0006C2A75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07952DBD1F789BD0006C2A75 /* ViewController.m in Sources */,
+				07952DC81F789BD0006C2A75 /* main.m in Sources */,
+				07952DBA1F789BD0006C2A75 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07952DCF1F789C41006C2A75 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07952D971F7892AE006C2A75 /* KSOForm-iOS */;
+			targetProxy = 07952DCE1F789C41006C2A75 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		07952DBE1F789BD0006C2A75 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07952DBF1F789BD0006C2A75 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		07952DC31F789BD0006C2A75 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07952DC41F789BD0006C2A75 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		07952D911F789168006C2A75 /* Debug */ = {
@@ -49,6 +344,266 @@
 			};
 			name = Release;
 		};
+		07952D9F1F7892AE006C2A75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 74KPPW2K35;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = KSOForm/Info.plist;
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/KSOForm/KSOForm-Info.h";
+				INFOPLIST_PREPROCESS = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksoform;
+				PRODUCT_NAME = KSOForm;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		07952DA01F7892AE006C2A75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 74KPPW2K35;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = KSOForm/Info.plist;
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/KSOForm/KSOForm-Info.h";
+				INFOPLIST_PREPROCESS = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksoform;
+				PRODUCT_NAME = KSOForm;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		07952DCA1F789BD0006C2A75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 74KPPW2K35;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Demo-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kosoku.KSOForm.Demo-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		07952DCB1F789BD0006C2A75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 74KPPW2K35;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Demo-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kosoku.KSOForm.Demo-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -57,6 +612,24 @@
 			buildConfigurations = (
 				07952D911F789168006C2A75 /* Debug */,
 				07952D921F789168006C2A75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07952D9E1F7892AE006C2A75 /* Build configuration list for PBXNativeTarget "KSOForm-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07952D9F1F7892AE006C2A75 /* Debug */,
+				07952DA01F7892AE006C2A75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07952DC91F789BD0006C2A75 /* Build configuration list for PBXNativeTarget "Demo-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07952DCA1F789BD0006C2A75 /* Debug */,
+				07952DCB1F789BD0006C2A75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
