@@ -29,6 +29,14 @@
 
 @implementation KSOFormTheme
 
+- (NSUInteger)hash {
+    return self.identifier.hash;
+}
+- (BOOL)isEqual:(id)object {
+    return (self == object ||
+            ([object isKindOfClass:KSOFormTheme.class] && [self.identifier isEqualToString:[object identifier]]));
+}
+
 - (id)copyWithZone:(NSZone *)zone {
     KSOFormTheme *retval = [[KSOFormTheme alloc] initWithIdentifier:[NSString stringWithFormat:@"%@.copy",self.identifier]];
     
@@ -44,6 +52,8 @@
     retval->_titleTextStyle = _titleTextStyle;
     retval->_subtitleTextStyle = _subtitleTextStyle;
     retval->_valueTextStyle = _valueTextStyle;
+    
+    retval->_keyboardAppearance = _keyboardAppearance;
     
     return retval;
 }

@@ -26,7 +26,7 @@
 @end
 
 @implementation KSOFormTextTableViewCell
-
+#pragma mark *** Subclass Overrides ***
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
         return nil;
@@ -45,7 +45,7 @@
     
     return self;
 }
-
+#pragma mark -
 - (BOOL)canBecomeFirstResponder {
     return [self.textField canBecomeFirstResponder];
 }
@@ -58,7 +58,7 @@
 - (BOOL)resignFirstResponder {
     return [self.textField resignFirstResponder];
 }
-
+#pragma mark -
 + (BOOL)requiresConstraintBasedLayout {
     return YES;
 }
@@ -80,13 +80,14 @@
     
     [super updateConstraints];
 }
-
+#pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
     
     [self.leadingView setFormRow:formRow];
     [self.textField setText:formRow.value];
     [self.textField setPlaceholder:formRow.placeholder];
+    [self.textField setKeyboardType:formRow.keyboardType];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
@@ -96,6 +97,7 @@
     [self.textField setFont:formTheme.valueFont];
     [self.textField setTextColor:formTheme.textColor ?: self.tintColor];
     [self.textField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:self.formRow.placeholder attributes:@{NSForegroundColorAttributeName: formTheme.valueColor}]];
+    [self.textField setKeyboardAppearance:formTheme.keyboardAppearance];
     
     if (formTheme.valueTextStyle == nil) {
         [NSObject KDI_unregisterDynamicTypeObject:self.textField];

@@ -35,6 +35,7 @@ static KSOFormRowKey const KSOFormRowKeyImage = @"image";
 static KSOFormRowKey const KSOFormRowKeyTitle = @"title";
 static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
 static KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
+static KSOFormRowKey const KSOFormRowKeyKeyboardType = @"keyboardType";
 
 @interface KSOFormRow : NSObject
 
@@ -48,6 +49,7 @@ static KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
 @property (copy,nonatomic,nullable) NSString *title;
 @property (copy,nonatomic,nullable) NSString *subtitle;
 @property (copy,nonatomic,nullable) NSString *placeholder;
+@property (assign,nonatomic) UIKeyboardType keyboardType;
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
 

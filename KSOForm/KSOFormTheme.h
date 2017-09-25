@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,nullable) UIFontTextStyle subtitleTextStyle;
 @property (strong,nonatomic,nullable) UIFontTextStyle valueTextStyle;
 
+@property (assign,nonatomic) UIKeyboardAppearance keyboardAppearance;
+
 /**
  The designated initializer.
  

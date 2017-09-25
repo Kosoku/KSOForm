@@ -37,6 +37,8 @@
     
     KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
     
+    [theme setKeyboardAppearance:UIKeyboardAppearanceDark];
+    
     [self.tableViewController setTheme:theme];
     
     NSDictionary *dictionary = @{KSOFormModelKeyRows: @[@{KSOFormRowKeyTitle: @"Title",

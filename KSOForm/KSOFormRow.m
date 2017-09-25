@@ -35,6 +35,7 @@
     _title = dictionary[KSOFormRowKeyTitle];
     _subtitle = dictionary[KSOFormRowKeySubtitle];
     _placeholder = dictionary[KSOFormRowKeyPlaceholder];
+    _keyboardType = [dictionary[KSOFormRowKeyKeyboardType] integerValue];
     
     return self;
 }
