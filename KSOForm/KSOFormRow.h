@@ -25,6 +25,16 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
 typedef BOOL(^KSOFormRowShouldValueChange)(id _Nullable value, NSError **error);
 typedef void(^KSOFormRowDidChangeValueBlock)(id _Nullable value);
 
+typedef NSString* KSOFormRowKey NS_STRING_ENUM;
+
+static KSOFormRowKey const KSOFormRowKeyType = @"type";
+static KSOFormRowKey const KSOFormRowKeyValue = @"value";
+static KSOFormRowKey const KSOFormRowKeyShouldChangeBlock = @"shouldChangeBlock";
+static KSOFormRowKey const KSOFormRowKeyDidChangeBlock = @"didChangeBlock";
+static KSOFormRowKey const KSOFormRowKeyImage = @"image";
+static KSOFormRowKey const KSOFormRowKeyTitle = @"title";
+static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
+
 @interface KSOFormRow : NSObject
 
 @property (readonly,assign,nonatomic) KSOFormRowType type;

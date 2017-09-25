@@ -15,6 +15,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NSString* KSOFormModelKey NS_STRING_ENUM;
+
+static KSOFormModelKey const KSOFormModelKeySections = @"sections";
+static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
+
 @class KSOFormSection,KSOFormRow;
 
 @interface KSOFormModel : NSObject
