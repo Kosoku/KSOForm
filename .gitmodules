@@ -1,0 +1,3 @@
+[submodule "Vendor/Quicksilver"]
+	path = Vendor/Quicksilver
+	url = https://github.com/Kosoku/Quicksilver.git
