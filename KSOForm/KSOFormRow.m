@@ -47,6 +47,7 @@
     _subtitle = dictionary[KSOFormRowKeySubtitle];
     _placeholder = dictionary[KSOFormRowKeyPlaceholder];
     _textValidator = dictionary[KSOFormRowKeyTextValidator];
+    _textFormatter = dictionary[KSOFormRowKeyTextFormatter];
     
     _autocapitalizationType = [dictionary[KSOFormRowKeyAutocapitalizationType] integerValue];
     _autocorrectionType = [dictionary[KSOFormRowKeyAutocorrectionType] integerValue];

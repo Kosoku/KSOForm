@@ -55,7 +55,7 @@
 - (void)layoutMarginsDidChange {
     [super layoutMarginsDidChange];
     
-    [self.trailingView setRightViewEdgeInsets:UIEdgeInsetsMake(0, 4.0, 0, self.layoutMargins.right)];
+    [self.trailingView setRightViewEdgeInsets:UIEdgeInsetsMake(0, ceil(self.layoutMargins.right * 0.5), 0, self.layoutMargins.right)];
 }
 #pragma mark -
 @dynamic leadingView;
@@ -100,6 +100,7 @@
     }
     
     [self.trailingView setKSO_textValidator:formRow.textValidator];
+    [self.trailingView setKSO_textFormatter:formRow.textFormatter];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
