@@ -15,6 +15,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class KSOFormModel;
+
 @interface KSOFormTableViewController : UITableViewController
+
+@property (strong,nonatomic) KSOFormModel *model;
 
 @end

@@ -15,6 +15,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class KSOFormRow;
+
 @interface KSOFormSection : NSObject
+
+@property (readonly,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 
 @end

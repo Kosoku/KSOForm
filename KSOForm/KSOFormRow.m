@@ -15,6 +15,25 @@
 
 #import "KSOFormRow.h"
 
+@interface KSOFormRow ()
+@property (readwrite,assign,nonatomic) KSOFormRowType type;
+@end
+
 @implementation KSOFormRow
+
+- (void)setValue:(id)value {
+    if (self.shouldChangeValueBlock != nil) {
+        NSError *outError;
+        if (!self.shouldChangeValueBlock(value,&outError)) {
+            return;
+        }
+    }
+    
+    _value = value;
+    
+    if (self.didChangeValueBlock != nil) {
+        self.didChangeValueBlock(_value);
+    }
+}
 
 @end
