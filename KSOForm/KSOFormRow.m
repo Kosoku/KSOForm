@@ -15,12 +15,18 @@
 
 #import "KSOFormRow.h"
 
+#import <Stanley/Stanley.h>
+
 @interface KSOFormRow ()
 @property (readwrite,weak,nonatomic) KSOFormSection *section;
 @property (readwrite,assign,nonatomic) KSOFormRowType type;
 @end
 
 @implementation KSOFormRow
+
++ (BOOL)automaticallyNotifiesObserversOfValue {
+    return NO;
+}
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section {
     if (!(self = [super init]))
@@ -39,6 +45,7 @@
     _subtitle = dictionary[KSOFormRowKeySubtitle];
     _placeholder = dictionary[KSOFormRowKeyPlaceholder];
     _keyboardType = [dictionary[KSOFormRowKeyKeyboardType] integerValue];
+    _returnKeyType = [dictionary[KSOFormRowKeyReturnKeyType] integerValue];
     
     return self;
 }
@@ -51,7 +58,15 @@
         }
     }
     
+    if ([_value isEqual:value]) {
+        return;
+    }
+    
+    [self willChangeValueForKey:@kstKeypath(self,value)];
+    
     _value = value;
+    
+    [self didChangeValueForKey:@kstKeypath(self,value)];
     
     if (self.didChangeValueBlock != nil) {
         self.didChangeValueBlock(_value);

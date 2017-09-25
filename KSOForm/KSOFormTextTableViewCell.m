@@ -17,6 +17,7 @@
 #import "KSOFormImageTitleSubtitleView.h"
 
 #import <Ditko/Ditko.h>
+#import <Stanley/Stanley.h>
 
 @interface KSOFormTextTableViewCell ()
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
@@ -31,6 +32,8 @@
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
         return nil;
     
+    kstWeakify(self);
+    
     _leadingView = [[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero];
     [_leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
@@ -41,6 +44,10 @@
     [_textField setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [_textField setTextAlignment:NSTextAlignmentRight];
     [_textField setInputAccessoryView:[[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:_textField]];
+    [_textField KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        [self.formRow setValue:self.textField.text];
+    } forControlEvents:UIControlEventAllEditingEvents];
     [self.contentView addSubview:_textField];
     
     return self;
@@ -98,6 +105,10 @@
     [self.textField setTextColor:formTheme.textColor ?: self.tintColor];
     [self.textField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:self.formRow.placeholder attributes:@{NSForegroundColorAttributeName: formTheme.valueColor}]];
     [self.textField setKeyboardAppearance:formTheme.keyboardAppearance];
+    
+    if (formTheme.textColor != nil) {
+        [self.textField setTintColor:formTheme.textColor];
+    }
     
     if (formTheme.valueTextStyle == nil) {
         [NSObject KDI_unregisterDynamicTypeObject:self.textField];

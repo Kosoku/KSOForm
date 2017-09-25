@@ -15,6 +15,7 @@
 
 #import "ViewController.h"
 
+#import <Ditko/Ditko.h>
 #import <KSOForm/KSOForm.h>
 
 @interface ViewController ()
@@ -41,22 +42,27 @@
     
     [self.tableViewController setTheme:theme];
     
-    NSDictionary *dictionary = @{KSOFormModelKeyRows: @[@{KSOFormRowKeyTitle: @"Title",
-                                                          KSOFormRowKeyValue: @"Value"},
-                                                        @{KSOFormRowKeyTitle: @"Title",
-                                                          KSOFormRowKeySubtitle: @"Subtitle",
-                                                          KSOFormRowKeyValue: @"Value"},
-                                                        @{KSOFormRowKeyTitle: @"Title",
-                                                          KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
-                                                          KSOFormRowKeyValue: @"Value"},
-                                                        @{KSOFormRowKeyTitle: @"Title",
-                                                          KSOFormRowKeySubtitle: @"Subtitle",
-                                                          KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
-                                                          KSOFormRowKeyValue: @"Value"},
-                                                        @{KSOFormRowKeyType: @(KSOFormRowTypeText),
-                                                          KSOFormRowKeyTitle: @"Title",
-                                                          KSOFormRowKeyPlaceholder: @"Type something"
-                                                          }]};
+    NSArray *section1 = @[@{KSOFormRowKeyTitle: @"Title",
+                            KSOFormRowKeyValue: @"Value"},
+                          @{KSOFormRowKeyTitle: @"Title",
+                            KSOFormRowKeySubtitle: @"Subtitle",
+                            KSOFormRowKeyValue: @"Value"},
+                          @{KSOFormRowKeyTitle: @"Title",
+                            KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                            KSOFormRowKeyValue: @"Value"},
+                          @{KSOFormRowKeyTitle: @"Title",
+                            KSOFormRowKeySubtitle: @"Subtitle",
+                            KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                            KSOFormRowKeyValue: @"Value"}];
+    NSArray *section2 = @[@{KSOFormRowKeyType: @(KSOFormRowTypeText),
+                            KSOFormRowKeyTitle: @"First Name",
+                            KSOFormRowKeyPlaceholder: @"Enter First Name"},
+                          @{KSOFormRowKeyType: @(KSOFormRowTypeText),
+                            KSOFormRowKeyTitle: @"Last Name",
+                            KSOFormRowKeyPlaceholder: @"Enter Last Name"}];
+    
+    NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: section1},
+                                                            @{KSOFormSectionKeyRows: section2}]};
     
     [self.tableViewController setModel:[[KSOFormModel alloc] initWithDictionary:dictionary]];
 }

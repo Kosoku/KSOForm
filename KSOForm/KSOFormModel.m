@@ -30,7 +30,9 @@
         return nil;
     
     if (dictionary[KSOFormModelKeySections] != nil) {
-        
+        _sections = [dictionary[KSOFormModelKeySections] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
+            return [[KSOFormSection alloc] initWithDictionary:object model:self];
+        }];
     }
     else if (dictionary[KSOFormModelKeyRows] != nil) {
         _sections = @[[[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyRows: dictionary[KSOFormModelKeyRows]} model:self]];
