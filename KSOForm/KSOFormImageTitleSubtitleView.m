@@ -31,6 +31,7 @@
     [_horizontalStackView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_horizontalStackView setAxis:UILayoutConstraintAxisHorizontal];
     [_horizontalStackView setAlignment:UIStackViewAlignmentCenter];
+    [_horizontalStackView setSpacing:8.0];
     [self addSubview:_horizontalStackView];
     
     _verticalStackView = [[UIStackView alloc] initWithFrame:CGRectZero];
