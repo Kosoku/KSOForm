@@ -44,8 +44,17 @@
     _title = dictionary[KSOFormRowKeyTitle];
     _subtitle = dictionary[KSOFormRowKeySubtitle];
     _placeholder = dictionary[KSOFormRowKeyPlaceholder];
+    
+    _autocapitalizationType = [dictionary[KSOFormRowKeyAutocapitalizationType] integerValue];
+    _autocorrectionType = [dictionary[KSOFormRowKeyAutocorrectionType] integerValue];
+    _spellCheckingType = [dictionary[KSOFormRowKeySpellCheckingType] integerValue];
+    _smartQuotesType = [dictionary[KSOFormRowKeySmartQuotesType] integerValue];
+    _smartDashesType = [dictionary[KSOFormRowKeySmartDashesType] integerValue];
+    _smartInsertDeleteType = [dictionary[KSOFormRowKeySmartInsertDeleteType] integerValue];
     _keyboardType = [dictionary[KSOFormRowKeyKeyboardType] integerValue];
     _returnKeyType = [dictionary[KSOFormRowKeyReturnKeyType] integerValue];
+    _secureTextEntry = [dictionary[KSOFormRowKeySecureTextEntry] boolValue];
+    _textContentType = dictionary[KSOFormRowKeyTextContentType];
     
     return self;
 }

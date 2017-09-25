@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, KSOFormRowType) {
     KSOFormRowTypeLabel = 0,
-    KSOFormRowTypeText
+    KSOFormRowTypeText,
+    KSOFormRowTypeSwitch
 };
 
 typedef BOOL(^KSOFormRowShouldValueChange)(id _Nullable value, NSError **error);
@@ -35,8 +36,17 @@ static KSOFormRowKey const KSOFormRowKeyImage = @"image";
 static KSOFormRowKey const KSOFormRowKeyTitle = @"title";
 static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
 static KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
+// UITextInputTraits
+static KSOFormRowKey const KSOFormRowKeyAutocapitalizationType = @"autocapitalizationType";
+static KSOFormRowKey const KSOFormRowKeyAutocorrectionType = @"autocorrectionType";
+static KSOFormRowKey const KSOFormRowKeySpellCheckingType = @"spellCheckingType";
+static KSOFormRowKey const KSOFormRowKeySmartQuotesType = @"smartQuotesType";
+static KSOFormRowKey const KSOFormRowKeySmartDashesType = @"smartDashesType";
+static KSOFormRowKey const KSOFormRowKeySmartInsertDeleteType = @"smartInsertDeleteType";
 static KSOFormRowKey const KSOFormRowKeyKeyboardType = @"keyboardType";
 static KSOFormRowKey const KSOFormRowKeyReturnKeyType = @"returnKeyType";
+static KSOFormRowKey const KSOFormRowKeySecureTextEntry = @"secureTextEntry";
+static KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
 
 @class KSOFormSection;
 
@@ -54,8 +64,17 @@ static KSOFormRowKey const KSOFormRowKeyReturnKeyType = @"returnKeyType";
 @property (copy,nonatomic,nullable) NSString *title;
 @property (copy,nonatomic,nullable) NSString *subtitle;
 @property (copy,nonatomic,nullable) NSString *placeholder;
+
+@property (assign,nonatomic) UITextAutocapitalizationType autocapitalizationType;
+@property (assign,nonatomic) UITextAutocorrectionType autocorrectionType;
+@property (assign,nonatomic) UITextSpellCheckingType spellCheckingType;
+@property (assign,nonatomic) UITextSmartQuotesType smartQuotesType NS_AVAILABLE_IOS(11_0);
+@property (assign,nonatomic) UITextSmartDashesType smartDashesType NS_AVAILABLE_IOS(11_0);
+@property (assign,nonatomic) UITextSmartInsertDeleteType smartInsertDeleteType NS_AVAILABLE_IOS(11_0);
 @property (assign,nonatomic) UIKeyboardType keyboardType;
 @property (assign,nonatomic) UIReturnKeyType returnKeyType;
+@property (assign,nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
+@property (copy,nonatomic) UITextContentType textContentType NS_AVAILABLE_IOS(10_0);
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 

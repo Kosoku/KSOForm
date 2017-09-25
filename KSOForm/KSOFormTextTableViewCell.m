@@ -95,6 +95,18 @@
     [self.textField setText:formRow.value];
     [self.textField setPlaceholder:formRow.placeholder];
     [self.textField setKeyboardType:formRow.keyboardType];
+    [self.textField setAutocapitalizationType:formRow.autocapitalizationType];
+    [self.textField setAutocorrectionType:formRow.autocorrectionType];
+    [self.textField setSpellCheckingType:formRow.spellCheckingType];
+    [self.textField setSecureTextEntry:formRow.isSecureTextEntry];
+    if (@available(iOS 10.0, *)) {
+        [self.textField setTextContentType:formRow.textContentType];
+    }
+    if (@available(iOS 11.0, *)) {
+        [self.textField setSmartQuotesType:formRow.smartQuotesType];
+        [self.textField setSmartDashesType:formRow.smartDashesType];
+        [self.textField setSmartInsertDeleteType:formRow.smartInsertDeleteType];
+    }
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
