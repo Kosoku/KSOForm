@@ -44,6 +44,7 @@
     retval->_subtitleColor = _subtitleColor;
     retval->_valueColor = _valueColor;
     retval->_textColor = _textColor;
+    retval->_textSelectionColor = _textSelectionColor;
     
     retval->_titleFont =_titleFont;
     retval->_subtitleFont = _subtitleFont;

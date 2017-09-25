@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
 @property (strong,nonatomic,null_resettable) UIColor *valueColor;
 @property (strong,nonatomic,nullable) UIColor *textColor;
+@property (strong,nonatomic,nullable) UIColor *textSelectionColor;
 
 @property (strong,nonatomic,null_resettable) UIFont *titleFont;
 @property (strong,nonatomic,null_resettable) UIFont *subtitleFont;

@@ -106,8 +106,8 @@
     [self.textField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:self.formRow.placeholder attributes:@{NSForegroundColorAttributeName: formTheme.valueColor}]];
     [self.textField setKeyboardAppearance:formTheme.keyboardAppearance];
     
-    if (formTheme.textColor != nil) {
-        [self.textField setTintColor:formTheme.textColor];
+    if (formTheme.textSelectionColor != nil) {
+        [self.textField setTintColor:formTheme.textSelectionColor];
     }
     
     if (formTheme.valueTextStyle == nil) {
