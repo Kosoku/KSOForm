@@ -18,6 +18,7 @@
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
+#import <KSOTextValidation/KSOTextValidation.h>
 
 @interface KSOFormTextTableViewCell ()
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
@@ -51,8 +52,18 @@
     return self;
 }
 #pragma mark -
+- (void)layoutMarginsDidChange {
+    [super layoutMarginsDidChange];
+    
+    [self.trailingView setRightViewEdgeInsets:UIEdgeInsetsMake(0, 4.0, 0, self.layoutMargins.right)];
+}
+#pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
+
+- (BOOL)trailingViewRespectsLayoutMargins {
+    return NO;
+}
 #pragma mark -
 - (BOOL)canBecomeFirstResponder {
     return [self.trailingView canBecomeFirstResponder];
@@ -87,6 +98,8 @@
         [self.trailingView setSmartDashesType:formRow.smartDashesType];
         [self.trailingView setSmartInsertDeleteType:formRow.smartInsertDeleteType];
     }
+    
+    [self.trailingView setKSO_textValidator:formRow.textValidator];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];

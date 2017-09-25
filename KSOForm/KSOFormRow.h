@@ -15,6 +15,7 @@
 
 #import <UIKit/UIKit.h>
 #import <KSOForm/KSOFormRowValueDataSource.h>
+#import <KSOTextValidation/KSOTextValidator.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,6 +40,7 @@ static KSOFormRowKey const KSOFormRowKeyImage = @"image";
 static KSOFormRowKey const KSOFormRowKeyTitle = @"title";
 static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
 static KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
+static KSOFormRowKey const KSOFormRowKeyTextValidator = @"textValidator";
 // UITextInputTraits
 static KSOFormRowKey const KSOFormRowKeyAutocapitalizationType = @"autocapitalizationType";
 static KSOFormRowKey const KSOFormRowKeyAutocorrectionType = @"autocorrectionType";
@@ -69,6 +71,7 @@ static KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
 @property (copy,nonatomic,nullable) NSString *title;
 @property (copy,nonatomic,nullable) NSString *subtitle;
 @property (copy,nonatomic,nullable) NSString *placeholder;
+@property (strong,nonatomic,nullable) id<KSOTextValidator> textValidator;
 
 @property (assign,nonatomic) UITextAutocapitalizationType autocapitalizationType;
 @property (assign,nonatomic) UITextAutocorrectionType autocorrectionType;

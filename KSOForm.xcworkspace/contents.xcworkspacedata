@@ -2,6 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Vendor/KSOTooltip/KSOTooltip.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Vendor/KSOTextValidation/KSOTextValidation.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Vendor/Agamotto/Agamotto.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Vendor/Stanley/Stanley.xcodeproj">
    </FileRef>
    <FileRef

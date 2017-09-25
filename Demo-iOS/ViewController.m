@@ -17,6 +17,7 @@
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
+#import <KSOTextValidation/KSOTextValidation.h>
 #import <KSOForm/KSOForm.h>
 
 @interface ViewController () <KSOFormRowValueDataSource>
@@ -24,6 +25,7 @@
 
 @property (copy,nonatomic) NSString *email;
 @property (copy,nonatomic) NSString *password;
+@property (copy,nonatomic) NSString *phoneNumber;
 @end
 
 @implementation ViewController
@@ -56,7 +58,8 @@
                             KSOFormRowKeyKeyboardType: @(UIKeyboardTypeEmailAddress),
                             KSOFormRowKeyTextContentType: UITextContentTypeEmailAddress,
                             KSOFormRowKeyValueKey: @kstKeypath(self,email),
-                            KSOFormRowKeyValueDataSource: self
+                            KSOFormRowKeyValueDataSource: self,
+                            KSOFormRowKeyTextValidator: [KSOEmailAddressValidator emailAddressValidator]
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypeText),
                             KSOFormRowKeyTitle: @"Password",
@@ -66,8 +69,14 @@
                             KSOFormRowKeyValueKey: @kstKeypath(self,password),
                             KSOFormRowKeyValueDataSource: self
                             },
-                          @{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
-                            KSOFormRowKeyTitle: @"Use magic login"
+                          @{KSOFormRowKeyType: @(KSOFormRowTypeText),
+                            KSOFormRowKeyTitle: @"Phone Number",
+                            KSOFormRowKeyPlaceholder: @"Enter phone number",
+                            KSOFormRowKeyKeyboardType: @(UIKeyboardTypePhonePad),
+                            KSOFormRowKeyTextContentType: UITextContentTypeTelephoneNumber,
+                            KSOFormRowKeyValueKey: @kstKeypath(self,phoneNumber),
+                            KSOFormRowKeyValueDataSource: self,
+                            KSOFormRowKeyTextValidator: [KSOPhoneNumberValidator phoneNumberValidator]
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: section1,

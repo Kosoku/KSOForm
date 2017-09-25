@@ -52,6 +52,15 @@
 		079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		079E19241F79919000743988 /* KSOFormSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079E19221F79919000743988 /* KSOFormSwitchTableViewCell.m */; };
 		079E19261F7998B400743988 /* KSOFormRowValueDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 079E19251F7998B400743988 /* KSOFormRowValueDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		079E19271F799FB500743988 /* Agamotto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079E19281F799FB500743988 /* Agamotto.framework */; };
+		079E19291F799FBD00743988 /* KSOTextValidation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079E192A1F799FBD00743988 /* KSOTextValidation.framework */; };
+		079E192B1F799FF700743988 /* KSOTooltip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079E192C1F799FF700743988 /* KSOTooltip.framework */; };
+		079E192D1F79A00800743988 /* KSOTooltip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079E192C1F799FF700743988 /* KSOTooltip.framework */; };
+		079E192E1F79A00800743988 /* KSOTooltip.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 079E192C1F799FF700743988 /* KSOTooltip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		079E192F1F79A00B00743988 /* KSOTextValidation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079E192A1F799FBD00743988 /* KSOTextValidation.framework */; };
+		079E19301F79A00B00743988 /* KSOTextValidation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 079E192A1F799FBD00743988 /* KSOTextValidation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		079E19311F79A00E00743988 /* Agamotto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079E19281F799FB500743988 /* Agamotto.framework */; };
+		079E19321F79A00E00743988 /* Agamotto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 079E19281F799FB500743988 /* Agamotto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,10 +80,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				079E192E1F79A00800743988 /* KSOTooltip.framework in Embed Frameworks */,
 				0712E4EF1F78E0D300F0E223 /* Stanley.framework in Embed Frameworks */,
+				079E19321F79A00E00743988 /* Agamotto.framework in Embed Frameworks */,
 				0712E4F11F78E0D300F0E223 /* Loki.framework in Embed Frameworks */,
 				07952DCD1F789C41006C2A75 /* KSOForm.framework in Embed Frameworks */,
 				0712E4F31F78E0D300F0E223 /* Ditko.framework in Embed Frameworks */,
+				079E19301F79A00B00743988 /* KSOTextValidation.framework in Embed Frameworks */,
 				071ED0321F78C6C800778F22 /* Quicksilver.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -125,6 +137,9 @@
 		079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormSwitchTableViewCell.h; sourceTree = "<group>"; };
 		079E19221F79919000743988 /* KSOFormSwitchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormSwitchTableViewCell.m; sourceTree = "<group>"; };
 		079E19251F7998B400743988 /* KSOFormRowValueDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormRowValueDataSource.h; sourceTree = "<group>"; };
+		079E19281F799FB500743988 /* Agamotto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Agamotto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		079E192A1F799FBD00743988 /* KSOTextValidation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOTextValidation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		079E192C1F799FF700743988 /* KSOTooltip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOTooltip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +147,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				079E192B1F799FF700743988 /* KSOTooltip.framework in Frameworks */,
+				079E19291F799FBD00743988 /* KSOTextValidation.framework in Frameworks */,
+				079E19271F799FB500743988 /* Agamotto.framework in Frameworks */,
 				0712E4EC1F78E0C600F0E223 /* Stanley.framework in Frameworks */,
 				0712E4EA1F78E0C200F0E223 /* Loki.framework in Frameworks */,
 				0712E4E81F78E0BE00F0E223 /* Ditko.framework in Frameworks */,
@@ -143,10 +161,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				079E192D1F79A00800743988 /* KSOTooltip.framework in Frameworks */,
 				0712E4EE1F78E0D300F0E223 /* Stanley.framework in Frameworks */,
+				079E19311F79A00E00743988 /* Agamotto.framework in Frameworks */,
 				0712E4F01F78E0D300F0E223 /* Loki.framework in Frameworks */,
 				07952DCC1F789C41006C2A75 /* KSOForm.framework in Frameworks */,
 				0712E4F21F78E0D300F0E223 /* Ditko.framework in Frameworks */,
+				079E192F1F79A00B00743988 /* KSOTextValidation.framework in Frameworks */,
 				071ED0311F78C6C800778F22 /* Quicksilver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +178,9 @@
 		071ED02E1F78C6B900778F22 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				079E192C1F799FF700743988 /* KSOTooltip.framework */,
+				079E192A1F799FBD00743988 /* KSOTextValidation.framework */,
+				079E19281F799FB500743988 /* Agamotto.framework */,
 				0712E4ED1F78E0C600F0E223 /* Stanley.framework */,
 				0712E4EB1F78E0C200F0E223 /* Loki.framework */,
 				0712E4E91F78E0BE00F0E223 /* Ditko.framework */,

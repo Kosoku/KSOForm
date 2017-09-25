@@ -10,3 +10,12 @@
 [submodule "Vendor/Loki"]
 	path = Vendor/Loki
 	url = https://github.com/Kosoku/Loki.git
+[submodule "Vendor/KSOTextValidation"]
+	path = Vendor/KSOTextValidation
+	url = https://github.com/Kosoku/KSOTextValidation.git
+[submodule "Vendor/Agamotto"]
+	path = Vendor/Agamotto
+	url = https://github.com/Kosoku/Agamotto.git
+[submodule "Vendor/KSOTooltip"]
+	path = Vendor/KSOTooltip
+	url = https://github.com/Kosoku/KSOTooltip.git
