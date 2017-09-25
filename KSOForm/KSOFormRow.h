@@ -14,6 +14,7 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <UIKit/UIKit.h>
+#import <KSOForm/KSOFormRowValueDataSource.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,13 +24,15 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
     KSOFormRowTypeSwitch
 };
 
-typedef BOOL(^KSOFormRowShouldValueChange)(id _Nullable value, NSError **error);
+typedef BOOL(^KSOFormRowShouldChangeValueBlock)(id _Nullable value, NSError **error);
 typedef void(^KSOFormRowDidChangeValueBlock)(id _Nullable value);
 
 typedef NSString* KSOFormRowKey NS_STRING_ENUM;
 
 static KSOFormRowKey const KSOFormRowKeyType = @"type";
 static KSOFormRowKey const KSOFormRowKeyValue = @"value";
+static KSOFormRowKey const KSOFormRowKeyValueKey = @"valueKey";
+static KSOFormRowKey const KSOFormRowKeyValueDataSource = @"valueDataSource";
 static KSOFormRowKey const KSOFormRowKeyShouldChangeBlock = @"shouldChangeBlock";
 static KSOFormRowKey const KSOFormRowKeyDidChangeBlock = @"didChangeBlock";
 static KSOFormRowKey const KSOFormRowKeyImage = @"image";
@@ -57,7 +60,9 @@ static KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
 @property (readonly,assign,nonatomic) KSOFormRowType type;
 
 @property (strong,nonatomic,nullable) id value;
-@property (copy,nonatomic,nullable) KSOFormRowShouldValueChange shouldChangeValueBlock;
+@property (copy,nonatomic,nullable) NSString *valueKey;
+@property (weak,nonatomic,nullable ) NSObject<KSOFormRowValueDataSource> *valueDataSource;
+@property (copy,nonatomic,nullable) KSOFormRowShouldChangeValueBlock shouldChangeValueBlock;
 @property (copy,nonatomic,nullable) KSOFormRowDidChangeValueBlock didChangeValueBlock;
 
 @property (strong,nonatomic,nullable) UIImage *image;

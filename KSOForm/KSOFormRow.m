@@ -37,6 +37,8 @@
     _type = [dictionary[KSOFormRowKeyType] integerValue];
     
     _value = dictionary[KSOFormRowKeyValue];
+    _valueKey = dictionary[KSOFormRowKeyValueKey];
+    _valueDataSource = dictionary[KSOFormRowKeyValueDataSource];
     _shouldChangeValueBlock = dictionary[KSOFormRowKeyShouldChangeBlock];
     _didChangeValueBlock = dictionary[KSOFormRowKeyDidChangeBlock];
     
@@ -59,10 +61,24 @@
     return self;
 }
 
+@synthesize value=_value;
+- (id)value {
+    return self.valueKey != nil && self.valueDataSource != nil ? [self.valueDataSource valueForKey:self.valueKey] : _value;
+}
 - (void)setValue:(id)value {
     if (self.shouldChangeValueBlock != nil) {
         NSError *outError;
         if (!self.shouldChangeValueBlock(value,&outError)) {
+            return;
+        }
+    }
+    
+    if (self.valueKey != nil &&
+        [self.valueDataSource respondsToSelector:@selector(shouldChangeValueBlock)] &&
+        self.valueDataSource.shouldChangeValueBlock != nil) {
+        
+        NSError *outError;
+        if (!self.valueDataSource.shouldChangeValueBlock(self.valueKey,value,&outError)) {
             return;
         }
     }
@@ -74,6 +90,12 @@
     [self willChangeValueForKey:@kstKeypath(self,value)];
     
     _value = value;
+    
+    if (self.valueKey != nil &&
+        self.valueDataSource != nil) {
+        
+        [self.valueDataSource setValue:_value forKey:self.valueKey];
+    }
     
     [self didChangeValueForKey:@kstKeypath(self,value)];
     

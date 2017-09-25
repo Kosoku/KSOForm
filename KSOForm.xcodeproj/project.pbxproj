@@ -51,6 +51,7 @@
 		079E19201F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079E191E1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m */; };
 		079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		079E19241F79919000743988 /* KSOFormSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079E19221F79919000743988 /* KSOFormSwitchTableViewCell.m */; };
+		079E19261F7998B400743988 /* KSOFormRowValueDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 079E19251F7998B400743988 /* KSOFormRowValueDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		079E191E1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormLeadingTrailingTableViewCell.m; sourceTree = "<group>"; };
 		079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormSwitchTableViewCell.h; sourceTree = "<group>"; };
 		079E19221F79919000743988 /* KSOFormSwitchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormSwitchTableViewCell.m; sourceTree = "<group>"; };
+		079E19251F7998B400743988 /* KSOFormRowValueDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormRowValueDataSource.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 				071ED0341F78D6AB00778F22 /* KSOFormTheme.m */,
 				07952DAC1F789681006C2A75 /* KSOFormTableViewController.h */,
 				07952DAD1F789681006C2A75 /* KSOFormTableViewController.m */,
+				079E19251F7998B400743988 /* KSOFormRowValueDataSource.h */,
 				07952DB01F789810006C2A75 /* KSOFormRowView.h */,
 				07952DE11F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.h */,
 				07952DE21F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.m */,
@@ -266,6 +269,7 @@
 				07952DD31F789D21006C2A75 /* KSOFormModel.h in Headers */,
 				079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */,
 				07952DD71F78A01F006C2A75 /* KSOFormRowTableViewCell.h in Headers */,
+				079E19261F7998B400743988 /* KSOFormRowValueDataSource.h in Headers */,
 				07952DAA1F789654006C2A75 /* KSOFormRow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

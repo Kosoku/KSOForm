@@ -16,10 +16,14 @@
 #import "ViewController.h"
 
 #import <Ditko/Ditko.h>
+#import <Stanley/Stanley.h>
 #import <KSOForm/KSOForm.h>
 
-@interface ViewController ()
+@interface ViewController () <KSOFormRowValueDataSource>
 @property (strong,nonatomic) KSOFormTableViewController *tableViewController;
+
+@property (copy,nonatomic) NSString *email;
+@property (copy,nonatomic) NSString *password;
 @end
 
 @implementation ViewController
@@ -50,16 +54,20 @@
                             KSOFormRowKeyTitle: @"Email",
                             KSOFormRowKeyPlaceholder: @"Enter your email address",
                             KSOFormRowKeyKeyboardType: @(UIKeyboardTypeEmailAddress),
-                            KSOFormRowKeyTextContentType: UITextContentTypeEmailAddress
+                            KSOFormRowKeyTextContentType: UITextContentTypeEmailAddress,
+                            KSOFormRowKeyValueKey: @kstKeypath(self,email),
+                            KSOFormRowKeyValueDataSource: self
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypeText),
                             KSOFormRowKeyTitle: @"Password",
                             KSOFormRowKeyPlaceholder: @"Enter your password",
                             KSOFormRowKeySecureTextEntry: @YES,
-                            KSOFormRowKeyTextContentType: UITextContentTypePassword
+                            KSOFormRowKeyTextContentType: UITextContentTypePassword,
+                            KSOFormRowKeyValueKey: @kstKeypath(self,password),
+                            KSOFormRowKeyValueDataSource: self
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
-                            KSOFormRowKeyTitle: @"Secure Text Entry"
+                            KSOFormRowKeyTitle: @"Use magic login"
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: section1,
