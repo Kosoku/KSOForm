@@ -15,6 +15,6 @@
 
 #import <KSOForm/KSOFormRowTableViewCell.h>
 
-@interface KSOFormTextTableViewCell : KSOFormRowTableViewCell
+@interface KSOFormLabelTableViewCell : KSOFormRowTableViewCell
 
 @end
