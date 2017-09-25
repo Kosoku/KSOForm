@@ -63,7 +63,8 @@
                           @{KSOFormRowKeyType: @(KSOFormRowTypeText),
                             KSOFormRowKeyTitle: @"Password",
                             KSOFormRowKeyPlaceholder: @"Enter your password",
-                            KSOFormRowKeySecureTextEntry: @YES
+                            KSOFormRowKeySecureTextEntry: @YES,
+                            KSOFormRowKeyTextContentType: UITextContentTypePassword
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: section1,
