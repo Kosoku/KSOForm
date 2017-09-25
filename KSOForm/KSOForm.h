@@ -26,5 +26,6 @@ FOUNDATION_EXPORT const unsigned char KSOFormVersionString[];
 #import <KSOForm/KSOFormModel.h>
 #import <KSOForm/KSOFormSection.h>
 #import <KSOForm/KSOFormRow.h>
+#import <KSOForm/KSOFormTheme.h>
 #import <KSOForm/KSOFormTableViewController.h>
 #import <KSOForm/KSOFormRowView.h>

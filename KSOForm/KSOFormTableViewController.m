@@ -18,12 +18,38 @@
 #import "KSOFormModel.h"
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
+#import "KSOFormTheme.h"
 
 @interface KSOFormTableViewController ()
-
+- (void)_KSOFormTableViewControllerInit;
 @end
 
 @implementation KSOFormTableViewController
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
+        return nil;
+    
+    [self _KSOFormTableViewControllerInit];
+    
+    return self;
+}
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (!(self = [super initWithCoder:aDecoder]))
+        return nil;
+    
+    [self _KSOFormTableViewControllerInit];
+    
+    return self;
+}
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    if (!(self = [super initWithStyle:style]))
+        return nil;
+    
+    [self _KSOFormTableViewControllerInit];
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,6 +78,7 @@
     }
     
     [retval setFormRow:formRow];
+    [retval setFormTheme:self.theme];
     
     return retval;
 }
@@ -63,10 +90,18 @@
     
 }
 
+- (void)setTheme:(KSOFormTheme *)theme {
+    _theme = theme ?: KSOFormTheme.defaultTheme;
+}
+
 - (void)setModel:(KSOFormModel *)model {
     _model = model;
     
     [self.tableView reloadData];
+}
+
+- (void)_KSOFormTableViewControllerInit; {
+    _theme = KSOFormTheme.defaultTheme;
 }
 
 @end

@@ -16,6 +16,8 @@
 #import "KSOFormTextTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
 
+#import <Ditko/Ditko.h>
+
 @interface KSOFormTextTableViewCell ()
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
 @property (strong,nonatomic) UILabel *valueLabel;
@@ -39,12 +41,6 @@
     [self.contentView addSubview:_valueLabel];
     
     return self;
-}
-
-- (void)layoutMarginsDidChange {
-    [super layoutMarginsDidChange];
-    
-    [self setNeedsUpdateConstraints];
 }
 
 + (BOOL)requiresConstraintBasedLayout {
@@ -74,6 +70,21 @@
     
     [self.leadingView setFormRow:formRow];
     [self.valueLabel setText:formRow.value];
+}
+- (void)setFormTheme:(KSOFormTheme *)formTheme {
+    [super setFormTheme:formTheme];
+    
+    [self.leadingView setFormTheme:formTheme];
+    
+    [self.valueLabel setFont:formTheme.valueFont];
+    [self.valueLabel setTextColor:formTheme.valueColor];
+    
+    if (formTheme.valueTextStyle == nil) {
+        [NSObject KDI_unregisterDynamicTypeObject:self.valueLabel];
+    }
+    else {
+        [NSObject KDI_registerDynamicTypeObject:self.valueLabel forTextStyle:formTheme.valueTextStyle];
+    }
 }
 
 @end

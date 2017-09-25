@@ -1,8 +1,8 @@
 //
-//  KSOFormTableViewController.h
+//  KSOFormTheme.h
 //  KSOForm-iOS
 //
-//  Created by William Towe on 9/24/17.
+//  Created by William Towe on 9/25/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -17,13 +17,37 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class KSOFormModel,KSOFormTheme;
+@interface KSOFormTheme : NSObject <NSCopying>
 
-@interface KSOFormTableViewController : UITableViewController
+@property (class,readonly,nonatomic) KSOFormTheme *defaultTheme;
 
-@property (strong,nonatomic,null_resettable) KSOFormTheme *theme;
+/**
+ Get the identifier of the receiver. Useful for debugging purposes.
+ */
+@property (readonly,copy,nonatomic) NSString *identifier;
 
-@property (strong,nonatomic) KSOFormModel *model;
+@property (strong,nonatomic,null_resettable) UIColor *titleColor;
+@property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
+@property (strong,nonatomic,null_resettable) UIColor *valueColor;
+
+@property (strong,nonatomic,null_resettable) UIFont *titleFont;
+@property (strong,nonatomic,null_resettable) UIFont *subtitleFont;
+@property (strong,nonatomic,null_resettable) UIFont *valueFont;
+
+@property (strong,nonatomic,nullable) UIFontTextStyle titleTextStyle;
+@property (strong,nonatomic,nullable) UIFontTextStyle subtitleTextStyle;
+@property (strong,nonatomic,nullable) UIFontTextStyle valueTextStyle;
+
+/**
+ The designated initializer.
+ 
+ @param identifier The unique identifier for the theme
+ @return The initialized instance
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end
 

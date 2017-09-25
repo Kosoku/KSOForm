@@ -27,5 +27,6 @@
 }
 
 @synthesize formRow=_formRow;
+@synthesize formTheme=_formTheme;
 
 @end

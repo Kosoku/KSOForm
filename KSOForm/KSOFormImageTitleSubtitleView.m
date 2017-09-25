@@ -15,6 +15,8 @@
 
 #import "KSOFormImageTitleSubtitleView.h"
 
+#import <Ditko/Ditko.h>
+
 @interface KSOFormImageTitleSubtitleView ()
 @property (strong,nonatomic) UIStackView *verticalStackView, *horizontalStackView;
 @property (strong,nonatomic) UIImageView *imageView;
@@ -72,6 +74,30 @@
     
     [self.subtitleLabel setText:_formRow.subtitle];
     [self.subtitleLabel setHidden:_formRow.subtitle == nil];
+}
+@synthesize formTheme=_formTheme;
+- (void)setFormTheme:(KSOFormTheme *)formTheme {
+    _formTheme = formTheme;
+    
+    [self.titleLabel setFont:_formTheme.titleFont];
+    [self.titleLabel setTextColor:_formTheme.titleColor];
+    
+    [self.subtitleLabel setFont:_formTheme.subtitleFont];
+    [self.subtitleLabel setTextColor:_formTheme.subtitleColor];
+    
+    if (_formTheme.titleTextStyle == nil) {
+        [NSObject KDI_unregisterDynamicTypeObject:self.titleLabel];
+    }
+    else {
+        [NSObject KDI_registerDynamicTypeObject:self.titleLabel forTextStyle:_formTheme.titleTextStyle];
+    }
+    
+    if (_formTheme.subtitleTextStyle == nil) {
+        [NSObject KDI_unregisterDynamicTypeObject:self.subtitleLabel];
+    }
+    else {
+        [NSObject KDI_registerDynamicTypeObject:self.subtitleLabel forTextStyle:_formTheme.subtitleTextStyle];
+    }
 }
 
 @end

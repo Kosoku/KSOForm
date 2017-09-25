@@ -35,6 +35,10 @@
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.tableViewController.view}]];
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.tableViewController.view}]];
     
+    KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
+    
+    [self.tableViewController setTheme:theme];
+    
     NSDictionary *dictionary = @{KSOFormModelKeyRows: @[@{KSOFormRowKeyTitle: @"Title",
                                                           KSOFormRowKeyValue: @"Value"},
                                                         @{KSOFormRowKeyTitle: @"Title",
