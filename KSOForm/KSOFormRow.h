@@ -18,7 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, KSOFormRowType) {
-    KSOFormRowTypeText = 0
+    KSOFormRowTypeLabel = 0,
+    KSOFormRowTypeText
 };
 
 typedef BOOL(^KSOFormRowShouldValueChange)(id _Nullable value, NSError **error);

@@ -69,7 +69,7 @@
     KSOFormRowTableViewCell *retval = nil;
     
     switch (formRow.type) {
-        case KSOFormRowTypeText:
+        case KSOFormRowTypeLabel:
             retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormTextTableViewCell.class) forIndexPath:indexPath];
             break;
             
