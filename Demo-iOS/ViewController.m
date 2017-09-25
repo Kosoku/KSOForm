@@ -43,14 +43,6 @@
     [self.tableViewController setTheme:theme];
     
     NSArray *section1 = @[@{KSOFormRowKeyTitle: @"Title",
-                            KSOFormRowKeyValue: @"Value"},
-                          @{KSOFormRowKeyTitle: @"Title",
-                            KSOFormRowKeySubtitle: @"Subtitle",
-                            KSOFormRowKeyValue: @"Value"},
-                          @{KSOFormRowKeyTitle: @"Title",
-                            KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
-                            KSOFormRowKeyValue: @"Value"},
-                          @{KSOFormRowKeyTitle: @"Title",
                             KSOFormRowKeySubtitle: @"Subtitle",
                             KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
                             KSOFormRowKeyValue: @"Value"}];
