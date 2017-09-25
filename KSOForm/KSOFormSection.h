@@ -19,13 +19,15 @@ typedef NSString* KSOFormSectionKey NS_STRING_ENUM;
 
 static KSOFormSectionKey const KSOFormSectionKeyRows = @"rows";
 
-@class KSOFormRow;
+@class KSOFormRow,KSOFormModel;
 
 @interface KSOFormSection : NSObject
 
+@property (readonly,weak,nonatomic) KSOFormModel *model;
+
 @property (readonly,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 
-- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary model:(KSOFormModel *)model NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

@@ -33,7 +33,7 @@
         
     }
     else if (dictionary[KSOFormModelKeyRows] != nil) {
-        _sections = @[[[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyRows: dictionary[KSOFormModelKeyRows]}]];
+        _sections = @[[[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyRows: dictionary[KSOFormModelKeyRows]} model:self]];
     }
     
     return self;

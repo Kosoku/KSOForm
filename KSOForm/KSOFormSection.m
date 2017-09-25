@@ -19,17 +19,19 @@
 #import <Quicksilver/Quicksilver.h>
 
 @interface KSOFormSection ()
+@property (readwrite,weak,nonatomic) KSOFormModel *model;
 @property (readwrite,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 @end
 
 @implementation KSOFormSection
 
-- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
+- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary model:(KSOFormModel *)model {
     if (!(self = [super init]))
         return nil;
     
+    _model = model;
     _rows = [(NSArray *)dictionary[KSOFormSectionKeyRows] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
-        return [[KSOFormRow alloc] initWithDictionary:object];
+        return [[KSOFormRow alloc] initWithDictionary:object section:self];
     }];
     
     return self;

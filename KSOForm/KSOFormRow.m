@@ -16,14 +16,17 @@
 #import "KSOFormRow.h"
 
 @interface KSOFormRow ()
+@property (readwrite,weak,nonatomic) KSOFormSection *section;
 @property (readwrite,assign,nonatomic) KSOFormRowType type;
 @end
 
 @implementation KSOFormRow
 
-- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
+- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section {
     if (!(self = [super init]))
         return nil;
+    
+    _section = section;
     
     _type = [dictionary[KSOFormRowKeyType] integerValue];
     
