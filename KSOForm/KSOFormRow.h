@@ -18,8 +18,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, KSOFormRowType) {
-    KSOFormRowTypeNone = 0,
-    KSOFormRowTypeText
+    KSOFormRowTypeText = 0
 };
 
 typedef BOOL(^KSOFormRowShouldValueChange)(id _Nullable value, NSError **error);
@@ -46,6 +45,11 @@ static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
 @property (strong,nonatomic,nullable) UIImage *image;
 @property (copy,nonatomic,nullable) NSString *title;
 @property (copy,nonatomic,nullable) NSString *subtitle;
+
+- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end
 

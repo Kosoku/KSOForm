@@ -21,6 +21,23 @@
 
 @implementation KSOFormRow
 
+- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
+    if (!(self = [super init]))
+        return nil;
+    
+    _type = [dictionary[KSOFormRowKeyType] integerValue];
+    
+    _value = dictionary[KSOFormRowKeyValue];
+    _shouldChangeValueBlock = dictionary[KSOFormRowKeyShouldChangeBlock];
+    _didChangeValueBlock = dictionary[KSOFormRowKeyDidChangeBlock];
+    
+    _image = dictionary[KSOFormRowKeyImage];
+    _title = dictionary[KSOFormRowKeyTitle];
+    _subtitle = dictionary[KSOFormRowKeySubtitle];
+    
+    return self;
+}
+
 - (void)setValue:(id)value {
     if (self.shouldChangeValueBlock != nil) {
         NSError *outError;

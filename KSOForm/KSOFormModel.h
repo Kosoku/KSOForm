@@ -28,7 +28,7 @@ static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)init;
-+ (instancetype)new;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end

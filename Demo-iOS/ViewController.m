@@ -15,8 +15,10 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+#import <KSOForm/KSOForm.h>
 
+@interface ViewController ()
+@property (strong,nonatomic) KSOFormTableViewController *tableViewController;
 @end
 
 @implementation ViewController
@@ -24,6 +26,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setTableViewController:[[KSOFormTableViewController alloc] initWithStyle:UITableViewStyleGrouped]];
+    [self addChildViewController:self.tableViewController];
+    [self.tableViewController.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addSubview:self.tableViewController.view];
+    [self.tableViewController didMoveToParentViewController:self];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.tableViewController.view}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.tableViewController.view}]];
+    
+    NSDictionary *dictionary = @{KSOFormModelKeyRows: @[@{KSOFormRowKeyTitle: @"Title",
+                                                          KSOFormRowKeyValue: @"Value"},
+                                                        @{KSOFormRowKeyTitle: @"Title",
+                                                          KSOFormRowKeySubtitle: @"Subtitle",
+                                                          KSOFormRowKeyValue: @"Value"},
+                                                        @{KSOFormRowKeyTitle: @"Title",
+                                                          KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                                                          KSOFormRowKeyValue: @"Value"},
+                                                        @{KSOFormRowKeyTitle: @"Title",
+                                                          KSOFormRowKeySubtitle: @"Subtitle",
+                                                          KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                                                          KSOFormRowKeyValue: @"Value"}]};
+    
+    [self.tableViewController setModel:[[KSOFormModel alloc] initWithDictionary:dictionary]];
 }
 
 @end

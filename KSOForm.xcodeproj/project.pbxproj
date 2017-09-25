@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		071ED02F1F78C6B900778F22 /* Quicksilver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071ED0301F78C6B900778F22 /* Quicksilver.framework */; };
+		071ED0311F78C6C800778F22 /* Quicksilver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071ED0301F78C6B900778F22 /* Quicksilver.framework */; };
+		071ED0321F78C6C800778F22 /* Quicksilver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 071ED0301F78C6B900778F22 /* Quicksilver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07952D9D1F7892AE006C2A75 /* KSOForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952D9B1F7892AE006C2A75 /* KSOForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07952DA61F789627006C2A75 /* KSOFormSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952DA41F789627006C2A75 /* KSOFormSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07952DA71F789627006C2A75 /* KSOFormSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 07952DA51F789627006C2A75 /* KSOFormSection.m */; };
@@ -51,6 +54,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				07952DCD1F789C41006C2A75 /* KSOForm.framework in Embed Frameworks */,
+				071ED0321F78C6C800778F22 /* Quicksilver.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		071ED0301F78C6B900778F22 /* Quicksilver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quicksilver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07952D981F7892AE006C2A75 /* KSOForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07952D9B1F7892AE006C2A75 /* KSOForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOForm.h; sourceTree = "<group>"; };
 		07952D9C1F7892AE006C2A75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				071ED02F1F78C6B900778F22 /* Quicksilver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,18 +108,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				07952DCC1F789C41006C2A75 /* KSOForm.framework in Frameworks */,
+				071ED0311F78C6C800778F22 /* Quicksilver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		071ED02E1F78C6B900778F22 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				071ED0301F78C6B900778F22 /* Quicksilver.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		07952D8C1F789168006C2A75 = {
 			isa = PBXGroup;
 			children = (
 				07952D9A1F7892AE006C2A75 /* KSOForm */,
 				07952DB71F789BD0006C2A75 /* Demo-iOS */,
 				07952D991F7892AE006C2A75 /* Products */,
+				071ED02E1F78C6B900778F22 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

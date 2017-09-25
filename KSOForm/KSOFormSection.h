@@ -25,4 +25,9 @@ static KSOFormSectionKey const KSOFormSectionKeyRows = @"rows";
 
 @property (readonly,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 
+- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @end

@@ -16,10 +16,23 @@
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
 
+#import <Quicksilver/Quicksilver.h>
+
 @interface KSOFormSection ()
 @property (readwrite,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 @end
 
 @implementation KSOFormSection
+
+- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
+    if (!(self = [super init]))
+        return nil;
+    
+    _rows = [(NSArray *)dictionary[KSOFormSectionKeyRows] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
+        return [[KSOFormRow alloc] initWithDictionary:object];
+    }];
+    
+    return self;
+}
 
 @end

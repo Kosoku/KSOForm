@@ -30,7 +30,7 @@
     _horizontalStackView = [[UIStackView alloc] initWithFrame:CGRectZero];
     [_horizontalStackView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_horizontalStackView setAxis:UILayoutConstraintAxisHorizontal];
-    [_horizontalStackView setAlignment:UIStackViewAlignmentLeading];
+    [_horizontalStackView setAlignment:UIStackViewAlignmentCenter];
     [self addSubview:_horizontalStackView];
     
     _verticalStackView = [[UIStackView alloc] initWithFrame:CGRectZero];
@@ -44,12 +44,17 @@
     [_horizontalStackView insertArrangedSubview:_imageView atIndex:0];
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [_titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
     [_titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_verticalStackView addArrangedSubview:_titleLabel];
     
     _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [_subtitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_subtitleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
     [_verticalStackView addArrangedSubview:_subtitleLabel];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _horizontalStackView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": _horizontalStackView}]];
     
     return self;
 }

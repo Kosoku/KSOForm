@@ -19,6 +19,8 @@
 @interface KSOFormTextTableViewCell ()
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
 @property (strong,nonatomic) UILabel *valueLabel;
+
+@property (copy,nonatomic) NSArray<NSLayoutConstraint *> *activeConstraints;
 @end
 
 @implementation KSOFormTextTableViewCell
@@ -29,19 +31,42 @@
     
     _leadingView = [[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero];
     [_leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_leadingView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.contentView addSubview:_leadingView];
     
     _valueLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [_valueLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.contentView addSubview:_valueLabel];
     
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]" options:0 metrics:nil views:@{@"view": _leadingView}]];
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view]-|" options:0 metrics:nil views:@{@"view": _leadingView}]];
-    
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]-|" options:0 metrics:nil views:@{@"view": _valueLabel, @"subview": _leadingView}]];
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view]-|" options:0 metrics:nil views:@{@"view": _valueLabel}]];
-    
     return self;
+}
+
+- (void)layoutMarginsDidChange {
+    [super layoutMarginsDidChange];
+    
+    [self setNeedsUpdateConstraints];
+}
+
++ (BOOL)requiresConstraintBasedLayout {
+    return YES;
+}
+- (void)updateConstraints {
+    [NSLayoutConstraint deactivateConstraints:self.activeConstraints];
+    
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[view]" options:0 metrics:@{@"left": @(self.layoutMargins.left)} views:@{@"view": _leadingView}]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": _leadingView}]];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]-right-|" options:0 metrics:@{@"right": @(self.layoutMargins.right)} views:@{@"view": _valueLabel, @"subview": _leadingView}]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": _valueLabel}]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+    
+    [self setActiveConstraints:constraints];
+    
+    [super updateConstraints];
 }
 
 - (void)setFormRow:(KSOFormRow *)formRow {

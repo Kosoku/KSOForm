@@ -44,7 +44,7 @@
     
     switch (formRow.type) {
         case KSOFormRowTypeText:
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormRowTableViewCell.class) forIndexPath:indexPath];
+            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormTextTableViewCell.class) forIndexPath:indexPath];
             break;
             
         default:
@@ -61,6 +61,12 @@
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+}
+
+- (void)setModel:(KSOFormModel *)model {
+    _model = model;
+    
+    [self.tableView reloadData];
 }
 
 @end

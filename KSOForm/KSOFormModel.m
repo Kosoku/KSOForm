@@ -17,6 +17,8 @@
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
 
+#import <Quicksilver/Quicksilver.h>
+
 @interface KSOFormModel ()
 @property (readwrite,copy,nonatomic) NSArray<KSOFormSection *> *sections;
 @end
@@ -27,7 +29,12 @@
     if (!(self = [super init]))
         return nil;
     
-    
+    if (dictionary[KSOFormModelKeySections] != nil) {
+        
+    }
+    else if (dictionary[KSOFormModelKeyRows] != nil) {
+        _sections = @[[[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyRows: dictionary[KSOFormModelKeyRows]}]];
+    }
     
     return self;
 }
