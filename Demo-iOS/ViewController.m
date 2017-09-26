@@ -88,7 +88,8 @@
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
                             KSOFormRowKeyTitle: @"Multiple Rows",
-                            KSOFormRowKeyPickerViewColumnsAndRows: @[@[@"Red",@"Green",@"Blue"],@[@"One",@"Two",@"Three"]]
+                            KSOFormRowKeyPickerViewColumnsAndRows: @[@[@"Red",@"Green",@"Blue"],@[@"One",@"Two",@"Three"]],
+                            KSOFormRowKeyPickerViewSelectedComponentsJoinString: @", "
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypeDatePicker),
                             KSOFormRowKeyTitle: @"Date Picker"

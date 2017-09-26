@@ -62,6 +62,7 @@
     
     _pickerViewColumnsAndRows = dictionary[KSOFormRowKeyPickerViewColumnsAndRows];
     _pickerViewRows = dictionary[KSOFormRowKeyPickerViewRows];
+    _pickerViewSelectedComponentsJoinString = dictionary[KSOFormRowKeyPickerViewSelectedComponentsJoinString];
     
     return self;
 }

@@ -49,6 +49,7 @@ static KSOFormRowKey const KSOFormRowKeyTextFormatter = @"textFormatter";
 // UIPickerView
 static KSOFormRowKey const KSOFormRowKeyPickerViewColumnsAndRows = @"pickerViewColumnsAndRows";
 static KSOFormRowKey const KSOFormRowKeyPickerViewRows = @"pickerViewRows";
+static KSOFormRowKey const KSOFormRowKeyPickerViewSelectedComponentsJoinString = @"pickerViewSelectedComponentsJoinString";
 // UITextInputTraits
 static KSOFormRowKey const KSOFormRowKeyAutocapitalizationType = @"autocapitalizationType";
 static KSOFormRowKey const KSOFormRowKeyAutocorrectionType = @"autocorrectionType";
@@ -95,6 +96,7 @@ static KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
 
 @property (copy,nonatomic,nullable) NSArray<NSArray<id<KSOFormPickerViewRow> > *> *pickerViewColumnsAndRows;
 @property (copy,nonatomic,nullable) NSArray<id<KSOFormPickerViewRow> > *pickerViewRows;
+@property (copy,nonatomic,nullable) NSString *pickerViewSelectedComponentsJoinString;
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 
