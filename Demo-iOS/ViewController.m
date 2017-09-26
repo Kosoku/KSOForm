@@ -81,6 +81,10 @@
                             }];
     NSArray *controls = @[@{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
                             KSOFormRowKeyTitle: @"Toggle Something"
+                            },
+                          @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
+                            KSOFormRowKeyTitle: @"Picker View Rows",
+                            KSOFormRowKeyPickerViewRows: @[@"Red",@"Green",@"Blue"]
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,

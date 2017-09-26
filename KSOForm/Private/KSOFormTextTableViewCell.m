@@ -52,19 +52,6 @@
     return self;
 }
 #pragma mark -
-- (void)layoutMarginsDidChange {
-    [super layoutMarginsDidChange];
-    
-    [self.trailingView setRightViewEdgeInsets:UIEdgeInsetsMake(0, ceil(self.layoutMargins.right * 0.5), 0, self.layoutMargins.right)];
-}
-#pragma mark -
-@dynamic leadingView;
-@dynamic trailingView;
-
-- (BOOL)trailingViewRespectsLayoutMargins {
-    return NO;
-}
-#pragma mark -
 - (BOOL)canBecomeFirstResponder {
     return [self.trailingView canBecomeFirstResponder];
 }
@@ -76,6 +63,19 @@
 }
 - (BOOL)resignFirstResponder {
     return [self.trailingView resignFirstResponder];
+}
+#pragma mark -
+- (void)layoutMarginsDidChange {
+    [super layoutMarginsDidChange];
+    
+    [self.trailingView setRightViewEdgeInsets:UIEdgeInsetsMake(0, ceil(self.layoutMargins.right * 0.5), 0, self.layoutMargins.right)];
+}
+#pragma mark -
+@dynamic leadingView;
+@dynamic trailingView;
+
+- (BOOL)trailingViewRespectsLayoutMargins {
+    return NO;
 }
 #pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {

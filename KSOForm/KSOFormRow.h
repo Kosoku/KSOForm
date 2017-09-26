@@ -15,6 +15,7 @@
 
 #import <UIKit/UIKit.h>
 #import <KSOForm/KSOFormRowValueDataSource.h>
+#import <KSOForm/KSOFormPickerViewRow.h>
 #import <KSOTextValidation/KSOTextValidator.h>
 #import <KSOTextValidation/KSOTextFormatter.h>
 
@@ -23,7 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, KSOFormRowType) {
     KSOFormRowTypeLabel = 0,
     KSOFormRowTypeText,
-    KSOFormRowTypeSwitch
+    KSOFormRowTypeSwitch,
+    KSOFormRowTypePickerView
 };
 
 typedef BOOL(^KSOFormRowShouldChangeValueBlock)(id _Nullable value, NSError **error);
@@ -43,6 +45,9 @@ static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
 static KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
 static KSOFormRowKey const KSOFormRowKeyTextValidator = @"textValidator";
 static KSOFormRowKey const KSOFormRowKeyTextFormatter = @"textFormatter";
+// UIPickerView
+static KSOFormRowKey const KSOFormRowKeyPickerViewColumnsAndRows = @"pickerViewColumnsAndRows";
+static KSOFormRowKey const KSOFormRowKeyPickerViewRows = @"pickerViewRows";
 // UITextInputTraits
 static KSOFormRowKey const KSOFormRowKeyAutocapitalizationType = @"autocapitalizationType";
 static KSOFormRowKey const KSOFormRowKeyAutocorrectionType = @"autocorrectionType";
@@ -86,6 +91,9 @@ static KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
 @property (assign,nonatomic) UIReturnKeyType returnKeyType;
 @property (assign,nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
 @property (copy,nonatomic) UITextContentType textContentType NS_AVAILABLE_IOS(10_0);
+
+@property (copy,nonatomic,nullable) NSArray<NSArray<id<KSOFormPickerViewRow> > *> *pickerViewColumnsAndRows;
+@property (copy,nonatomic,nullable) NSArray<id<KSOFormPickerViewRow> > *pickerViewRows;
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 

@@ -49,6 +49,9 @@
 		07952DE41F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07952DE21F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.m */; };
 		079A1B3D1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 079A1B3B1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.h */; };
 		079A1B3E1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079A1B3C1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.m */; };
+		079A1B431F7ADE9300C9F9BB /* KSOFormPickerViewRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 079A1B421F7ADE9300C9F9BB /* KSOFormPickerViewRow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		079A1B461F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 079A1B441F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		079A1B471F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 079A1B451F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.m */; };
 		079E191F1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 079E191D1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h */; };
 		079E19201F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079E191E1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m */; };
 		079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -136,6 +139,9 @@
 		07952DE21F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormImageTitleSubtitleView.m; sourceTree = "<group>"; };
 		079A1B3B1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormPickerViewTableViewCell.h; sourceTree = "<group>"; };
 		079A1B3C1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormPickerViewTableViewCell.m; sourceTree = "<group>"; };
+		079A1B421F7ADE9300C9F9BB /* KSOFormPickerViewRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormPickerViewRow.h; sourceTree = "<group>"; };
+		079A1B441F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+KSOFormPickerViewRowExtensions.h"; sourceTree = "<group>"; };
+		079A1B451F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+KSOFormPickerViewRowExtensions.m"; sourceTree = "<group>"; };
 		079E191D1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormLeadingTrailingTableViewCell.h; sourceTree = "<group>"; };
 		079E191E1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormLeadingTrailingTableViewCell.m; sourceTree = "<group>"; };
 		079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormSwitchTableViewCell.h; sourceTree = "<group>"; };
@@ -246,6 +252,9 @@
 				07952DAD1F789681006C2A75 /* KSOFormTableViewController.m */,
 				079E19251F7998B400743988 /* KSOFormRowValueDataSource.h */,
 				07952DB01F789810006C2A75 /* KSOFormRowView.h */,
+				079A1B421F7ADE9300C9F9BB /* KSOFormPickerViewRow.h */,
+				079A1B441F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.h */,
+				079A1B451F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.m */,
 				079A1B401F7AC84D00C9F9BB /* Private */,
 			);
 			name = Source;
@@ -298,6 +307,7 @@
 				071ED0351F78D6AB00778F22 /* KSOFormTheme.h in Headers */,
 				079E191F1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h in Headers */,
 				07952DE31F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.h in Headers */,
+				079A1B461F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.h in Headers */,
 				079A1B3D1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.h in Headers */,
 				07952DA61F789627006C2A75 /* KSOFormSection.h in Headers */,
 				07952DDB1F78A1C6006C2A75 /* KSOFormLabelTableViewCell.h in Headers */,
@@ -309,6 +319,7 @@
 				079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */,
 				07952DD71F78A01F006C2A75 /* KSOFormRowTableViewCell.h in Headers */,
 				079E19261F7998B400743988 /* KSOFormRowValueDataSource.h in Headers */,
+				079A1B431F7ADE9300C9F9BB /* KSOFormPickerViewRow.h in Headers */,
 				07952DAA1F789654006C2A75 /* KSOFormRow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07952DDC1F78A1C6006C2A75 /* KSOFormLabelTableViewCell.m in Sources */,
+				079A1B471F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.m in Sources */,
 				07952DAB1F789654006C2A75 /* KSOFormRow.m in Sources */,
 				07952DAF1F789681006C2A75 /* KSOFormTableViewController.m in Sources */,
 				079E19241F79919000743988 /* KSOFormSwitchTableViewCell.m in Sources */,

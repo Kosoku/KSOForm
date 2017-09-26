@@ -60,6 +60,9 @@
     _secureTextEntry = [dictionary[KSOFormRowKeySecureTextEntry] boolValue];
     _textContentType = dictionary[KSOFormRowKeyTextContentType];
     
+    _pickerViewColumnsAndRows = dictionary[KSOFormRowKeyPickerViewColumnsAndRows];
+    _pickerViewRows = dictionary[KSOFormRowKeyPickerViewRows];
+    
     return self;
 }
 
