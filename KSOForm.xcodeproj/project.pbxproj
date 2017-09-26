@@ -54,6 +54,8 @@
 		079A1B471F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 079A1B451F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.m */; };
 		079A1B4A1F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 079A1B481F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.h */; };
 		079A1B4B1F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079A1B491F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.m */; };
+		079A1B4E1F7B100900C9F9BB /* KSOFormStepperTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 079A1B4C1F7B100900C9F9BB /* KSOFormStepperTableViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		079A1B4F1F7B100900C9F9BB /* KSOFormStepperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079A1B4D1F7B100900C9F9BB /* KSOFormStepperTableViewCell.m */; };
 		079E191F1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 079E191D1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h */; };
 		079E19201F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079E191E1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m */; };
 		079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -146,6 +148,8 @@
 		079A1B451F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+KSOFormPickerViewRowExtensions.m"; sourceTree = "<group>"; };
 		079A1B481F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormDatePickerTableViewCell.h; sourceTree = "<group>"; };
 		079A1B491F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormDatePickerTableViewCell.m; sourceTree = "<group>"; };
+		079A1B4C1F7B100900C9F9BB /* KSOFormStepperTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormStepperTableViewCell.h; sourceTree = "<group>"; };
+		079A1B4D1F7B100900C9F9BB /* KSOFormStepperTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormStepperTableViewCell.m; sourceTree = "<group>"; };
 		079E191D1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormLeadingTrailingTableViewCell.h; sourceTree = "<group>"; };
 		079E191E1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormLeadingTrailingTableViewCell.m; sourceTree = "<group>"; };
 		079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormSwitchTableViewCell.h; sourceTree = "<group>"; };
@@ -299,6 +303,8 @@
 				079A1B3C1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.m */,
 				079A1B481F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.h */,
 				079A1B491F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.m */,
+				079A1B4C1F7B100900C9F9BB /* KSOFormStepperTableViewCell.h */,
+				079A1B4D1F7B100900C9F9BB /* KSOFormStepperTableViewCell.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 			files = (
 				071ED0351F78D6AB00778F22 /* KSOFormTheme.h in Headers */,
 				079E191F1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h in Headers */,
+				079A1B4E1F7B100900C9F9BB /* KSOFormStepperTableViewCell.h in Headers */,
 				07952DE31F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.h in Headers */,
 				079A1B461F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.h in Headers */,
 				079A1B3D1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.h in Headers */,
@@ -449,6 +456,7 @@
 				071ED0361F78D6AB00778F22 /* KSOFormTheme.m in Sources */,
 				07952DE41F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.m in Sources */,
 				07952DD41F789D21006C2A75 /* KSOFormModel.m in Sources */,
+				079A1B4F1F7B100900C9F9BB /* KSOFormStepperTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

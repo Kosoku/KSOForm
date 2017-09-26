@@ -19,6 +19,7 @@
 #import "KSOFormSwitchTableViewCell.h"
 #import "KSOFormPickerViewTableViewCell.h"
 #import "KSOFormDatePickerTableViewCell.h"
+#import "KSOFormStepperTableViewCell.h"
 #import "KSOFormModel.h"
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
@@ -69,6 +70,7 @@
     [self.tableView registerClass:KSOFormSwitchTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSwitchTableViewCell.class)];
     [self.tableView registerClass:KSOFormPickerViewTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormPickerViewTableViewCell.class)];
     [self.tableView registerClass:KSOFormDatePickerTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormDatePickerTableViewCell.class)];
+    [self.tableView registerClass:KSOFormStepperTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormStepperTableViewCell.class)];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -102,6 +104,9 @@
             break;
         case KSOFormRowTypeDatePicker:
             retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormDatePickerTableViewCell.class) forIndexPath:indexPath];
+            break;
+        case KSOFormRowTypeStepper:
+            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormStepperTableViewCell.class) forIndexPath:indexPath];
             break;
         default:
             break;
