@@ -21,7 +21,9 @@
 
 @interface KSOFormStepperTableViewCell ()
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
-@property (strong,nonatomic) UIStepper *trailingView;
+@property (strong,nonatomic) UIStackView *trailingView;
+@property (strong,nonatomic) UILabel *valueLabel;
+@property (strong,nonatomic) UIStepper *stepper;
 @end
 
 @implementation KSOFormStepperTableViewCell
@@ -37,32 +39,30 @@
     [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.contentView addSubview:self.leadingView];
     
-    [self setTrailingView:[[UIStepper alloc] initWithFrame:CGRectZero]];
+    [self setTrailingView:[[UIStackView alloc] initWithFrame:CGRectZero]];
     [self.trailingView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [self.trailingView KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
-        kstStrongify(self);
-        [self.formRow setValue:@(self.trailingView.value)];
-    } forControlEvents:UIControlEventValueChanged];
+    [self.trailingView setAxis:UILayoutConstraintAxisHorizontal];
+    [self.trailingView setAlignment:UIStackViewAlignmentCenter];
+    [self.trailingView setSpacing:8.0];
     [self.contentView addSubview:self.trailingView];
     
+    [self setValueLabel:[[UILabel alloc] initWithFrame:CGRectZero]];
+    [self.valueLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.trailingView addArrangedSubview:self.valueLabel];
+    
+    [self setStepper:[[UIStepper alloc] initWithFrame:CGRectZero]];
+    [self.stepper setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.stepper KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        NSNumber *value = @(self.stepper.value);
+        
+        [self.formRow setValue:value];
+        [self.valueLabel setText:value.stringValue];
+    } forControlEvents:UIControlEventValueChanged];
+    [self.trailingView addArrangedSubview:self.stepper];
+    
     return self;
-}
-#pragma mark -
-- (BOOL)canBecomeFirstResponder {
-    return [self.trailingView canBecomeFirstResponder];
-}
-- (BOOL)canResignFirstResponder {
-    return [self.trailingView canResignFirstResponder];
-}
-- (BOOL)isFirstResponder {
-    return [self.trailingView isFirstResponder];
-}
-- (BOOL)becomeFirstResponder {
-    return [self.trailingView becomeFirstResponder];
-}
-- (BOOL)resignFirstResponder {
-    return [self.trailingView resignFirstResponder];
 }
 #pragma mark -
 @dynamic leadingView;
@@ -73,15 +73,26 @@
     
     [self.leadingView setFormRow:formRow];
     
-    [self.trailingView setValue:[formRow.value doubleValue]];
+    [self.stepper setValue:[formRow.value doubleValue]];
+    [self.valueLabel setText:[formRow.value stringValue]];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
     
     [self.leadingView setFormTheme:formTheme];
     
+    [self.valueLabel setFont:formTheme.valueFont];
+    [self.valueLabel setTextColor:formTheme.valueColor];
+    
+    if (formTheme.valueTextStyle == nil) {
+        [NSObject KDI_unregisterDynamicTypeObject:self.valueLabel];
+    }
+    else {
+        [NSObject KDI_registerDynamicTypeObject:self.valueLabel forTextStyle:formTheme.valueTextStyle];
+    }
+    
     if (formTheme.textColor != nil) {
-        [self.trailingView setTintColor:formTheme.textColor];
+        [self.stepper setTintColor:formTheme.textColor];
     }
 }
 @end

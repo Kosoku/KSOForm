@@ -103,6 +103,9 @@
                                 
                                 retval;
                             })
+                            },
+                          @{KSOFormRowKeyType: @(KSOFormRowTypeStepper),
+                            KSOFormRowKeyTitle: @"Stepper"
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,
