@@ -35,15 +35,19 @@ typedef void(^KSOFormRowDidChangeValueBlock)(id _Nullable value);
 
 typedef NSString* KSOFormRowKey NS_STRING_ENUM;
 
+// value related
 static KSOFormRowKey const KSOFormRowKeyType = @"type";
 static KSOFormRowKey const KSOFormRowKeyValue = @"value";
 static KSOFormRowKey const KSOFormRowKeyValueKey = @"valueKey";
+static KSOFormRowKey const KSOFormRowKeyValueFormatter = @"valueFormatter";
 static KSOFormRowKey const KSOFormRowKeyValueDataSource = @"valueDataSource";
-static KSOFormRowKey const KSOFormRowKeyShouldChangeBlock = @"shouldChangeBlock";
-static KSOFormRowKey const KSOFormRowKeyDidChangeBlock = @"didChangeBlock";
+static KSOFormRowKey const KSOFormRowKeyValueShouldChangeBlock = @"valueShouldChangeBlock";
+static KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock = @"valueDidChangeBlock";
+// secondary properties
 static KSOFormRowKey const KSOFormRowKeyImage = @"image";
 static KSOFormRowKey const KSOFormRowKeyTitle = @"title";
 static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
+// text properties
 static KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
 static KSOFormRowKey const KSOFormRowKeyTextValidator = @"textValidator";
 static KSOFormRowKey const KSOFormRowKeyTextFormatter = @"textFormatter";
@@ -67,6 +71,10 @@ static KSOFormRowKey const KSOFormRowKeyDatePickerMode = @"datePickerMode";
 static KSOFormRowKey const KSOFormRowKeyDatePickerMinimumDate = @"datePickerMinimumDate";
 static KSOFormRowKey const KSOFormRowKeyDatePickerMaximumDate = @"datePickerMaximumDate";
 static KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter = @"datePickerDateFormatter";
+// UIStepper
+static KSOFormRowKey const KSOFormRowKeyStepperMinimumValue = @"stepperMinimumValue";
+static KSOFormRowKey const KSOFormRowKeyStepperMaximumValue = @"stepperMaximumValue";
+static KSOFormRowKey const KSOFormRowKeyStepperStepValue = @"stepperStepValue";
 
 @class KSOFormSection;
 
@@ -79,7 +87,9 @@ static KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter = @"datePickerDa
 @property (readonly,nonatomic,getter=isEditable) BOOL editable;
 
 @property (strong,nonatomic,nullable) id value;
+@property (readonly,nonatomic,nullable) NSString *formattedValue;
 @property (copy,nonatomic,nullable) NSString *valueKey;
+@property (strong,nonatomic,nullable) __kindof NSFormatter *valueFormatter;
 @property (weak,nonatomic,nullable ) NSObject<KSOFormRowValueDataSource> *valueDataSource;
 @property (copy,nonatomic,nullable) KSOFormRowShouldChangeValueBlock shouldChangeValueBlock;
 @property (copy,nonatomic,nullable) KSOFormRowDidChangeValueBlock didChangeValueBlock;
@@ -110,6 +120,10 @@ static KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter = @"datePickerDa
 @property (copy,nonatomic,nullable) NSDate *datePickerMinimumDate;
 @property (copy,nonatomic,nullable) NSDate *datePickerMaximumDate;
 @property (strong,nonatomic,nullable) NSDateFormatter *datePickerDateFormatter;
+
+@property (assign,nonatomic) double stepperMinimumValue;
+@property (assign,nonatomic) double stepperMaximumValue;
+@property (assign,nonatomic) double stepperStepValue;
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 

@@ -38,9 +38,10 @@
     
     _value = dictionary[KSOFormRowKeyValue];
     _valueKey = dictionary[KSOFormRowKeyValueKey];
+    _valueFormatter = dictionary[KSOFormRowKeyValueFormatter];
     _valueDataSource = dictionary[KSOFormRowKeyValueDataSource];
-    _shouldChangeValueBlock = dictionary[KSOFormRowKeyShouldChangeBlock];
-    _didChangeValueBlock = dictionary[KSOFormRowKeyDidChangeBlock];
+    _shouldChangeValueBlock = dictionary[KSOFormRowKeyValueShouldChangeBlock];
+    _didChangeValueBlock = dictionary[KSOFormRowKeyValueDidChangeBlock];
     
     _image = dictionary[KSOFormRowKeyImage];
     _title = dictionary[KSOFormRowKeyTitle];
@@ -69,6 +70,10 @@
     _datePickerMaximumDate = dictionary[KSOFormRowKeyDatePickerMaximumDate];
     _datePickerDateFormatter = dictionary[KSOFormRowKeyDatePickerDateFormatter];
     
+    _stepperMinimumValue = [dictionary[KSOFormRowKeyStepperMinimumValue] doubleValue];
+    _stepperMaximumValue = [dictionary[KSOFormRowKeyStepperMaximumValue] doubleValue];
+    _stepperStepValue = [dictionary[KSOFormRowKeyStepperStepValue] doubleValue];
+    
     return self;
 }
 
@@ -80,7 +85,7 @@
 
 @synthesize value=_value;
 - (id)value {
-    return self.valueKey != nil && self.valueDataSource != nil ? [self.valueDataSource valueForKey:self.valueKey] : _value;
+    return self.valueKey != nil && self.valueDataSource != nil ? [self.valueDataSource valueForKey:self.valueKey] : _value;;
 }
 - (void)setValue:(id)value {
     if (self.shouldChangeValueBlock != nil) {
@@ -119,6 +124,16 @@
     if (self.didChangeValueBlock != nil) {
         self.didChangeValueBlock(_value);
     }
+}
+- (NSString *)formattedValue {
+    return self.valueFormatter == nil ? [self.value description] : [self.valueFormatter stringForObjectValue:self.value];
+}
+
+- (double)stepperMaximumValue {
+    return _stepperMaximumValue > 0.0 ? _stepperMaximumValue : 1.0;
+}
+- (double)stepperStepValue {
+    return _stepperStepValue > 0.0 ? _stepperStepValue : 1.0;
 }
 
 @end

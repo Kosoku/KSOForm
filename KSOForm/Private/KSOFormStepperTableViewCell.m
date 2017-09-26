@@ -55,10 +55,8 @@
     [self.stepper setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.stepper KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
-        NSNumber *value = @(self.stepper.value);
-        
-        [self.formRow setValue:value];
-        [self.valueLabel setText:value.stringValue];
+        [self.formRow setValue:@(self.stepper.value)];
+        [self.valueLabel setText:self.formRow.formattedValue];
     } forControlEvents:UIControlEventValueChanged];
     [self.trailingView addArrangedSubview:self.stepper];
     
@@ -73,8 +71,12 @@
     
     [self.leadingView setFormRow:formRow];
     
+    [self.stepper setMinimumValue:formRow.stepperMinimumValue];
+    [self.stepper setMaximumValue:formRow.stepperMaximumValue];
+    [self.stepper setStepValue:formRow.stepperStepValue];
     [self.stepper setValue:[formRow.value doubleValue]];
-    [self.valueLabel setText:[formRow.value stringValue]];
+    
+    [self.valueLabel setText:formRow.formattedValue];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];

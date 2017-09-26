@@ -105,7 +105,17 @@
                             })
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypeStepper),
-                            KSOFormRowKeyTitle: @"Stepper"
+                            KSOFormRowKeyTitle: @"Stepper",
+                            KSOFormRowKeyStepperStepValue: @0.05,
+                            KSOFormRowKeyStepperMinimumValue: @-1.0,
+                            KSOFormRowKeyValueFormatter: ({
+                                NSNumberFormatter *retval = [[NSNumberFormatter alloc] init];
+                                
+                                [retval setNumberStyle:NSNumberFormatterDecimalStyle];
+                                [retval setMinimumFractionDigits:2];
+                                
+                                retval;
+                            })
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,
