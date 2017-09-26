@@ -89,6 +89,9 @@
                           @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
                             KSOFormRowKeyTitle: @"Multiple Rows",
                             KSOFormRowKeyPickerViewColumnsAndRows: @[@[@"Red",@"Green",@"Blue"],@[@"One",@"Two",@"Three"]]
+                            },
+                          @{KSOFormRowKeyType: @(KSOFormRowTypeDatePicker),
+                            KSOFormRowKeyTitle: @"Date Picker"
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,
