@@ -72,6 +72,12 @@
     return self;
 }
 
+- (BOOL)isEditable {
+    return (self.type == KSOFormRowTypeText ||
+            self.type == KSOFormRowTypeDatePicker ||
+            self.type == KSOFormRowTypePickerView);
+}
+
 @synthesize value=_value;
 - (id)value {
     return self.valueKey != nil && self.valueDataSource != nil ? [self.valueDataSource valueForKey:self.valueKey] : _value;

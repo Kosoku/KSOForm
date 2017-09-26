@@ -75,6 +75,8 @@ static KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter = @"datePickerDa
 
 @property (readonly,assign,nonatomic) KSOFormRowType type;
 
+@property (readonly,nonatomic,getter=isEditable) BOOL editable;
+
 @property (strong,nonatomic,nullable) id value;
 @property (copy,nonatomic,nullable) NSString *valueKey;
 @property (weak,nonatomic,nullable ) NSObject<KSOFormRowValueDataSource> *valueDataSource;

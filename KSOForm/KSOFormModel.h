@@ -15,6 +15,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NSString* KSOFormModelKey NS_STRING_ENUM;
 
 static KSOFormModelKey const KSOFormModelKeySections = @"sections";
@@ -31,4 +33,10 @@ static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
+- (nullable KSOFormRow *)formRowForIndexPath:(NSIndexPath *)indexPath;
+- (nullable NSIndexPath *)indexPathForFormRow:(KSOFormRow *)formRow;
+
 @end
+
+NS_ASSUME_NONNULL_END
+

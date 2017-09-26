@@ -52,6 +52,9 @@
 - (BOOL)canResignFirstResponder {
     return [self.trailingView canResignFirstResponder];
 }
+- (BOOL)isFirstResponder {
+    return [self.trailingView isFirstResponder];
+}
 - (BOOL)becomeFirstResponder {
     return [self.trailingView becomeFirstResponder];
 }

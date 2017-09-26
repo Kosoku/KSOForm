@@ -24,6 +24,11 @@
 #import "KSOFormRow.h"
 #import "KSOFormTheme.h"
 
+#import <Ditko/Ditko.h>
+#import <Agamotto/Agamotto.h>
+#import <Stanley/Stanley.h>
+#import <Quicksilver/Quicksilver.h>
+
 @interface KSOFormTableViewController ()
 - (void)_KSOFormTableViewControllerInit;
 @end
@@ -79,8 +84,8 @@
     return self.model.sections[section].footerTitle;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    KSOFormRow *formRow = self.model.sections[indexPath.section].rows[indexPath.row];
-    KSOFormRowTableViewCell *retval = nil;
+    KSOFormRow *formRow = [self.model formRowForIndexPath:indexPath];
+    UITableViewCell<KSOFormRowView> *retval = nil;
     
     switch (formRow.type) {
         case KSOFormRowTypeLabel:
@@ -111,15 +116,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    if ([cell canBecomeFirstResponder]) {
+    if (cell.canBecomeFirstResponder) {
         [cell becomeFirstResponder];
     }
     else {
         [self.tableView endEditing:NO];
     }
-}
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
 }
 
 - (void)setTheme:(KSOFormTheme *)theme {
@@ -134,6 +136,78 @@
 
 - (void)_KSOFormTableViewControllerInit; {
     _theme = KSOFormTheme.defaultTheme;
+    
+    kstWeakify(self);
+    [self KAG_addObserverForNotificationNames:@[KDINextPreviousInputAccessoryViewNotificationNext,KDINextPreviousInputAccessoryViewNotificationPrevious] object:nil block:^(NSNotification * _Nonnull notification) {
+        kstStrongify(self);
+        
+        UITableViewCell<KSOFormRowView> *cell = [self.tableView.visibleCells KQS_find:^BOOL(__kindof UITableViewCell * _Nonnull object, NSInteger index) {
+            return object.isFirstResponder;
+        }];
+        
+        if (cell == nil) {
+            return;
+        }
+        
+        NSArray<KSOFormRow *> *formRows = [[self.model.sections KQS_map:^id _Nullable(KSOFormSection * _Nonnull object, NSInteger index) {
+            return object.rows;
+        }] KQS_flatten];
+        NSInteger index = [formRows indexOfObject:cell.formRow];
+        KSOFormRow *editableFormRow = nil;
+        
+        if ([notification.name isEqualToString:KDINextPreviousInputAccessoryViewNotificationNext]) {
+            if ((++index) == formRows.count) {
+                index = 0;
+            }
+            
+            for (NSInteger i=index; i<formRows.count; i++) {
+                if (formRows[i].isEditable) {
+                    editableFormRow = formRows[i];
+                    break;
+                }
+            }
+            
+            if (editableFormRow == nil) {
+                for (NSInteger i=0; i<index; i++) {
+                    if (formRows[i].isEditable) {
+                        editableFormRow = formRows[i];
+                        break;
+                    }
+                }
+            }
+        }
+        else {
+            if ((--index) < 0) {
+                index = formRows.count - 1;
+            }
+            
+            for (NSInteger i=index; i>=0; i--) {
+                if (formRows[i].isEditable) {
+                    editableFormRow = formRows[i];
+                    break;
+                }
+            }
+            
+            if (editableFormRow == nil) {
+                for (NSInteger i=formRows.count - 1; i>index; i--) {
+                    if (formRows[i].isEditable) {
+                        editableFormRow = formRows[i];
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (editableFormRow == nil) {
+            return;
+        }
+        
+        NSIndexPath *indexPath = [self.model indexPathForFormRow:editableFormRow];
+        
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+        
+        [[self.tableView cellForRowAtIndexPath:indexPath] becomeFirstResponder];
+    }];
 }
 
 @end

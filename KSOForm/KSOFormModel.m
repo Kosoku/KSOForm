@@ -41,4 +41,26 @@
     return self;
 }
 
+- (KSOFormRow *)formRowForIndexPath:(NSIndexPath *)indexPath {
+    return self.sections[indexPath.section].rows[indexPath.row];
+}
+- (NSIndexPath *)indexPathForFormRow:(KSOFormRow *)formRow {
+    NSIndexPath *retval = nil;
+    
+    for (NSUInteger i=0; i<self.sections.count; i++) {
+        for (NSUInteger j=0; j<self.sections[i].rows.count; j++) {
+            if ([formRow isEqual:self.sections[i].rows[j]]) {
+                retval = [NSIndexPath indexPathForRow:j inSection:i];
+                break;
+            }
+        }
+        
+        if (retval != nil) {
+            break;
+        }
+    }
+    
+    return retval;
+}
+
 @end
