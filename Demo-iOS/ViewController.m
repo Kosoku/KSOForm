@@ -48,11 +48,11 @@
     
     [self.tableViewController setTheme:theme];
     
-    NSArray *section1 = @[@{KSOFormRowKeyTitle: @"Title",
+    NSArray *readonly = @[@{KSOFormRowKeyTitle: @"Title",
                             KSOFormRowKeySubtitle: @"Subtitle",
                             KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
                             KSOFormRowKeyValue: @"Value"}];
-    NSArray *section2 = @[@{KSOFormRowKeyType: @(KSOFormRowTypeText),
+    NSArray *textEntry = @[@{KSOFormRowKeyType: @(KSOFormRowTypeText),
                             KSOFormRowKeyTitle: @"Email",
                             KSOFormRowKeyPlaceholder: @"Enter your email address",
                             KSOFormRowKeyKeyboardType: @(UIKeyboardTypeEmailAddress),
@@ -76,15 +76,23 @@
                             KSOFormRowKeyTextContentType: UITextContentTypeTelephoneNumber,
                             KSOFormRowKeyValueKey: @kstKeypath(self,phoneNumber),
                             KSOFormRowKeyValueDataSource: self,
-                            KSOFormRowKeyTextValidator: [KSOPhoneNumberValidator phoneNumberValidator]
+                            KSOFormRowKeyTextValidator: [KSOPhoneNumberValidator phoneNumberValidator],
+                            KSOFormRowKeyTextFormatter: [[KSTPhoneNumberFormatter alloc] init]
+                            }];
+    NSArray *controls = @[@{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
+                            KSOFormRowKeyTitle: @"Toggle Something"
                             }];
     
-    NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: section1,
+    NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,
                                                               KSOFormSectionKeyHeaderTitle: @"Read only values",
                                                               KSOFormSectionKeyFooterTitle: @"Section footer title"
                                                               },
-                                                            @{KSOFormSectionKeyRows: section2,
-                                                              KSOFormSectionKeyHeaderTitle: @"Login details",
+                                                            @{KSOFormSectionKeyRows: textEntry,
+                                                              KSOFormSectionKeyHeaderTitle: @"Text entry",
+                                                              KSOFormSectionKeyFooterTitle: @"Section footer title"
+                                                              },
+                                                            @{KSOFormSectionKeyRows: controls,
+                                                              KSOFormSectionKeyHeaderTitle: @"Controls",
                                                               KSOFormSectionKeyFooterTitle: @"Section footer title"
                                                               }]};
     
