@@ -83,8 +83,12 @@
                             KSOFormRowKeyTitle: @"Toggle Something"
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
-                            KSOFormRowKeyTitle: @"Picker View Rows",
+                            KSOFormRowKeyTitle: @"Rows",
                             KSOFormRowKeyPickerViewRows: @[@"Red",@"Green",@"Blue"]
+                            },
+                          @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
+                            KSOFormRowKeyTitle: @"Multiple Rows",
+                            KSOFormRowKeyPickerViewColumnsAndRows: @[@[@"Red",@"Green",@"Blue"],@[@"One",@"Two",@"Three"]]
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,

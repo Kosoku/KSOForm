@@ -33,12 +33,12 @@
     
     [self setLeadingView:[[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero]];
     [self.leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.contentView addSubview:self.leadingView];
     
     [self setTrailingView:[KDIPickerViewButton buttonWithType:UIButtonTypeSystem]];
     [self.trailingView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.trailingView setDataSource:self];
     [self.trailingView setDelegate:self];
     [self.contentView addSubview:self.trailingView];
@@ -123,8 +123,15 @@
 - (void)pickerViewButton:(KDIPickerViewButton *)pickerViewButton didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (self.formRow.pickerViewColumnsAndRows.count > 0) {
         NSMutableArray *temp = [NSMutableArray arrayWithArray:self.formRow.value];
+        id<KSOFormPickerViewRow> pickerViewRow = self.formRow.pickerViewColumnsAndRows[component][row];
         
-        [temp replaceObjectAtIndex:component withObject:self.formRow.pickerViewColumnsAndRows[component][row]];
+        if (temp.count <= component) {
+            for (NSInteger i=0; i<=component; i++) {
+                [temp insertObject:NSNull.null atIndex:i];
+            }
+        }
+        
+        [temp replaceObjectAtIndex:component withObject:pickerViewRow];
         
         [self.formRow setValue:[temp copy]];
     }
