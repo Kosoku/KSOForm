@@ -64,6 +64,11 @@
     _pickerViewRows = dictionary[KSOFormRowKeyPickerViewRows];
     _pickerViewSelectedComponentsJoinString = dictionary[KSOFormRowKeyPickerViewSelectedComponentsJoinString];
     
+    _datePickerMode = [dictionary[KSOFormRowKeyDatePickerMode] integerValue];
+    _datePickerMinimumDate = dictionary[KSOFormRowKeyDatePickerMinimumDate];
+    _datePickerMaximumDate = dictionary[KSOFormRowKeyDatePickerMaximumDate];
+    _datePickerDateFormatter = dictionary[KSOFormRowKeyDatePickerDateFormatter];
+    
     return self;
 }
 

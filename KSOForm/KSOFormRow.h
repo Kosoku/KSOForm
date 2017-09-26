@@ -46,10 +46,6 @@ static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
 static KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
 static KSOFormRowKey const KSOFormRowKeyTextValidator = @"textValidator";
 static KSOFormRowKey const KSOFormRowKeyTextFormatter = @"textFormatter";
-// UIPickerView
-static KSOFormRowKey const KSOFormRowKeyPickerViewColumnsAndRows = @"pickerViewColumnsAndRows";
-static KSOFormRowKey const KSOFormRowKeyPickerViewRows = @"pickerViewRows";
-static KSOFormRowKey const KSOFormRowKeyPickerViewSelectedComponentsJoinString = @"pickerViewSelectedComponentsJoinString";
 // UITextInputTraits
 static KSOFormRowKey const KSOFormRowKeyAutocapitalizationType = @"autocapitalizationType";
 static KSOFormRowKey const KSOFormRowKeyAutocorrectionType = @"autocorrectionType";
@@ -61,6 +57,15 @@ static KSOFormRowKey const KSOFormRowKeyKeyboardType = @"keyboardType";
 static KSOFormRowKey const KSOFormRowKeyReturnKeyType = @"returnKeyType";
 static KSOFormRowKey const KSOFormRowKeySecureTextEntry = @"secureTextEntry";
 static KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
+// UIPickerView
+static KSOFormRowKey const KSOFormRowKeyPickerViewColumnsAndRows = @"pickerViewColumnsAndRows";
+static KSOFormRowKey const KSOFormRowKeyPickerViewRows = @"pickerViewRows";
+static KSOFormRowKey const KSOFormRowKeyPickerViewSelectedComponentsJoinString = @"pickerViewSelectedComponentsJoinString";
+// UIDatePicker
+static KSOFormRowKey const KSOFormRowKeyDatePickerMode = @"datePickerMode";
+static KSOFormRowKey const KSOFormRowKeyDatePickerMinimumDate = @"datePickerMinimumDate";
+static KSOFormRowKey const KSOFormRowKeyDatePickerMaximumDate = @"datePickerMaximumDate";
+static KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter = @"datePickerDateFormatter";
 
 @class KSOFormSection;
 
@@ -97,6 +102,11 @@ static KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
 @property (copy,nonatomic,nullable) NSArray<NSArray<id<KSOFormPickerViewRow> > *> *pickerViewColumnsAndRows;
 @property (copy,nonatomic,nullable) NSArray<id<KSOFormPickerViewRow> > *pickerViewRows;
 @property (copy,nonatomic,nullable) NSString *pickerViewSelectedComponentsJoinString;
+
+@property (assign,nonatomic) UIDatePickerMode datePickerMode;
+@property (copy,nonatomic,nullable) NSDate *datePickerMinimumDate;
+@property (copy,nonatomic,nullable) NSDate *datePickerMaximumDate;
+@property (strong,nonatomic,nullable) NSDateFormatter *datePickerDateFormatter;
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 

@@ -66,6 +66,7 @@
     [super setFormRow:formRow];
     
     [self.leadingView setFormRow:formRow];
+    
     [self.trailingView setSelectedComponentsJoinString:formRow.pickerViewSelectedComponentsJoinString];
     [self.trailingView reloadData];
     

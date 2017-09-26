@@ -92,7 +92,17 @@
                             KSOFormRowKeyPickerViewSelectedComponentsJoinString: @", "
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypeDatePicker),
-                            KSOFormRowKeyTitle: @"Date Picker"
+                            KSOFormRowKeyTitle: @"Date Picker",
+                            KSOFormRowKeyDatePickerMode: @(UIDatePickerModeDateAndTime),
+                            KSOFormRowKeyDatePickerMinimumDate: NSDate.date,
+                            KSOFormRowKeyDatePickerDateFormatter: ({
+                                NSDateFormatter *retval = [[NSDateFormatter alloc] init];
+                                
+                                [retval setDateStyle:NSDateFormatterShortStyle];
+                                [retval setTimeStyle:NSDateFormatterShortStyle];
+                                
+                                retval;
+                            })
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,
