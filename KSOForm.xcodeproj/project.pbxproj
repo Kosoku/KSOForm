@@ -246,20 +246,7 @@
 				07952DAD1F789681006C2A75 /* KSOFormTableViewController.m */,
 				079E19251F7998B400743988 /* KSOFormRowValueDataSource.h */,
 				07952DB01F789810006C2A75 /* KSOFormRowView.h */,
-				07952DE11F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.h */,
-				07952DE21F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.m */,
-				07952DD51F78A01F006C2A75 /* KSOFormRowTableViewCell.h */,
-				07952DD61F78A01F006C2A75 /* KSOFormRowTableViewCell.m */,
-				079E191D1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h */,
-				079E191E1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m */,
-				07952DD91F78A1C6006C2A75 /* KSOFormLabelTableViewCell.h */,
-				07952DDA1F78A1C6006C2A75 /* KSOFormLabelTableViewCell.m */,
-				0712E4F41F78E6A400F0E223 /* KSOFormTextTableViewCell.h */,
-				0712E4F51F78E6A400F0E223 /* KSOFormTextTableViewCell.m */,
-				079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */,
-				079E19221F79919000743988 /* KSOFormSwitchTableViewCell.m */,
-				079A1B3B1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.h */,
-				079A1B3C1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.m */,
+				079A1B401F7AC84D00C9F9BB /* Private */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -278,6 +265,27 @@
 				07952DC71F789BD0006C2A75 /* main.m */,
 			);
 			path = "Demo-iOS";
+			sourceTree = "<group>";
+		};
+		079A1B401F7AC84D00C9F9BB /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				07952DE11F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.h */,
+				07952DE21F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.m */,
+				07952DD51F78A01F006C2A75 /* KSOFormRowTableViewCell.h */,
+				07952DD61F78A01F006C2A75 /* KSOFormRowTableViewCell.m */,
+				079E191D1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h */,
+				079E191E1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m */,
+				07952DD91F78A1C6006C2A75 /* KSOFormLabelTableViewCell.h */,
+				07952DDA1F78A1C6006C2A75 /* KSOFormLabelTableViewCell.m */,
+				0712E4F41F78E6A400F0E223 /* KSOFormTextTableViewCell.h */,
+				0712E4F51F78E6A400F0E223 /* KSOFormTextTableViewCell.m */,
+				079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */,
+				079E19221F79919000743988 /* KSOFormSwitchTableViewCell.m */,
+				079A1B3B1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.h */,
+				079A1B3C1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.m */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
