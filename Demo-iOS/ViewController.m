@@ -20,6 +20,89 @@
 #import <KSOTextValidation/KSOTextValidation.h>
 #import <KSOForm/KSOForm.h>
 
+@interface TableBackgroundView : UIView
+@property (strong,nonatomic) UIImageView *imageView;
+@end
+
+@implementation TableBackgroundView
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (!(self = [super initWithFrame:frame]))
+        return nil;
+    
+    [self setImageView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kosoku-logo"].KDI_templateImage]];
+    [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.imageView setTintColor:[KDIColorHexadecimal(@"ebebf0") KDI_colorByAdjustingBrightnessBy:0.05]];
+    [self addSubview:self.imageView];
+    
+    [self sizeToFit];
+    
+    return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    [self.imageView setFrame:self.bounds];
+}
+@end
+
+@interface TableHeaderView : UIView
+@property (strong,nonatomic) UIImageView *imageView;
+@end
+
+@implementation TableHeaderView
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (!(self = [super initWithFrame:frame]))
+        return nil;
+    
+    [self setImageView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kosoku-logo"]]];
+    [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self addSubview:self.imageView];
+    
+    [self sizeToFit];
+    
+    return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    [self.imageView setFrame:CGRectMake(0, 8, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - 8)];
+}
+- (CGSize)sizeThatFits:(CGSize)size {
+    return CGSizeMake(CGRectGetWidth(UIScreen.mainScreen.bounds), 50 + 8);
+}
+@end
+
+@interface TableFooterView : UIView
+@property (strong,nonatomic) UILabel *label;
+@end
+
+@implementation TableFooterView
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (!(self = [super initWithFrame:frame]))
+        return nil;
+    
+    [self setLabel:[[UILabel alloc] initWithFrame:CGRectZero]];
+    [self.label setText:@"Kosoku Interactive, LLC."];
+    [self.label setTextAlignment:NSTextAlignmentCenter];
+    [self addSubview:self.label];
+    
+    [self sizeToFit];
+    
+    return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    [self.label setFrame:self.bounds];
+}
+- (CGSize)sizeThatFits:(CGSize)size {
+    return CGSizeMake(CGRectGetWidth(UIScreen.mainScreen.bounds), ceil(self.label.font.lineHeight));
+}
+@end
+
 @interface ViewController () <KSOFormRowValueDataSource>
 @property (copy,nonatomic) NSString *email;
 @property (copy,nonatomic) NSString *password;
@@ -138,7 +221,9 @@
     }
                                                                    }]];
     
-    KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS"}];
+    KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS",
+                                                                     KSOFormModelKeyHeaderView: [[TableHeaderView alloc] initWithFrame:CGRectZero]
+                                                                     }];
     
     [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title",
                                       KSOFormSectionKeyFooterTitle: @"Section footer title"

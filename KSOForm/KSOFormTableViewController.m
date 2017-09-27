@@ -79,6 +79,12 @@
     [self.tableView registerClass:KSOFormSegmentedTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSegmentedTableViewCell.class)];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    KSTLogCGSize(size);
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.tableView endEditing:YES];
 }
@@ -185,10 +191,12 @@
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         if ([keyPath isEqualToString:@kstKeypath(self,model)]) {
-            if (self.isViewLoaded &&
-                self.view.window != nil) {
-                
+            if (self.isViewLoaded) {
                 [self.tableView reloadData];
+                
+                [self.tableView setBackgroundView:self.model.backgroundView];
+                [self.tableView setTableHeaderView:self.model.headerView];
+                [self.tableView setTableFooterView:self.model.footerView];
             }
         }
         else if ([keyPath isEqualToString:@kstKeypath(self,model.title)]) {

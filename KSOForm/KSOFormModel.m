@@ -39,6 +39,9 @@
         return nil;
     
     _title = dictionary[KSOFormModelKeyTitle];
+    _backgroundView = dictionary[KSOFormModelKeyBackgroundView];
+    _headerView = dictionary[KSOFormModelKeyHeaderView];
+    _footerView = dictionary[KSOFormModelKeyFooterView];
     _sections = [[NSMutableArray alloc] init];
     
     if (dictionary[KSOFormModelKeySections] != nil) {
