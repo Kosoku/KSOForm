@@ -28,6 +28,19 @@
     return NO;
 }
 
+@synthesize autocapitalizationType=_autocapitalizationType;
+@synthesize autocorrectionType=_autocorrectionType;
+@synthesize spellCheckingType=_spellCheckingType;
+@synthesize smartQuotesType=_smartQuotesType;
+@synthesize smartDashesType=_smartDashesType;
+@synthesize smartInsertDeleteType=_smartInsertDeleteType;
+@synthesize keyboardType=_keyboardType;
+@synthesize keyboardAppearance=_keyboardAppearance;
+@synthesize returnKeyType=_returnKeyType;
+@synthesize enablesReturnKeyAutomatically=_enablesReturnKeyAutomatically;
+@synthesize secureTextEntry=_secureTextEntry;
+@synthesize textContentType=_textContentType;
+
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section {
     if (!(self = [super init]))
         return nil;
@@ -57,7 +70,9 @@
     _smartDashesType = [dictionary[KSOFormRowKeySmartDashesType] integerValue];
     _smartInsertDeleteType = [dictionary[KSOFormRowKeySmartInsertDeleteType] integerValue];
     _keyboardType = [dictionary[KSOFormRowKeyKeyboardType] integerValue];
+    _keyboardAppearance = [dictionary[KSOFormRowKeyKeyboardAppearance] integerValue];
     _returnKeyType = [dictionary[KSOFormRowKeyReturnKeyType] integerValue];
+    _enablesReturnKeyAutomatically = [dictionary[KSOFormRowKeyEnablesReturnKeyAutomatically] integerValue];
     _secureTextEntry = [dictionary[KSOFormRowKeySecureTextEntry] boolValue];
     _textContentType = dictionary[KSOFormRowKeyTextContentType];
     

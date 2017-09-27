@@ -63,7 +63,9 @@ static KSOFormRowKey const KSOFormRowKeySmartQuotesType = @"smartQuotesType";
 static KSOFormRowKey const KSOFormRowKeySmartDashesType = @"smartDashesType";
 static KSOFormRowKey const KSOFormRowKeySmartInsertDeleteType = @"smartInsertDeleteType";
 static KSOFormRowKey const KSOFormRowKeyKeyboardType = @"keyboardType";
+static KSOFormRowKey const KSOFormRowKeyKeyboardAppearance = @"keyboardAppearance";
 static KSOFormRowKey const KSOFormRowKeyReturnKeyType = @"returnKeyType";
+static KSOFormRowKey const KSOFormRowKeyEnablesReturnKeyAutomatically = @"enablesReturnKeyAutomatically";
 static KSOFormRowKey const KSOFormRowKeySecureTextEntry = @"secureTextEntry";
 static KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
 // UIPickerView
@@ -90,7 +92,7 @@ static KSOFormRowKey const KSOFormRowKeySegmentedItems = @"segmentedItems";
 
 @class KSOFormSection;
 
-@interface KSOFormRow : NSObject
+@interface KSOFormRow : NSObject <UITextInputTraits>
 
 @property (readonly,weak,nonatomic) KSOFormSection *section;
 
@@ -113,17 +115,6 @@ static KSOFormRowKey const KSOFormRowKeySegmentedItems = @"segmentedItems";
 @property (strong,nonatomic,nullable) id<KSOTextValidator> textValidator;
 // NSFormatter works here as well
 @property (strong,nonatomic,nullable) id<KSOTextFormatter> textFormatter;
-
-@property (assign,nonatomic) UITextAutocapitalizationType autocapitalizationType;
-@property (assign,nonatomic) UITextAutocorrectionType autocorrectionType;
-@property (assign,nonatomic) UITextSpellCheckingType spellCheckingType;
-@property (assign,nonatomic) UITextSmartQuotesType smartQuotesType NS_AVAILABLE_IOS(11_0);
-@property (assign,nonatomic) UITextSmartDashesType smartDashesType NS_AVAILABLE_IOS(11_0);
-@property (assign,nonatomic) UITextSmartInsertDeleteType smartInsertDeleteType NS_AVAILABLE_IOS(11_0);
-@property (assign,nonatomic) UIKeyboardType keyboardType;
-@property (assign,nonatomic) UIReturnKeyType returnKeyType;
-@property (assign,nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
-@property (copy,nonatomic) UITextContentType textContentType NS_AVAILABLE_IOS(10_0);
 
 @property (copy,nonatomic,nullable) NSArray<NSArray<id<KSOFormPickerViewRow> > *> *pickerViewColumnsAndRows;
 @property (copy,nonatomic,nullable) NSArray<id<KSOFormPickerViewRow> > *pickerViewRows;
