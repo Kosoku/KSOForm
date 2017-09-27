@@ -219,6 +219,87 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		07732A231F7BEF280018E255 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				07952DD91F78A1C6006C2A75 /* KSOFormLabelTableViewCell.h */,
+				07952DDA1F78A1C6006C2A75 /* KSOFormLabelTableViewCell.m */,
+			);
+			name = Label;
+			sourceTree = "<group>";
+		};
+		07732A241F7BEF330018E255 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				0712E4F41F78E6A400F0E223 /* KSOFormTextTableViewCell.h */,
+				0712E4F51F78E6A400F0E223 /* KSOFormTextTableViewCell.m */,
+			);
+			name = Text;
+			sourceTree = "<group>";
+		};
+		07732A251F7BEF3B0018E255 /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */,
+				079E19221F79919000743988 /* KSOFormSwitchTableViewCell.m */,
+			);
+			name = Switch;
+			sourceTree = "<group>";
+		};
+		07732A261F7BEF460018E255 /* Picker View */ = {
+			isa = PBXGroup;
+			children = (
+				079A1B3B1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.h */,
+				079A1B3C1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.m */,
+			);
+			name = "Picker View";
+			sourceTree = "<group>";
+		};
+		07732A271F7BEF500018E255 /* Date Picker */ = {
+			isa = PBXGroup;
+			children = (
+				079A1B481F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.h */,
+				079A1B491F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.m */,
+			);
+			name = "Date Picker";
+			sourceTree = "<group>";
+		};
+		07732A281F7BEF580018E255 /* Stepper */ = {
+			isa = PBXGroup;
+			children = (
+				079A1B4C1F7B100900C9F9BB /* KSOFormStepperTableViewCell.h */,
+				079A1B4D1F7B100900C9F9BB /* KSOFormStepperTableViewCell.m */,
+			);
+			name = Stepper;
+			sourceTree = "<group>";
+		};
+		07732A291F7BEF5F0018E255 /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				079A1B501F7B1F3B00C9F9BB /* KSOFormSliderTableViewCell.h */,
+				079A1B511F7B1F3B00C9F9BB /* KSOFormSliderTableViewCell.m */,
+			);
+			name = Slider;
+			sourceTree = "<group>";
+		};
+		07732A2A1F7BEF6A0018E255 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				079A1B541F7B478400C9F9BB /* KSOFormButtonTableViewCell.h */,
+				079A1B551F7B478400C9F9BB /* KSOFormButtonTableViewCell.m */,
+			);
+			name = Button;
+			sourceTree = "<group>";
+		};
+		07732A2B1F7BEF720018E255 /* Segmented */ = {
+			isa = PBXGroup;
+			children = (
+				079A1B581F7B5A0B00C9F9BB /* KSOFormSegmentedTableViewCell.h */,
+				079A1B591F7B5A0B00C9F9BB /* KSOFormSegmentedTableViewCell.m */,
+			);
+			name = Segmented;
+			sourceTree = "<group>";
+		};
 		07952D8C1F789168006C2A75 = {
 			isa = PBXGroup;
 			children = (
@@ -299,32 +380,31 @@
 		079A1B401F7AC84D00C9F9BB /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				079A1B5F1F7BED1200C9F9BB /* Base */,
+				07732A231F7BEF280018E255 /* Label */,
+				07732A241F7BEF330018E255 /* Text */,
+				07732A251F7BEF3B0018E255 /* Switch */,
+				07732A261F7BEF460018E255 /* Picker View */,
+				07732A271F7BEF500018E255 /* Date Picker */,
+				07732A281F7BEF580018E255 /* Stepper */,
+				07732A291F7BEF5F0018E255 /* Slider */,
+				07732A2A1F7BEF6A0018E255 /* Button */,
+				07732A2B1F7BEF720018E255 /* Segmented */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		079A1B5F1F7BED1200C9F9BB /* Base */ = {
+			isa = PBXGroup;
+			children = (
 				07952DE11F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.h */,
 				07952DE21F78BB3E006C2A75 /* KSOFormImageTitleSubtitleView.m */,
 				07952DD51F78A01F006C2A75 /* KSOFormRowTableViewCell.h */,
 				07952DD61F78A01F006C2A75 /* KSOFormRowTableViewCell.m */,
 				079E191D1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h */,
 				079E191E1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m */,
-				07952DD91F78A1C6006C2A75 /* KSOFormLabelTableViewCell.h */,
-				07952DDA1F78A1C6006C2A75 /* KSOFormLabelTableViewCell.m */,
-				0712E4F41F78E6A400F0E223 /* KSOFormTextTableViewCell.h */,
-				0712E4F51F78E6A400F0E223 /* KSOFormTextTableViewCell.m */,
-				079E19211F79919000743988 /* KSOFormSwitchTableViewCell.h */,
-				079E19221F79919000743988 /* KSOFormSwitchTableViewCell.m */,
-				079A1B3B1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.h */,
-				079A1B3C1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.m */,
-				079A1B481F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.h */,
-				079A1B491F7AF3D400C9F9BB /* KSOFormDatePickerTableViewCell.m */,
-				079A1B4C1F7B100900C9F9BB /* KSOFormStepperTableViewCell.h */,
-				079A1B4D1F7B100900C9F9BB /* KSOFormStepperTableViewCell.m */,
-				079A1B501F7B1F3B00C9F9BB /* KSOFormSliderTableViewCell.h */,
-				079A1B511F7B1F3B00C9F9BB /* KSOFormSliderTableViewCell.m */,
-				079A1B541F7B478400C9F9BB /* KSOFormButtonTableViewCell.h */,
-				079A1B551F7B478400C9F9BB /* KSOFormButtonTableViewCell.m */,
-				079A1B581F7B5A0B00C9F9BB /* KSOFormSegmentedTableViewCell.h */,
-				079A1B591F7B5A0B00C9F9BB /* KSOFormSegmentedTableViewCell.m */,
 			);
-			path = Private;
+			name = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
