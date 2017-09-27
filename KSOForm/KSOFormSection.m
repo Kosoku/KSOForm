@@ -20,6 +20,7 @@
 
 @interface KSOFormSection ()
 @property (readwrite,weak,nonatomic) KSOFormModel *model;
+@property (readwrite,copy,nonatomic) NSString *identifier;
 @property (readwrite,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 @end
 
@@ -30,6 +31,7 @@
         return nil;
     
     _model = model;
+    _identifier = [[NSUUID UUID] UUIDString];
     _headerTitle = dictionary[KSOFormSectionKeyHeaderTitle];
     _footerTitle = dictionary[KSOFormSectionKeyFooterTitle];
     _rows = [(NSArray *)dictionary[KSOFormSectionKeyRows] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {

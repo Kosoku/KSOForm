@@ -19,6 +19,7 @@
 
 @interface KSOFormRow ()
 @property (readwrite,weak,nonatomic) KSOFormSection *section;
+@property (readwrite,copy,nonatomic) NSString *identifier;
 @property (readwrite,assign,nonatomic) KSOFormRowType type;
 @end
 
@@ -46,6 +47,8 @@
         return nil;
     
     _section = section;
+    
+    _identifier = [[NSUUID UUID] UUIDString];
     
     _type = [dictionary[KSOFormRowKeyType] integerValue];
     

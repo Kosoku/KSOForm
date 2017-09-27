@@ -29,6 +29,8 @@ static KSOFormSectionKey const KSOFormSectionKeyFooterTitle = @"footerTitle";
 
 @property (readonly,weak,nonatomic) KSOFormModel *model;
 
+@property (readonly,copy,nonatomic) NSString *identifier;
+
 @property (copy,nonatomic,nullable) NSString *headerTitle;
 @property (copy,nonatomic,nullable) NSString *footerTitle;
 

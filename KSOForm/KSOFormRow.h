@@ -96,6 +96,8 @@ static KSOFormRowKey const KSOFormRowKeySegmentedItems = @"segmentedItems";
 
 @property (readonly,weak,nonatomic) KSOFormSection *section;
 
+@property (readonly,copy,nonatomic) NSString *identifier;
+
 @property (readonly,assign,nonatomic) KSOFormRowType type;
 
 @property (readonly,nonatomic,getter=isEditable) BOOL editable;
