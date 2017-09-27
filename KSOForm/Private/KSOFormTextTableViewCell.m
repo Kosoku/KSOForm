@@ -93,6 +93,7 @@
     [self.trailingView setText:formRow.value];
     [self.trailingView setPlaceholder:formRow.placeholder];
     [self.trailingView setKeyboardType:formRow.keyboardType];
+    [self.trailingView setKeyboardAppearance:formRow.keyboardAppearance];
     [self.trailingView setAutocapitalizationType:formRow.autocapitalizationType];
     [self.trailingView setAutocorrectionType:formRow.autocorrectionType];
     [self.trailingView setSpellCheckingType:formRow.spellCheckingType];
@@ -116,7 +117,7 @@
     
     [self.trailingView setFont:formTheme.valueFont];
     [self.trailingView setTextColor:formTheme.textColor ?: self.tintColor];
-    [self.trailingView setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:self.formRow.placeholder attributes:@{NSForegroundColorAttributeName: formTheme.valueColor}]];
+    [self.trailingView setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:self.formRow.placeholder ?: @"" attributes:@{NSForegroundColorAttributeName: formTheme.valueColor}]];
     [self.trailingView setKeyboardAppearance:formTheme.keyboardAppearance];
     
     if (formTheme.textSelectionColor != nil) {
