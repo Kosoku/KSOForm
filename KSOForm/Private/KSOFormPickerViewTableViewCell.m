@@ -62,8 +62,8 @@
     return [self.trailingView resignFirstResponder];
 }
 #pragma mark -
-- (void)setSelected:(BOOL)selected {
-    [super setSelected:selected];
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
     
     if (selected) {
         [self.trailingView becomeFirstResponder];

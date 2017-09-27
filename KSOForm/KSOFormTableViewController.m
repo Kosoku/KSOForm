@@ -132,6 +132,32 @@
     return retval;
 }
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    KSOFormRow *formRow = [self.model formRowForIndexPath:indexPath];
+    
+    switch (formRow.type) {
+        case KSOFormRowTypeButton:
+        case KSOFormRowTypeText:
+        case KSOFormRowTypeDatePicker:
+        case KSOFormRowTypePickerView:
+            return YES;
+        default:
+            return NO;
+    }
+}
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    KSOFormRow *formRow = [self.model formRowForIndexPath:indexPath];
+    
+    switch (formRow.type) {
+        case KSOFormRowTypeButton:
+        case KSOFormRowTypeText:
+        case KSOFormRowTypeDatePicker:
+        case KSOFormRowTypePickerView:
+            return indexPath;
+        default:
+            return nil;
+    }
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

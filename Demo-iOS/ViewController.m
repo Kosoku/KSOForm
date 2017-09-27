@@ -83,11 +83,7 @@
                             KSOFormRowKeyTitle: @"Toggle Something"
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
-                            KSOFormRowKeyTitle: @"Rows",
-                            KSOFormRowKeyPickerViewRows: @[@"Red",@"Green",@"Blue"]
-                            },
-                          @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
-                            KSOFormRowKeyTitle: @"Multiple Rows",
+                            KSOFormRowKeyTitle: @"Picker View",
                             KSOFormRowKeyPickerViewColumnsAndRows: @[@[@"Red",@"Green",@"Blue"],@[@"One",@"Two",@"Three"]],
                             KSOFormRowKeyPickerViewSelectedComponentsJoinString: @", "
                             },
@@ -123,15 +119,18 @@
                             KSOFormRowKeySliderMaximumValueImage: [UIImage imageNamed:@"socket"]
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypeButton),
-                            KSOFormRowKeyTitle: @"Show Alert"
+                            KSOFormRowKeyTitle: @"Show Alert",
+                            KSOFormRowKeyControlBlock: ^(__kindof UIControl *control, UIControlEvents controlEvents){
+                                [UIAlertController KDI_presentAlertControllerWithTitle:@"Oh Noes!" message:@"Did you see that Morty?!?" cancelButtonTitle:nil otherButtonTitles:nil completion:nil];
+                            }
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,
-                                                              KSOFormSectionKeyHeaderTitle: @"Read only values",
+                                                              KSOFormSectionKeyHeaderTitle: @"Read only",
                                                               KSOFormSectionKeyFooterTitle: @"Section footer title"
                                                               },
                                                             @{KSOFormSectionKeyRows: textEntry,
-                                                              KSOFormSectionKeyHeaderTitle: @"Text entry",
+                                                              KSOFormSectionKeyHeaderTitle: @"Text fields",
                                                               KSOFormSectionKeyFooterTitle: @"Section footer title"
                                                               },
                                                             @{KSOFormSectionKeyRows: controls,
