@@ -79,7 +79,11 @@
                             KSOFormRowKeyTextValidator: [KSOPhoneNumberValidator phoneNumberValidator],
                             KSOFormRowKeyTextFormatter: [[KSTPhoneNumberFormatter alloc] init]
                             }];
-    NSArray *controls = @[@{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
+    NSArray *controls = @[@{KSOFormRowKeyType: @(KSOFormRowTypeSegmented),
+                            KSOFormRowKeyTitle: @"Segmented",
+                            KSOFormRowKeySegmentedItems: @[@"First",@"Second",@"Third",@"Fourth"]
+                            },
+                          @{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
                             KSOFormRowKeyTitle: @"Toggle Something"
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),

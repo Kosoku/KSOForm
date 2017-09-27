@@ -81,6 +81,8 @@
     
     _controlBlock = dictionary[KSOFormRowKeyControlBlock];
     
+    _segmentedItems = dictionary[KSOFormRowKeySegmentedItems];
+    
     return self;
 }
 

@@ -30,7 +30,8 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
     KSOFormRowTypeDatePicker,
     KSOFormRowTypeStepper,
     KSOFormRowTypeSlider,
-    KSOFormRowTypeButton
+    KSOFormRowTypeButton,
+    KSOFormRowTypeSegmented
 };
 
 typedef BOOL(^KSOFormRowShouldChangeValueBlock)(id _Nullable value, NSError **error);
@@ -84,6 +85,8 @@ static KSOFormRowKey const KSOFormRowKeySliderMinimumValueImage = @"sliderMinimu
 static KSOFormRowKey const KSOFormRowKeySliderMaximumValueImage = @"sliderMaximumValueImage";
 // UIControl (e.g. UIButton)
 static KSOFormRowKey const KSOFormRowKeyControlBlock = @"controlBlock";
+// UISegmentedControl
+static KSOFormRowKey const KSOFormRowKeySegmentedItems = @"segmentedItems";
 
 @class KSOFormSection;
 
@@ -141,6 +144,8 @@ static KSOFormRowKey const KSOFormRowKeyControlBlock = @"controlBlock";
 @property (copy,nonatomic,nullable) UIImage *sliderMaximumValueImage;
 
 @property (copy,nonatomic,nullable) KDIUIControlBlock controlBlock;
+// NSString or UIImage
+@property (copy,nonatomic,nullable) NSArray *segmentedItems;
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 

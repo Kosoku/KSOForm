@@ -1,8 +1,8 @@
 //
-//  KSOFormButtonTableViewCell.h
+//  KSOFormSegmentedTableViewCell.h
 //  KSOForm-iOS
 //
-//  Created by William Towe on 9/26/17.
+//  Created by William Towe on 9/27/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -15,6 +15,6 @@
 
 #import "KSOFormLeadingTrailingTableViewCell.h"
 
-@interface KSOFormButtonTableViewCell : KSOFormLeadingTrailingTableViewCell
+@interface KSOFormSegmentedTableViewCell : KSOFormLeadingTrailingTableViewCell
 
 @end
