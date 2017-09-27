@@ -17,7 +17,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef BOOL(^KSOFormRowValueDataSourceShouldChangeValueBlock)(NSString *valueKey, id _Nullable value, NSError **error);
+@class KSOFormRow;
+
+typedef BOOL(^KSOFormRowValueDataSourceShouldChangeValueBlock)(KSOFormRow *row, id _Nullable value, NSError **error);
 
 @protocol KSOFormRowValueDataSource <NSObject>
 @optional

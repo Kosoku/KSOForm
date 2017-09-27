@@ -49,8 +49,8 @@ typedef NS_ENUM(NSInteger, KSOFormRowCellAccessoryType) {
     KSOFormRowCellAccessoryTypeAutomatic = NSIntegerMax
 };
 
-typedef BOOL(^KSOFormRowShouldChangeValueBlock)(id _Nullable value, NSError **error);
-typedef void(^KSOFormRowDidChangeValueBlock)(id _Nullable value);
+typedef BOOL(^KSOFormRowShouldChangeValueBlock)(KSOFormRow *row, id _Nullable value, NSError **error);
+typedef void(^KSOFormRowDidChangeValueBlock)(KSOFormRow *row, id _Nullable value);
 
 typedef NSString* KSOFormRowKey NS_STRING_ENUM;
 

@@ -138,7 +138,7 @@
 - (void)setValue:(id)value {
     if (self.shouldChangeValueBlock != nil) {
         NSError *outError;
-        if (!self.shouldChangeValueBlock(value,&outError)) {
+        if (!self.shouldChangeValueBlock(self,value,&outError)) {
             return;
         }
     }
@@ -148,7 +148,7 @@
         self.valueDataSource.shouldChangeValueBlock != nil) {
         
         NSError *outError;
-        if (!self.valueDataSource.shouldChangeValueBlock(self.valueKey,value,&outError)) {
+        if (!self.valueDataSource.shouldChangeValueBlock(self,value,&outError)) {
             return;
         }
     }
@@ -170,7 +170,7 @@
     [self didChangeValueForKey:@kstKeypath(self,value)];
     
     if (self.didChangeValueBlock != nil) {
-        self.didChangeValueBlock(_value);
+        self.didChangeValueBlock(self,_value);
     }
 }
 - (NSString *)formattedValue {

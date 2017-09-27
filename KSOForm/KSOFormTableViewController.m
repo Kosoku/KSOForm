@@ -188,7 +188,7 @@
     
     kstWeakify(self);
     
-    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title),@kstKeypath(self,model.sections)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         if ([keyPath isEqualToString:@kstKeypath(self,model)]) {
             if (self.isViewLoaded) {
@@ -201,6 +201,9 @@
         }
         else if ([keyPath isEqualToString:@kstKeypath(self,model.title)]) {
             [self setTitle:self.model.title];
+        }
+        else if ([keyPath isEqualToString:@kstKeypath(self,model.sections)]) {
+            KSTLog(@"%@ %@",value,change);
         }
     }];
     
