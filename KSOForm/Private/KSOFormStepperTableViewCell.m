@@ -84,7 +84,7 @@
     [self.leadingView setFormTheme:formTheme];
     
     [self.valueLabel setFont:formTheme.valueFont];
-    [self.valueLabel setTextColor:formTheme.valueColor];
+    [self.valueLabel setTextColor:formTheme.textColor ?: self.tintColor];
     
     if (formTheme.valueTextStyle == nil) {
         [NSObject KDI_unregisterDynamicTypeObject:self.valueLabel];
