@@ -155,6 +155,7 @@
     else if (formRow.actionModel != nil) {
         viewController = [[KSOFormTableViewController alloc] initWithStyle:self.tableView.style];
         
+        [(KSOFormTableViewController *)viewController setTheme:self.theme];
         [(KSOFormTableViewController *)viewController setModel:formRow.actionModel];
     }
     
