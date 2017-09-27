@@ -96,7 +96,7 @@
     return self.model.sections[section].footerTitle;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    KSOFormRow *formRow = [self.model formRowForIndexPath:indexPath];
+    KSOFormRow *formRow = [self.model rowForIndexPath:indexPath];
     UITableViewCell<KSOFormRowView> *retval = nil;
     
     switch (formRow.type) {
@@ -138,33 +138,38 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    KSOFormRow *formRow = [self.model formRowForIndexPath:indexPath];
-    
-    switch (formRow.type) {
-        case KSOFormRowTypeButton:
-        case KSOFormRowTypeText:
-        case KSOFormRowTypeDatePicker:
-        case KSOFormRowTypePickerView:
-            return YES;
-        default:
-            return NO;
-    }
+    return [self.model rowForIndexPath:indexPath].isSelectable;
 }
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    KSOFormRow *formRow = [self.model formRowForIndexPath:indexPath];
-    
-    switch (formRow.type) {
-        case KSOFormRowTypeButton:
-        case KSOFormRowTypeText:
-        case KSOFormRowTypeDatePicker:
-        case KSOFormRowTypePickerView:
-            return indexPath;
-        default:
-            return nil;
-    }
+    return [self.model rowForIndexPath:indexPath].isSelectable ? indexPath : nil;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    KSOFormRow *formRow = [self.model rowForIndexPath:indexPath];
+    UIViewController *viewController = nil;
+    
+    if (formRow.actionViewControllerClass != Nil) {
+        viewController = [[formRow.actionViewControllerClass alloc] initWithNibName:nil bundle:nil];
+    }
+    else if (formRow.actionModel != nil) {
+        viewController = [[KSOFormTableViewController alloc] initWithStyle:self.tableView.style];
+        
+        [(KSOFormTableViewController *)viewController setModel:formRow.actionModel];
+    }
+    
+    if (viewController != nil) {
+        switch (formRow.action) {
+            case KSOFormRowActionPush:
+                [self.navigationController pushViewController:viewController animated:YES];
+                break;
+            case KSOFormRowActionPresent:
+                [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)setTheme:(KSOFormTheme *)theme {
@@ -254,7 +259,7 @@
             return;
         }
         
-        NSIndexPath *indexPath = [self.model indexPathForFormRow:editableFormRow];
+        NSIndexPath *indexPath = [self.model indexPathForRow:editableFormRow];
         
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
         

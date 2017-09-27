@@ -28,6 +28,10 @@
 
 @implementation KSOFormSection
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p> identifier=%@ headerTitle=%@ footerTitle=%@ rows=%@",NSStringFromClass(self.class),self,self.identifier,self.headerTitle,self.footerTitle,self.rows];
+}
+
 - (instancetype)init {
     return [self initWithDictionary:nil model:nil];
 }

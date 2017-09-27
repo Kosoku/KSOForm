@@ -27,6 +27,10 @@
 
 @implementation KSOFormModel
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p> title=%@ sections=%@",NSStringFromClass(self.class),self,self.title,self.sections];
+}
+
 - (instancetype)init {
     return [self initWithDictionary:nil];
 }
@@ -49,10 +53,10 @@
     return self;
 }
 
-- (KSOFormRow *)formRowForIndexPath:(NSIndexPath *)indexPath {
+- (KSOFormRow *)rowForIndexPath:(NSIndexPath *)indexPath {
     return self.sections[indexPath.section].rows[indexPath.row];
 }
-- (NSIndexPath *)indexPathForFormRow:(KSOFormRow *)formRow {
+- (NSIndexPath *)indexPathForRow:(KSOFormRow *)formRow {
     NSIndexPath *retval = nil;
     
     for (NSUInteger i=0; i<self.sections.count; i++) {

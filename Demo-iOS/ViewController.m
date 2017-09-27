@@ -118,20 +118,28 @@
                             }
                             }];
     
+    KSOFormModel *readOnlyModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Read Only Values"}];
+    
+    [readOnlyModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Read Only Values",
+                                              KSOFormSectionKeyFooterTitle: @"Section footer title"
+                                              }];
+    [readOnlyModel.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Title",
+                                                                   KSOFormRowKeyValue: @"Value"},
+                                                                 @{KSOFormRowKeyTitle: @"Title",
+                                                                   KSOFormRowKeySubtitle: @"Subtitle",
+                                                                   KSOFormRowKeyValue: @"Value"},
+                                                                 @{KSOFormRowKeyTitle: @"Title",
+                                                                   KSOFormRowKeySubtitle: @"Subtitle",
+                                                                   KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                                                                   KSOFormRowKeyValue: @"Value"}]];
     KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS"}];
     
-    [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Read Only Values",
+    [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title",
                                       KSOFormSectionKeyFooterTitle: @"Section footer title"
                                       }];
-    [model.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Title",
-                                                           KSOFormRowKeyValue: @"Value"},
-                                                         @{KSOFormRowKeyTitle: @"Title",
-                                                           KSOFormRowKeySubtitle: @"Subtitle",
-                                                           KSOFormRowKeyValue: @"Value"},
-                                                         @{KSOFormRowKeyTitle: @"Title",
-                                                           KSOFormRowKeySubtitle: @"Subtitle",
-                                                           KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
-                                                           KSOFormRowKeyValue: @"Value"}]];
+    [model.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Read Only Values",
+                                                           KSOFormRowKeyActionModel: readOnlyModel
+                                                           }]];
     
     [self setModel:model];
 }

@@ -29,6 +29,10 @@
     return NO;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p> identifier=%@ title=%@",NSStringFromClass(self.class),self,self.identifier,self.title];
+}
+
 - (instancetype)init {
     return [self initWithDictionary:nil section:nil];
 }
@@ -123,6 +127,9 @@
             self.type == KSOFormRowTypeDatePicker ||
             self.type == KSOFormRowTypePickerView);
 }
+- (BOOL)isSelectable {
+    return (self.isEditable || self.cellAccessoryType == KSOFormRowCellAccessoryTypeDisclosureIndicator);
+}
 
 @synthesize value=_value;
 - (id)value {
@@ -192,6 +199,13 @@
 
 - (float)sliderMaximumValue {
     return _sliderMaximumValue > 0.0 ? _sliderMaximumValue : 1.0;
+}
+
+- (KSOFormModel *)actionModel {
+    return [self.actionDelegate respondsToSelector:@selector(actionFormModelForFormRow:)] ? [self.actionDelegate actionFormModelForFormRow:self] : _actionModel;
+}
+- (Class)actionViewControllerClass {
+    return [self.actionDelegate respondsToSelector:@selector(actionViewControllerClassForFormRow:)] ? [self.actionDelegate actionViewControllerClassForFormRow:self] : _actionViewControllerClass;
 }
 
 @end

@@ -33,8 +33,8 @@ static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 
 - (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
-- (nullable KSOFormRow *)formRowForIndexPath:(NSIndexPath *)indexPath;
-- (nullable NSIndexPath *)indexPathForFormRow:(KSOFormRow *)formRow;
+- (nullable KSOFormRow *)rowForIndexPath:(NSIndexPath *)indexPath;
+- (nullable NSIndexPath *)indexPathForRow:(KSOFormRow *)formRow;
 
 - (void)addSection:(KSOFormSection *)section;
 - (void)addSections:(NSArray<KSOFormSection *> *)sections;

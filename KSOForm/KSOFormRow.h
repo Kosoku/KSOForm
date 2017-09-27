@@ -122,6 +122,7 @@ static KSOFormRowKey const KSOFormRowKeyActionViewControllerClass = @"actionView
 @property (readonly,assign,nonatomic) KSOFormRowType type;
 
 @property (readonly,nonatomic,getter=isEditable) BOOL editable;
+@property (readonly,nonatomic,getter=isSelectable) BOOL selectable;
 
 @property (strong,nonatomic,nullable) id value;
 @property (readonly,nonatomic,nullable) NSString *formattedValue;
