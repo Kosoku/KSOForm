@@ -20,6 +20,4 @@
 @property (strong,nonatomic) UIView *leadingView;
 @property (strong,nonatomic) UIView *trailingView;
 
-@property (readonly,nonatomic) BOOL trailingViewRespectsLayoutMargins;
-
 @end
