@@ -15,33 +15,35 @@
 
 #import "KSOFormModel.h"
 #import "KSOFormSection.h"
+#import "KSOFormSection+KSOExtensionsPrivate.h"
 #import "KSOFormRow.h"
 
+#import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
 
-NSNotificationName const KSOFormModelNotificationDidInsertRows = @"KSOFormModelNotificationDidInsertRows";
-NSString *const KSOFormModelUserInfoKeyRows = @"KSOFormModelUserInfoKeyRows";
-NSString *const KSOFormModelUserInfoKeyRowIndexes = @"KSOFormModelUserInfoKeyRowIndexes";
-
 @interface KSOFormModel ()
-@property (readwrite,copy,nonatomic) NSArray<KSOFormSection *> *sections;
+@property (readwrite,copy,nonatomic) NSMutableArray<KSOFormSection *> *sections;
 @end
 
 @implementation KSOFormModel
 
+- (instancetype)init {
+    return [self initWithDictionary:nil];
+}
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
     if (!(self = [super init]))
         return nil;
     
     _title = dictionary[KSOFormModelKeyTitle];
+    _sections = [[NSMutableArray alloc] init];
     
     if (dictionary[KSOFormModelKeySections] != nil) {
-        _sections = [dictionary[KSOFormModelKeySections] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
+        [_sections addObjectsFromArray:[dictionary[KSOFormModelKeySections] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
             return [[KSOFormSection alloc] initWithDictionary:object model:self];
-        }];
+        }]];
     }
     else if (dictionary[KSOFormModelKeyRows] != nil) {
-        _sections = @[[[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyRows: dictionary[KSOFormModelKeyRows]} model:self]];
+        [_sections addObject:[[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyRows: dictionary[KSOFormModelKeyRows]} model:self]];
     }
     
     return self;
@@ -69,11 +71,47 @@ NSString *const KSOFormModelUserInfoKeyRowIndexes = @"KSOFormModelUserInfoKeyRow
     return retval;
 }
 
-- (void)insertRows:(NSArray<KSOFormRow *> *)rows inSection:(KSOFormSection *)section animated:(BOOL)animated; {
-    
+- (void)addSection:(KSOFormSection *)section {
+    [self addSections:@[section]];
 }
-- (void)deleteRows:(NSArray<KSOFormRow *> *)rows animated:(BOOL)animated; {
+- (void)addSections:(NSArray<KSOFormSection *> *)sections; {
+    [[self mutableArrayValueForKey:@kstKeypath(self,sections)] addObjectsFromArray:sections];
+}
+
+- (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary; {
+    [self addSection:[[KSOFormSection alloc] initWithDictionary:dictionary model:self]];
+}
+- (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries; {
+    [self addSections:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
+        return [[KSOFormSection alloc] initWithDictionary:object model:self];
+    }]];
+}
+#pragma mark Properties
+- (NSArray<KSOFormSection *> *)sections {
+    return [_sections copy];
+}
+#pragma mark *** Private Methods ***
+#pragma mark KVC
+- (void)insertObject:(KSOFormSection *)object inSectionsAtIndex:(NSUInteger)index {
+    [_sections insertObject:object atIndex:index];
     
+    [object setModel:self];
+}
+- (void)removeObjectFromSectionsAtIndex:(NSUInteger)index {
+    [_sections removeObjectAtIndex:index];
+}
+- (void)insertSections:(NSArray *)array atIndexes:(NSIndexSet *)indexes {
+    [_sections insertObjects:array atIndexes:indexes];
+    
+    for (KSOFormSection *section in array) {
+        [section setModel:self];
+    }
+}
+- (void)removeSectionsAtIndexes:(NSIndexSet *)indexes {
+    [_sections removeObjectsAtIndexes:indexes];
+}
+- (void)replaceObjectInSectionsAtIndex:(NSUInteger)index withObject:(KSOFormSection *)object {
+    [_sections replaceObjectAtIndex:index withObject:object];
 }
 
 @end

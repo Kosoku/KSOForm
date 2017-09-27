@@ -23,10 +23,6 @@ static KSOFormModelKey const KSOFormModelKeyTitle = @"title";
 static KSOFormModelKey const KSOFormModelKeySections = @"sections";
 static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 
-FOUNDATION_EXPORT NSNotificationName const KSOFormModelNotificationDidInsertRows;
-FOUNDATION_EXPORT NSString *const KSOFormModelUserInfoKeyRows;
-FOUNDATION_EXPORT NSString *const KSOFormModelUserInfoKeyRowIndexes;
-
 @class KSOFormSection,KSOFormRow;
 
 @interface KSOFormModel : NSObject
@@ -35,16 +31,16 @@ FOUNDATION_EXPORT NSString *const KSOFormModelUserInfoKeyRowIndexes;
 
 @property (readonly,copy,nonatomic) NSArray<KSOFormSection *> *sections;
 
-- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
-
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
 - (nullable KSOFormRow *)formRowForIndexPath:(NSIndexPath *)indexPath;
 - (nullable NSIndexPath *)indexPathForFormRow:(KSOFormRow *)formRow;
 
-- (void)insertRows:(NSArray<KSOFormRow *> *)rows inSection:(KSOFormSection *)section animated:(BOOL)animated;
-- (void)deleteRows:(NSArray<KSOFormRow *> *)rows animated:(BOOL)animated;
+- (void)addSection:(KSOFormSection *)section;
+- (void)addSections:(NSArray<KSOFormSection *> *)sections;
+
+- (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary;
+- (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries;
 
 @end
 

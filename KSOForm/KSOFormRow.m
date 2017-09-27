@@ -29,6 +29,10 @@
     return NO;
 }
 
+- (instancetype)init {
+    return [self initWithDictionary:nil section:nil];
+}
+
 @synthesize autocapitalizationType=_autocapitalizationType;
 @synthesize autocorrectionType=_autocorrectionType;
 @synthesize spellCheckingType=_spellCheckingType;
@@ -109,6 +113,9 @@
     _actionViewControllerClass = dictionary[KSOFormRowKeyActionViewControllerClass];
     
     return self;
+}
+- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
+    return [self initWithDictionary:dictionary section:nil];
 }
 
 - (BOOL)isEditable {

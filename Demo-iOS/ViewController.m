@@ -118,21 +118,22 @@
                             }
                             }];
     
-    NSDictionary *dictionary = @{KSOFormModelKeyTitle: @"Demo-iOS",
-                                 KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,
-                                                              KSOFormSectionKeyHeaderTitle: @"Read only",
-                                                              KSOFormSectionKeyFooterTitle: @"Section footer title"
-                                                              },
-                                                            @{KSOFormSectionKeyRows: textEntry,
-                                                              KSOFormSectionKeyHeaderTitle: @"Text fields",
-                                                              KSOFormSectionKeyFooterTitle: @"Section footer title"
-                                                              },
-                                                            @{KSOFormSectionKeyRows: controls,
-                                                              KSOFormSectionKeyHeaderTitle: @"Controls",
-                                                              KSOFormSectionKeyFooterTitle: @"Section footer title"
-                                                              }]};
+    KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS"}];
     
-    [self setModel:[[KSOFormModel alloc] initWithDictionary:dictionary]];
+    [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Read Only Values",
+                                      KSOFormSectionKeyFooterTitle: @"Section footer title"
+                                      }];
+    [model.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Title",
+                                                           KSOFormRowKeyValue: @"Value"},
+                                                         @{KSOFormRowKeyTitle: @"Title",
+                                                           KSOFormRowKeySubtitle: @"Subtitle",
+                                                           KSOFormRowKeyValue: @"Value"},
+                                                         @{KSOFormRowKeyTitle: @"Title",
+                                                           KSOFormRowKeySubtitle: @"Subtitle",
+                                                           KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                                                           KSOFormRowKeyValue: @"Value"}]];
+    
+    [self setModel:model];
 }
 
 @end

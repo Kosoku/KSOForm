@@ -168,10 +168,8 @@ static KSOFormRowKey const KSOFormRowKeyActionViewControllerClass = @"actionView
 @property (strong,nonatomic,nullable) KSOFormModel *actionModel;
 @property (strong,nonatomic,nullable) Class actionViewControllerClass;
 
-- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
-
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary section:(nullable KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary;
 
 @end
 

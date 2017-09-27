@@ -15,17 +15,22 @@
 
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
+#import "KSOFormRow+KSOExtensionsPrivate.h"
 
+#import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
 
 @interface KSOFormSection ()
 @property (readwrite,weak,nonatomic) KSOFormModel *model;
 @property (readwrite,copy,nonatomic) NSString *identifier;
-@property (readwrite,copy,nonatomic) NSArray<KSOFormRow *> *rows;
+@property (readwrite,copy,nonatomic) NSMutableArray<KSOFormRow *> *rows;
 @end
 
 @implementation KSOFormSection
 
+- (instancetype)init {
+    return [self initWithDictionary:nil model:nil];
+}
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary model:(KSOFormModel *)model {
     if (!(self = [super init]))
         return nil;
@@ -34,11 +39,61 @@
     _identifier = [[NSUUID UUID] UUIDString];
     _headerTitle = dictionary[KSOFormSectionKeyHeaderTitle];
     _footerTitle = dictionary[KSOFormSectionKeyFooterTitle];
-    _rows = [(NSArray *)dictionary[KSOFormSectionKeyRows] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
+    _rows = [[NSMutableArray alloc] init];
+    
+    [_rows addObjectsFromArray:[(NSArray *)dictionary[KSOFormSectionKeyRows] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
         return [[KSOFormRow alloc] initWithDictionary:object section:self];
-    }];
+    }]];
     
     return self;
+}
+- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
+    return [self initWithDictionary:dictionary model:nil];
+}
+
+- (void)addRow:(KSOFormRow *)row {
+    [self addRows:@[row]];
+}
+- (void)addRows:(NSArray<KSOFormRow *> *)rows; {
+    [[self mutableArrayValueForKey:@kstKeypath(self,rows)] addObjectsFromArray:rows];
+}
+
+- (void)addRowFromDictionary:(NSDictionary<NSString *,id> *)dictionary; {
+    [self addRow:[[KSOFormRow alloc] initWithDictionary:dictionary section:self]];
+}
+- (void)addRowsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries; {
+    [self addRows:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
+        return [[KSOFormRow alloc] initWithDictionary:object section:self];
+    }]];
+}
+#pragma mark Properties
+- (NSArray<KSOFormRow *> *)rows {
+    return [_rows copy];
+}
+#pragma mark *** Private Methods ***
+#pragma mark KVC
+- (void)insertObject:(KSOFormRow *)object inRowsAtIndex:(NSUInteger)index {
+    [_rows insertObject:object atIndex:index];
+    
+    [object setSection:self];
+}
+- (void)removeObjectFromRowsAtIndex:(NSUInteger)index {
+    [_rows removeObjectAtIndex:index];
+}
+- (void)insertRows:(NSArray *)array atIndexes:(NSIndexSet *)indexes {
+    [_rows insertObjects:array atIndexes:indexes];
+    
+    for (KSOFormRow *row in array) {
+        [row setSection:self];
+    }
+}
+- (void)removeRowsAtIndexes:(NSIndexSet *)indexes {
+    [_rows removeObjectsAtIndexes:indexes];
+}
+- (void)replaceObjectInRowsAtIndex:(NSUInteger)index withObject:(KSOFormRow *)object {
+    [_rows replaceObjectAtIndex:index withObject:object];
+    
+    [object setSection:self];
 }
 
 @end
