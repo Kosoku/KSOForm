@@ -221,6 +221,13 @@
     }
                                                                    }]];
     
+    KSOFormModel *wifiModel = [[KSOFormModel alloc] init];
+    
+    [wifiModel setTitle:@"Wi-Fi"];
+    [wifiModel addSectionFromDictionary:@{KSOFormSectionKeyRows: @[@{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
+                                                                     KSOFormRowKeyTitle: @"Wi-Fi"
+                                                                     }]}];
+    
     KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS",
                                                                      KSOFormModelKeyHeaderView: [[TableHeaderView alloc] initWithFrame:CGRectZero]
                                                                      }];
@@ -236,6 +243,10 @@
                                                            },
                                                          @{KSOFormRowKeyTitle: @"Controls",
                                                            KSOFormRowKeyActionModel: controlsModel
+                                                           },
+                                                         @{KSOFormRowKeyTitle: @"Wi-Fi",
+                                                           KSOFormRowKeyValue: @"Network Name",
+                                                           KSOFormRowKeyActionModel: wifiModel
                                                            }]];
     
     [self setModel:model];
