@@ -16,6 +16,7 @@
 #import <UIKit/UIKit.h>
 #import <KSOForm/KSOFormRowValueDataSource.h>
 #import <KSOForm/KSOFormPickerViewRow.h>
+#import <KSOForm/KSOFormRowActionDelegate.h>
 #import <KSOTextValidation/KSOTextValidator.h>
 #import <KSOTextValidation/KSOTextFormatter.h>
 #import <Ditko/UIControl+KDIExtensions.h>
@@ -32,6 +33,20 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
     KSOFormRowTypeSlider,
     KSOFormRowTypeButton,
     KSOFormRowTypeSegmented
+};
+
+typedef NS_ENUM(NSInteger, KSOFormRowAction) {
+    KSOFormRowActionPush = 0,
+    KSOFormRowActionPresent
+};
+
+typedef NS_ENUM(NSInteger, KSOFormRowCellAccessoryType) {
+    KSOFormRowCellAccessoryTypeNone = UITableViewCellAccessoryNone,
+    KSOFormRowCellAccessoryTypeDisclosureIndicator = UITableViewCellAccessoryDisclosureIndicator,
+    KSOFormRowCellAccessoryTypeDetailDisclosureButton = UITableViewCellAccessoryDetailDisclosureButton,
+    KSOFormRowCellAccessoryTypeCheckmark = UITableViewCellAccessoryCheckmark,
+    KSOFormRowCellAccessoryTypeDetailButton = UITableViewCellAccessoryDetailButton,
+    KSOFormRowCellAccessoryTypeAutomatic = NSIntegerMax
 };
 
 typedef BOOL(^KSOFormRowShouldChangeValueBlock)(id _Nullable value, NSError **error);
@@ -51,6 +66,7 @@ static KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock = @"valueDidChangeBl
 static KSOFormRowKey const KSOFormRowKeyImage = @"image";
 static KSOFormRowKey const KSOFormRowKeyTitle = @"title";
 static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
+static KSOFormRowKey const KSOFormRowKeyCellAccessoryType = @"cellAccessoryType";
 // text properties
 static KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
 static KSOFormRowKey const KSOFormRowKeyTextValidator = @"textValidator";
@@ -89,8 +105,13 @@ static KSOFormRowKey const KSOFormRowKeySliderMaximumValueImage = @"sliderMaximu
 static KSOFormRowKey const KSOFormRowKeyControlBlock = @"controlBlock";
 // UISegmentedControl
 static KSOFormRowKey const KSOFormRowKeySegmentedItems = @"segmentedItems";
+// present/push support
+static KSOFormRowKey const KSOFormRowKeyAction = @"action";
+static KSOFormRowKey const KSOFormRowKeyActionDelegate = @"actionDelegate";
+static KSOFormRowKey const KSOFormRowKeyActionModel = @"actionModel";
+static KSOFormRowKey const KSOFormRowKeyActionViewControllerClass = @"actionViewController";
 
-@class KSOFormSection;
+@class KSOFormSection,KSOFormModel;
 
 @interface KSOFormRow : NSObject <UITextInputTraits>
 
@@ -113,6 +134,8 @@ static KSOFormRowKey const KSOFormRowKeySegmentedItems = @"segmentedItems";
 @property (strong,nonatomic,nullable) UIImage *image;
 @property (copy,nonatomic,nullable) NSString *title;
 @property (copy,nonatomic,nullable) NSString *subtitle;
+@property (assign,nonatomic) KSOFormRowCellAccessoryType cellAccessoryType;
+
 @property (copy,nonatomic,nullable) NSString *placeholder;
 @property (strong,nonatomic,nullable) id<KSOTextValidator> textValidator;
 // NSFormatter works here as well
@@ -139,6 +162,11 @@ static KSOFormRowKey const KSOFormRowKeySegmentedItems = @"segmentedItems";
 @property (copy,nonatomic,nullable) KDIUIControlBlock controlBlock;
 // NSString or UIImage
 @property (copy,nonatomic,nullable) NSArray *segmentedItems;
+
+@property (assign,nonatomic) KSOFormRowAction action;
+@property (weak,nonatomic,nullable) id<KSOFormRowActionDelegate> actionDelegate;
+@property (strong,nonatomic,nullable) KSOFormModel *actionModel;
+@property (strong,nonatomic,nullable) Class actionViewControllerClass;
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 

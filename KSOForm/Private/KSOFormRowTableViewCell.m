@@ -27,6 +27,11 @@
 }
 
 @synthesize formRow=_formRow;
+- (void)setFormRow:(KSOFormRow *)formRow {
+    _formRow = formRow;
+    
+    [self setAccessoryType:(UITableViewCellAccessoryType)_formRow.cellAccessoryType];
+}
 @synthesize formTheme=_formTheme;
 
 @end

@@ -62,6 +62,8 @@
     _image = dictionary[KSOFormRowKeyImage];
     _title = dictionary[KSOFormRowKeyTitle];
     _subtitle = dictionary[KSOFormRowKeySubtitle];
+    _cellAccessoryType = dictionary[KSOFormRowKeyCellAccessoryType] == nil ? KSOFormRowCellAccessoryTypeAutomatic : [dictionary[KSOFormRowKeyCellAccessoryType] integerValue];
+    
     _placeholder = dictionary[KSOFormRowKeyPlaceholder];
     _textValidator = dictionary[KSOFormRowKeyTextValidator];
     _textFormatter = dictionary[KSOFormRowKeyTextFormatter];
@@ -100,6 +102,11 @@
     _controlBlock = dictionary[KSOFormRowKeyControlBlock];
     
     _segmentedItems = dictionary[KSOFormRowKeySegmentedItems];
+    
+    _action = [dictionary[KSOFormRowKeyAction] integerValue];
+    _actionDelegate = dictionary[KSOFormRowKeyActionDelegate];
+    _actionModel = dictionary[KSOFormRowKeyActionModel];
+    _actionViewControllerClass = dictionary[KSOFormRowKeyActionViewControllerClass];
     
     return self;
 }
@@ -154,6 +161,19 @@
 }
 - (NSString *)formattedValue {
     return self.valueFormatter == nil ? [self.value description] : [self.valueFormatter stringForObjectValue:self.value];
+}
+
+- (KSOFormRowCellAccessoryType)cellAccessoryType {
+    if (_cellAccessoryType == KSOFormRowCellAccessoryTypeAutomatic) {
+        if (self.actionDelegate != nil ||
+            self.actionModel != nil ||
+            self.actionViewControllerClass != Nil) {
+            
+            return KSOFormRowCellAccessoryTypeDisclosureIndicator;
+        }
+        return KSOFormRowCellAccessoryTypeNone;
+    }
+    return _cellAccessoryType;
 }
 
 - (double)stepperMaximumValue {

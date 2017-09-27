@@ -23,6 +23,7 @@
 		071ED0321F78C6C800778F22 /* Quicksilver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 071ED0301F78C6B900778F22 /* Quicksilver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		071ED0351F78D6AB00778F22 /* KSOFormTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 071ED0331F78D6AB00778F22 /* KSOFormTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		071ED0361F78D6AB00778F22 /* KSOFormTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 071ED0341F78D6AB00778F22 /* KSOFormTheme.m */; };
+		073AE1401F7C033200C77C66 /* KSOFormRowActionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 073AE13F1F7C033200C77C66 /* KSOFormRowActionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07952D9D1F7892AE006C2A75 /* KSOForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952D9B1F7892AE006C2A75 /* KSOForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07952DA61F789627006C2A75 /* KSOFormSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952DA41F789627006C2A75 /* KSOFormSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07952DA71F789627006C2A75 /* KSOFormSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 07952DA51F789627006C2A75 /* KSOFormSection.m */; };
@@ -117,6 +118,7 @@
 		071ED0301F78C6B900778F22 /* Quicksilver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quicksilver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		071ED0331F78D6AB00778F22 /* KSOFormTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormTheme.h; sourceTree = "<group>"; };
 		071ED0341F78D6AB00778F22 /* KSOFormTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormTheme.m; sourceTree = "<group>"; };
+		073AE13F1F7C033200C77C66 /* KSOFormRowActionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormRowActionDelegate.h; sourceTree = "<group>"; };
 		07952D981F7892AE006C2A75 /* KSOForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07952D9B1F7892AE006C2A75 /* KSOForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOForm.h; sourceTree = "<group>"; };
 		07952D9C1F7892AE006C2A75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				079A1B421F7ADE9300C9F9BB /* KSOFormPickerViewRow.h */,
 				079A1B441F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.h */,
 				079A1B451F7AE1C700C9F9BB /* NSString+KSOFormPickerViewRowExtensions.m */,
+				073AE13F1F7C033200C77C66 /* KSOFormRowActionDelegate.h */,
 				079A1B401F7AC84D00C9F9BB /* Private */,
 			);
 			name = Source;
@@ -432,6 +435,7 @@
 				079E19261F7998B400743988 /* KSOFormRowValueDataSource.h in Headers */,
 				079A1B431F7ADE9300C9F9BB /* KSOFormPickerViewRow.h in Headers */,
 				07952DAA1F789654006C2A75 /* KSOFormRow.h in Headers */,
+				073AE1401F7C033200C77C66 /* KSOFormRowActionDelegate.h in Headers */,
 				079A1B5A1F7B5A0B00C9F9BB /* KSOFormSegmentedTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
