@@ -107,7 +107,7 @@
                           @{KSOFormRowKeyType: @(KSOFormRowTypeStepper),
                             KSOFormRowKeyTitle: @"Stepper",
                             KSOFormRowKeyStepperStepValue: @0.05,
-                            KSOFormRowKeyStepperMinimumValue: @-1.0,
+                            KSOFormRowKeyMinimumValue: @-1.0,
                             KSOFormRowKeyValueFormatter: ({
                                 NSNumberFormatter *retval = [[NSNumberFormatter alloc] init];
                                 
@@ -118,7 +118,9 @@
                             })
                             },
                           @{KSOFormRowKeyType: @(KSOFormRowTypeSlider),
-                            KSOFormRowKeyTitle: @"Slider"
+                            KSOFormRowKeyTitle: @"Slider",
+                            KSOFormRowKeySliderMinimumValueImage: [UIImage imageNamed:@"bag"],
+                            KSOFormRowKeySliderMaximumValueImage: [UIImage imageNamed:@"socket"]
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,

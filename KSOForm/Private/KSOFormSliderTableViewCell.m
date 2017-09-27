@@ -18,6 +18,7 @@
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
+#import <Loki/Loki.h>
 
 @interface KSOFormSliderTableViewCell ()
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
@@ -51,18 +52,34 @@
 #pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
+- (NSNumber *)leadingToTrailingMargin {
+    return @(32.0);
+}
 #pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
     
     [self.leadingView setFormRow:formRow];
     
+    [self.trailingView setMinimumValue:formRow.sliderMinimumValue];
+    [self.trailingView setMaximumValue:formRow.sliderMaximumValue];
+    [self.trailingView setMinimumValueImage:formRow.sliderMinimumValueImage];
+    [self.trailingView setMaximumValueImage:formRow.sliderMaximumValueImage];
     [self.trailingView setValue:[formRow.value floatValue]];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
     
     [self.leadingView setFormTheme:formTheme];
+    
+    if (formTheme.valueColor != nil) {
+        if (self.formRow.sliderMinimumValueImage != nil) {
+            [self.trailingView setMinimumValueImage:[self.formRow.sliderMinimumValueImage KLO_imageByTintingWithColor:formTheme.valueColor]];
+        }
+        if (self.formRow.sliderMaximumValueImage != nil) {
+            [self.trailingView setMaximumValueImage:[self.formRow.sliderMaximumValueImage KLO_imageByTintingWithColor:formTheme.valueColor]];
+        }
+    }
     
     if (formTheme.textColor != nil) {
         [self.trailingView setTintColor:formTheme.textColor];

@@ -20,4 +20,6 @@
 @property (strong,nonatomic) UIView *leadingView;
 @property (strong,nonatomic) UIView *trailingView;
 
+@property (readonly,nonatomic) NSNumber *leadingToTrailingMargin;
+
 @end

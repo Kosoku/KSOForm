@@ -72,10 +72,14 @@ static KSOFormRowKey const KSOFormRowKeyDatePickerMode = @"datePickerMode";
 static KSOFormRowKey const KSOFormRowKeyDatePickerMinimumDate = @"datePickerMinimumDate";
 static KSOFormRowKey const KSOFormRowKeyDatePickerMaximumDate = @"datePickerMaximumDate";
 static KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter = @"datePickerDateFormatter";
+// UIStepper & UISlider
+static KSOFormRowKey const KSOFormRowKeyMinimumValue = @"minimumValue";
+static KSOFormRowKey const KSOFormRowKeyMaximumValue = @"maximumValue";
 // UIStepper
-static KSOFormRowKey const KSOFormRowKeyStepperMinimumValue = @"stepperMinimumValue";
-static KSOFormRowKey const KSOFormRowKeyStepperMaximumValue = @"stepperMaximumValue";
 static KSOFormRowKey const KSOFormRowKeyStepperStepValue = @"stepperStepValue";
+// UISlider
+static KSOFormRowKey const KSOFormRowKeySliderMinimumValueImage = @"sliderMinimumValueImage";
+static KSOFormRowKey const KSOFormRowKeySliderMaximumValueImage = @"sliderMaximumValueImage";
 
 @class KSOFormSection;
 
@@ -100,6 +104,7 @@ static KSOFormRowKey const KSOFormRowKeyStepperStepValue = @"stepperStepValue";
 @property (copy,nonatomic,nullable) NSString *subtitle;
 @property (copy,nonatomic,nullable) NSString *placeholder;
 @property (strong,nonatomic,nullable) id<KSOTextValidator> textValidator;
+// NSFormatter works here as well
 @property (strong,nonatomic,nullable) id<KSOTextFormatter> textFormatter;
 
 @property (assign,nonatomic) UITextAutocapitalizationType autocapitalizationType;
@@ -125,6 +130,11 @@ static KSOFormRowKey const KSOFormRowKeyStepperStepValue = @"stepperStepValue";
 @property (assign,nonatomic) double stepperMinimumValue;
 @property (assign,nonatomic) double stepperMaximumValue;
 @property (assign,nonatomic) double stepperStepValue;
+
+@property (assign,nonatomic) float sliderMinimumValue;
+@property (assign,nonatomic) float sliderMaximumValue;
+@property (copy,nonatomic,nullable) UIImage *sliderMinimumValueImage;
+@property (copy,nonatomic,nullable) UIImage *sliderMaximumValueImage;
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 

@@ -70,9 +70,14 @@
     _datePickerMaximumDate = dictionary[KSOFormRowKeyDatePickerMaximumDate];
     _datePickerDateFormatter = dictionary[KSOFormRowKeyDatePickerDateFormatter];
     
-    _stepperMinimumValue = [dictionary[KSOFormRowKeyStepperMinimumValue] doubleValue];
-    _stepperMaximumValue = [dictionary[KSOFormRowKeyStepperMaximumValue] doubleValue];
+    _stepperMinimumValue = [dictionary[KSOFormRowKeyMinimumValue] doubleValue];
+    _stepperMaximumValue = [dictionary[KSOFormRowKeyMaximumValue] doubleValue];
     _stepperStepValue = [dictionary[KSOFormRowKeyStepperStepValue] doubleValue];
+    
+    _sliderMinimumValue = [dictionary[KSOFormRowKeyMinimumValue] floatValue];
+    _sliderMaximumValue = [dictionary[KSOFormRowKeyMaximumValue] floatValue];
+    _sliderMinimumValueImage = dictionary[KSOFormRowKeySliderMinimumValueImage];
+    _sliderMaximumValueImage = dictionary[KSOFormRowKeySliderMaximumValueImage];
     
     return self;
 }
@@ -134,6 +139,10 @@
 }
 - (double)stepperStepValue {
     return _stepperStepValue > 0.0 ? _stepperStepValue : 1.0;
+}
+
+- (float)sliderMaximumValue {
+    return _sliderMaximumValue > 0.0 ? _sliderMaximumValue : 1.0;
 }
 
 @end
