@@ -18,6 +18,7 @@
 #import <KSOForm/KSOFormPickerViewRow.h>
 #import <KSOTextValidation/KSOTextValidator.h>
 #import <KSOTextValidation/KSOTextFormatter.h>
+#import <Ditko/UIControl+KDIExtensions.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,7 +29,8 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
     KSOFormRowTypePickerView,
     KSOFormRowTypeDatePicker,
     KSOFormRowTypeStepper,
-    KSOFormRowTypeSlider
+    KSOFormRowTypeSlider,
+    KSOFormRowTypeButton
 };
 
 typedef BOOL(^KSOFormRowShouldChangeValueBlock)(id _Nullable value, NSError **error);
@@ -80,6 +82,8 @@ static KSOFormRowKey const KSOFormRowKeyStepperStepValue = @"stepperStepValue";
 // UISlider
 static KSOFormRowKey const KSOFormRowKeySliderMinimumValueImage = @"sliderMinimumValueImage";
 static KSOFormRowKey const KSOFormRowKeySliderMaximumValueImage = @"sliderMaximumValueImage";
+// UIControl (e.g. UIButton)
+static KSOFormRowKey const KSOFormRowKeyControlBlock = @"controlBlock";
 
 @class KSOFormSection;
 
@@ -135,6 +139,8 @@ static KSOFormRowKey const KSOFormRowKeySliderMaximumValueImage = @"sliderMaximu
 @property (assign,nonatomic) float sliderMaximumValue;
 @property (copy,nonatomic,nullable) UIImage *sliderMinimumValueImage;
 @property (copy,nonatomic,nullable) UIImage *sliderMaximumValueImage;
+
+@property (copy,nonatomic,nullable) KDIUIControlBlock controlBlock;
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 

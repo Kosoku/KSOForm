@@ -62,6 +62,14 @@
     return [self.trailingView resignFirstResponder];
 }
 #pragma mark -
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    
+    if (selected) {
+        [self.trailingView becomeFirstResponder];
+    }
+}
+#pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
 #pragma mark -

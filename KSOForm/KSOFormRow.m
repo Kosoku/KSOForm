@@ -79,6 +79,8 @@
     _sliderMinimumValueImage = dictionary[KSOFormRowKeySliderMinimumValueImage];
     _sliderMaximumValueImage = dictionary[KSOFormRowKeySliderMaximumValueImage];
     
+    _controlBlock = dictionary[KSOFormRowKeyControlBlock];
+    
     return self;
 }
 

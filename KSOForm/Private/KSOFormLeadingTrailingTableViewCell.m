@@ -26,24 +26,30 @@
 }
 - (void)updateConstraints {
     NSAssert(self.leadingView != nil, @"leadingView cannot be nil!");
-    NSAssert(self.trailingView != nil, @"trailingView cannot be nil!");
     
     [NSLayoutConstraint deactivateConstraints:self.activeConstraints];
     
     NSMutableArray *constraints = [[NSMutableArray alloc] init];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[view]" options:0 metrics:@{@"left": @(self.layoutMargins.left)} views:@{@"view": self.leadingView}]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.leadingView}]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.leadingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
-    
-    if (self.leadingToTrailingMargin == nil) {
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]-right-|" options:0 metrics:@{@"right": @(self.layoutMargins.right)} views:@{@"view": self.trailingView, @"subview": self.leadingView}]];
+    if (self.trailingView == nil) {
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[view]-right-|" options:0 metrics:@{@"left": @(self.layoutMargins.left), @"right": @(self.layoutMargins.right)} views:@{@"view": self.leadingView}]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.leadingView}]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:self.leadingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     }
     else {
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-margin-[view]-right-|" options:0 metrics:@{@"right": @(self.layoutMargins.right), @"margin": self.leadingToTrailingMargin} views:@{@"view": self.trailingView, @"subview": self.leadingView}]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[view]" options:0 metrics:@{@"left": @(self.layoutMargins.left)} views:@{@"view": self.leadingView}]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.leadingView}]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:self.leadingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+        
+        if (self.leadingToTrailingMargin == nil) {
+            [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]-right-|" options:0 metrics:@{@"right": @(self.layoutMargins.right)} views:@{@"view": self.trailingView, @"subview": self.leadingView}]];
+        }
+        else {
+            [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-margin-[view]-right-|" options:0 metrics:@{@"right": @(self.layoutMargins.right), @"margin": self.leadingToTrailingMargin} views:@{@"view": self.trailingView, @"subview": self.leadingView}]];
+        }
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.trailingView}]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:self.trailingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     }
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.trailingView}]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.trailingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     
     [NSLayoutConstraint activateConstraints:constraints];
     

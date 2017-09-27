@@ -21,6 +21,7 @@
 #import "KSOFormDatePickerTableViewCell.h"
 #import "KSOFormStepperTableViewCell.h"
 #import "KSOFormSliderTableViewCell.h"
+#import "KSOFormButtonTableViewCell.h"
 #import "KSOFormModel.h"
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
@@ -73,6 +74,11 @@
     [self.tableView registerClass:KSOFormDatePickerTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormDatePickerTableViewCell.class)];
     [self.tableView registerClass:KSOFormStepperTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormStepperTableViewCell.class)];
     [self.tableView registerClass:KSOFormSliderTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class)];
+    [self.tableView registerClass:KSOFormButtonTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class)];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.tableView endEditing:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -113,6 +119,9 @@
         case KSOFormRowTypeSlider:
             retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class) forIndexPath:indexPath];
             break;
+        case KSOFormRowTypeButton:
+            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class) forIndexPath:indexPath];
+            break;
         default:
             break;
     }
@@ -124,14 +133,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    if (cell.canBecomeFirstResponder) {
-        [cell becomeFirstResponder];
-    }
-    else {
-        [self.tableView endEditing:NO];
-    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)setTheme:(KSOFormTheme *)theme {

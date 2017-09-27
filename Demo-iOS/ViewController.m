@@ -121,6 +121,9 @@
                             KSOFormRowKeyTitle: @"Slider",
                             KSOFormRowKeySliderMinimumValueImage: [UIImage imageNamed:@"bag"],
                             KSOFormRowKeySliderMaximumValueImage: [UIImage imageNamed:@"socket"]
+                            },
+                          @{KSOFormRowKeyType: @(KSOFormRowTypeButton),
+                            KSOFormRowKeyTitle: @"Show Alert"
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,
