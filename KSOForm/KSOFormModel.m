@@ -19,6 +19,10 @@
 
 #import <Quicksilver/Quicksilver.h>
 
+NSNotificationName const KSOFormModelNotificationDidInsertRows = @"KSOFormModelNotificationDidInsertRows";
+NSString *const KSOFormModelUserInfoKeyRows = @"KSOFormModelUserInfoKeyRows";
+NSString *const KSOFormModelUserInfoKeyRowIndexes = @"KSOFormModelUserInfoKeyRowIndexes";
+
 @interface KSOFormModel ()
 @property (readwrite,copy,nonatomic) NSArray<KSOFormSection *> *sections;
 @end
@@ -28,6 +32,8 @@
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
     if (!(self = [super init]))
         return nil;
+    
+    _title = dictionary[KSOFormModelKeyTitle];
     
     if (dictionary[KSOFormModelKeySections] != nil) {
         _sections = [dictionary[KSOFormModelKeySections] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
@@ -61,6 +67,13 @@
     }
     
     return retval;
+}
+
+- (void)insertRows:(NSArray<KSOFormRow *> *)rows inSection:(KSOFormSection *)section animated:(BOOL)animated; {
+    
+}
+- (void)deleteRows:(NSArray<KSOFormRow *> *)rows animated:(BOOL)animated; {
+    
 }
 
 @end

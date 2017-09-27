@@ -19,12 +19,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NSString* KSOFormModelKey NS_STRING_ENUM;
 
+static KSOFormModelKey const KSOFormModelKeyTitle = @"title";
 static KSOFormModelKey const KSOFormModelKeySections = @"sections";
 static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
+
+FOUNDATION_EXPORT NSNotificationName const KSOFormModelNotificationDidInsertRows;
+FOUNDATION_EXPORT NSString *const KSOFormModelUserInfoKeyRows;
+FOUNDATION_EXPORT NSString *const KSOFormModelUserInfoKeyRowIndexes;
 
 @class KSOFormSection,KSOFormRow;
 
 @interface KSOFormModel : NSObject
+
+@property (copy,nonatomic,nullable) NSString *title;
 
 @property (readonly,copy,nonatomic) NSArray<KSOFormSection *> *sections;
 
@@ -35,6 +42,9 @@ static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 
 - (nullable KSOFormRow *)formRowForIndexPath:(NSIndexPath *)indexPath;
 - (nullable NSIndexPath *)indexPathForFormRow:(KSOFormRow *)formRow;
+
+- (void)insertRows:(NSArray<KSOFormRow *> *)rows inSection:(KSOFormSection *)section animated:(BOOL)animated;
+- (void)deleteRows:(NSArray<KSOFormRow *> *)rows animated:(BOOL)animated;
 
 @end
 

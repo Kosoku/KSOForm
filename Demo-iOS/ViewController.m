@@ -21,8 +21,6 @@
 #import <KSOForm/KSOForm.h>
 
 @interface ViewController () <KSOFormRowValueDataSource>
-@property (strong,nonatomic) KSOFormTableViewController *tableViewController;
-
 @property (copy,nonatomic) NSString *email;
 @property (copy,nonatomic) NSString *password;
 @property (copy,nonatomic) NSString *phoneNumber;
@@ -33,20 +31,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setTableViewController:[[KSOFormTableViewController alloc] initWithStyle:UITableViewStyleGrouped]];
-    [self addChildViewController:self.tableViewController];
-    [self.tableViewController.view setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addSubview:self.tableViewController.view];
-    [self.tableViewController didMoveToParentViewController:self];
-    
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.tableViewController.view}]];
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.tableViewController.view}]];
-    
     KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
     
     [theme setKeyboardAppearance:UIKeyboardAppearanceDark];
     
-    [self.tableViewController setTheme:theme];
+    [self setTheme:theme];
     
     NSArray *readonly = @[@{KSOFormRowKeyTitle: @"Title",
                             KSOFormRowKeySubtitle: @"Subtitle",
@@ -129,7 +118,8 @@
                             }
                             }];
     
-    NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,
+    NSDictionary *dictionary = @{KSOFormModelKeyTitle: @"Demo-iOS",
+                                 KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,
                                                               KSOFormSectionKeyHeaderTitle: @"Read only",
                                                               KSOFormSectionKeyFooterTitle: @"Section footer title"
                                                               },
@@ -142,7 +132,7 @@
                                                               KSOFormSectionKeyFooterTitle: @"Section footer title"
                                                               }]};
     
-    [self.tableViewController setModel:[[KSOFormModel alloc] initWithDictionary:dictionary]];
+    [self setModel:[[KSOFormModel alloc] initWithDictionary:dictionary]];
 }
 
 @end

@@ -171,16 +171,25 @@
     _theme = theme ?: KSOFormTheme.defaultTheme;
 }
 
-- (void)setModel:(KSOFormModel *)model {
-    _model = model;
-    
-    [self.tableView reloadData];
-}
-
 - (void)_KSOFormTableViewControllerInit; {
     _theme = KSOFormTheme.defaultTheme;
     
     kstWeakify(self);
+    
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        if ([keyPath isEqualToString:@kstKeypath(self,model)]) {
+            if (self.isViewLoaded &&
+                self.view.window != nil) {
+                
+                [self.tableView reloadData];
+            }
+        }
+        else if ([keyPath isEqualToString:@kstKeypath(self,model.title)]) {
+            [self setTitle:self.model.title];
+        }
+    }];
+    
     [self KAG_addObserverForNotificationNames:@[KDINextPreviousInputAccessoryViewNotificationNext,KDINextPreviousInputAccessoryViewNotificationPrevious] object:nil block:^(NSNotification * _Nonnull notification) {
         kstStrongify(self);
         
