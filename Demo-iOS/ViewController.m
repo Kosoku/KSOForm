@@ -116,6 +116,9 @@
                                 
                                 retval;
                             })
+                            },
+                          @{KSOFormRowKeyType: @(KSOFormRowTypeSlider),
+                            KSOFormRowKeyTitle: @"Slider"
                             }];
     
     NSDictionary *dictionary = @{KSOFormModelKeySections: @[@{KSOFormSectionKeyRows: readonly,

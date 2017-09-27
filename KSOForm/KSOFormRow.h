@@ -27,7 +27,8 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
     KSOFormRowTypeSwitch,
     KSOFormRowTypePickerView,
     KSOFormRowTypeDatePicker,
-    KSOFormRowTypeStepper
+    KSOFormRowTypeStepper,
+    KSOFormRowTypeSlider
 };
 
 typedef BOOL(^KSOFormRowShouldChangeValueBlock)(id _Nullable value, NSError **error);
