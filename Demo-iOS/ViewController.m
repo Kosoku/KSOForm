@@ -107,12 +107,15 @@
 @property (copy,nonatomic) NSString *email;
 @property (copy,nonatomic) NSString *password;
 @property (copy,nonatomic) NSString *phoneNumber;
+@property (assign,nonatomic) BOOL enableWifi;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _enableWifi = YES;
     
     KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
     
@@ -225,7 +228,17 @@
     
     [wifiModel setTitle:@"Wi-Fi"];
     [wifiModel addSectionFromDictionary:@{KSOFormSectionKeyRows: @[@{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
-                                                                     KSOFormRowKeyTitle: @"Wi-Fi"
+                                                                     KSOFormRowKeyTitle: @"Wi-Fi",
+                                                                     KSOFormRowKeyValueKey: @kstKeypath(self,enableWifi),
+                                                                     KSOFormRowKeyValueDataSource: self,
+                                                                     KSOFormRowKeyValueDidChangeBlock: ^(KSOFormRow *row, id value){
+        if ([value boolValue]) {
+            KSTLog(@"wifi enabled!");
+        }
+        else {
+            KSTLog(@"wifi disabled!");
+        }
+    }
                                                                      }]}];
     
     KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS",
