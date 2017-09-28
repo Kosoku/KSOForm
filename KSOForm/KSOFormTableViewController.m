@@ -23,7 +23,8 @@
 #import "KSOFormSliderTableViewCell.h"
 #import "KSOFormButtonTableViewCell.h"
 #import "KSOFormSegmentedTableViewCell.h"
-#import "KSOFormModel.h"
+#import "KSOFormTableViewHeaderView.h"
+#import "KSOFormTableViewFooterView.h"
 #import "KSOFormModel+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
@@ -79,6 +80,11 @@
     [self.tableView registerClass:KSOFormSliderTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class)];
     [self.tableView registerClass:KSOFormButtonTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class)];
     [self.tableView registerClass:KSOFormSegmentedTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSegmentedTableViewCell.class)];
+    
+    [self.tableView setEstimatedSectionHeaderHeight:32.0];
+    [self.tableView setEstimatedSectionFooterHeight:32.0];
+    [self.tableView registerClass:KSOFormTableViewHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(KSOFormTableViewHeaderView.class)];
+    [self.tableView registerClass:KSOFormTableViewFooterView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(KSOFormTableViewFooterView.class)];
     
     kstWeakify(self);
     
@@ -190,12 +196,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.model.sections[section].rows.count;
 }
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.model.sections[section].headerTitle;
-}
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return self.model.sections[section].footerTitle;
-}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     KSOFormRow *formRow = [self.model rowForIndexPath:indexPath];
     UITableViewCell<KSOFormRowView> *retval = nil;
@@ -246,6 +246,8 @@
         }
     }
     
+    NSAssert([retval conformsToProtocol:@protocol(KSOFormRowView)], @"table view cell must conform to KSOFormRowView protocol!");
+    
     [retval setFormRow:formRow];
     if ([retval respondsToSelector:@selector(setFormTheme:)]) {
         [retval setFormTheme:self.theme];
@@ -254,6 +256,26 @@
     return retval;
 }
 #pragma mark UITableViewDelegate
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    KSOFormSection *formSection = self.model.sections[section];
+    UITableViewHeaderFooterView<KSOFormSectionView> *retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewHeaderView.class)];
+    
+    NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view header view must conform to KSOFormSectionView protocol!");
+    
+    [retval setFormSection:formSection];
+    
+    return retval;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    KSOFormSection *formSection = self.model.sections[section];
+    UITableViewHeaderFooterView<KSOFormSectionView> *retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewFooterView.class)];
+    
+    NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view footer view must conform to KSOFormSectionView protocol!");
+    
+    [retval setFormSection:formSection];
+    
+    return retval;
+}
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return [self.model rowForIndexPath:indexPath].isSelectable;
 }
