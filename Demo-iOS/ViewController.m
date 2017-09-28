@@ -115,8 +115,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _enableWifi = YES;
-    
     KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
     
     [theme setKeyboardAppearance:UIKeyboardAppearanceDark];
@@ -155,7 +153,6 @@
                                                                KSOFormRowKeyTitle: @"Password",
                                                                KSOFormRowKeyPlaceholder: @"Enter your password",
                                                                KSOFormRowKeySecureTextEntry: @YES,
-                                                               KSOFormRowKeyTextContentType: UITextContentTypePassword,
                                                                KSOFormRowKeyValueKey: @kstKeypath(self,password),
                                                                KSOFormRowKeyValueDataSource: self
                                                                },
@@ -233,10 +230,34 @@
                                                                      KSOFormRowKeyValueDataSource: self,
                                                                      KSOFormRowKeyValueDidChangeBlock: ^(KSOFormRow *row, id value){
         if ([value boolValue]) {
-            KSTLog(@"wifi enabled!");
+            [row.section addRowFromDictionary:@{KSOFormRowKeyTitle: @"Selected Network Name"}];
+            
+            KSOFormSection *section = [[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyHeaderTitle: @"Select a Wi-Fi network…"}];
+            
+            [section addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Network 1",
+                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
+                                                 },
+                                               @{KSOFormRowKeyTitle: @"Network 2",
+                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
+                                                 },
+                                               @{KSOFormRowKeyTitle: @"Network 3",
+                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
+                                                 },
+                                               @{KSOFormRowKeyTitle: @"Network 4",
+                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
+                                                 },
+                                               @{KSOFormRowKeyTitle: @"Network 5",
+                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
+                                                 },
+                                               @{KSOFormRowKeyTitle: @"Network 6",
+                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
+                                                 }]];
+            
+            [row.section.model addSection:section];
         }
         else {
-            KSTLog(@"wifi disabled!");
+            [row.section.model removeSection:row.section.model.sections.lastObject];
+            [row.section removeRow:row.section.rows.lastObject];
         }
     }
                                                                      }]}];

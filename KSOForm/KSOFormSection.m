@@ -14,8 +14,8 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "KSOFormSection.h"
-#import "KSOFormRow.h"
 #import "KSOFormRow+KSOExtensionsPrivate.h"
+#import "KSOFormModel+KSOExtensionsPrivate.h"
 
 #import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
@@ -59,7 +59,21 @@
     [self addRows:@[row]];
 }
 - (void)addRows:(NSArray<KSOFormRow *> *)rows; {
-    [[self mutableArrayValueForKey:@kstKeypath(self,rows)] addObjectsFromArray:rows];
+    [self.model.tableView beginUpdates];
+    
+    NSInteger section = [self.model.sections indexOfObject:self];
+    NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_rows.count, rows.count)];
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+    
+    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:idx inSection:section]];
+    }];
+    
+    [_rows addObjectsFromArray:rows];
+    
+    [self.model.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    
+    [self.model.tableView endUpdates];
 }
 
 - (void)addRowFromDictionary:(NSDictionary<NSString *,id> *)dictionary; {
@@ -70,34 +84,33 @@
         return [[KSOFormRow alloc] initWithDictionary:object section:self];
     }]];
 }
+
+- (void)removeRow:(KSOFormRow *)row; {
+    [self removeRows:@[row]];
+}
+- (void)removeRows:(NSArray<KSOFormRow *> *)rows; {
+    [self.model.tableView beginUpdates];
+    
+    NSInteger section = [self.model.sections indexOfObject:self];
+    NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+    
+    for (KSOFormRow *row in rows) {
+        NSInteger index = [_rows indexOfObject:row];
+        
+        [indexes addIndex:index];
+        [indexPaths addObject:[NSIndexPath indexPathForRow:index inSection:section]];
+    }
+    
+    [_rows removeObjectsAtIndexes:indexes];
+    
+    [self.model.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.model.tableView endUpdates];
+}
 #pragma mark Properties
 - (NSArray<KSOFormRow *> *)rows {
     return [_rows copy];
-}
-#pragma mark *** Private Methods ***
-#pragma mark KVC
-- (void)insertObject:(KSOFormRow *)object inRowsAtIndex:(NSUInteger)index {
-    [_rows insertObject:object atIndex:index];
-    
-    [object setSection:self];
-}
-- (void)removeObjectFromRowsAtIndex:(NSUInteger)index {
-    [_rows removeObjectAtIndex:index];
-}
-- (void)insertRows:(NSArray *)array atIndexes:(NSIndexSet *)indexes {
-    [_rows insertObjects:array atIndexes:indexes];
-    
-    for (KSOFormRow *row in array) {
-        [row setSection:self];
-    }
-}
-- (void)removeRowsAtIndexes:(NSIndexSet *)indexes {
-    [_rows removeObjectsAtIndexes:indexes];
-}
-- (void)replaceObjectInRowsAtIndex:(NSUInteger)index withObject:(KSOFormRow *)object {
-    [_rows replaceObjectAtIndex:index withObject:object];
-    
-    [object setSection:self];
 }
 
 @end

@@ -13,7 +13,7 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import "KSOFormModel.h"
+#import "KSOFormModel+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
 #import "KSOFormSection+KSOExtensionsPrivate.h"
 #import "KSOFormRow.h"
@@ -23,6 +23,7 @@
 
 @interface KSOFormModel ()
 @property (readwrite,copy,nonatomic) NSMutableArray<KSOFormSection *> *sections;
+@property (weak,nonatomic) UITableView *tableView;
 @end
 
 @implementation KSOFormModel
@@ -82,7 +83,15 @@
     [self addSections:@[section]];
 }
 - (void)addSections:(NSArray<KSOFormSection *> *)sections; {
-    [[self mutableArrayValueForKey:@kstKeypath(self,sections)] addObjectsFromArray:sections];
+    [self.tableView beginUpdates];
+    
+    NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_sections.count, sections.count)];
+    
+    [_sections addObjectsFromArray:sections];
+    
+    [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
+    
+    [self.tableView endUpdates];
 }
 
 - (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary; {
@@ -93,32 +102,28 @@
         return [[KSOFormSection alloc] initWithDictionary:object model:self];
     }]];
 }
+
+- (void)removeSection:(KSOFormSection *)section; {
+    [self removeSections:@[section]];
+}
+- (void)removeSections:(NSArray<KSOFormSection *> *)sections; {
+    [self.tableView beginUpdates];
+    
+    NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
+    
+    for (KSOFormSection *section in sections) {
+        [indexes addIndex:[_sections indexOfObject:section]];
+    }
+    
+    [_sections removeObjectsAtIndexes:indexes];
+    
+    [self.tableView deleteSections:indexes withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.tableView endUpdates];
+}
 #pragma mark Properties
 - (NSArray<KSOFormSection *> *)sections {
     return [_sections copy];
-}
-#pragma mark *** Private Methods ***
-#pragma mark KVC
-- (void)insertObject:(KSOFormSection *)object inSectionsAtIndex:(NSUInteger)index {
-    [_sections insertObject:object atIndex:index];
-    
-    [object setModel:self];
-}
-- (void)removeObjectFromSectionsAtIndex:(NSUInteger)index {
-    [_sections removeObjectAtIndex:index];
-}
-- (void)insertSections:(NSArray *)array atIndexes:(NSIndexSet *)indexes {
-    [_sections insertObjects:array atIndexes:indexes];
-    
-    for (KSOFormSection *section in array) {
-        [section setModel:self];
-    }
-}
-- (void)removeSectionsAtIndexes:(NSIndexSet *)indexes {
-    [_sections removeObjectsAtIndexes:indexes];
-}
-- (void)replaceObjectInSectionsAtIndex:(NSUInteger)index withObject:(KSOFormSection *)object {
-    [_sections replaceObjectAtIndex:index withObject:object];
 }
 
 @end

@@ -78,6 +78,7 @@
 		079E19301F79A00B00743988 /* KSOTextValidation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 079E192A1F799FBD00743988 /* KSOTextValidation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		079E19311F79A00E00743988 /* Agamotto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079E19281F799FB500743988 /* Agamotto.framework */; };
 		079E19321F79A00E00743988 /* Agamotto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 079E19281F799FB500743988 /* Agamotto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07CCBAB71F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 07CCBAB51F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +175,7 @@
 		079E19281F799FB500743988 /* Agamotto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Agamotto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		079E192A1F799FBD00743988 /* KSOTextValidation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOTextValidation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		079E192C1F799FF700743988 /* KSOTooltip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOTooltip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07CCBAB51F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KSOFormModel+KSOExtensionsPrivate.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +386,7 @@
 		079A1B401F7AC84D00C9F9BB /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				07CCBAB51F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h */,
 				073AE1411F7C108200C77C66 /* KSOFormSection+KSOExtensionsPrivate.h */,
 				073AE1451F7C10DF00C77C66 /* KSOFormRow+KSOExtensionsPrivate.h */,
 				079A1B5F1F7BED1200C9F9BB /* Base */,
@@ -436,6 +439,7 @@
 				07952D9D1F7892AE006C2A75 /* KSOForm.h in Headers */,
 				073AE1471F7C10DF00C77C66 /* KSOFormRow+KSOExtensionsPrivate.h in Headers */,
 				07952DAE1F789681006C2A75 /* KSOFormTableViewController.h in Headers */,
+				07CCBAB71F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h in Headers */,
 				07952DD31F789D21006C2A75 /* KSOFormModel.h in Headers */,
 				079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */,
 				07952DD71F78A01F006C2A75 /* KSOFormRowTableViewCell.h in Headers */,
@@ -808,7 +812,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Demo-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -865,7 +869,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Demo-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kosoku.KSOForm.Demo-iOS";

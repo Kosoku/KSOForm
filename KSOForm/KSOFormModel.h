@@ -49,6 +49,9 @@ static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 - (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary;
 - (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries;
 
+- (void)removeSection:(KSOFormSection *)section;
+- (void)removeSections:(NSArray<KSOFormSection *> *)sections;
+
 @end
 
 NS_ASSUME_NONNULL_END

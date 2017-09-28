@@ -45,6 +45,9 @@ static KSOFormSectionKey const KSOFormSectionKeyFooterTitle = @"footerTitle";
 - (void)addRowFromDictionary:(NSDictionary<NSString *,id> *)dictionary;
 - (void)addRowsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries;
 
+- (void)removeRow:(KSOFormRow *)row;
+- (void)removeRows:(NSArray<KSOFormRow *> *)rows;
+
 @end
 
 NS_ASSUME_NONNULL_END

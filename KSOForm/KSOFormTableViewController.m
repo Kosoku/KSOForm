@@ -24,6 +24,7 @@
 #import "KSOFormButtonTableViewCell.h"
 #import "KSOFormSegmentedTableViewCell.h"
 #import "KSOFormModel.h"
+#import "KSOFormModel+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
 #import "KSOFormTheme.h"
@@ -34,6 +35,8 @@
 #import <Quicksilver/Quicksilver.h>
 
 @interface KSOFormTableViewController ()
+@property (copy,nonatomic) NSArray<id<KAGObserver> > *rowsObservers;
+
 - (void)_KSOFormTableViewControllerInit;
 @end
 
@@ -77,6 +80,95 @@
     [self.tableView registerClass:KSOFormSliderTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class)];
     [self.tableView registerClass:KSOFormButtonTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class)];
     [self.tableView registerClass:KSOFormSegmentedTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSegmentedTableViewCell.class)];
+    
+    kstWeakify(self);
+    
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        if ([keyPath isEqualToString:@kstKeypath(self,model)]) {
+            [self.model setTableView:self.tableView];
+            
+            [self.tableView reloadData];
+            
+            [self.tableView setBackgroundView:self.model.backgroundView];
+            [self.tableView setTableHeaderView:self.model.headerView];
+            [self.tableView setTableFooterView:self.model.footerView];
+        }
+        else if ([keyPath isEqualToString:@kstKeypath(self,model.title)]) {
+            [self setTitle:self.model.title];
+        }
+    }];
+    
+    [self KAG_addObserverForNotificationNames:@[KDINextPreviousInputAccessoryViewNotificationNext,KDINextPreviousInputAccessoryViewNotificationPrevious] object:nil block:^(NSNotification * _Nonnull notification) {
+        kstStrongify(self);
+        
+        UITableViewCell<KSOFormRowView> *cell = [self.tableView.visibleCells KQS_find:^BOOL(__kindof UITableViewCell * _Nonnull object, NSInteger index) {
+            return object.isFirstResponder;
+        }];
+        
+        if (cell == nil) {
+            return;
+        }
+        
+        NSArray<KSOFormRow *> *formRows = [[self.model.sections KQS_map:^id _Nullable(KSOFormSection * _Nonnull object, NSInteger index) {
+            return object.rows;
+        }] KQS_flatten];
+        NSInteger index = [formRows indexOfObject:cell.formRow];
+        KSOFormRow *editableFormRow = nil;
+        
+        if ([notification.name isEqualToString:KDINextPreviousInputAccessoryViewNotificationNext]) {
+            if ((++index) == formRows.count) {
+                index = 0;
+            }
+            
+            for (NSInteger i=index; i<formRows.count; i++) {
+                if (formRows[i].isEditable) {
+                    editableFormRow = formRows[i];
+                    break;
+                }
+            }
+            
+            if (editableFormRow == nil) {
+                for (NSInteger i=0; i<index; i++) {
+                    if (formRows[i].isEditable) {
+                        editableFormRow = formRows[i];
+                        break;
+                    }
+                }
+            }
+        }
+        else {
+            if ((--index) < 0) {
+                index = formRows.count - 1;
+            }
+            
+            for (NSInteger i=index; i>=0; i--) {
+                if (formRows[i].isEditable) {
+                    editableFormRow = formRows[i];
+                    break;
+                }
+            }
+            
+            if (editableFormRow == nil) {
+                for (NSInteger i=formRows.count - 1; i>index; i--) {
+                    if (formRows[i].isEditable) {
+                        editableFormRow = formRows[i];
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (editableFormRow == nil) {
+            return;
+        }
+        
+        NSIndexPath *indexPath = [self.model indexPathForRow:editableFormRow];
+        
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+        
+        [[self.tableView cellForRowAtIndexPath:indexPath] becomeFirstResponder];
+    }];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -185,98 +277,6 @@
 
 - (void)_KSOFormTableViewControllerInit; {
     _theme = KSOFormTheme.defaultTheme;
-    
-    kstWeakify(self);
-    
-    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title),@kstKeypath(self,model.sections)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
-        kstStrongify(self);
-        if ([keyPath isEqualToString:@kstKeypath(self,model)]) {
-            if (self.isViewLoaded) {
-                [self.tableView reloadData];
-                
-                [self.tableView setBackgroundView:self.model.backgroundView];
-                [self.tableView setTableHeaderView:self.model.headerView];
-                [self.tableView setTableFooterView:self.model.footerView];
-            }
-        }
-        else if ([keyPath isEqualToString:@kstKeypath(self,model.title)]) {
-            [self setTitle:self.model.title];
-        }
-        else if ([keyPath isEqualToString:@kstKeypath(self,model.sections)]) {
-            KSTLog(@"%@ %@",value,change);
-        }
-    }];
-    
-    [self KAG_addObserverForNotificationNames:@[KDINextPreviousInputAccessoryViewNotificationNext,KDINextPreviousInputAccessoryViewNotificationPrevious] object:nil block:^(NSNotification * _Nonnull notification) {
-        kstStrongify(self);
-        
-        UITableViewCell<KSOFormRowView> *cell = [self.tableView.visibleCells KQS_find:^BOOL(__kindof UITableViewCell * _Nonnull object, NSInteger index) {
-            return object.isFirstResponder;
-        }];
-        
-        if (cell == nil) {
-            return;
-        }
-        
-        NSArray<KSOFormRow *> *formRows = [[self.model.sections KQS_map:^id _Nullable(KSOFormSection * _Nonnull object, NSInteger index) {
-            return object.rows;
-        }] KQS_flatten];
-        NSInteger index = [formRows indexOfObject:cell.formRow];
-        KSOFormRow *editableFormRow = nil;
-        
-        if ([notification.name isEqualToString:KDINextPreviousInputAccessoryViewNotificationNext]) {
-            if ((++index) == formRows.count) {
-                index = 0;
-            }
-            
-            for (NSInteger i=index; i<formRows.count; i++) {
-                if (formRows[i].isEditable) {
-                    editableFormRow = formRows[i];
-                    break;
-                }
-            }
-            
-            if (editableFormRow == nil) {
-                for (NSInteger i=0; i<index; i++) {
-                    if (formRows[i].isEditable) {
-                        editableFormRow = formRows[i];
-                        break;
-                    }
-                }
-            }
-        }
-        else {
-            if ((--index) < 0) {
-                index = formRows.count - 1;
-            }
-            
-            for (NSInteger i=index; i>=0; i--) {
-                if (formRows[i].isEditable) {
-                    editableFormRow = formRows[i];
-                    break;
-                }
-            }
-            
-            if (editableFormRow == nil) {
-                for (NSInteger i=formRows.count - 1; i>index; i--) {
-                    if (formRows[i].isEditable) {
-                        editableFormRow = formRows[i];
-                        break;
-                    }
-                }
-            }
-        }
-        
-        if (editableFormRow == nil) {
-            return;
-        }
-        
-        NSIndexPath *indexPath = [self.model indexPathForRow:editableFormRow];
-        
-        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
-        
-        [[self.tableView cellForRowAtIndexPath:indexPath] becomeFirstResponder];
-    }];
 }
 
 @end
