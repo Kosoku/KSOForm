@@ -21,6 +21,15 @@
 #import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
 
+KSOFormModelKey const KSOFormModelKeyTitle = @"title";
+KSOFormModelKey const KSOFormModelKeyBackgroundView = @"backgroundView";
+KSOFormModelKey const KSOFormModelKeyHeaderView = @"headerView";
+KSOFormModelKey const KSOFormModelKeyFooterView = @"footerView";
+KSOFormModelKey const KSOFormModelKeyCellIdentifiersToCellNibs = @"cellIdentifiersToCellNibs";
+KSOFormModelKey const KSOFormModelKeyHeaderFooterViewIdentifiersToHeaderFooterViewNibs = @"headerFooterViewIdentifiersToHeaderFooterViewNibs";
+KSOFormModelKey const KSOFormModelKeySections = @"sections";
+KSOFormModelKey const KSOFormModelKeyRows = @"rows";
+
 @interface KSOFormModel ()
 @property (readwrite,copy,nonatomic) NSMutableArray<KSOFormSection *> *sections;
 @property (weak,nonatomic) UITableView *tableView;
@@ -85,15 +94,7 @@
     [self addSections:@[section]];
 }
 - (void)addSections:(NSArray<KSOFormSection *> *)sections; {
-    [self.tableView beginUpdates];
-    
-    NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_sections.count, sections.count)];
-    
-    [_sections addObjectsFromArray:sections];
-    
-    [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
-    
-    [self.tableView endUpdates];
+    [self insertSections:sections atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_sections.count, sections.count)]];
 }
 
 - (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary; {
@@ -103,6 +104,19 @@
     [self addSections:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
         return [[KSOFormSection alloc] initWithDictionary:object model:self];
     }]];
+}
+
+- (void)insertSection:(KSOFormSection *)section atIndex:(NSUInteger)index; {
+    [self insertSections:@[section] atIndexes:[NSIndexSet indexSetWithIndex:index]];
+}
+- (void)insertSections:(NSArray<KSOFormSection *> *)sections atIndexes:(NSIndexSet *)indexes; {
+    [self.tableView beginUpdates];
+    
+    [_sections insertObjects:sections atIndexes:indexes];
+    
+    [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
+    
+    [self.tableView endUpdates];
 }
 
 - (void)removeSection:(KSOFormSection *)section; {
@@ -123,9 +137,39 @@
     
     [self.tableView endUpdates];
 }
+
+- (void)replaceSection:(KSOFormSection *)oldSection withSection:(KSOFormSection *)newSection {
+    [self.tableView beginUpdates];
+    
+    NSUInteger index = [_sections indexOfObject:oldSection];
+    
+    [_sections replaceObjectAtIndex:index withObject:newSection];
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.tableView endUpdates];
+}
 #pragma mark Properties
 - (NSArray<KSOFormSection *> *)sections {
     return [_sections copy];
 }
 
+@end
+
+@implementation KSOFormModel (KSOFormModelKeyedSubscripting)
+- (id)objectForKeyedSubscript:(KSOFormModelKey)key {
+    return [self valueForKey:key];
+}
+- (void)setObject:(id)obj forKeyedSubscript:(KSOFormModelKey)key {
+    [self setValue:obj forKey:key];
+}
+@end
+
+@implementation KSOFormModel (KSOFormModelIndexedSubscripting)
+- (KSOFormSection *)objectAtIndexedSubscript:(NSUInteger)idx {
+    return self.sections[idx];
+}
+- (void)setObject:(KSOFormSection *)obj atIndexedSubscript:(NSUInteger)idx {
+    [self replaceSection:self.sections[idx] withSection:obj];
+}
 @end

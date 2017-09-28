@@ -17,16 +17,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString* KSOFormModelKey NS_STRING_ENUM;
+typedef NSString* KSOFormModelKey NS_EXTENSIBLE_STRING_ENUM;
 
-static KSOFormModelKey const KSOFormModelKeyTitle = @"title";
-static KSOFormModelKey const KSOFormModelKeyBackgroundView = @"backgroundView";
-static KSOFormModelKey const KSOFormModelKeyHeaderView = @"headerView";
-static KSOFormModelKey const KSOFormModelKeyFooterView = @"footerView";
-static KSOFormModelKey const KSOFormModelKeyCellIdentifiersToCellNibs = @"cellIdentifiersToCellNibs";
-static KSOFormModelKey const KSOFormModelKeyHeaderFooterViewIdentifiersToHeaderFooterViewNibs = @"headerFooterViewIdentifiersToHeaderFooterViewNibs";
-static KSOFormModelKey const KSOFormModelKeySections = @"sections";
-static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyTitle;
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyBackgroundView;
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyHeaderView;
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyFooterView;
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyCellIdentifiersToCellNibs;
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyHeaderFooterViewIdentifiersToHeaderFooterViewNibs;
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeySections;
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRows;
 
 @class KSOFormSection,KSOFormRow;
 
@@ -54,9 +54,24 @@ static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 - (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary;
 - (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries;
 
+- (void)insertSection:(KSOFormSection *)section atIndex:(NSUInteger)index;
+- (void)insertSections:(NSArray<KSOFormSection *> *)sections atIndexes:(NSIndexSet *)indexes;
+
 - (void)removeSection:(KSOFormSection *)section;
 - (void)removeSections:(NSArray<KSOFormSection *> *)sections;
 
+- (void)replaceSection:(KSOFormSection *)oldSection withSection:(KSOFormSection *)newSection;
+
+@end
+
+@interface KSOFormModel (KSOFormModelKeyedSubscripting)
+- (nullable id)objectForKeyedSubscript:(KSOFormModelKey)key;
+- (void)setObject:(nullable id)obj forKeyedSubscript:(KSOFormModelKey)key;
+@end
+
+@interface KSOFormModel (KSOFormModelIndexedSubscripting)
+- (KSOFormSection *)objectAtIndexedSubscript:(NSUInteger)idx;
+- (void)setObject:(KSOFormSection *)obj atIndexedSubscript:(NSUInteger)idx;
 @end
 
 NS_ASSUME_NONNULL_END
