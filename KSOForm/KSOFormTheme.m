@@ -15,13 +15,19 @@
 
 #import "KSOFormTheme.h"
 
+#import <Ditko/Ditko.h>
+
 @interface KSOFormTheme ()
 @property (readwrite,copy,nonatomic) NSString *identifier;
 
++ (UIColor *)_defaultHeaderTitleColor;
++ (UIColor *)_defaultFooterTitleColor;
 + (UIColor *)_defaultTitleColor;
 + (UIColor *)_defaultSubtitleColor;
 + (UIColor *)_defaultValueColor;
 
++ (UIFont *)_defaultHeaderTitleFont;
++ (UIFont *)_defaultFooterTitleFont;
 + (UIFont *)_defaultTitleFont;
 + (UIFont *)_defaultSubtitleFont;
 + (UIFont *)_defaultValueFont;
@@ -40,16 +46,22 @@
 - (id)copyWithZone:(NSZone *)zone {
     KSOFormTheme *retval = [[KSOFormTheme alloc] initWithIdentifier:[NSString stringWithFormat:@"%@.copy",self.identifier]];
     
+    retval->_headerTitleColor = _headerTitleColor;
+    retval->_footerTitleColor = _footerTitleColor;
     retval->_titleColor = _titleColor;
     retval->_subtitleColor = _subtitleColor;
     retval->_valueColor = _valueColor;
     retval->_textColor = _textColor;
     retval->_textSelectionColor = _textSelectionColor;
     
+    retval->_headerTitleFont = _headerTitleFont;
+    retval->_footerTitleFont = _footerTitleFont;
     retval->_titleFont =_titleFont;
     retval->_subtitleFont = _subtitleFont;
     retval->_valueFont = _valueFont;
     
+    retval->_headerTitleTextStyle = _headerTitleTextStyle;
+    retval->_footerTitleTextStyle = _footerTitleTextStyle;
     retval->_titleTextStyle = _titleTextStyle;
     retval->_subtitleTextStyle = _subtitleTextStyle;
     retval->_valueTextStyle = _valueTextStyle;
@@ -65,14 +77,20 @@
     
     _identifier = [identifier copy];
     
+    _headerTitleColor = [self.class _defaultHeaderTitleColor];
+    _footerTitleColor = [self.class _defaultFooterTitleColor];
     _titleColor = [self.class _defaultTitleColor];
     _subtitleColor = [self.class _defaultSubtitleColor];
     _valueColor = [self.class _defaultValueColor];
     
+    _headerTitleFont = [self.class _defaultHeaderTitleFont];
+    _footerTitleFont = [self.class _defaultFooterTitleFont];
     _titleFont = [self.class _defaultTitleFont];
     _subtitleFont = [self.class _defaultSubtitleFont];
     _valueFont = [self.class _defaultValueFont];
     
+    _headerTitleTextStyle = UIFontTextStyleCaption1;
+    _footerTitleTextStyle = UIFontTextStyleCaption1;
     _titleTextStyle = UIFontTextStyleBody;
     _subtitleTextStyle = UIFontTextStyleFootnote;
     _valueTextStyle = UIFontTextStyleBody;
@@ -84,6 +102,12 @@
     return [[KSOFormTheme alloc] initWithIdentifier:@"com.kosoku.ksoform.theme.default"];
 }
 
+- (void)setHeaderTitleColor:(UIColor *)headerTitleColor {
+    _headerTitleColor = headerTitleColor ?: [self.class _defaultHeaderTitleColor];
+}
+- (void)setFooterTitleColor:(UIColor *)footerTitleColor {
+    _footerTitleColor = footerTitleColor ?: [self.class _defaultFooterTitleColor];
+}
 - (void)setTitleColor:(UIColor *)titleColor {
     _titleColor = titleColor ?: [self.class _defaultTitleColor];
 }
@@ -94,6 +118,12 @@
     _valueColor = valueColor ?: [self.class _defaultValueColor];
 }
 
+- (void)setHeaderTitleFont:(UIFont *)headerTitleFont {
+    _headerTitleFont = headerTitleFont ?: [self.class _defaultHeaderTitleFont];
+}
+- (void)setFooterTitleFont:(UIFont *)footerTitleFont {
+    _footerTitleFont = footerTitleFont ?: [self.class _defaultFooterTitleFont];
+}
 - (void)setTitleFont:(UIFont *)titleFont {
     _titleFont = titleFont ?: [self.class _defaultTitleFont];
 }
@@ -104,6 +134,12 @@
     _valueFont = valueFont ?: [self.class _defaultValueFont];
 }
 
++ (UIColor *)_defaultHeaderTitleColor; {
+    return UIColor.grayColor;
+}
++ (UIColor *)_defaultFooterTitleColor; {
+    return UIColor.grayColor;
+}
 + (UIColor *)_defaultTitleColor; {
     return UIColor.blackColor;
 }
@@ -112,6 +148,13 @@
 }
 + (UIColor *)_defaultValueColor; {
     return UIColor.lightGrayColor;
+}
+
++ (UIFont *)_defaultHeaderTitleFont; {
+    return [UIFont systemFontOfSize:13.0];
+}
++ (UIFont *)_defaultFooterTitleFont; {
+    return [UIFont systemFontOfSize:13.0];
 }
 + (UIFont *)_defaultTitleFont; {
     return [UIFont systemFontOfSize:17.0];

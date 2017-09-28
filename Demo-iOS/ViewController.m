@@ -258,7 +258,15 @@
                                                                      }];
     
     [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title",
-                                      KSOFormSectionKeyFooterTitle: @"Section footer title"
+                                      KSOFormSectionKeyFooterAttributedTitle: ({
+        NSMutableAttributedString *retval = [[NSMutableAttributedString alloc] init];
+        
+        [retval appendAttributedString:[[NSAttributedString alloc] initWithString:@"This is a attributed footer title with a " attributes:nil]];
+        [retval appendAttributedString:[[NSAttributedString alloc] initWithString:@"link to Kosoku" attributes:@{NSLinkAttributeName: [NSURL URLWithString:@"https://www.kosoku.com/"]}]];
+        [retval appendAttributedString:[[NSAttributedString alloc] initWithString:@" that you can tap on to open the link in Safari." attributes:nil]];
+        
+        retval;
+    })
                                       }];
     [model.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Read Only Values",
                                                            KSOFormRowKeyActionModel: readOnlyModel

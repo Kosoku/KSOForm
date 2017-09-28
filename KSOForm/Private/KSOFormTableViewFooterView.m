@@ -14,13 +14,49 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "KSOFormTableViewFooterView.h"
+#import "KSOFormTableViewHeaderFooterTextView.h"
+
+#import <Ditko/Ditko.h>
+
+@interface KSOFormTableViewFooterView ()
+@property (strong,nonatomic) KSOFormTableViewHeaderFooterTextView *formSectionView;
+@end
 
 @implementation KSOFormTableViewFooterView
+
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
+    if (!(self = [super initWithReuseIdentifier:reuseIdentifier]))
+        return nil;
+    
+    [self setFormSectionView:[[KSOFormTableViewHeaderFooterTextView alloc] initWithFrame:CGRectZero textContainer:nil]];
+    
+    return self;
+}
+
+@dynamic formSectionView;
 
 - (void)setFormSection:(KSOFormSection *)formSection {
     [super setFormSection:formSection];
     
-    [self.textLabel setText:formSection.footerTitle];
+    if (formSection.footerAttributedTitle == nil) {
+        [self.formSectionView setText:formSection.footerTitle];
+    }
+    else {
+        [self.formSectionView setAttributedText:formSection.footerAttributedTitle];
+    }
+}
+- (void)setFormTheme:(KSOFormTheme *)formTheme {
+    [super setFormTheme:formTheme];
+    
+    [self.formSectionView setTextColor:formTheme.footerTitleColor];
+    [self.formSectionView setFont:formTheme.footerTitleFont];
+    
+    if (formTheme.footerTitleTextStyle == nil) {
+        [NSObject KDI_unregisterDynamicTypeObject:self.formSectionView];
+    }
+    else {
+        [NSObject KDI_registerDynamicTypeObject:self.formSectionView forTextStyle:formTheme.footerTitleTextStyle];
+    }
 }
 
 @end

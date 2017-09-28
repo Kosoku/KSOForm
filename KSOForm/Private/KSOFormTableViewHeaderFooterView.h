@@ -18,4 +18,6 @@
 
 @interface KSOFormTableViewHeaderFooterView : UITableViewHeaderFooterView <KSOFormSectionView>
 
+@property (strong,nonatomic) __kindof UIView *formSectionView;
+
 @end

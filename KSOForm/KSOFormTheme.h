@@ -26,16 +26,22 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (readonly,copy,nonatomic) NSString *identifier;
 
+@property (strong,nonatomic,null_resettable) UIColor *headerTitleColor;
+@property (strong,nonatomic,null_resettable) UIColor *footerTitleColor;
 @property (strong,nonatomic,null_resettable) UIColor *titleColor;
 @property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
 @property (strong,nonatomic,null_resettable) UIColor *valueColor;
 @property (strong,nonatomic,nullable) UIColor *textColor;
 @property (strong,nonatomic,nullable) UIColor *textSelectionColor;
 
+@property (strong,nonatomic,null_resettable) UIFont *headerTitleFont;
+@property (strong,nonatomic,null_resettable) UIFont *footerTitleFont;
 @property (strong,nonatomic,null_resettable) UIFont *titleFont;
 @property (strong,nonatomic,null_resettable) UIFont *subtitleFont;
 @property (strong,nonatomic,null_resettable) UIFont *valueFont;
 
+@property (strong,nonatomic,nullable) UIFontTextStyle headerTitleTextStyle;
+@property (strong,nonatomic,nullable) UIFontTextStyle footerTitleTextStyle;
 @property (strong,nonatomic,nullable) UIFontTextStyle titleTextStyle;
 @property (strong,nonatomic,nullable) UIFontTextStyle subtitleTextStyle;
 @property (strong,nonatomic,nullable) UIFontTextStyle valueTextStyle;

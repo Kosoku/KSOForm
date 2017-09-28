@@ -72,6 +72,12 @@
     [super updateConstraints];
 }
 
+- (void)layoutMarginsDidChange {
+    [super layoutMarginsDidChange];
+    
+    [self setNeedsUpdateConstraints];
+}
+
 - (NSNumber *)leadingToTrailingMargin {
     return nil;
 }

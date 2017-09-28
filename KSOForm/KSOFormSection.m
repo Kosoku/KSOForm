@@ -43,6 +43,8 @@
     _identifier = [[NSUUID UUID] UUIDString];
     _headerTitle = dictionary[KSOFormSectionKeyHeaderTitle];
     _footerTitle = dictionary[KSOFormSectionKeyFooterTitle];
+    _headerAttributedTitle = dictionary[KSOFormSectionKeyHeaderAttributedTitle];
+    _footerAttributedTitle = dictionary[KSOFormSectionKeyFooterAttributedTitle];
     _rows = [[NSMutableArray alloc] init];
     
     [_rows addObjectsFromArray:[(NSArray *)dictionary[KSOFormSectionKeyRows] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
@@ -109,6 +111,15 @@
     [self.model.tableView endUpdates];
 }
 #pragma mark Properties
+- (BOOL)wantsHeaderView {
+    return (self.headerTitle != nil ||
+            self.headerAttributedTitle != nil);
+}
+- (BOOL)wantsFooterView {
+    return (self.footerTitle != nil ||
+            self.footerAttributedTitle != nil);
+}
+
 - (NSArray<KSOFormRow *> *)rows {
     return [_rows copy];
 }

@@ -92,6 +92,8 @@
 		07CCBAD51F7D663900AED8AA /* KSOFormTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBAD31F7D663900AED8AA /* KSOFormTableViewHeaderView.m */; };
 		07CCBAD81F7D667F00AED8AA /* KSOFormTableViewFooterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07CCBAD61F7D667F00AED8AA /* KSOFormTableViewFooterView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07CCBAD91F7D667F00AED8AA /* KSOFormTableViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBAD71F7D667F00AED8AA /* KSOFormTableViewFooterView.m */; };
+		07CCBADD1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07CCBADB1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		07CCBADE1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBADC1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +206,8 @@
 		07CCBAD31F7D663900AED8AA /* KSOFormTableViewHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormTableViewHeaderView.m; sourceTree = "<group>"; };
 		07CCBAD61F7D667F00AED8AA /* KSOFormTableViewFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormTableViewFooterView.h; sourceTree = "<group>"; };
 		07CCBAD71F7D667F00AED8AA /* KSOFormTableViewFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormTableViewFooterView.m; sourceTree = "<group>"; };
+		07CCBADB1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormTableViewHeaderFooterTextView.h; sourceTree = "<group>"; };
+		07CCBADC1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormTableViewHeaderFooterTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -449,6 +453,8 @@
 				07952DD61F78A01F006C2A75 /* KSOFormRowTableViewCell.m */,
 				079E191D1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.h */,
 				079E191E1F798D3800743988 /* KSOFormLeadingTrailingTableViewCell.m */,
+				07CCBADB1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.h */,
+				07CCBADC1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.m */,
 				07CCBACC1F7D64D900AED8AA /* KSOFormTableViewHeaderFooterView.h */,
 				07CCBACD1F7D64D900AED8AA /* KSOFormTableViewHeaderFooterView.m */,
 				07CCBAD21F7D663800AED8AA /* KSOFormTableViewHeaderView.h */,
@@ -489,6 +495,7 @@
 				079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */,
 				07CCBAD11F7D659E00AED8AA /* KSOFormSectionView.h in Headers */,
 				07952DD71F78A01F006C2A75 /* KSOFormRowTableViewCell.h in Headers */,
+				07CCBADD1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.h in Headers */,
 				079E19261F7998B400743988 /* KSOFormRowValueDataSource.h in Headers */,
 				079A1B431F7ADE9300C9F9BB /* KSOFormPickerViewRow.h in Headers */,
 				073AE1431F7C108200C77C66 /* KSOFormSection+KSOExtensionsPrivate.h in Headers */,
@@ -625,6 +632,7 @@
 				07952DD41F789D21006C2A75 /* KSOFormModel.m in Sources */,
 				079A1B531F7B1F3B00C9F9BB /* KSOFormSliderTableViewCell.m in Sources */,
 				079A1B4F1F7B100900C9F9BB /* KSOFormStepperTableViewCell.m in Sources */,
+				07CCBADE1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -258,21 +258,35 @@
 #pragma mark UITableViewDelegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     KSOFormSection *formSection = self.model.sections[section];
-    UITableViewHeaderFooterView<KSOFormSectionView> *retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewHeaderView.class)];
+    UITableViewHeaderFooterView<KSOFormSectionView> *retval = nil;
     
-    NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view header view must conform to KSOFormSectionView protocol!");
-    
-    [retval setFormSection:formSection];
+    if (formSection.wantsHeaderView) {
+        retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewHeaderView.class)];
+        
+        NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view header view must conform to KSOFormSectionView protocol!");
+        
+        [retval setFormSection:formSection];
+        if ([retval respondsToSelector:@selector(setFormTheme:)]) {
+            [retval setFormTheme:self.theme];
+        }
+    }
     
     return retval;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     KSOFormSection *formSection = self.model.sections[section];
-    UITableViewHeaderFooterView<KSOFormSectionView> *retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewFooterView.class)];
+    UITableViewHeaderFooterView<KSOFormSectionView> *retval = nil;
     
-    NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view footer view must conform to KSOFormSectionView protocol!");
-    
-    [retval setFormSection:formSection];
+    if (formSection.wantsFooterView) {
+        retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewFooterView.class)];
+        
+        NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view footer view must conform to KSOFormSectionView protocol!");
+        
+        [retval setFormSection:formSection];
+        if ([retval respondsToSelector:@selector(setFormTheme:)]) {
+            [retval setFormTheme:self.theme];
+        }
+    }
     
     return retval;
 }

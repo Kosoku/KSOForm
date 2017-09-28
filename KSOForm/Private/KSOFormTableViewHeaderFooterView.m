@@ -15,9 +15,53 @@
 
 #import "KSOFormTableViewHeaderFooterView.h"
 
+@interface KSOFormTableViewHeaderFooterView ()
+@property (copy,nonatomic) NSArray<NSLayoutConstraint *> *activeConstraints;
+
+- (NSArray<NSLayoutConstraint *> *)_constraintsForFormSectionView;
+@end
+
 @implementation KSOFormTableViewHeaderFooterView
+
+- (void)updateConstraints {
+    [self setActiveConstraints:[self _constraintsForFormSectionView]];
+    
+    [super updateConstraints];
+}
+
+- (void)layoutMarginsDidChange {
+    [super layoutMarginsDidChange];
+    
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)setFormSectionView:(__kindof UIView *)formSectionView {
+    _formSectionView = formSectionView;
+    
+    [_formSectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.contentView addSubview:_formSectionView];
+    
+    [self setActiveConstraints:[self _constraintsForFormSectionView]];
+}
 
 @synthesize formSection=_formSection;
 @synthesize formTheme=_formTheme;
+
+- (NSArray<NSLayoutConstraint *> *)_constraintsForFormSectionView; {
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[view]-right-|" options:0 metrics:@{@"left": @(self.layoutMargins.left), @"right": @(self.layoutMargins.right)} views:@{@"view": self.formSectionView}]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[view]-bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.formSectionView}]];
+    
+    return constraints;
+}
+
+- (void)setActiveConstraints:(NSArray<NSLayoutConstraint *> *)activeConstraints {
+    [NSLayoutConstraint deactivateConstraints:_activeConstraints];
+    
+    _activeConstraints = activeConstraints;
+    
+    [NSLayoutConstraint activateConstraints:_activeConstraints];
+}
 
 @end

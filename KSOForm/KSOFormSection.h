@@ -22,6 +22,8 @@ typedef NSString* KSOFormSectionKey NS_STRING_ENUM;
 static KSOFormSectionKey const KSOFormSectionKeyRows = @"rows";
 static KSOFormSectionKey const KSOFormSectionKeyHeaderTitle = @"headerTitle";
 static KSOFormSectionKey const KSOFormSectionKeyFooterTitle = @"footerTitle";
+static KSOFormSectionKey const KSOFormSectionKeyHeaderAttributedTitle = @"headerAttributedTitle";
+static KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle = @"footerAttributedTitle";
 
 @class KSOFormRow,KSOFormModel;
 
@@ -31,8 +33,16 @@ static KSOFormSectionKey const KSOFormSectionKeyFooterTitle = @"footerTitle";
 
 @property (readonly,copy,nonatomic) NSString *identifier;
 
+@property (readonly,nonatomic) BOOL wantsHeaderView;
+@property (readonly,nonatomic) BOOL wantsFooterView;
+
 @property (copy,nonatomic,nullable) NSString *headerTitle;
 @property (copy,nonatomic,nullable) NSString *footerTitle;
+
+@property (copy,nonatomic,nullable) NSAttributedString *headerAttributedTitle;
+@property (copy,nonatomic,nullable) NSAttributedString *footerAttributedTitle;
+
+
 
 @property (readonly,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 
