@@ -47,13 +47,21 @@
             right = @0.0;
         }
         
+        NSNumber *top = @(self.layoutMargins.top);
+        NSNumber *bottom = @(self.layoutMargins.bottom);
+        
+        if (!self.trailingViewWantsTopBottomLayoutMargins) {
+            top = @0.0;
+            bottom = @0.0;
+        }
+        
         if (self.leadingToTrailingMargin == nil) {
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]-right-|" options:0 metrics:@{@"right": right} views:@{@"view": self.trailingView, @"subview": self.leadingView}]];
         }
         else {
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-margin-[view]-right-|" options:0 metrics:@{@"right": right, @"margin": self.leadingToTrailingMargin} views:@{@"view": self.trailingView, @"subview": self.leadingView}]];
         }
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.trailingView}]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=top-[view]->=bottom-|" options:0 metrics:@{@"top": top, @"bottom": bottom} views:@{@"view": self.trailingView}]];
         [constraints addObject:[NSLayoutConstraint constraintWithItem:self.trailingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     }
     
@@ -66,6 +74,9 @@
 
 - (NSNumber *)leadingToTrailingMargin {
     return nil;
+}
+- (BOOL)trailingViewWantsTopBottomLayoutMargins {
+    return YES;
 }
 
 @end

@@ -21,5 +21,6 @@
 @property (strong,nonatomic) UIView *trailingView;
 
 @property (readonly,nonatomic) NSNumber *leadingToTrailingMargin;
+@property (readonly,nonatomic) BOOL trailingViewWantsTopBottomLayoutMargins;
 
 @end
