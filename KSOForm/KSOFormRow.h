@@ -110,6 +110,10 @@ static KSOFormRowKey const KSOFormRowKeyAction = @"action";
 static KSOFormRowKey const KSOFormRowKeyActionDelegate = @"actionDelegate";
 static KSOFormRowKey const KSOFormRowKeyActionModel = @"actionModel";
 static KSOFormRowKey const KSOFormRowKeyActionViewControllerClass = @"actionViewController";
+// custom cell support
+static KSOFormRowKey const KSOFormRowKeyCellClass = @"cellClass";
+static KSOFormRowKey const KSOFormRowKeyCellIdentifier = @"cellIdentifier";
+static KSOFormRowKey const KSOFormRowKeyHeaderFooterViewIdentifier = @"headerFooterViewIdentifier";
 
 @class KSOFormSection,KSOFormModel;
 
@@ -168,6 +172,10 @@ static KSOFormRowKey const KSOFormRowKeyActionViewControllerClass = @"actionView
 @property (weak,nonatomic,nullable) id<KSOFormRowActionDelegate> actionDelegate;
 @property (strong,nonatomic,nullable) KSOFormModel *actionModel;
 @property (strong,nonatomic,nullable) Class actionViewControllerClass;
+
+@property (strong,nonatomic,nullable) Class cellClass;
+@property (copy,nonatomic,nullable) NSString *cellIdentifier;
+@property (copy,nonatomic,nullable) NSString *headerFooterViewIdentifier;
 
 - (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary section:(nullable KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary;

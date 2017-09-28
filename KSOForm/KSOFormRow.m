@@ -116,6 +116,10 @@
     _actionModel = dictionary[KSOFormRowKeyActionModel];
     _actionViewControllerClass = dictionary[KSOFormRowKeyActionViewControllerClass];
     
+    _cellClass = dictionary[KSOFormRowKeyCellClass];
+    _cellIdentifier = dictionary[KSOFormRowKeyCellIdentifier];
+    _headerFooterViewIdentifier = dictionary[KSOFormRowKeyHeaderFooterViewIdentifier];
+    
     return self;
 }
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {

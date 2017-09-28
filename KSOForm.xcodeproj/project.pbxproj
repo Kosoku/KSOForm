@@ -80,6 +80,7 @@
 		079E19321F79A00E00743988 /* Agamotto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 079E19281F799FB500743988 /* Agamotto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07CCBAB71F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 07CCBAB51F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07CCBABB1F7CC2F900AED8AA /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBABA1F7CC2F900AED8AA /* MapViewController.m */; };
+		07CCBAC31F7D577B00AED8AA /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBAC21F7D577B00AED8AA /* CustomTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +180,8 @@
 		07CCBAB51F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KSOFormModel+KSOExtensionsPrivate.h"; sourceTree = "<group>"; };
 		07CCBAB91F7CC2F900AED8AA /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		07CCBABA1F7CC2F900AED8AA /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		07CCBAC11F7D577B00AED8AA /* CustomTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		07CCBAC21F7D577B00AED8AA /* CustomTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,6 +381,8 @@
 				07952DB91F789BD0006C2A75 /* AppDelegate.m */,
 				07952DBB1F789BD0006C2A75 /* ViewController.h */,
 				07952DBC1F789BD0006C2A75 /* ViewController.m */,
+				07CCBAC11F7D577B00AED8AA /* CustomTableViewCell.h */,
+				07CCBAC21F7D577B00AED8AA /* CustomTableViewCell.m */,
 				07CCBAB91F7CC2F900AED8AA /* MapViewController.h */,
 				07CCBABA1F7CC2F900AED8AA /* MapViewController.m */,
 				07952DC11F789BD0006C2A75 /* Assets.xcassets */,
@@ -588,6 +593,7 @@
 				07952DBD1F789BD0006C2A75 /* ViewController.m in Sources */,
 				07952DC81F789BD0006C2A75 /* main.m in Sources */,
 				07952DBA1F789BD0006C2A75 /* AppDelegate.m in Sources */,
+				07CCBAC31F7D577B00AED8AA /* CustomTableViewCell.m in Sources */,
 				07CCBABB1F7CC2F900AED8AA /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

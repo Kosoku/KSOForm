@@ -35,11 +35,12 @@
 #import <Quicksilver/Quicksilver.h>
 
 @interface KSOFormTableViewController ()
+
 - (void)_KSOFormTableViewControllerInit;
 @end
 
 @implementation KSOFormTableViewController
-
+#pragma mark *** Subclass Overrides ***
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
         return nil;
@@ -64,7 +65,7 @@
     
     return self;
 }
-
+#pragma mark -
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -168,17 +169,11 @@
         [[self.tableView cellForRowAtIndexPath:indexPath] becomeFirstResponder];
     }];
 }
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
-    KSTLogCGSize(size);
-}
-
+#pragma mark UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.tableView endEditing:YES];
 }
-
+#pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.model.sections.count;
 }
@@ -195,44 +190,60 @@
     KSOFormRow *formRow = [self.model rowForIndexPath:indexPath];
     UITableViewCell<KSOFormRowView> *retval = nil;
     
-    switch (formRow.type) {
-        case KSOFormRowTypeLabel:
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormLabelTableViewCell.class) forIndexPath:indexPath];
-            break;
-        case KSOFormRowTypeText:
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormTextTableViewCell.class) forIndexPath:indexPath];
-            break;
-        case KSOFormRowTypeSwitch:
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSwitchTableViewCell.class) forIndexPath:indexPath];
-            break;
-        case KSOFormRowTypePickerView:
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormPickerViewTableViewCell.class) forIndexPath:indexPath];
-            break;
-        case KSOFormRowTypeDatePicker:
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormDatePickerTableViewCell.class) forIndexPath:indexPath];
-            break;
-        case KSOFormRowTypeStepper:
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormStepperTableViewCell.class) forIndexPath:indexPath];
-            break;
-        case KSOFormRowTypeSlider:
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class) forIndexPath:indexPath];
-            break;
-        case KSOFormRowTypeButton:
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class) forIndexPath:indexPath];
-            break;
-        case KSOFormRowTypeSegmented:
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSegmentedTableViewCell.class) forIndexPath:indexPath];
-            break;
-        default:
-            break;
+    if (formRow.cellClass != Nil) {
+        retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(formRow.cellClass) forIndexPath:indexPath];
+        
+        if (retval == nil) {
+            [tableView registerClass:formRow.cellClass forCellReuseIdentifier:NSStringFromClass(formRow.cellClass)];
+            
+            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(formRow.cellClass) forIndexPath:indexPath];
+        }
+    }
+    else if (formRow.cellIdentifier != nil) {
+        retval = [tableView dequeueReusableCellWithIdentifier:formRow.cellIdentifier forIndexPath:indexPath];
+    }
+    else {
+        switch (formRow.type) {
+            case KSOFormRowTypeLabel:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormLabelTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypeText:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormTextTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypeSwitch:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSwitchTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypePickerView:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormPickerViewTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypeDatePicker:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormDatePickerTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypeStepper:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormStepperTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypeSlider:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypeButton:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypeSegmented:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSegmentedTableViewCell.class) forIndexPath:indexPath];
+                break;
+            default:
+                break;
+        }
     }
     
     [retval setFormRow:formRow];
-    [retval setFormTheme:self.theme];
+    if ([retval respondsToSelector:@selector(setFormTheme:)]) {
+        [retval setFormTheme:self.theme];
+    }
     
     return retval;
 }
-
+#pragma mark UITableViewDelegate
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return [self.model rowForIndexPath:indexPath].isSelectable;
 }
@@ -268,11 +279,12 @@
         }
     }
 }
-
+#pragma mark *** Public Methods ***
+#pragma mark Properties
 - (void)setTheme:(KSOFormTheme *)theme {
     _theme = theme ?: KSOFormTheme.defaultTheme;
 }
-
+#pragma mark *** Private Methods ***
 - (void)_KSOFormTableViewControllerInit; {
     _theme = KSOFormTheme.defaultTheme;
 }
