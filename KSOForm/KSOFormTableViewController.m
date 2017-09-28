@@ -82,7 +82,7 @@
     
     kstWeakify(self);
     
-    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title),@kstKeypath(self,model.cellIdentifiersToCellNibs),@kstKeypath(self,model.headerFooterViewIdentifiersToHeaderFooterViewNibs)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         if ([keyPath isEqualToString:@kstKeypath(self,model)]) {
             [self.model setTableView:self.tableView];
@@ -95,6 +95,16 @@
         }
         else if ([keyPath isEqualToString:@kstKeypath(self,model.title)]) {
             [self setTitle:self.model.title];
+        }
+        else if ([keyPath isEqualToString:@kstKeypath(self,model.cellIdentifiersToCellNibs)]) {
+            [self.model.cellIdentifiersToCellNibs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, UINib * _Nonnull obj, BOOL * _Nonnull stop) {
+                [self.tableView registerNib:obj forCellReuseIdentifier:key];
+            }];
+        }
+        else if ([keyPath isEqualToString:@kstKeypath(self,model.headerFooterViewIdentifiersToHeaderFooterViewNibs)]) {
+            [self.model.headerFooterViewIdentifiersToHeaderFooterViewNibs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, UINib * _Nonnull obj, BOOL * _Nonnull stop) {
+                [self.tableView registerNib:obj forHeaderFooterViewReuseIdentifier:key];
+            }];
         }
     }];
     

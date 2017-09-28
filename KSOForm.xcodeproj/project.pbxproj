@@ -81,6 +81,10 @@
 		07CCBAB71F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 07CCBAB51F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07CCBABB1F7CC2F900AED8AA /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBABA1F7CC2F900AED8AA /* MapViewController.m */; };
 		07CCBAC31F7D577B00AED8AA /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBAC21F7D577B00AED8AA /* CustomTableViewCell.m */; };
+		07CCBAC51F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CCBAC41F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework */; };
+		07CCBAC61F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07CCBAC41F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07CCBAC91F7D592400AED8AA /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07CCBAC71F7D592400AED8AA /* CustomTableViewCell.xib */; };
+		07CCBACB1F7D60FE00AED8AA /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07CCBACA1F7D60FE00AED8AA /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +111,7 @@
 				07952DCD1F789C41006C2A75 /* KSOForm.framework in Embed Frameworks */,
 				0712E4F31F78E0D300F0E223 /* Ditko.framework in Embed Frameworks */,
 				079E19301F79A00B00743988 /* KSOTextValidation.framework in Embed Frameworks */,
+				07CCBAC61F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework in Embed Frameworks */,
 				071ED0321F78C6C800778F22 /* Quicksilver.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -182,6 +187,9 @@
 		07CCBABA1F7CC2F900AED8AA /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		07CCBAC11F7D577B00AED8AA /* CustomTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		07CCBAC21F7D577B00AED8AA /* CustomTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		07CCBAC41F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07CCBAC81F7D592400AED8AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CustomTableViewCell.xib; sourceTree = "<group>"; };
+		07CCBACA1F7D60FE00AED8AA /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +218,7 @@
 				07952DCC1F789C41006C2A75 /* KSOForm.framework in Frameworks */,
 				0712E4F21F78E0D300F0E223 /* Ditko.framework in Frameworks */,
 				079E192F1F79A00B00743988 /* KSOTextValidation.framework in Frameworks */,
+				07CCBAC51F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework in Frameworks */,
 				071ED0311F78C6C800778F22 /* Quicksilver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +229,7 @@
 		071ED02E1F78C6B900778F22 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07CCBAC41F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework */,
 				079E192C1F799FF700743988 /* KSOTooltip.framework */,
 				079E192A1F799FBD00743988 /* KSOTextValidation.framework */,
 				079E19281F799FB500743988 /* Agamotto.framework */,
@@ -383,8 +393,10 @@
 				07952DBC1F789BD0006C2A75 /* ViewController.m */,
 				07CCBAC11F7D577B00AED8AA /* CustomTableViewCell.h */,
 				07CCBAC21F7D577B00AED8AA /* CustomTableViewCell.m */,
+				07CCBAC71F7D592400AED8AA /* CustomTableViewCell.xib */,
 				07CCBAB91F7CC2F900AED8AA /* MapViewController.h */,
 				07CCBABA1F7CC2F900AED8AA /* MapViewController.m */,
+				07CCBACA1F7D60FE00AED8AA /* FontAwesome.ttf */,
 				07952DC11F789BD0006C2A75 /* Assets.xcassets */,
 				07952DC31F789BD0006C2A75 /* LaunchScreen.storyboard */,
 				07952DC61F789BD0006C2A75 /* Info.plist */,
@@ -555,6 +567,8 @@
 			files = (
 				07952DC51F789BD0006C2A75 /* LaunchScreen.storyboard in Resources */,
 				07952DC21F789BD0006C2A75 /* Assets.xcassets in Resources */,
+				07CCBAC91F7D592400AED8AA /* CustomTableViewCell.xib in Resources */,
+				07CCBACB1F7D60FE00AED8AA /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,6 +629,14 @@
 				07952DC41F789BD0006C2A75 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		07CCBAC71F7D592400AED8AA /* CustomTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07CCBAC81F7D592400AED8AA /* Base */,
+			);
+			name = CustomTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

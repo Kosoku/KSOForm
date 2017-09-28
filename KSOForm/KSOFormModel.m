@@ -39,6 +39,8 @@
     if (!(self = [super init]))
         return nil;
     
+    _cellIdentifiersToCellNibs = dictionary[KSOFormModelKeyCellIdentifiersToCellNibs];
+    _headerFooterViewIdentifiersToHeaderFooterViewNibs = dictionary[KSOFormModelKeyHeaderFooterViewIdentifiersToHeaderFooterViewNibs];
     _title = dictionary[KSOFormModelKeyTitle];
     _backgroundView = dictionary[KSOFormModelKeyBackgroundView];
     _headerView = dictionary[KSOFormModelKeyHeaderView];

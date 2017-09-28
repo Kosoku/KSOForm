@@ -15,6 +15,7 @@
 
 #import "ViewController.h"
 #import "MapViewController.h"
+#import "CustomTableViewCell.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
@@ -224,6 +225,7 @@
     
     KSOFormModel *wifiModel = [[KSOFormModel alloc] init];
     
+    [wifiModel setCellIdentifiersToCellNibs:@{NSStringFromClass(CustomTableViewCell.class): [UINib nibWithNibName:NSStringFromClass(CustomTableViewCell.class) bundle:nil]}];
     [wifiModel setTitle:@"Wi-Fi"];
     [wifiModel addSectionFromDictionary:@{KSOFormSectionKeyRows: @[@{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
                                                                      KSOFormRowKeyTitle: @"Wi-Fi",
@@ -231,29 +233,16 @@
                                                                      KSOFormRowKeyValueDataSource: self,
                                                                      KSOFormRowKeyValueDidChangeBlock: ^(KSOFormRow *row, id value){
         if ([value boolValue]) {
-            [row.section addRowFromDictionary:@{KSOFormRowKeyTitle: @"Selected Network Name"}];
+            [row.section addRowFromDictionary:@{KSOFormRowKeyValue: @{@"name": @"Selected Network Name", @"selected": @YES}, KSOFormRowKeyCellIdentifier: NSStringFromClass(CustomTableViewCell.class)}];
             
             KSOFormSection *section = [[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyHeaderTitle: @"Select a Wi-Fi network…"}];
+            NSMutableArray *rows = [[NSMutableArray alloc] init];
             
-            [section addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Network 1",
-                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
-                                                 },
-                                               @{KSOFormRowKeyTitle: @"Network 2",
-                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
-                                                 },
-                                               @{KSOFormRowKeyTitle: @"Network 3",
-                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
-                                                 },
-                                               @{KSOFormRowKeyTitle: @"Network 4",
-                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
-                                                 },
-                                               @{KSOFormRowKeyTitle: @"Network 5",
-                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
-                                                 },
-                                               @{KSOFormRowKeyTitle: @"Network 6",
-                                                 KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
-                                                 }]];
+            for (NSInteger i=0; i<10; i++) {
+                [rows addObject:[[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyValue: @{@"name": [NSString stringWithFormat:@"Network Name %@",[NSNumberFormatter localizedStringFromNumber:@(i) numberStyle:NSNumberFormatterDecimalStyle]]}, KSOFormRowKeyCellIdentifier: NSStringFromClass(CustomTableViewCell.class)}]];
+            }
             
+            [section addRows:rows];
             [row.section.model addSection:section];
         }
         else {

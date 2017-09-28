@@ -15,11 +15,37 @@
 
 #import "CustomTableViewCell.h"
 
+#import <Ditko/Ditko.h>
+#import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 
+static CGSize const kImageSize = {.width=25, .height=25};
+
+@interface CustomTableViewCell ()
+@property (weak,nonatomic) IBOutlet UIButton *checkboxButton;
+@property (weak,nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak,nonatomic) IBOutlet UIButton *lockButton;
+@property (weak,nonatomic) IBOutlet UIButton *signalButton;
+@end
 
 @implementation CustomTableViewCell
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view(>=height@priority)]" options:0 metrics:@{@"height": @44.0, @"priority": @(UILayoutPriorityDefaultHigh)} views:@{@"view": self.contentView}]];
+    
+    [self.checkboxButton setImage:[UIImage KSO_fontAwesomeImageWithString:@"\uf00c" size:kImageSize].KDI_templateImage forState:UIControlStateNormal];
+    [self.lockButton setImage:[UIImage KSO_fontAwesomeImageWithString:@"\uf023" foregroundColor:UIColor.blackColor size:kImageSize] forState:UIControlStateNormal];
+    [self.signalButton setImage:[UIImage KSO_fontAwesomeImageWithString:@"\uf1eb" foregroundColor:UIColor.blackColor size:kImageSize] forState:UIControlStateNormal];
+}
+
 @synthesize formRow=_formRow;
+- (void)setFormRow:(KSOFormRow *)formRow {
+    _formRow = formRow;
+    
+    [self.nameLabel setText:_formRow.value[@"name"]];
+    [self.checkboxButton setHidden:![_formRow.value[@"selected"] boolValue]];
+}
 @synthesize formTheme=_formTheme;
 
 @end

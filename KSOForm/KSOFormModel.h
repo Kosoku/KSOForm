@@ -23,6 +23,8 @@ static KSOFormModelKey const KSOFormModelKeyTitle = @"title";
 static KSOFormModelKey const KSOFormModelKeyBackgroundView = @"backgroundView";
 static KSOFormModelKey const KSOFormModelKeyHeaderView = @"headerView";
 static KSOFormModelKey const KSOFormModelKeyFooterView = @"footerView";
+static KSOFormModelKey const KSOFormModelKeyCellIdentifiersToCellNibs = @"cellIdentifiersToCellNibs";
+static KSOFormModelKey const KSOFormModelKeyHeaderFooterViewIdentifiersToHeaderFooterViewNibs = @"headerFooterViewIdentifiersToHeaderFooterViewNibs";
 static KSOFormModelKey const KSOFormModelKeySections = @"sections";
 static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 
@@ -31,6 +33,9 @@ static KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 @interface KSOFormModel : NSObject
 
 @property (copy,nonatomic,nullable) NSString *title;
+
+@property (copy,nonatomic,nullable) NSDictionary<NSString *, UINib *> *cellIdentifiersToCellNibs;
+@property (copy,nonatomic,nullable) NSDictionary<NSString *, UINib *> *headerFooterViewIdentifiersToHeaderFooterViewNibs;
 
 @property (strong,nonatomic,nullable) __kindof UIView *backgroundView;
 @property (strong,nonatomic,nullable) __kindof UIView *headerView;
