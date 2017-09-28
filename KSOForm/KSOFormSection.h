@@ -24,6 +24,10 @@ static KSOFormSectionKey const KSOFormSectionKeyHeaderTitle = @"headerTitle";
 static KSOFormSectionKey const KSOFormSectionKeyFooterTitle = @"footerTitle";
 static KSOFormSectionKey const KSOFormSectionKeyHeaderAttributedTitle = @"headerAttributedTitle";
 static KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle = @"footerAttributedTitle";
+static KSOFormSectionKey const KSOFormSectionKeyHeaderViewClass = @"headerViewClass";
+static KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
+static KSOFormSectionKey const KSOFormSectionKeyHeaderViewIdentifier = @"headerViewIdentifier";
+static KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier = @"footerViewIdentifier";
 
 @class KSOFormRow,KSOFormModel;
 
@@ -42,7 +46,10 @@ static KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle = @"footer
 @property (copy,nonatomic,nullable) NSAttributedString *headerAttributedTitle;
 @property (copy,nonatomic,nullable) NSAttributedString *footerAttributedTitle;
 
-
+@property (strong,nonatomic,nullable) Class headerViewClass;
+@property (strong,nonatomic,nullable) Class footerViewClass;
+@property (copy,nonatomic,nullable) NSString *headerViewIdentifier;
+@property (copy,nonatomic,nullable) NSString *footerViewIdentifier;
 
 @property (readonly,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 

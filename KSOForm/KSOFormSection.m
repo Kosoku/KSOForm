@@ -45,6 +45,10 @@
     _footerTitle = dictionary[KSOFormSectionKeyFooterTitle];
     _headerAttributedTitle = dictionary[KSOFormSectionKeyHeaderAttributedTitle];
     _footerAttributedTitle = dictionary[KSOFormSectionKeyFooterAttributedTitle];
+    _headerViewClass = dictionary[KSOFormSectionKeyHeaderViewClass];
+    _footerViewClass = dictionary[KSOFormSectionKeyFooterViewClass];
+    _headerViewIdentifier = dictionary[KSOFormSectionKeyHeaderViewIdentifier];
+    _footerViewIdentifier = dictionary[KSOFormSectionKeyFooterViewIdentifier];
     _rows = [[NSMutableArray alloc] init];
     
     [_rows addObjectsFromArray:[(NSArray *)dictionary[KSOFormSectionKeyRows] KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {

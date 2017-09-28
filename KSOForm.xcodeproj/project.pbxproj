@@ -94,6 +94,7 @@
 		07CCBAD91F7D667F00AED8AA /* KSOFormTableViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBAD71F7D667F00AED8AA /* KSOFormTableViewFooterView.m */; };
 		07CCBADD1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07CCBADB1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07CCBADE1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBADC1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.m */; };
+		07CCBAE11F7DA0CB00AED8AA /* HeaderViewWithProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBAE01F7DA0CB00AED8AA /* HeaderViewWithProgress.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +209,8 @@
 		07CCBAD71F7D667F00AED8AA /* KSOFormTableViewFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormTableViewFooterView.m; sourceTree = "<group>"; };
 		07CCBADB1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormTableViewHeaderFooterTextView.h; sourceTree = "<group>"; };
 		07CCBADC1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormTableViewHeaderFooterTextView.m; sourceTree = "<group>"; };
+		07CCBADF1F7DA0CB00AED8AA /* HeaderViewWithProgress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderViewWithProgress.h; sourceTree = "<group>"; };
+		07CCBAE01F7DA0CB00AED8AA /* HeaderViewWithProgress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderViewWithProgress.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +413,8 @@
 				07952DB91F789BD0006C2A75 /* AppDelegate.m */,
 				07952DBB1F789BD0006C2A75 /* ViewController.h */,
 				07952DBC1F789BD0006C2A75 /* ViewController.m */,
+				07CCBADF1F7DA0CB00AED8AA /* HeaderViewWithProgress.h */,
+				07CCBAE01F7DA0CB00AED8AA /* HeaderViewWithProgress.m */,
 				07CCBAC11F7D577B00AED8AA /* CustomTableViewCell.h */,
 				07CCBAC21F7D577B00AED8AA /* CustomTableViewCell.m */,
 				07CCBAC71F7D592400AED8AA /* CustomTableViewCell.xib */,
@@ -642,6 +647,7 @@
 			files = (
 				07952DBD1F789BD0006C2A75 /* ViewController.m in Sources */,
 				07952DC81F789BD0006C2A75 /* main.m in Sources */,
+				07CCBAE11F7DA0CB00AED8AA /* HeaderViewWithProgress.m in Sources */,
 				07952DBA1F789BD0006C2A75 /* AppDelegate.m in Sources */,
 				07CCBAC31F7D577B00AED8AA /* CustomTableViewCell.m in Sources */,
 				07CCBABB1F7CC2F900AED8AA /* MapViewController.m in Sources */,

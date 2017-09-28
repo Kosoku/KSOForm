@@ -261,7 +261,21 @@
     UITableViewHeaderFooterView<KSOFormSectionView> *retval = nil;
     
     if (formSection.wantsHeaderView) {
-        retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewHeaderView.class)];
+        if (formSection.headerViewClass != Nil) {
+            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.headerViewClass)];
+            
+            if (retval == nil) {
+                [self.tableView registerClass:formSection.headerViewClass forHeaderFooterViewReuseIdentifier:NSStringFromClass(formSection.headerViewClass)];
+                
+                retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.headerViewClass)];
+            }
+        }
+        else if (formSection.headerViewIdentifier != nil) {
+            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:formSection.headerViewIdentifier];
+        }
+        else {
+            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewHeaderView.class)];
+        }
         
         NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view header view must conform to KSOFormSectionView protocol!");
         
@@ -278,7 +292,21 @@
     UITableViewHeaderFooterView<KSOFormSectionView> *retval = nil;
     
     if (formSection.wantsFooterView) {
-        retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewFooterView.class)];
+        if (formSection.footerViewClass != Nil) {
+            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.footerViewClass)];
+            
+            if (retval == nil) {
+                [self.tableView registerClass:formSection.footerViewClass forHeaderFooterViewReuseIdentifier:NSStringFromClass(formSection.footerViewClass)];
+                
+                retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.footerViewClass)];
+            }
+        }
+        else if (formSection.footerViewIdentifier != nil) {
+            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:formSection.footerViewIdentifier];
+        }
+        else {
+            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewFooterView.class)];
+        }
         
         NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view footer view must conform to KSOFormSectionView protocol!");
         

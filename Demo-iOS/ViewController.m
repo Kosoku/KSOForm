@@ -16,6 +16,7 @@
 #import "ViewController.h"
 #import "MapViewController.h"
 #import "CustomTableViewCell.h"
+#import "HeaderViewWithProgress.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
@@ -226,7 +227,7 @@
     KSOFormModel *wifiModel = [[KSOFormModel alloc] init];
     
     [wifiModel setCellIdentifiersToCellNibs:@{NSStringFromClass(CustomTableViewCell.class): [UINib nibWithNibName:NSStringFromClass(CustomTableViewCell.class) bundle:nil]}];
-    [wifiModel setTitle:@"Wi-Fi"];
+    [wifiModel setTitle:@"Wi-Fi Example"];
     [wifiModel addSectionFromDictionary:@{KSOFormSectionKeyRows: @[@{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
                                                                      KSOFormRowKeyTitle: @"Wi-Fi",
                                                                      KSOFormRowKeyValueKey: @kstKeypath(self,enableWifi),
@@ -235,7 +236,7 @@
         if ([value boolValue]) {
             [row.section addRowFromDictionary:@{KSOFormRowKeyValue: @{@"name": @"Selected Network Name", @"selected": @YES}, KSOFormRowKeyCellIdentifier: NSStringFromClass(CustomTableViewCell.class)}];
             
-            KSOFormSection *section = [[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyHeaderTitle: @"Select a Wi-Fi network…"}];
+            KSOFormSection *section = [[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyHeaderTitle: @"Choose a network…", KSOFormSectionKeyHeaderViewClass: HeaderViewWithProgress.class}];
             NSMutableArray *rows = [[NSMutableArray alloc] init];
             
             for (NSInteger i=0; i<10; i++) {
