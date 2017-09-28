@@ -35,8 +35,6 @@
 #import <Quicksilver/Quicksilver.h>
 
 @interface KSOFormTableViewController ()
-@property (copy,nonatomic) NSArray<id<KAGObserver> > *rowsObservers;
-
 - (void)_KSOFormTableViewControllerInit;
 @end
 
