@@ -21,6 +21,9 @@
 @property (strong,nonatomic) UILabel *titleLabel;
 @property (strong,nonatomic) UIActivityIndicatorView *indicatorView;
 
+@property (copy,nonatomic) NSArray<NSLayoutConstraint *> *activeConstraints;
+
+- (NSArray<NSLayoutConstraint *> *)_constraintsForContentViews;
 @end
 
 @implementation HeaderViewWithProgress
@@ -38,13 +41,21 @@
     [_indicatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.contentView addSubview:_indicatorView];
     
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]" options:0 metrics:nil views:@{@"view": _titleLabel}]];
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view]-|" options:0 metrics:nil views:@{@"view": _titleLabel}]];
-    
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]->=8-|" options:0 metrics:nil views:@{@"view": _indicatorView, @"subview": _titleLabel}]];
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view]-|" options:0 metrics:nil views:@{@"view": _indicatorView}]];
+    [self setActiveConstraints:[self _constraintsForContentViews]];
     
     return self;
+}
+
+- (void)updateConstraints {
+    [self setActiveConstraints:[self _constraintsForContentViews]];
+    
+    [super updateConstraints];
+}
+
+- (void)layoutMarginsDidChange {
+    [super layoutMarginsDidChange];
+    
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)didMoveToWindow {
@@ -77,6 +88,26 @@
     else {
         [NSObject KDI_registerDynamicTypeObject:self.titleLabel forTextStyle:_formTheme.headerTitleTextStyle];
     }
+}
+
+- (NSArray<NSLayoutConstraint *> *)_constraintsForContentViews; {
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[view]" options:0 metrics:@{@"left": @(self.layoutMargins.left)} views:@{@"view": self.titleLabel}]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[view]-bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.titleLabel}]];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]->=right-|" options:0 metrics:@{@"right": @(self.layoutMargins.right)} views:@{@"view": self.indicatorView, @"subview": self.titleLabel}]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[view]-bottom-|" options:0 metrics:@{@"top": @(self.layoutMargins.top), @"bottom": @(self.layoutMargins.bottom)} views:@{@"view": self.indicatorView}]];
+    
+    return constraints;
+}
+
+- (void)setActiveConstraints:(NSArray<NSLayoutConstraint *> *)activeConstraints {
+    [NSLayoutConstraint deactivateConstraints:_activeConstraints];
+    
+    _activeConstraints = activeConstraints;
+    
+    [NSLayoutConstraint activateConstraints:_activeConstraints];
 }
 
 @end

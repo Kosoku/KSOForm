@@ -38,6 +38,7 @@
         case CBManagerStatePoweredOn:
             value = @"On";
             [self.model.sections.firstObject.rows.firstObject setValue:@YES];
+            [self.model.sections.firstObject setFooterTitle:[NSString stringWithFormat:@"Now discoverable as \"%@\".",UIDevice.currentDevice.name]];
             [central scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey: @NO}];
             break;
         case CBManagerStateResetting:
@@ -48,6 +49,8 @@
             break;
         case CBManagerStateUnsupported:
             value = @"Unsupported";
+            [self.model.sections.firstObject.rows.firstObject setEnabled:NO];
+            [self.model.sections.firstObject.rows.firstObject setValue:@NO];
             break;
         case CBManagerStateUnauthorized:
             value = @"Unauthorized";

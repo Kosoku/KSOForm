@@ -16,7 +16,9 @@
 #import "KSOFormTableViewFooterView.h"
 #import "KSOFormTableViewHeaderFooterTextView.h"
 
+#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
+#import <Stanley/Stanley.h>
 
 @interface KSOFormTableViewFooterView ()
 @property (strong,nonatomic) KSOFormTableViewHeaderFooterTextView *formSectionView;
@@ -28,37 +30,47 @@
     if (!(self = [super initWithReuseIdentifier:reuseIdentifier]))
         return nil;
     
+    kstWeakify(self);
+    
     [self setFormSectionView:[[KSOFormTableViewHeaderFooterTextView alloc] initWithFrame:CGRectZero textContainer:nil]];
+    
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formTheme),@kstKeypath(self,formSection.footerTitle),@kstKeypath(self,formSection.footerAttributedTitle)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,formSection.footerTitle)] ||
+                [keyPath isEqualToString:@kstKeypath(self,formSection.footerAttributedTitle)]) {
+                
+                if (self.formSection.footerAttributedTitle == nil) {
+                    [self.formSectionView setText:self.formSection.footerTitle];
+                }
+                else {
+                    [self.formSectionView setAttributedText:self.formSection.footerAttributedTitle];
+                }
+            }
+            
+            if (self.formTheme == nil) {
+                return;
+            }
+            
+            if ([keyPath isEqualToString:@kstKeypath(self,formTheme)]) {
+                if (self.formSection.footerAttributedTitle == nil) {
+                    [self.formSectionView setTextColor:self.formTheme.footerTitleColor];
+                }
+                [self.formSectionView setFont:self.formTheme.footerTitleFont];
+                
+                if (self.formTheme.footerTitleTextStyle == nil) {
+                    [NSObject KDI_unregisterDynamicTypeObject:self.formSectionView];
+                }
+                else {
+                    [NSObject KDI_registerDynamicTypeObject:self.formSectionView forTextStyle:self.formTheme.footerTitleTextStyle];
+                }
+            }
+        });
+    }];
     
     return self;
 }
 
 @dynamic formSectionView;
-
-- (void)setFormSection:(KSOFormSection *)formSection {
-    [super setFormSection:formSection];
-    
-    if (formSection.footerAttributedTitle == nil) {
-        [self.formSectionView setText:formSection.footerTitle];
-    }
-    else {
-        [self.formSectionView setAttributedText:formSection.footerAttributedTitle];
-    }
-}
-- (void)setFormTheme:(KSOFormTheme *)formTheme {
-    [super setFormTheme:formTheme];
-    
-    if (self.formSection.footerAttributedTitle == nil) {
-        [self.formSectionView setTextColor:formTheme.footerTitleColor];
-    }
-    [self.formSectionView setFont:formTheme.footerTitleFont];
-    
-    if (formTheme.footerTitleTextStyle == nil) {
-        [NSObject KDI_unregisterDynamicTypeObject:self.formSectionView];
-    }
-    else {
-        [NSObject KDI_registerDynamicTypeObject:self.formSectionView forTextStyle:formTheme.footerTitleTextStyle];
-    }
-}
 
 @end
