@@ -15,6 +15,8 @@
 
 #import "HeaderViewWithProgress.h"
 
+#import <Ditko/Ditko.h>
+
 @interface HeaderViewWithProgress ()
 @property (strong,nonatomic) UILabel *titleLabel;
 @property (strong,nonatomic) UIActivityIndicatorView *indicatorView;
@@ -61,6 +63,20 @@
     _formSection = formSection;
     
     [self.titleLabel setText:_formSection.headerTitle.uppercaseString];
+}
+@synthesize formTheme=_formTheme;
+- (void)setFormTheme:(KSOFormTheme *)formTheme {
+    _formTheme = formTheme;
+    
+    [self.titleLabel setTextColor:_formTheme.headerTitleColor];
+    [self.titleLabel setFont:_formTheme.headerTitleFont];
+    
+    if (_formTheme.headerTitleTextStyle == nil) {
+        [NSObject KDI_unregisterDynamicTypeObject:self.titleLabel];
+    }
+    else {
+        [NSObject KDI_registerDynamicTypeObject:self.titleLabel forTextStyle:_formTheme.headerTitleTextStyle];
+    }
 }
 
 @end

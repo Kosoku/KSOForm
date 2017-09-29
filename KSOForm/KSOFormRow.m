@@ -125,6 +125,8 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     
     _type = [dictionary[KSOFormRowKeyType] integerValue];
     
+    _enabled = YES;
+    
     _value = dictionary[KSOFormRowKeyValue];
     _valueKey = dictionary[KSOFormRowKeyValueKey];
     _valueFormatter = dictionary[KSOFormRowKeyValueFormatter];
@@ -199,9 +201,10 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
 }
 
 - (BOOL)isEditable {
-    return (self.type == KSOFormRowTypeText ||
-            self.type == KSOFormRowTypeDatePicker ||
-            self.type == KSOFormRowTypePickerView);
+    return (self.isEnabled &&
+            (self.type == KSOFormRowTypeText ||
+             self.type == KSOFormRowTypeDatePicker ||
+             self.type == KSOFormRowTypePickerView));
 }
 - (BOOL)isSelectable {
     return (self.isEditable || self.cellAccessoryType == KSOFormRowCellAccessoryTypeDisclosureIndicator);

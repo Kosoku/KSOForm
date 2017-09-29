@@ -16,6 +16,7 @@
 #import "KSOFormSwitchTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
 
+#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
 
@@ -45,6 +46,13 @@
         [self.formRow setValue:@(self.trailingView.isOn)];
     } forControlEvents:UIControlEventValueChanged];
     [self.contentView addSubview:self.trailingView];
+    
+    [self KAG_addObserverForKeyPath:@kstKeypath(self,formRow.enabled) options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            [self.trailingView setEnabled:self.formRow.enabled];
+        });
+    }];
     
     return self;
 }

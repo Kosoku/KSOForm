@@ -131,6 +131,7 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint;
 
 @property (readonly,assign,nonatomic) KSOFormRowType type;
 
+@property (assign,nonatomic,getter=isEnabled) BOOL enabled;
 @property (readonly,nonatomic,getter=isEditable) BOOL editable;
 @property (readonly,nonatomic,getter=isSelectable) BOOL selectable;
 

@@ -105,11 +105,11 @@
 }
 @end
 
-@interface ViewController () <KSOFormRowValueDataSource>
+@interface ViewController () <KSOFormRowValueDataSource,KSOFormRowActionDelegate>
 @property (copy,nonatomic) NSString *email;
 @property (copy,nonatomic) NSString *password;
 @property (copy,nonatomic) NSString *phoneNumber;
-@property (assign,nonatomic) BOOL enableWifi;
+@property (strong,nonatomic) KSOFormRow *bluetoothRow;
 @end
 
 @implementation ViewController
@@ -264,14 +264,20 @@
     }),
                                                                    KSOFormSectionKeyRows: @[@{KSOFormRowKeyTitle: @"Map View",
                                                                                               KSOFormRowKeyActionViewControllerClass: MapViewController.class
-                                                                                              },
-                                                                                            @{KSOFormRowKeyTitle: @"Bluetooth",
-                                                                                              KSOFormRowKeyValue: @"On/Off",
-                                                                                              KSOFormRowKeyActionViewControllerClass: BluetoothTableViewController.class
-                                                                                              }]
+                                                                                              }
+                                                                                            ]
                                                                    }]];
+    [self setBluetoothRow:[[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: @"Bluetooth",
+                                                                   KSOFormRowKeyValue: @"Unknown",
+                                                                   KSOFormRowKeyActionDelegate: self
+                                                                   }]];
+    [model.sections.lastObject addRow:self.bluetoothRow];
     
     [self setModel:model];
+}
+
+- (UIViewController *)actionViewControllerForFormRow:(KSOFormRow *)formRow {
+    return [[BluetoothTableViewController alloc] initWithFormRow:self.bluetoothRow];
 }
 
 @end

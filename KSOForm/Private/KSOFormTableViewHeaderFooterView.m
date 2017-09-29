@@ -23,6 +23,9 @@
 
 @implementation KSOFormTableViewHeaderFooterView
 
++ (BOOL)requiresConstraintBasedLayout {
+    return YES;
+}
 - (void)updateConstraints {
     [self setActiveConstraints:[self _constraintsForFormSectionView]];
     

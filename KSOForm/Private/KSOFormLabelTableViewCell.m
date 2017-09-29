@@ -16,7 +16,9 @@
 #import "KSOFormLabelTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
 
+#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
+#import <Stanley/Stanley.h>
 
 @interface KSOFormLabelTableViewCell ()
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
@@ -29,6 +31,8 @@
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
         return nil;
     
+    kstWeakify(self);
+    
     [self setLeadingView:[[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero]];
     [self.leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
@@ -38,6 +42,13 @@
     [self.trailingView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.contentView addSubview:self.trailingView];
+    
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.value)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            [self.trailingView setText:self.formRow.value];
+        });
+    }];
     
     return self;
 }
@@ -49,7 +60,6 @@
     [super setFormRow:formRow];
     
     [self.leadingView setFormRow:formRow];
-    [self.trailingView setText:formRow.value];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];

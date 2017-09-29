@@ -274,6 +274,16 @@
                 
                 retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.headerViewClass)];
             }
+            
+            if (retval == nil) {
+                UINib *nib = [UINib nibWithNibName:NSStringFromClass(formSection.headerViewClass) bundle:[NSBundle bundleForClass:formSection.headerViewClass]];
+                
+                if (nib != nil) {
+                    [self.tableView registerNib:nib forHeaderFooterViewReuseIdentifier:NSStringFromClass(formSection.headerViewClass)];
+                    
+                    retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.headerViewClass)];
+                }
+            }
         }
         else if (formSection.headerViewIdentifier != nil) {
             retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:formSection.headerViewIdentifier];
@@ -281,6 +291,10 @@
         else {
             retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewHeaderView.class)];
         }
+        
+//        if (tableView.style == UITableViewStyleGrouped) {
+//            [retval setLayoutMargins:UIEdgeInsetsMake(11, 20, 11, 20)];
+//        }
         
         NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view header view must conform to KSOFormSectionView protocol!");
         
@@ -305,6 +319,16 @@
                 
                 retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.footerViewClass)];
             }
+            
+            if (retval == nil) {
+                UINib *nib = [UINib nibWithNibName:NSStringFromClass(formSection.footerViewClass) bundle:[NSBundle bundleForClass:formSection.footerViewClass]];
+                
+                if (nib != nil) {
+                    [self.tableView registerNib:nib forHeaderFooterViewReuseIdentifier:NSStringFromClass(formSection.footerViewClass)];
+                    
+                    retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.footerViewClass)];
+                }
+            }
         }
         else if (formSection.footerViewIdentifier != nil) {
             retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:formSection.footerViewIdentifier];
@@ -312,6 +336,10 @@
         else {
             retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewFooterView.class)];
         }
+        
+//        if (tableView.style == UITableViewStyleGrouped) {
+//            [retval setLayoutMargins:UIEdgeInsetsMake(11, 20, 11, 20)];
+//        }
         
         NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view footer view must conform to KSOFormSectionView protocol!");
         
@@ -343,6 +371,9 @@
         
         [(KSOFormTableViewController *)viewController setTheme:self.theme];
         [(KSOFormTableViewController *)viewController setModel:formRow.actionModel];
+    }
+    else if ([formRow.actionDelegate respondsToSelector:@selector(actionViewControllerForFormRow:)]) {
+        viewController = [formRow.actionDelegate actionViewControllerForFormRow:formRow];
     }
     
     if (viewController != nil) {
