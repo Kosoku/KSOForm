@@ -52,68 +52,71 @@ typedef NS_ENUM(NSInteger, KSOFormRowCellAccessoryType) {
 typedef BOOL(^KSOFormRowShouldChangeValueBlock)(KSOFormRow *row, id _Nullable value, NSError **error);
 typedef void(^KSOFormRowDidChangeValueBlock)(KSOFormRow *row, id _Nullable value);
 
-typedef NSString* KSOFormRowKey NS_STRING_ENUM;
+typedef NSString* KSOFormRowKey NS_EXTENSIBLE_STRING_ENUM;
 
 // value related
-static KSOFormRowKey const KSOFormRowKeyType = @"type";
-static KSOFormRowKey const KSOFormRowKeyValue = @"value";
-static KSOFormRowKey const KSOFormRowKeyValueKey = @"valueKey";
-static KSOFormRowKey const KSOFormRowKeyValueFormatter = @"valueFormatter";
-static KSOFormRowKey const KSOFormRowKeyValueDataSource = @"valueDataSource";
-static KSOFormRowKey const KSOFormRowKeyValueShouldChangeBlock = @"valueShouldChangeBlock";
-static KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock = @"valueDidChangeBlock";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyType;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValue;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueKey;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueFormatter;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueDataSource;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueShouldChangeBlock;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock;
 // secondary properties
-static KSOFormRowKey const KSOFormRowKeyImage = @"image";
-static KSOFormRowKey const KSOFormRowKeyTitle = @"title";
-static KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
-static KSOFormRowKey const KSOFormRowKeyCellAccessoryType = @"cellAccessoryType";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyImage;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTitle;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySubtitle;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellAccessoryType;
 // text properties
-static KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
-static KSOFormRowKey const KSOFormRowKeyTextValidator = @"textValidator";
-static KSOFormRowKey const KSOFormRowKeyTextFormatter = @"textFormatter";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyPlaceholder;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTextValidator;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTextFormatter;
 // UITextInputTraits
-static KSOFormRowKey const KSOFormRowKeyAutocapitalizationType = @"autocapitalizationType";
-static KSOFormRowKey const KSOFormRowKeyAutocorrectionType = @"autocorrectionType";
-static KSOFormRowKey const KSOFormRowKeySpellCheckingType = @"spellCheckingType";
-static KSOFormRowKey const KSOFormRowKeySmartQuotesType = @"smartQuotesType";
-static KSOFormRowKey const KSOFormRowKeySmartDashesType = @"smartDashesType";
-static KSOFormRowKey const KSOFormRowKeySmartInsertDeleteType = @"smartInsertDeleteType";
-static KSOFormRowKey const KSOFormRowKeyKeyboardType = @"keyboardType";
-static KSOFormRowKey const KSOFormRowKeyKeyboardAppearance = @"keyboardAppearance";
-static KSOFormRowKey const KSOFormRowKeyReturnKeyType = @"returnKeyType";
-static KSOFormRowKey const KSOFormRowKeyEnablesReturnKeyAutomatically = @"enablesReturnKeyAutomatically";
-static KSOFormRowKey const KSOFormRowKeySecureTextEntry = @"secureTextEntry";
-static KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyAutocapitalizationType;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyAutocorrectionType;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySpellCheckingType;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySmartQuotesType NS_AVAILABLE_IOS(11_0);
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySmartDashesType NS_AVAILABLE_IOS(11_0);
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySmartInsertDeleteType NS_AVAILABLE_IOS(11_0);
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyKeyboardType;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyKeyboardAppearance;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyReturnKeyType;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyEnablesReturnKeyAutomatically;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySecureTextEntry;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTextContentType;
 // UIPickerView
-static KSOFormRowKey const KSOFormRowKeyPickerViewColumnsAndRows = @"pickerViewColumnsAndRows";
-static KSOFormRowKey const KSOFormRowKeyPickerViewRows = @"pickerViewRows";
-static KSOFormRowKey const KSOFormRowKeyPickerViewSelectedComponentsJoinString = @"pickerViewSelectedComponentsJoinString";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyPickerViewColumnsAndRows;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyPickerViewRows;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyPickerViewSelectedComponentsJoinString;
 // UIDatePicker
-static KSOFormRowKey const KSOFormRowKeyDatePickerMode = @"datePickerMode";
-static KSOFormRowKey const KSOFormRowKeyDatePickerMinimumDate = @"datePickerMinimumDate";
-static KSOFormRowKey const KSOFormRowKeyDatePickerMaximumDate = @"datePickerMaximumDate";
-static KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter = @"datePickerDateFormatter";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyDatePickerMode;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyDatePickerMinimumDate;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyDatePickerMaximumDate;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter;
 // UIStepper & UISlider
-static KSOFormRowKey const KSOFormRowKeyMinimumValue = @"minimumValue";
-static KSOFormRowKey const KSOFormRowKeyMaximumValue = @"maximumValue";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyMinimumValue;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyMaximumValue;
 // UIStepper
-static KSOFormRowKey const KSOFormRowKeyStepperStepValue = @"stepperStepValue";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyStepperStepValue;
 // UISlider
-static KSOFormRowKey const KSOFormRowKeySliderMinimumValueImage = @"sliderMinimumValueImage";
-static KSOFormRowKey const KSOFormRowKeySliderMaximumValueImage = @"sliderMaximumValueImage";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySliderMinimumValueImage;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySliderMaximumValueImage;
 // UIControl (e.g. UIButton)
-static KSOFormRowKey const KSOFormRowKeyControlBlock = @"controlBlock";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyControlBlock;
 // UISegmentedControl
-static KSOFormRowKey const KSOFormRowKeySegmentedItems = @"segmentedItems";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySegmentedItems;
 // present/push support
-static KSOFormRowKey const KSOFormRowKeyAction = @"action";
-static KSOFormRowKey const KSOFormRowKeyActionDelegate = @"actionDelegate";
-static KSOFormRowKey const KSOFormRowKeyActionModel = @"actionModel";
-static KSOFormRowKey const KSOFormRowKeyActionViewControllerClass = @"actionViewController";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyAction;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyActionDelegate;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyActionModel;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyActionViewControllerClass;
 // custom cell support
-static KSOFormRowKey const KSOFormRowKeyCellClass = @"cellClass";
-static KSOFormRowKey const KSOFormRowKeyCellIdentifier = @"cellIdentifier";
-static KSOFormRowKey const KSOFormRowKeyHeaderFooterViewIdentifier = @"headerFooterViewIdentifier";
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellClass;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellIdentifier;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyHeaderFooterViewIdentifier;
+// UIAccessibility
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyImageAccessibilityLabel;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint;
 
 @class KSOFormSection,KSOFormModel;
 
@@ -161,8 +164,8 @@ static KSOFormRowKey const KSOFormRowKeyHeaderFooterViewIdentifier = @"headerFoo
 
 @property (assign,nonatomic) float sliderMinimumValue;
 @property (assign,nonatomic) float sliderMaximumValue;
-@property (copy,nonatomic,nullable) UIImage *sliderMinimumValueImage;
-@property (copy,nonatomic,nullable) UIImage *sliderMaximumValueImage;
+@property (strong,nonatomic,nullable) UIImage *sliderMinimumValueImage;
+@property (strong,nonatomic,nullable) UIImage *sliderMaximumValueImage;
 
 @property (copy,nonatomic,nullable) KDIUIControlBlock controlBlock;
 // NSString or UIImage
@@ -177,9 +180,17 @@ static KSOFormRowKey const KSOFormRowKeyHeaderFooterViewIdentifier = @"headerFoo
 @property (copy,nonatomic,nullable) NSString *cellIdentifier;
 @property (copy,nonatomic,nullable) NSString *headerFooterViewIdentifier;
 
+@property (copy,nonatomic,nullable) NSString *imageAccessibilityLabel;
+@property (copy,nonatomic,nullable) NSString *buttonAccessibilityHint;
+
 - (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary section:(nullable KSOFormSection *)section NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary;
 
+@end
+
+@interface KSOFormRow (KSOFormRowKeyedSubscripting)
+- (nullable id)objectForKeyedSubscript:(KSOFormRowKey)key;
+- (void)setObject:(nullable id)obj forKeyedSubscript:(KSOFormRowKey)key;
 @end
 
 NS_ASSUME_NONNULL_END

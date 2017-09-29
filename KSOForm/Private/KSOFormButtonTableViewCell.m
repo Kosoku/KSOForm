@@ -60,6 +60,7 @@
     [super setFormRow:formRow];
     
     [self.leadingView setTitle:formRow.title forState:UIControlStateNormal];
+    [self.leadingView setAccessibilityHint:formRow.buttonAccessibilityHint];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];

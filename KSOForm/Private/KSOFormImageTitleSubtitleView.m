@@ -67,6 +67,7 @@
     _formRow = formRow;
     
     [self.imageView setImage:_formRow.image];
+    [self.imageView setAccessibilityLabel:_formRow.imageAccessibilityLabel];
     [self.imageView setHidden:_formRow.image == nil];
     
     [self.titleLabel setText:_formRow.title];

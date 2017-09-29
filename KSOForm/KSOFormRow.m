@@ -17,6 +17,69 @@
 
 #import <Stanley/Stanley.h>
 
+KSOFormRowKey const KSOFormRowKeyType = @"type";
+KSOFormRowKey const KSOFormRowKeyValue = @"value";
+KSOFormRowKey const KSOFormRowKeyValueKey = @"valueKey";
+KSOFormRowKey const KSOFormRowKeyValueFormatter = @"valueFormatter";
+KSOFormRowKey const KSOFormRowKeyValueDataSource = @"valueDataSource";
+KSOFormRowKey const KSOFormRowKeyValueShouldChangeBlock = @"valueShouldChangeBlock";
+KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock = @"valueDidChangeBlock";
+
+KSOFormRowKey const KSOFormRowKeyImage = @"image";
+KSOFormRowKey const KSOFormRowKeyTitle = @"title";
+KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
+KSOFormRowKey const KSOFormRowKeyCellAccessoryType = @"cellAccessoryType";
+
+KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
+KSOFormRowKey const KSOFormRowKeyTextValidator = @"textValidator";
+KSOFormRowKey const KSOFormRowKeyTextFormatter = @"textFormatter";
+
+KSOFormRowKey const KSOFormRowKeyAutocapitalizationType = @"autocapitalizationType";
+KSOFormRowKey const KSOFormRowKeyAutocorrectionType = @"autocorrectionType";
+KSOFormRowKey const KSOFormRowKeySpellCheckingType = @"spellCheckingType";
+KSOFormRowKey const KSOFormRowKeySmartQuotesType = @"smartQuotesType";
+KSOFormRowKey const KSOFormRowKeySmartDashesType = @"smartDashesType";
+KSOFormRowKey const KSOFormRowKeySmartInsertDeleteType = @"smartInsertDeleteType";
+KSOFormRowKey const KSOFormRowKeyKeyboardType = @"keyboardType";
+KSOFormRowKey const KSOFormRowKeyKeyboardAppearance = @"keyboardAppearance";
+KSOFormRowKey const KSOFormRowKeyReturnKeyType = @"returnKeyType";
+KSOFormRowKey const KSOFormRowKeyEnablesReturnKeyAutomatically = @"enablesReturnKeyAutomatically";
+KSOFormRowKey const KSOFormRowKeySecureTextEntry = @"secureTextEntry";
+KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
+
+KSOFormRowKey const KSOFormRowKeyPickerViewColumnsAndRows = @"pickerViewColumnsAndRows";
+KSOFormRowKey const KSOFormRowKeyPickerViewRows = @"pickerViewRows";
+KSOFormRowKey const KSOFormRowKeyPickerViewSelectedComponentsJoinString = @"pickerViewSelectedComponentsJoinString";
+
+KSOFormRowKey const KSOFormRowKeyDatePickerMode = @"datePickerMode";
+KSOFormRowKey const KSOFormRowKeyDatePickerMinimumDate = @"datePickerMinimumDate";
+KSOFormRowKey const KSOFormRowKeyDatePickerMaximumDate = @"datePickerMaximumDate";
+KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter = @"datePickerDateFormatter";
+
+KSOFormRowKey const KSOFormRowKeyMinimumValue = @"minimumValue";
+KSOFormRowKey const KSOFormRowKeyMaximumValue = @"maximumValue";
+
+KSOFormRowKey const KSOFormRowKeyStepperStepValue = @"stepperStepValue";
+
+KSOFormRowKey const KSOFormRowKeySliderMinimumValueImage = @"sliderMinimumValueImage";
+KSOFormRowKey const KSOFormRowKeySliderMaximumValueImage = @"sliderMaximumValueImage";
+
+KSOFormRowKey const KSOFormRowKeyControlBlock = @"controlBlock";
+
+KSOFormRowKey const KSOFormRowKeySegmentedItems = @"segmentedItems";
+
+KSOFormRowKey const KSOFormRowKeyAction = @"action";
+KSOFormRowKey const KSOFormRowKeyActionDelegate = @"actionDelegate";
+KSOFormRowKey const KSOFormRowKeyActionModel = @"actionModel";
+KSOFormRowKey const KSOFormRowKeyActionViewControllerClass = @"actionViewController";
+
+KSOFormRowKey const KSOFormRowKeyCellClass = @"cellClass";
+KSOFormRowKey const KSOFormRowKeyCellIdentifier = @"cellIdentifier";
+KSOFormRowKey const KSOFormRowKeyHeaderFooterViewIdentifier = @"headerFooterViewIdentifier";
+
+KSOFormRowKey const KSOFormRowKeyImageAccessibilityLabel = @"imageAccessibilityLabel";
+KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibilityHint";
+
 @interface KSOFormRow ()
 @property (readwrite,weak,nonatomic) KSOFormSection *section;
 @property (readwrite,copy,nonatomic) NSString *identifier;
@@ -79,9 +142,11 @@
     _autocapitalizationType = [dictionary[KSOFormRowKeyAutocapitalizationType] integerValue];
     _autocorrectionType = [dictionary[KSOFormRowKeyAutocorrectionType] integerValue];
     _spellCheckingType = [dictionary[KSOFormRowKeySpellCheckingType] integerValue];
-    _smartQuotesType = [dictionary[KSOFormRowKeySmartQuotesType] integerValue];
-    _smartDashesType = [dictionary[KSOFormRowKeySmartDashesType] integerValue];
-    _smartInsertDeleteType = [dictionary[KSOFormRowKeySmartInsertDeleteType] integerValue];
+    if (@available(iOS 11.0, *)) {
+        _smartQuotesType = [dictionary[KSOFormRowKeySmartQuotesType] integerValue];
+        _smartDashesType = [dictionary[KSOFormRowKeySmartDashesType] integerValue];
+        _smartInsertDeleteType = [dictionary[KSOFormRowKeySmartInsertDeleteType] integerValue];
+    }
     _keyboardType = [dictionary[KSOFormRowKeyKeyboardType] integerValue];
     _keyboardAppearance = [dictionary[KSOFormRowKeyKeyboardAppearance] integerValue];
     _returnKeyType = [dictionary[KSOFormRowKeyReturnKeyType] integerValue];
@@ -119,6 +184,9 @@
     _cellClass = dictionary[KSOFormRowKeyCellClass];
     _cellIdentifier = dictionary[KSOFormRowKeyCellIdentifier];
     _headerFooterViewIdentifier = dictionary[KSOFormRowKeyHeaderFooterViewIdentifier];
+    
+    _imageAccessibilityLabel = dictionary[KSOFormRowKeyImageAccessibilityLabel];
+    _buttonAccessibilityHint = dictionary[KSOFormRowKeyButtonAccessibilityHint];
     
     return self;
 }
@@ -212,4 +280,13 @@
     return [self.actionDelegate respondsToSelector:@selector(actionViewControllerClassForFormRow:)] ? [self.actionDelegate actionViewControllerClassForFormRow:self] : _actionViewControllerClass;
 }
 
+@end
+
+@implementation KSOFormRow (KSOFormRowKeyedSubscripting)
+- (id)objectForKeyedSubscript:(KSOFormRowKey)key; {
+    return [self valueForKey:key];
+}
+- (void)setObject:(id)obj forKeyedSubscript:(KSOFormRowKey)key; {
+    [self setValue:obj forKey:key];
+}
 @end

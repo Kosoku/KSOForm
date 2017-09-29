@@ -98,9 +98,7 @@
     [self.trailingView setAutocorrectionType:formRow.autocorrectionType];
     [self.trailingView setSpellCheckingType:formRow.spellCheckingType];
     [self.trailingView setSecureTextEntry:formRow.isSecureTextEntry];
-    if (@available(iOS 10.0, *)) {
-        [self.trailingView setTextContentType:formRow.textContentType];
-    }
+    [self.trailingView setTextContentType:formRow.textContentType];
     if (@available(iOS 11.0, *)) {
         [self.trailingView setSmartQuotesType:formRow.smartQuotesType];
         [self.trailingView setSmartDashesType:formRow.smartDashesType];
