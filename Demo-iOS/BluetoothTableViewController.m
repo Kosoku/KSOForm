@@ -37,6 +37,7 @@
             break;
         case CBManagerStatePoweredOn:
             value = @"On";
+            [self.model.sections.firstObject.rows.firstObject setValue:@YES];
             [central scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey: @NO}];
             break;
         case CBManagerStateResetting:

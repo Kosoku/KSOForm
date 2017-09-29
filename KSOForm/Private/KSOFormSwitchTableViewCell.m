@@ -47,10 +47,11 @@
     } forControlEvents:UIControlEventValueChanged];
     [self.contentView addSubview:self.trailingView];
     
-    [self KAG_addObserverForKeyPath:@kstKeypath(self,formRow.enabled) options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.enabled),@kstKeypath(self,formRow.value)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
             [self.trailingView setEnabled:self.formRow.enabled];
+            [self.trailingView setOn:[self.formRow.value boolValue]];
         });
     }];
     
@@ -67,8 +68,6 @@
     [super setFormRow:formRow];
     
     [self.leadingView setFormRow:formRow];
-    
-    [self.trailingView setOn:[formRow.value boolValue]];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
