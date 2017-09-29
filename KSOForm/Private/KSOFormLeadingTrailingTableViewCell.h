@@ -20,6 +20,7 @@
 @property (strong,nonatomic) __kindof UIView *leadingView;
 @property (strong,nonatomic) __kindof UIView *trailingView;
 
+@property (readonly,nonatomic) BOOL wantsLeadingViewCenteredVertically;
 @property (readonly,nonatomic) NSNumber *leadingToTrailingMargin;
 @property (readonly,nonatomic) BOOL trailingViewWantsTopBottomLayoutMargins;
 @property (readonly,nonatomic) CGFloat minimumTrailingViewHeight;

@@ -68,6 +68,10 @@
         }
     }
     
+    if (self.wantsLeadingViewCenteredVertically) {
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:self.leadingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    }
+    
     [NSLayoutConstraint activateConstraints:constraints];
     
     [self setActiveConstraints:constraints];
@@ -81,6 +85,9 @@
     [self setNeedsUpdateConstraints];
 }
 
+- (BOOL)wantsLeadingViewCenteredVertically {
+    return YES;
+}
 - (NSNumber *)leadingToTrailingMargin {
     return nil;
 }

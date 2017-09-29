@@ -73,10 +73,11 @@
     [self.peripherals addObject:peripheral];
     
     if (peripheral.name == nil) {
+        [self.model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: peripheral.identifier.UUIDString}];
         return;
     }
     
-    [self.model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: peripheral.name,
+    [self.model[1] addRowFromDictionary:@{KSOFormRowKeyTitle: peripheral.name,
                                                            KSOFormRowKeyValue: @"Unknown",
                                                            KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
                                                            }];

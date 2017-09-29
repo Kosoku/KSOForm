@@ -76,6 +76,9 @@
 #pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
+- (BOOL)wantsLeadingViewCenteredVertically {
+    return NO;
+}
 - (CGFloat)minimumTrailingViewHeight {
     CGFloat lineHeight = MAX(self.height, ceil(self.trailingView.font.lineHeight));
     CGFloat retval = lineHeight;
