@@ -20,6 +20,16 @@
 #import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
 
+KSOFormSectionKey const KSOFormSectionKeyRows = @"rows";
+KSOFormSectionKey const KSOFormSectionKeyHeaderTitle = @"headerTitle";
+KSOFormSectionKey const KSOFormSectionKeyFooterTitle = @"footerTitle";
+KSOFormSectionKey const KSOFormSectionKeyHeaderAttributedTitle = @"headerAttributedTitle";
+KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle = @"footerAttributedTitle";
+KSOFormSectionKey const KSOFormSectionKeyHeaderViewClass = @"headerViewClass";
+KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
+KSOFormSectionKey const KSOFormSectionKeyHeaderViewIdentifier = @"headerViewIdentifier";
+KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier = @"footerViewIdentifier";
+
 @interface KSOFormSection ()
 @property (readwrite,weak,nonatomic) KSOFormModel *model;
 @property (readwrite,copy,nonatomic) NSString *identifier;
@@ -65,10 +75,25 @@
     [self addRows:@[row]];
 }
 - (void)addRows:(NSArray<KSOFormRow *> *)rows; {
+    [self insertRows:rows atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_rows.count, rows.count)]];
+}
+
+- (void)addRowFromDictionary:(NSDictionary<NSString *,id> *)dictionary; {
+    [self addRow:[[KSOFormRow alloc] initWithDictionary:dictionary section:self]];
+}
+- (void)addRowsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries; {
+    [self addRows:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
+        return [[KSOFormRow alloc] initWithDictionary:object section:self];
+    }]];
+}
+
+- (void)insertRow:(KSOFormRow *)row atIndex:(NSUInteger)index; {
+    [self insertRows:@[row] atIndexes:[NSIndexSet indexSetWithIndex:index]];
+}
+- (void)insertRows:(NSArray<KSOFormRow *> *)rows atIndexes:(NSIndexSet *)indexes; {
     [self.model.tableView beginUpdates];
     
     NSInteger section = [self.model.sections indexOfObject:self];
-    NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_rows.count, rows.count)];
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
@@ -80,15 +105,6 @@
     [self.model.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
     
     [self.model.tableView endUpdates];
-}
-
-- (void)addRowFromDictionary:(NSDictionary<NSString *,id> *)dictionary; {
-    [self addRow:[[KSOFormRow alloc] initWithDictionary:dictionary section:self]];
-}
-- (void)addRowsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries; {
-    [self addRows:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
-        return [[KSOFormRow alloc] initWithDictionary:object section:self];
-    }]];
 }
 
 - (void)removeRow:(KSOFormRow *)row; {
@@ -114,6 +130,18 @@
     
     [self.model.tableView endUpdates];
 }
+
+- (void)replaceRow:(KSOFormRow *)oldRow withRow:(KSOFormRow *)newRow; {
+    [self.model.tableView beginUpdates];
+    
+    NSUInteger index = [_rows indexOfObject:oldRow];
+    
+    [_rows replaceObjectAtIndex:index withObject:newRow];
+    
+    [self.model.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.model.tableView endUpdates];
+}
 #pragma mark Properties
 - (BOOL)wantsHeaderView {
     return (self.headerTitle != nil ||
@@ -128,4 +156,22 @@
     return [_rows copy];
 }
 
+@end
+
+@implementation KSOFormSection (KSOFormSectionKeyedSubscripting)
+- (id)objectForKeyedSubscript:(KSOFormSectionKey)key; {
+    return [self valueForKey:key];
+}
+- (void)setObject:(id)obj forKeyedSubscript:(KSOFormSectionKey)key; {
+    [self setValue:obj forKey:key];
+}
+@end
+
+@implementation KSOFormSection (KSOFormSectionIndexedSubscripting)
+- (KSOFormRow *)objectAtIndexedSubscript:(NSUInteger)idx; {
+    return self.rows[idx];
+}
+- (void)setObject:(KSOFormRow *)obj atIndexedSubscript:(NSUInteger)idx; {
+    
+}
 @end

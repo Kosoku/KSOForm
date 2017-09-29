@@ -17,17 +17,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString* KSOFormSectionKey NS_STRING_ENUM;
+typedef NSString* KSOFormSectionKey NS_EXTENSIBLE_STRING_ENUM;
 
-static KSOFormSectionKey const KSOFormSectionKeyRows = @"rows";
-static KSOFormSectionKey const KSOFormSectionKeyHeaderTitle = @"headerTitle";
-static KSOFormSectionKey const KSOFormSectionKeyFooterTitle = @"footerTitle";
-static KSOFormSectionKey const KSOFormSectionKeyHeaderAttributedTitle = @"headerAttributedTitle";
-static KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle = @"footerAttributedTitle";
-static KSOFormSectionKey const KSOFormSectionKeyHeaderViewClass = @"headerViewClass";
-static KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
-static KSOFormSectionKey const KSOFormSectionKeyHeaderViewIdentifier = @"headerViewIdentifier";
-static KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier = @"footerViewIdentifier";
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyRows;
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderTitle;
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterTitle;
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderAttributedTitle;
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle;
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderViewClass;
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterViewClass;
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderViewIdentifier;
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier;
 
 @class KSOFormRow,KSOFormModel;
 
@@ -62,9 +62,24 @@ static KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier = @"footerV
 - (void)addRowFromDictionary:(NSDictionary<NSString *,id> *)dictionary;
 - (void)addRowsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries;
 
+- (void)insertRow:(KSOFormRow *)row atIndex:(NSUInteger)index;
+- (void)insertRows:(NSArray<KSOFormRow *> *)rows atIndexes:(NSIndexSet *)indexes;
+
 - (void)removeRow:(KSOFormRow *)row;
 - (void)removeRows:(NSArray<KSOFormRow *> *)rows;
 
+- (void)replaceRow:(KSOFormRow *)oldRow withRow:(KSOFormRow *)newRow;
+
+@end
+
+@interface KSOFormSection (KSOFormSectionKeyedSubscripting)
+- (nullable id)objectForKeyedSubscript:(KSOFormSectionKey)key;
+- (void)setObject:(nullable id)obj forKeyedSubscript:(KSOFormSectionKey)key;
+@end
+
+@interface KSOFormSection (KSOFormSectionIndexedSubscripting)
+- (KSOFormRow *)objectAtIndexedSubscript:(NSUInteger)idx;
+- (void)setObject:(KSOFormRow *)obj atIndexedSubscript:(NSUInteger)idx;
 @end
 
 NS_ASSUME_NONNULL_END
