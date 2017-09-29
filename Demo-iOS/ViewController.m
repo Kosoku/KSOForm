@@ -168,6 +168,10 @@
                                                                KSOFormRowKeyValueDataSource: self,
                                                                KSOFormRowKeyTextValidator: [KSOPhoneNumberValidator phoneNumberValidator],
                                                                KSOFormRowKeyTextFormatter: [[KSTPhoneNumberFormatter alloc] init]
+                                                               },
+                                                             @{KSOFormRowKeyType: @(KSOFormRowTypeTextMultiline),
+                                                               KSOFormRowKeyTitle: @"Notes",
+                                                               KSOFormRowKeyPlaceholder: @"Enter your notes"
                                                                }]];
     KSOFormModel *controlsModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Controls"}];
     

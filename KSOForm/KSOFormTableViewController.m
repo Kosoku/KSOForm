@@ -23,6 +23,7 @@
 #import "KSOFormSliderTableViewCell.h"
 #import "KSOFormButtonTableViewCell.h"
 #import "KSOFormSegmentedTableViewCell.h"
+#import "KSOFormTextMultilineTableViewCell.h"
 #import "KSOFormTableViewHeaderView.h"
 #import "KSOFormTableViewFooterView.h"
 #import "KSOFormModel+KSOExtensionsPrivate.h"
@@ -80,6 +81,7 @@
     [self.tableView registerClass:KSOFormSliderTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class)];
     [self.tableView registerClass:KSOFormButtonTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class)];
     [self.tableView registerClass:KSOFormSegmentedTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSegmentedTableViewCell.class)];
+    [self.tableView registerClass:KSOFormTextMultilineTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormTextMultilineTableViewCell.class)];
     
     [self.tableView setEstimatedSectionHeaderHeight:32.0];
     [self.tableView setEstimatedSectionFooterHeight:32.0];
@@ -219,6 +221,9 @@
                 break;
             case KSOFormRowTypeText:
                 retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormTextTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypeTextMultiline:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormTextMultilineTableViewCell.class) forIndexPath:indexPath];
                 break;
             case KSOFormRowTypeSwitch:
                 retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSwitchTableViewCell.class) forIndexPath:indexPath];

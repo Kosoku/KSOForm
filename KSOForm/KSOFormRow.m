@@ -31,6 +31,8 @@ KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
 KSOFormRowKey const KSOFormRowKeyCellAccessoryType = @"cellAccessoryType";
 
 KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
+KSOFormRowKey const KSOFormRowKeyMinimumNumberOfLines = @"minimumNumberOfLines";
+KSOFormRowKey const KSOFormRowKeyMaximumNumberOfLines = @"maximumNumberOfLines";
 KSOFormRowKey const KSOFormRowKeyTextValidator = @"textValidator";
 KSOFormRowKey const KSOFormRowKeyTextFormatter = @"textFormatter";
 
@@ -136,6 +138,8 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     _cellAccessoryType = dictionary[KSOFormRowKeyCellAccessoryType] == nil ? KSOFormRowCellAccessoryTypeAutomatic : [dictionary[KSOFormRowKeyCellAccessoryType] integerValue];
     
     _placeholder = dictionary[KSOFormRowKeyPlaceholder];
+    _minimumNumberOfLines = [dictionary[KSOFormRowKeyMinimumNumberOfLines] unsignedIntegerValue];
+    _maximumNumberOfLines = [dictionary[KSOFormRowKeyMaximumNumberOfLines] unsignedIntegerValue];
     _textValidator = dictionary[KSOFormRowKeyTextValidator];
     _textFormatter = dictionary[KSOFormRowKeyTextFormatter];
     

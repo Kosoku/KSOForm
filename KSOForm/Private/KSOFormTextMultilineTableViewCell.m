@@ -1,8 +1,8 @@
 //
-//  KSOFormTextTableViewCell.m
+//  KSOFormTextMultilineTableViewCell.m
 //  KSOForm-iOS
 //
-//  Created by William Towe on 9/25/17.
+//  Created by William Towe on 9/28/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -13,40 +13,37 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import "KSOFormTextTableViewCell.h"
+#import "KSOFormTextMultilineTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
+#import "KSOFormModel+KSOExtensionsPrivate.h"
+#import "KSOFormSection.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
-#import <KSOTextValidation/KSOTextValidation.h>
 
-@interface KSOFormTextTableViewCell () <UITextFieldDelegate>
+@interface KSOFormTextMultilineTableViewCell () <UITextViewDelegate>
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
-@property (strong,nonatomic) KDITextField *trailingView;
+@property (strong,nonatomic) KDITextView *trailingView;
+
+@property (assign,nonatomic) CGFloat height;
 @end
 
-@implementation KSOFormTextTableViewCell
+@implementation KSOFormTextMultilineTableViewCell
 #pragma mark *** Subclass Overrides ***
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
         return nil;
-    
-    kstWeakify(self);
     
     [self setLeadingView:[[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero]];
     [self.leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.contentView addSubview:self.leadingView];
     
-    [self setTrailingView:[[KDITextField alloc] initWithFrame:CGRectZero]];
+    [self setTrailingView:[[KDITextView alloc] initWithFrame:CGRectZero]];
     [self.trailingView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.trailingView setTextAlignment:NSTextAlignmentRight];
     [self.trailingView setInputAccessoryView:[[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:self.trailingView]];
-    [self.trailingView KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
-        kstStrongify(self);
-        [self.formRow setValue:self.trailingView.text];
-    } forControlEvents:UIControlEventAllEditingEvents];
     [self.trailingView setDelegate:self];
     [self.contentView addSubview:self.trailingView];
     
@@ -69,12 +66,6 @@
     return [self.trailingView resignFirstResponder];
 }
 #pragma mark -
-- (void)layoutMarginsDidChange {
-    [super layoutMarginsDidChange];
-    
-    [self.trailingView setRightViewEdgeInsets:UIEdgeInsetsMake(0, ceil(self.layoutMargins.right * 0.5), 0, 0)];
-}
-#pragma mark -
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
@@ -85,6 +76,20 @@
 #pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
+- (CGFloat)minimumTrailingViewHeight {
+    CGFloat lineHeight = MAX(self.height, ceil(self.trailingView.font.lineHeight));
+    CGFloat retval = lineHeight;
+    
+    if (self.formRow.minimumNumberOfLines > 0) {
+        retval = lineHeight * self.formRow.minimumNumberOfLines;
+    }
+    
+    if (self.formRow.maximumNumberOfLines > 0) {
+        retval = lineHeight * self.formRow.maximumNumberOfLines;
+    }
+    
+    return retval;
+}
 #pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
@@ -106,8 +111,8 @@
         [self.trailingView setSmartInsertDeleteType:formRow.smartInsertDeleteType];
     }
     
-    [self.trailingView setKSO_textValidator:formRow.textValidator];
-    [self.trailingView setKSO_textFormatter:formRow.textFormatter];
+//    [self.trailingView setKSO_textValidator:formRow.textValidator];
+//    [self.trailingView setKSO_textFormatter:formRow.textFormatter];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
@@ -130,15 +135,32 @@
         [NSObject KDI_registerDynamicTypeObject:self.trailingView forTextStyle:formTheme.valueTextStyle];
     }
 }
-#pragma mark UITextFieldDelegate
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+#pragma mark UITextViewDelegate
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if (self.formRow.shouldChangeValueBlock != nil) {
-        NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        NSString *value = [textView.text stringByReplacingCharactersInRange:range withString:text];
         NSError *outError;
         
         return self.formRow.shouldChangeValueBlock(self.formRow,value,&outError);
     }
     return YES;
 }
-
+- (void)textViewDidChange:(UITextView *)textView {
+    [self.formRow setValue:self.trailingView.text];
+    [self setHeight:[textView sizeThatFits:CGSizeMake(CGRectGetWidth(textView.frame), CGFLOAT_MAX)].height];
+}
+#pragma mark *** Private Methods ***
+#pragma mark Properties
+- (void)setHeight:(CGFloat)height {
+    if (_height == height) {
+        return;
+    }
+    
+    _height = height;
+    
+    [self setNeedsUpdateConstraints];
+    
+    [self.formRow.section.model.tableView beginUpdates];
+    [self.formRow.section.model.tableView endUpdates];
+}
 @end

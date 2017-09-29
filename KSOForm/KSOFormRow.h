@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, KSOFormRowType) {
     KSOFormRowTypeLabel = 0,
     KSOFormRowTypeText,
+    KSOFormRowTypeTextMultiline,
     KSOFormRowTypeSwitch,
     KSOFormRowTypePickerView,
     KSOFormRowTypeDatePicker,
@@ -69,6 +70,8 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySubtitle;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellAccessoryType;
 // text properties
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyPlaceholder;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyMinimumNumberOfLines;
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyMaximumNumberOfLines;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTextValidator;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTextFormatter;
 // UITextInputTraits
@@ -145,6 +148,8 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint;
 @property (assign,nonatomic) KSOFormRowCellAccessoryType cellAccessoryType;
 
 @property (copy,nonatomic,nullable) NSString *placeholder;
+@property (assign,nonatomic) NSUInteger minimumNumberOfLines;
+@property (assign,nonatomic) NSUInteger maximumNumberOfLines;
 @property (strong,nonatomic,nullable) id<KSOTextValidator> textValidator;
 // NSFormatter works here as well
 @property (strong,nonatomic,nullable) id<KSOTextFormatter> textFormatter;
