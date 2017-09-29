@@ -89,8 +89,8 @@
     _subtitleFont = [self.class _defaultSubtitleFont];
     _valueFont = [self.class _defaultValueFont];
     
-    _headerTitleTextStyle = UIFontTextStyleCaption1;
-    _footerTitleTextStyle = UIFontTextStyleCaption1;
+    _headerTitleTextStyle = UIFontTextStyleFootnote;
+    _footerTitleTextStyle = UIFontTextStyleFootnote;
     _titleTextStyle = UIFontTextStyleBody;
     _subtitleTextStyle = UIFontTextStyleFootnote;
     _valueTextStyle = UIFontTextStyleBody;
