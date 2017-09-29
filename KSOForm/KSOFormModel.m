@@ -113,6 +113,10 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     [self.tableView beginUpdates];
     
     [_sections insertObjects:sections atIndexes:indexes];
+
+    for (KSOFormSection *section in sections) {
+        [section setModel:self];
+    }
     
     [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
     
@@ -129,6 +133,7 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     
     for (KSOFormSection *section in sections) {
         [indexes addIndex:[_sections indexOfObject:section]];
+        [section setModel:nil];
     }
     
     [_sections removeObjectsAtIndexes:indexes];
@@ -144,6 +149,9 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     NSUInteger index = [_sections indexOfObject:oldSection];
     
     [_sections replaceObjectAtIndex:index withObject:newSection];
+    
+    [oldSection setModel:nil];
+    [newSection setModel:self];
     
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
     

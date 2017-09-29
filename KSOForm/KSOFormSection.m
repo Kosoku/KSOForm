@@ -100,7 +100,11 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier = @"footerViewIden
         [indexPaths addObject:[NSIndexPath indexPathForRow:idx inSection:section]];
     }];
     
-    [_rows addObjectsFromArray:rows];
+    [_rows insertObjects:rows atIndexes:indexes];
+    
+    for (KSOFormRow *row in rows) {
+        [row setSection:self];
+    }
     
     [self.model.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
     
@@ -122,6 +126,7 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier = @"footerViewIden
         
         [indexes addIndex:index];
         [indexPaths addObject:[NSIndexPath indexPathForRow:index inSection:section]];
+        [row setSection:nil];
     }
     
     [_rows removeObjectsAtIndexes:indexes];
@@ -137,6 +142,9 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier = @"footerViewIden
     NSUInteger index = [_rows indexOfObject:oldRow];
     
     [_rows replaceObjectAtIndex:index withObject:newRow];
+    
+    [oldRow setSection:nil];
+    [newRow setSection:self];
     
     [self.model.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
     
