@@ -15,8 +15,7 @@
 
 #import "ViewController.h"
 #import "MapViewController.h"
-#import "CustomTableViewCell.h"
-#import "HeaderViewWithProgress.h"
+#import "BluetoothTableViewController.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
@@ -228,36 +227,6 @@
     }
                                                                    }]];
     
-    KSOFormModel *wifiModel = [[KSOFormModel alloc] init];
-    
-    [wifiModel setCellIdentifiersToCellNibs:@{NSStringFromClass(CustomTableViewCell.class): [UINib nibWithNibName:NSStringFromClass(CustomTableViewCell.class) bundle:nil]}];
-    [wifiModel setTitle:@"Wi-Fi Example"];
-    [wifiModel addSectionFromDictionary:@{KSOFormSectionKeyRows: @[@{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
-                                                                     KSOFormRowKeyTitle: @"Wi-Fi",
-                                                                     KSOFormRowKeyValueKey: @kstKeypath(self,enableWifi),
-                                                                     KSOFormRowKeyValueDataSource: self,
-                                                                     KSOFormRowKeyValueDidChangeBlock: ^(KSOFormRow *row, id value){
-        if ([value boolValue]) {
-            [row.section addRowFromDictionary:@{KSOFormRowKeyValue: @{@"name": @"Selected Network Name", @"selected": @YES}, KSOFormRowKeyCellIdentifier: NSStringFromClass(CustomTableViewCell.class)}];
-            
-            KSOFormSection *section = [[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyHeaderTitle: @"Choose a network…", KSOFormSectionKeyHeaderViewClass: HeaderViewWithProgress.class}];
-            NSMutableArray *rows = [[NSMutableArray alloc] init];
-            
-            for (NSInteger i=0; i<10; i++) {
-                [rows addObject:[[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyValue: @{@"name": [NSString stringWithFormat:@"Network Name %@",[NSNumberFormatter localizedStringFromNumber:@(i) numberStyle:NSNumberFormatterDecimalStyle]]}, KSOFormRowKeyCellIdentifier: NSStringFromClass(CustomTableViewCell.class)}]];
-            }
-            
-            [section addRows:rows];
-            [row.section.model addSection:section];
-        }
-        else {
-            [row.section.model removeSection:row.section.model.sections.lastObject];
-            [row.section removeRow:row.section.rows.lastObject];
-        }
-    }
-                                                                     }]}];
-    
-    
     KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS",
                                                                      KSOFormModelKeyHeaderView: [[TableHeaderView alloc] initWithFrame:CGRectZero]
                                                                      }];
@@ -281,14 +250,26 @@
                                                            },
                                                          @{KSOFormRowKeyTitle: @"Controls",
                                                            KSOFormRowKeyActionModel: controlsModel
-                                                           },
-                                                         @{KSOFormRowKeyTitle: @"Wi-Fi",
-                                                           KSOFormRowKeyValue: @"Network Name",
-                                                           KSOFormRowKeyActionModel: wifiModel
-                                                           },
-                                                         @{KSOFormRowKeyTitle: @"Map View",
-                                                           KSOFormRowKeyActionViewControllerClass: MapViewController.class
-                                                           }]];
+                                                           }
+                                                         ]];
+    [model addSection:[[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyHeaderTitle: @"Custom Examples",
+                                                                   KSOFormSectionKeyFooterAttributedTitle: ({
+        NSMutableAttributedString *retval = [[NSMutableAttributedString alloc] initWithString:@"This is another attributed string being used as footer text and it is very colorful." attributes:nil];
+        
+        [retval.string enumerateSubstringsInRange:NSMakeRange(0, retval.length) options:NSStringEnumerationByWords|NSStringEnumerationSubstringNotRequired usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+            [retval addAttributes:@{NSForegroundColorAttributeName: KDIColorRandomRGB()} range:substringRange];
+        }];
+        
+        retval;
+    }),
+                                                                   KSOFormSectionKeyRows: @[@{KSOFormRowKeyTitle: @"Map View",
+                                                                                              KSOFormRowKeyActionViewControllerClass: MapViewController.class
+                                                                                              },
+                                                                                            @{KSOFormRowKeyTitle: @"Bluetooth",
+                                                                                              KSOFormRowKeyValue: @"On/Off",
+                                                                                              KSOFormRowKeyActionViewControllerClass: BluetoothTableViewController.class
+                                                                                              }]
+                                                                   }]];
     
     [self setModel:model];
 }

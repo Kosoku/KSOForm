@@ -48,7 +48,9 @@
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
     
-    [self.formSectionView setTextColor:formTheme.headerTitleColor];
+    if (self.formSection.headerAttributedTitle == nil) {
+        [self.formSectionView setTextColor:formTheme.headerTitleColor];
+    }
     [self.formSectionView setFont:formTheme.headerTitleFont];
     
     if (formTheme.headerTitleTextStyle == nil) {
