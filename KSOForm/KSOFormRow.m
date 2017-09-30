@@ -13,9 +13,12 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import "KSOFormRow.h"
+#import "KSOFormRow+KSOExtensionsPrivate.h"
+#import "KSOFormSection.h"
+#import "KSOFormModel+KSOExtensionsPrivate.h"
 
 #import <Stanley/Stanley.h>
+#import <Quicksilver/Quicksilver.h>
 
 KSOFormRowKey const KSOFormRowKeyType = @"type";
 KSOFormRowKey const KSOFormRowKeyValue = @"value";
@@ -92,6 +95,9 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
 
 + (BOOL)automaticallyNotifiesObserversOfValue {
     return NO;
+}
++ (NSSet<NSString *> *)keyPathsForValuesAffectingCellAccessoryType {
+    return [NSSet setWithArray:@[@kstKeypath(KSOFormRow.new,value),@kstKeypath(KSOFormRow.new,isSelected)]];
 }
 
 - (NSString *)description {
@@ -202,7 +208,13 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
              self.type == KSOFormRowTypePickerView));
 }
 - (BOOL)isSelectable {
-    return (self.isEditable || self.cellAccessoryType == KSOFormRowCellAccessoryTypeDisclosureIndicator);
+    return (self.isEditable ||
+            self.cellAccessoryType == KSOFormRowCellAccessoryTypeDisclosureIndicator ||
+            self.section.model.parentFormRow.type == KSOFormRowTypeOptions);
+}
+- (BOOL)isSelected {
+    return (self.section.model.parentFormRow.type == KSOFormRowTypeOptions &&
+            [self.title isEqualToString:self.section.model.parentFormRow.formattedValue]);
 }
 
 @synthesize value=_value;
@@ -243,6 +255,13 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     
     [self didChangeValueForKey:@kstKeypath(self,value)];
     
+    if (self.type == KSOFormRowTypeOptions) {
+        for (KSOFormRow *row in self.actionModel.sections.firstObject.rows) {
+            [row willChangeValueForKey:@kstKeypath(row,isSelected)];
+            [row didChangeValueForKey:@kstKeypath(row,isSelected)];
+        }
+    }
+    
     if (self.didChangeValueBlock != nil) {
         self.didChangeValueBlock(self,_value);
     }
@@ -253,11 +272,15 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
 
 - (KSOFormRowCellAccessoryType)cellAccessoryType {
     if (_cellAccessoryType == KSOFormRowCellAccessoryTypeAutomatic) {
-        if (self.actionDelegate != nil ||
+        if (self.type == KSOFormRowTypeOptions ||
+            self.actionDelegate != nil ||
             self.actionModel != nil ||
             self.actionViewControllerClass != Nil) {
             
             return KSOFormRowCellAccessoryTypeDisclosureIndicator;
+        }
+        else if (self.isSelected) {
+            return KSOFormRowCellAccessoryTypeCheckmark;
         }
         return KSOFormRowCellAccessoryTypeNone;
     }
@@ -276,6 +299,15 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
 }
 
 - (KSOFormModel *)actionModel {
+    if (self.type == KSOFormRowTypeOptions &&
+        _actionModel == nil) {
+        
+        _actionModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyRows: [self.pickerViewRows KQS_map:^id _Nullable(id<KSOFormPickerViewRow>  _Nonnull object, NSInteger index) {
+            return [[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: [object formPickerViewRowTitle]}];
+        }], KSOFormModelKeyTitle: self.title}];
+        
+        [_actionModel setParentFormRow:self];
+    }
     return [self.actionDelegate respondsToSelector:@selector(actionFormModelForFormRow:)] ? [self.actionDelegate actionFormModelForFormRow:self] : _actionModel;
 }
 - (Class)actionViewControllerClass {

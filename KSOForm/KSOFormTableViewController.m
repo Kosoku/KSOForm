@@ -214,6 +214,7 @@
     else {
         switch (formRow.type) {
             case KSOFormRowTypeLabel:
+            case KSOFormRowTypeOptions:
                 retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormLabelTableViewCell.class) forIndexPath:indexPath];
                 break;
             case KSOFormRowTypeText:
@@ -334,6 +335,7 @@
     
     return retval;
 }
+#pragma mark -
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return [self.model rowForIndexPath:indexPath].isSelectable;
 }
@@ -344,7 +346,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     KSOFormRow *formRow = [self.model rowForIndexPath:indexPath];
-    
     UIViewController *viewController = nil;
     
     if (formRow.actionViewControllerClass != Nil) {

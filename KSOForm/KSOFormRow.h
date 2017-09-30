@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign,nonatomic,getter=isEnabled) BOOL enabled;
 @property (readonly,nonatomic,getter=isEditable) BOOL editable;
 @property (readonly,nonatomic,getter=isSelectable) BOOL selectable;
+@property (readonly,nonatomic,getter=isSelected) BOOL selected;
 
 @property (strong,nonatomic,nullable) id value;
 @property (readonly,nonatomic,nullable) NSString *formattedValue;

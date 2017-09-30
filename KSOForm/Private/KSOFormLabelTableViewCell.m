@@ -15,6 +15,8 @@
 
 #import "KSOFormLabelTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
+#import "KSOFormModel+KSOExtensionsPrivate.h"
+#import "KSOFormSection.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
@@ -46,11 +48,21 @@
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.value)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
-            [self.trailingView setText:self.formRow.value];
+            [self.trailingView setText:self.formRow.formattedValue];
         });
     }];
     
     return self;
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    if (self.formRow.section.model.parentFormRow.type == KSOFormRowTypeOptions) {
+        if (selected) {
+            [self.formRow.section.model.parentFormRow setValue:self.formRow.title];
+        }
+    }
 }
 
 @dynamic leadingView;

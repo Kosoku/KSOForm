@@ -30,6 +30,8 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 
 @interface KSOFormModel ()
 @property (readwrite,copy,nonatomic) NSMutableArray<KSOFormSection *> *sections;
+@property (weak,nonatomic) KSOFormRow *parentFormRow;
+
 @property (weak,nonatomic) UITableView *tableView;
 @end
 

@@ -15,23 +15,30 @@
 
 #import "KSOFormRowTableViewCell.h"
 
+#import <Agamotto/Agamotto.h>
+#import <Stanley/Stanley.h>
+
 @implementation KSOFormRowTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
         return nil;
+
+    kstWeakify(self);
     
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view(>=height@priority)]" options:0 metrics:@{@"height": @44.0, @"priority": @(UILayoutPriorityDefaultHigh)} views:@{@"view": self.contentView}]];
+
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.cellAccessoryType)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            [self setAccessoryType:(UITableViewCellAccessoryType)self.formRow.cellAccessoryType];
+        });
+    }];
     
     return self;
 }
 
 @synthesize formRow=_formRow;
-- (void)setFormRow:(KSOFormRow *)formRow {
-    _formRow = formRow;
-    
-    [self setAccessoryType:(UITableViewCellAccessoryType)_formRow.cellAccessoryType];
-}
 @synthesize formTheme=_formTheme;
 
 @end

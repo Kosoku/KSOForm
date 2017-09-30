@@ -110,184 +110,179 @@
 @property (copy,nonatomic) NSString *password;
 @property (copy,nonatomic) NSString *phoneNumber;
 @property (strong,nonatomic) KSOFormRow *bluetoothRow;
-
-- (void)_createForms;
 @end
 
 @implementation ViewController
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
-    [self _createForms];
+    KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
+    
+    [theme setKeyboardAppearance:UIKeyboardAppearanceDark];
+    
+    [self setTheme:theme];
+    
+    KSOFormModel *readOnlyModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Read Only Values"}];
+    
+    [readOnlyModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Read Only Values",
+                                              KSOFormSectionKeyFooterTitle: @"Footer for read only values"
+                                              }];
+    [readOnlyModel.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Title",
+                                                                   KSOFormRowKeyValue: @"Value"},
+                                                                 @{KSOFormRowKeyTitle: @"Title",
+                                                                   KSOFormRowKeySubtitle: @"Subtitle",
+                                                                   KSOFormRowKeyValue: @"Value"},
+                                                                 @{KSOFormRowKeyTitle: @"Title",
+                                                                   KSOFormRowKeySubtitle: @"Subtitle",
+                                                                   KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                                                                   KSOFormRowKeyValue: @"Value"}]];
+    KSOFormModel *textModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Text Entry"}];
+    
+    [textModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Text entry examples",
+                                          KSOFormSectionKeyFooterTitle: @"Footer for text entry examples"
+                                          }];
+    [textModel.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyType: @(KSOFormRowTypeText),
+                                                               KSOFormRowKeyTitle: @"Email",
+                                                               KSOFormRowKeyPlaceholder: @"Enter your email address",
+                                                               KSOFormRowKeyKeyboardType: @(UIKeyboardTypeEmailAddress),
+                                                               KSOFormRowKeyTextContentType: UITextContentTypeEmailAddress,
+                                                               KSOFormRowKeyValueKey: @kstKeypath(self,email),
+                                                               KSOFormRowKeyValueDataSource: self,
+                                                               KSOFormRowKeyTextValidator: [KSOEmailAddressValidator emailAddressValidator]
+                                                               },
+                                                             @{KSOFormRowKeyType: @(KSOFormRowTypeText),
+                                                               KSOFormRowKeyTitle: @"Password",
+                                                               KSOFormRowKeyPlaceholder: @"Enter your password",
+                                                               KSOFormRowKeySecureTextEntry: @YES,
+                                                               KSOFormRowKeyValueKey: @kstKeypath(self,password),
+                                                               KSOFormRowKeyValueDataSource: self
+                                                               },
+                                                             @{KSOFormRowKeyType: @(KSOFormRowTypeText),
+                                                               KSOFormRowKeyTitle: @"Phone Number",
+                                                               KSOFormRowKeyPlaceholder: @"Enter phone number",
+                                                               KSOFormRowKeyKeyboardType: @(UIKeyboardTypePhonePad),
+                                                               KSOFormRowKeyTextContentType: UITextContentTypeTelephoneNumber,
+                                                               KSOFormRowKeyValueKey: @kstKeypath(self,phoneNumber),
+                                                               KSOFormRowKeyValueDataSource: self,
+                                                               KSOFormRowKeyTextValidator: [KSOPhoneNumberValidator phoneNumberValidator],
+                                                               KSOFormRowKeyTextFormatter: [[KSTPhoneNumberFormatter alloc] init]
+                                                               },
+                                                             @{KSOFormRowKeyType: @(KSOFormRowTypeTextMultiline),
+                                                               KSOFormRowKeyTitle: @"Notes",
+                                                               KSOFormRowKeyPlaceholder: @"Enter your notes"
+                                                               }]];
+    KSOFormModel *controlsModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Controls"}];
+    
+    [controlsModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Control examples",
+                                              KSOFormSectionKeyFooterTitle: @"Footer for control examples"
+                                              }];
+    [controlsModel.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyType: @(KSOFormRowTypeSegmented),
+                                                                   KSOFormRowKeyTitle: @"Segmented",
+                                                                   KSOFormRowKeySegmentedItems: @[@"First",@"Second",@"Third",@"Fourth"]
+                                                                   },
+                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
+                                                                   KSOFormRowKeyTitle: @"Toggle Something"
+                                                                   },
+                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
+                                                                   KSOFormRowKeyTitle: @"Picker View",
+                                                                   KSOFormRowKeyPickerViewColumnsAndRows: @[@[@"Red",@"Green",@"Blue"],@[@"One",@"Two",@"Three"]],
+                                                                   KSOFormRowKeyPickerViewSelectedComponentsJoinString: @", "
+                                                                   },
+                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeOptions),
+                                                                   KSOFormRowKeyTitle: @"Options",
+                                                                   KSOFormRowKeyPickerViewRows: @[@"Red",@"Green",@"Blue"],
+                                                                   KSOFormRowKeyValue: @"Red"
+                                                                   },
+                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeDatePicker),
+                                                                   KSOFormRowKeyTitle: @"Date Picker",
+                                                                   KSOFormRowKeyDatePickerMode: @(UIDatePickerModeDateAndTime),
+                                                                   KSOFormRowKeyDatePickerMinimumDate: NSDate.date,
+                                                                   KSOFormRowKeyDatePickerDateFormatter: ({
+        NSDateFormatter *retval = [[NSDateFormatter alloc] init];
+        
+        [retval setDateStyle:NSDateFormatterShortStyle];
+        [retval setTimeStyle:NSDateFormatterShortStyle];
+        
+        retval;
+    })
+                                                                   },
+                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeStepper),
+                                                                   KSOFormRowKeyTitle: @"Stepper",
+                                                                   KSOFormRowKeyStepperStepValue: @0.05,
+                                                                   KSOFormRowKeyMinimumValue: @-1.0,
+                                                                   KSOFormRowKeyValueFormatter: ({
+        NSNumberFormatter *retval = [[NSNumberFormatter alloc] init];
+        
+        [retval setNumberStyle:NSNumberFormatterDecimalStyle];
+        [retval setMinimumFractionDigits:2];
+        
+        retval;
+    })
+                                                                   },
+                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeSlider),
+                                                                   KSOFormRowKeyTitle: @"Slider",
+                                                                   KSOFormRowKeySliderMinimumValueImage: [UIImage imageNamed:@"bag"],
+                                                                   KSOFormRowKeySliderMaximumValueImage: [UIImage imageNamed:@"socket"]
+                                                                   },
+                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeButton),
+                                                                   KSOFormRowKeyTitle: @"Show Alert",
+                                                                   KSOFormRowKeyControlBlock: ^(__kindof UIControl *control, UIControlEvents controlEvents){
+        [UIAlertController KDI_presentAlertControllerWithTitle:@"Oh Noes!" message:@"Did you see that Morty?!?" cancelButtonTitle:nil otherButtonTitles:nil completion:nil];
+    }
+                                                                   }]];
+    
+    KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS",
+                                                                     KSOFormModelKeyHeaderView: [[TableHeaderView alloc] initWithFrame:CGRectZero]
+                                                                     }];
+    
+    [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title",
+                                      KSOFormSectionKeyFooterAttributedTitle: ({
+        NSMutableAttributedString *retval = [[NSMutableAttributedString alloc] init];
+        
+        [retval appendAttributedString:[[NSAttributedString alloc] initWithString:@"This is a attributed footer title with a " attributes:nil]];
+        [retval appendAttributedString:[[NSAttributedString alloc] initWithString:@"link to Kosoku" attributes:@{NSLinkAttributeName: [NSURL URLWithString:@"https://www.kosoku.com/"]}]];
+        [retval appendAttributedString:[[NSAttributedString alloc] initWithString:@" that you can tap on to open the link in Safari." attributes:nil]];
+        
+        retval;
+    })
+                                      }];
+    [model.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Read Only Values",
+                                                           KSOFormRowKeyActionModel: readOnlyModel
+                                                           },
+                                                         @{KSOFormRowKeyTitle: @"Text Entry",
+                                                           KSOFormRowKeyActionModel: textModel
+                                                           },
+                                                         @{KSOFormRowKeyTitle: @"Controls",
+                                                           KSOFormRowKeyActionModel: controlsModel
+                                                           }
+                                                         ]];
+    [model addSection:[[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyHeaderTitle: @"Custom Examples",
+                                                                   KSOFormSectionKeyFooterAttributedTitle: ({
+        NSMutableAttributedString *retval = [[NSMutableAttributedString alloc] initWithString:@"This is another attributed string being used as footer text and it is very colorful." attributes:nil];
+        
+        [retval.string enumerateSubstringsInRange:NSMakeRange(0, retval.length) options:NSStringEnumerationByWords|NSStringEnumerationSubstringNotRequired usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+            [retval addAttributes:@{NSForegroundColorAttributeName: KDIColorRandomRGB()} range:substringRange];
+        }];
+        
+        retval;
+    }),
+                                                                   KSOFormSectionKeyRows: @[@{KSOFormRowKeyTitle: @"Map View",
+                                                                                              KSOFormRowKeyActionViewControllerClass: MapViewController.class
+                                                                                              }
+                                                                                            ]
+                                                                   }]];
+    [self setBluetoothRow:[[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: @"Bluetooth",
+                                                                   KSOFormRowKeyValue: @"Unknown",
+                                                                   KSOFormRowKeyActionDelegate: self
+                                                                   }]];
+    [model.sections.lastObject addRow:self.bluetoothRow];
+    
+    [self setModel:model];
 }
 
 - (UIViewController *)actionViewControllerForFormRow:(KSOFormRow *)formRow {
     return [[BluetoothTableViewController alloc] initWithFormRow:self.bluetoothRow];
-}
-
-- (void)_createForms {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
-        
-        [theme setKeyboardAppearance:UIKeyboardAppearanceDark];
-        [theme setTextColor:KDIColorHexadecimal(@"276695")];
-        
-        [self setTheme:theme];
-        
-        KSOFormModel *readOnlyModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Read Only Values"}];
-        
-        [readOnlyModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Read Only Values",
-                                                  KSOFormSectionKeyFooterTitle: @"Footer for read only values"
-                                                  }];
-        [readOnlyModel.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Title",
-                                                                       KSOFormRowKeyValue: @"Value"},
-                                                                     @{KSOFormRowKeyTitle: @"Title",
-                                                                       KSOFormRowKeySubtitle: @"Subtitle",
-                                                                       KSOFormRowKeyValue: @"Value"},
-                                                                     @{KSOFormRowKeyTitle: @"Title",
-                                                                       KSOFormRowKeySubtitle: @"Subtitle",
-                                                                       KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
-                                                                       KSOFormRowKeyValue: @"Value"}]];
-        KSOFormModel *textModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Text Entry"}];
-        
-        [textModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Text entry examples",
-                                              KSOFormSectionKeyFooterTitle: @"Footer for text entry examples"
-                                              }];
-        [textModel.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyType: @(KSOFormRowTypeText),
-                                                                   KSOFormRowKeyTitle: @"Email",
-                                                                   KSOFormRowKeyPlaceholder: @"Enter your email address",
-                                                                   KSOFormRowKeyKeyboardType: @(UIKeyboardTypeEmailAddress),
-                                                                   KSOFormRowKeyTextContentType: UITextContentTypeEmailAddress,
-                                                                   KSOFormRowKeyValueKey: @kstKeypath(self,email),
-                                                                   KSOFormRowKeyValueDataSource: self,
-                                                                   KSOFormRowKeyTextValidator: [KSOEmailAddressValidator emailAddressValidator]
-                                                                   },
-                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeText),
-                                                                   KSOFormRowKeyTitle: @"Password",
-                                                                   KSOFormRowKeyPlaceholder: @"Enter your password",
-                                                                   KSOFormRowKeySecureTextEntry: @YES,
-                                                                   KSOFormRowKeyValueKey: @kstKeypath(self,password),
-                                                                   KSOFormRowKeyValueDataSource: self
-                                                                   },
-                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeText),
-                                                                   KSOFormRowKeyTitle: @"Phone Number",
-                                                                   KSOFormRowKeyPlaceholder: @"Enter phone number",
-                                                                   KSOFormRowKeyKeyboardType: @(UIKeyboardTypePhonePad),
-                                                                   KSOFormRowKeyTextContentType: UITextContentTypeTelephoneNumber,
-                                                                   KSOFormRowKeyValueKey: @kstKeypath(self,phoneNumber),
-                                                                   KSOFormRowKeyValueDataSource: self,
-                                                                   KSOFormRowKeyTextValidator: [KSOPhoneNumberValidator phoneNumberValidator],
-                                                                   KSOFormRowKeyTextFormatter: [[KSTPhoneNumberFormatter alloc] init]
-                                                                   },
-                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeTextMultiline),
-                                                                   KSOFormRowKeyTitle: @"Notes",
-                                                                   KSOFormRowKeyPlaceholder: @"Enter your notes"
-                                                                   }]];
-        KSOFormModel *controlsModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Controls"}];
-        
-        [controlsModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Control examples",
-                                                  KSOFormSectionKeyFooterTitle: @"Footer for control examples"
-                                                  }];
-        [controlsModel.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyType: @(KSOFormRowTypeSegmented),
-                                                                       KSOFormRowKeyTitle: @"Segmented",
-                                                                       KSOFormRowKeySegmentedItems: @[@"First",@"Second",@"Third",@"Fourth"]
-                                                                       },
-                                                                     @{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
-                                                                       KSOFormRowKeyTitle: @"Toggle Something"
-                                                                       },
-                                                                     @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
-                                                                       KSOFormRowKeyTitle: @"Picker View",
-                                                                       KSOFormRowKeyPickerViewColumnsAndRows: @[@[@"Red",@"Green",@"Blue"],@[@"One",@"Two",@"Three"]],
-                                                                       KSOFormRowKeyPickerViewSelectedComponentsJoinString: @", "
-                                                                       },
-                                                                     @{KSOFormRowKeyType: @(KSOFormRowTypeDatePicker),
-                                                                       KSOFormRowKeyTitle: @"Date Picker",
-                                                                       KSOFormRowKeyDatePickerMode: @(UIDatePickerModeDateAndTime),
-                                                                       KSOFormRowKeyDatePickerMinimumDate: NSDate.date,
-                                                                       KSOFormRowKeyDatePickerDateFormatter: ({
-            NSDateFormatter *retval = [[NSDateFormatter alloc] init];
-            
-            [retval setDateStyle:NSDateFormatterShortStyle];
-            [retval setTimeStyle:NSDateFormatterShortStyle];
-            
-            retval;
-        })
-                                                                       },
-                                                                     @{KSOFormRowKeyType: @(KSOFormRowTypeStepper),
-                                                                       KSOFormRowKeyTitle: @"Stepper",
-                                                                       KSOFormRowKeyStepperStepValue: @0.05,
-                                                                       KSOFormRowKeyMinimumValue: @-1.0,
-                                                                       KSOFormRowKeyValueFormatter: ({
-            NSNumberFormatter *retval = [[NSNumberFormatter alloc] init];
-            
-            [retval setNumberStyle:NSNumberFormatterDecimalStyle];
-            [retval setMinimumFractionDigits:2];
-            
-            retval;
-        })
-                                                                       },
-                                                                     @{KSOFormRowKeyType: @(KSOFormRowTypeSlider),
-                                                                       KSOFormRowKeyTitle: @"Slider",
-                                                                       KSOFormRowKeySliderMinimumValueImage: [UIImage imageNamed:@"bag"],
-                                                                       KSOFormRowKeySliderMaximumValueImage: [UIImage imageNamed:@"socket"]
-                                                                       },
-                                                                     @{KSOFormRowKeyType: @(KSOFormRowTypeButton),
-                                                                       KSOFormRowKeyTitle: @"Show Alert",
-                                                                       KSOFormRowKeyControlBlock: ^(__kindof UIControl *control, UIControlEvents controlEvents){
-            [UIAlertController KDI_presentAlertControllerWithTitle:@"Oh Noes!" message:@"Did you see that Morty?!?" cancelButtonTitle:nil otherButtonTitles:nil completion:nil];
-        }
-                                                                       }]];
-        
-        KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS",
-                                                                         KSOFormModelKeyHeaderView: [[TableHeaderView alloc] initWithFrame:CGRectZero]
-                                                                         }];
-        
-        [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title",
-                                          KSOFormSectionKeyFooterAttributedTitle: ({
-            NSMutableAttributedString *retval = [[NSMutableAttributedString alloc] init];
-            
-            [retval appendAttributedString:[[NSAttributedString alloc] initWithString:@"This is a attributed footer title with a " attributes:nil]];
-            [retval appendAttributedString:[[NSAttributedString alloc] initWithString:@"link to Kosoku" attributes:@{NSLinkAttributeName: [NSURL URLWithString:@"https://www.kosoku.com/"]}]];
-            [retval appendAttributedString:[[NSAttributedString alloc] initWithString:@" that you can tap on to open the link in Safari." attributes:nil]];
-            
-            retval;
-        })
-                                          }];
-        [model.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyTitle: @"Read Only Values",
-                                                               KSOFormRowKeyActionModel: readOnlyModel
-                                                               },
-                                                             @{KSOFormRowKeyTitle: @"Text Entry",
-                                                               KSOFormRowKeyActionModel: textModel
-                                                               },
-                                                             @{KSOFormRowKeyTitle: @"Controls",
-                                                               KSOFormRowKeyActionModel: controlsModel
-                                                               }
-                                                             ]];
-        [model addSection:[[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyHeaderTitle: @"Custom Examples",
-                                                                       KSOFormSectionKeyFooterAttributedTitle: ({
-            NSMutableAttributedString *retval = [[NSMutableAttributedString alloc] initWithString:@"This is another attributed string being used as footer text and it is very colorful." attributes:nil];
-            
-            [retval.string enumerateSubstringsInRange:NSMakeRange(0, retval.length) options:NSStringEnumerationByWords|NSStringEnumerationSubstringNotRequired usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
-                [retval addAttributes:@{NSForegroundColorAttributeName: KDIColorRandomRGB()} range:substringRange];
-            }];
-            
-            retval;
-        }),
-                                                                       KSOFormSectionKeyRows: @[@{KSOFormRowKeyTitle: @"Map View",
-                                                                                                  KSOFormRowKeyActionViewControllerClass: MapViewController.class
-                                                                                                  }
-                                                                                                ]
-                                                                       }]];
-        [self setBluetoothRow:[[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: @"Bluetooth",
-                                                                       KSOFormRowKeyValue: @"Unknown",
-                                                                       KSOFormRowKeyActionDelegate: self
-                                                                       }]];
-        [model.sections.lastObject addRow:self.bluetoothRow];
-        
-        [self setModel:model];
-    });
 }
 
 @end

@@ -16,5 +16,6 @@
 #import "KSOFormModel.h"
 
 @interface KSOFormModel (KSOExtensionsPrivate)
+@property (weak,nonatomic) KSOFormRow *parentFormRow;
 @property (weak,nonatomic) UITableView *tableView;
 @end
