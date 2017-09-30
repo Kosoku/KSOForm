@@ -18,8 +18,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol KSOFormPickerViewRow <NSObject>
-@required
+@optional
 @property (readonly,nonatomic) NSString *formPickerViewRowTitle;
+@property (readonly,nonatomic) NSAttributedString *formPickerViewRowAttributedTitle;
+@end
+
+@interface NSString (KSOFormPickerViewRowExtensions) <KSOFormPickerViewRow>
+@end
+
+@interface NSAttributedString (KSOFormPickerViewRowExtensions) <KSOFormPickerViewRow>
 @end
 
 NS_ASSUME_NONNULL_END

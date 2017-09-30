@@ -32,7 +32,6 @@ FOUNDATION_EXPORT const unsigned char KSOFormVersionString[];
 #import <KSOForm/KSOFormRowValueDataSource.h>
 #import <KSOForm/KSOFormPickerViewRow.h>
 #import <KSOForm/KSOFormRowSegmentedItem.h>
-#import <KSOForm/NSString+KSOFormPickerViewRowExtensions.h>
 #import <KSOForm/KSOFormRowActionDelegate.h>
 
 #import <KSOForm/KSOFormModel.h>

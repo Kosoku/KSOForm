@@ -135,10 +135,10 @@
 - (NSInteger)pickerViewButton:(KDIPickerViewButton *)pickerViewButton numberOfRowsInComponent:(NSInteger)component {
     return self.formRow.pickerViewColumnsAndRows.count > 0 ? self.formRow.pickerViewColumnsAndRows[component].count : self.formRow.pickerViewRows.count;
 }
-- (NSString *)pickerViewButton:(KDIPickerViewButton *)pickerViewButton titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+- (NSAttributedString *)pickerViewButton:(KDIPickerViewButton *)pickerViewButton attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     id<KSOFormPickerViewRow> pickerViewRow = self.formRow.pickerViewColumnsAndRows.count > 0 ? self.formRow.pickerViewColumnsAndRows[component][row] : self.formRow.pickerViewRows[row];
     
-    return pickerViewRow.formPickerViewRowTitle;
+    return [pickerViewRow respondsToSelector:@selector(formPickerViewRowAttributedTitle)] ? pickerViewRow.formPickerViewRowAttributedTitle : [[NSAttributedString alloc] initWithString:pickerViewRow.formPickerViewRowTitle ?: @""];
 }
 #pragma mark KDIPickerViewButtonDelegate
 - (void)pickerViewButton:(KDIPickerViewButton *)pickerViewButton didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
