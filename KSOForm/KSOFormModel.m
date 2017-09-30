@@ -94,45 +94,73 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     return retval;
 }
 
+- (void)performUpdates:(dispatch_block_t)updates {
+    [self.tableView beginUpdates];
+    
+    updates();
+    
+    [self.tableView endUpdates];
+}
+
 - (void)addSection:(KSOFormSection *)section {
     [self addSections:@[section]];
+}
+- (void)addSection:(KSOFormSection *)section animation:(UITableViewRowAnimation)animation; {
+    [self addSections:@[section] animation:animation];
 }
 - (void)addSections:(NSArray<KSOFormSection *> *)sections; {
     [self insertSections:sections atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_sections.count, sections.count)]];
 }
+- (void)addSections:(NSArray<KSOFormSection *> *)sections animation:(UITableViewRowAnimation)animation; {
+    [self insertSections:sections atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_sections.count, sections.count)] animation:animation];
+}
 
 - (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary; {
     [self addSection:[[KSOFormSection alloc] initWithDictionary:dictionary model:self]];
+}
+- (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary animation:(UITableViewRowAnimation)animation; {
+    [self addSection:[[KSOFormSection alloc] initWithDictionary:dictionary model:self] animation:animation];
 }
 - (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries; {
     [self addSections:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
         return [[KSOFormSection alloc] initWithDictionary:object model:self];
     }]];
 }
+- (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries animation:(UITableViewRowAnimation)animation; {
+    [self addSections:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
+        return [[KSOFormSection alloc] initWithDictionary:object model:self];
+    }] animation:animation];
+}
 
 - (void)insertSection:(KSOFormSection *)section atIndex:(NSUInteger)index; {
     [self insertSections:@[section] atIndexes:[NSIndexSet indexSetWithIndex:index]];
 }
+- (void)insertSection:(KSOFormSection *)section atIndex:(NSUInteger)index animation:(UITableViewRowAnimation)animation; {
+    [self insertSections:@[section] atIndexes:[NSIndexSet indexSetWithIndex:index] animation:animation];
+}
 - (void)insertSections:(NSArray<KSOFormSection *> *)sections atIndexes:(NSIndexSet *)indexes; {
-    [self.tableView beginUpdates];
-    
+    [self insertSections:sections atIndexes:indexes animation:UITableViewRowAnimationNone];
+}
+- (void)insertSections:(NSArray<KSOFormSection *> *)sections atIndexes:(NSIndexSet *)indexes animation:(UITableViewRowAnimation)animation; {
     [_sections insertObjects:sections atIndexes:indexes];
-
+    
     for (KSOFormSection *section in sections) {
         [section setModel:self];
     }
     
-    [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
-    
-    [self.tableView endUpdates];
+    [self.tableView insertSections:indexes withRowAnimation:animation];
 }
 
 - (void)removeSection:(KSOFormSection *)section; {
     [self removeSections:@[section]];
 }
+- (void)removeSection:(KSOFormSection *)section animation:(UITableViewRowAnimation)animation; {
+    [self removeSections:@[section] animation:animation];
+}
 - (void)removeSections:(NSArray<KSOFormSection *> *)sections; {
-    [self.tableView beginUpdates];
-    
+    [self removeSections:sections animation:UITableViewRowAnimationNone];
+}
+- (void)removeSections:(NSArray<KSOFormSection *> *)sections animation:(UITableViewRowAnimation)animation; {
     NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
     
     for (KSOFormSection *section in sections) {
@@ -142,14 +170,13 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     
     [_sections removeObjectsAtIndexes:indexes];
     
-    [self.tableView deleteSections:indexes withRowAnimation:UITableViewRowAnimationFade];
-    
-    [self.tableView endUpdates];
+    [self.tableView deleteSections:indexes withRowAnimation:animation];
 }
 
 - (void)replaceSection:(KSOFormSection *)oldSection withSection:(KSOFormSection *)newSection {
-    [self.tableView beginUpdates];
-    
+    [self replaceSection:oldSection withSection:newSection animation:UITableViewRowAnimationNone];
+}
+- (void)replaceSection:(KSOFormSection *)oldSection withSection:(KSOFormSection *)newSection animation:(UITableViewRowAnimation)animation; {
     NSUInteger index = [_sections indexOfObject:oldSection];
     
     [_sections replaceObjectAtIndex:index withObject:newSection];
@@ -157,9 +184,7 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     [oldSection setModel:nil];
     [newSection setModel:self];
     
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
-    
-    [self.tableView endUpdates];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:animation];
 }
 #pragma mark Properties
 - (NSArray<KSOFormSection *> *)sections {

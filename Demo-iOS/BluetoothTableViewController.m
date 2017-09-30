@@ -20,10 +20,11 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface BluetoothTableViewController () <CBCentralManagerDelegate>
+@interface BluetoothTableViewController () <KSOFormRowValueDataSource,CBCentralManagerDelegate>
 @property (strong,nonatomic) KSOFormRow *formRow;
 @property (strong,nonatomic) CBCentralManager *centralManager;
 @property (strong,nonatomic) NSMutableSet *peripherals;
+@property (assign,nonatomic) BOOL scanning;
 @end
 
 @implementation BluetoothTableViewController
@@ -37,9 +38,7 @@
             break;
         case CBManagerStatePoweredOn:
             value = @"On";
-            [self.model.sections.firstObject.rows.firstObject setValue:@YES];
             [self.model.sections.firstObject setFooterTitle:[NSString stringWithFormat:@"Now discoverable as \"%@\".",UIDevice.currentDevice.name]];
-            [central scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey: @NO}];
             break;
         case CBManagerStateResetting:
             value = @"Resetting";
@@ -72,15 +71,27 @@
     
     [self.peripherals addObject:peripheral];
     
-    if (peripheral.name == nil) {
-        [self.model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: peripheral.identifier.UUIDString}];
-        return;
-    }
+    dispatch_block_t block = ^{
+        if (peripheral.name == nil) {
+            [self.model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: peripheral.identifier.UUIDString} animation:UITableViewRowAnimationTop];
+            return;
+        }
+        
+        [self.model[1] addRowFromDictionary:@{KSOFormRowKeyTitle: peripheral.name,
+                                              KSOFormRowKeyValue: @"Unknown",
+                                              KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
+                                              } animation:UITableViewRowAnimationTop];
+    };
     
-    [self.model[1] addRowFromDictionary:@{KSOFormRowKeyTitle: peripheral.name,
-                                                           KSOFormRowKeyValue: @"Unknown",
-                                                           KSOFormRowKeyCellAccessoryType: @(UITableViewCellAccessoryDetailButton)
-                                                           }];
+    if (self.model.sections.count == 1) {
+        [self.model performUpdates:^{
+            [self.model addSectionsFromDictionaries:@[@{KSOFormSectionKeyHeaderTitle: @"My Devices"},@{KSOFormSectionKeyHeaderViewClass: HeaderViewWithProgress.class, KSOFormSectionKeyHeaderTitle: @"Other Devices"}] animation:UITableViewRowAnimationTop];
+            block();
+        }];
+    }
+    else {
+        block();
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -96,16 +107,31 @@
     _formRow = formRow;
     _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
     
-    KSOFormSection *toggleSection = [[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyRows: @[@{KSOFormRowKeyType: @(KSOFormRowTypeSwitch), KSOFormRowKeyTitle: @"Bluetooth"
+    KSOFormSection *toggleSection = [[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyRows: @[@{KSOFormRowKeyType: @(KSOFormRowTypeSwitch), KSOFormRowKeyTitle: @"Bluetooth", KSOFormRowKeyValueKey: @"scanning", KSOFormRowKeyValueDataSource: self
                                                                                                             }],
                                                                                  KSOFormSectionKeyFooterTitle: @"Location accuracy and nearby services are improved when Bluetooth is turned on."
                                                                                  }];
-    KSOFormSection *myDevicesSection = [[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyHeaderTitle: @"My Devices"}];
-    KSOFormSection *otherDevices = [[KSOFormSection alloc] initWithDictionary:@{KSOFormSectionKeyHeaderViewClass: HeaderViewWithProgress.class, KSOFormSectionKeyHeaderTitle: @"Other Devices"}];
     
-    [self setModel:[[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Bluetooth", KSOFormModelKeySections: @[toggleSection,myDevicesSection,otherDevices]}]];
+    [self setModel:[[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Bluetooth", KSOFormModelKeySections: @[toggleSection]}]];
     
     return self;
+}
+
+- (void)setScanning:(BOOL)scanning {
+    if (_scanning == scanning) {
+        return;
+    }
+    
+    _scanning = scanning;
+    
+    if (_scanning) {
+        [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey: @NO}];
+    }
+    else {
+        [self.centralManager stopScan];
+        [self.model removeSections:[self.model.sections subarrayWithRange:NSMakeRange(1, 2)] animation:UITableViewRowAnimationFade];
+        [self.peripherals removeAllObjects];
+    }
 }
 
 @end

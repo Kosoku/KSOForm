@@ -122,19 +122,30 @@ UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRows;
  */
 - (nullable NSIndexPath *)indexPathForRow:(KSOFormRow *)formRow;
 
+- (void)performUpdates:(nullable NS_NOESCAPE dispatch_block_t)updates;
+
 - (void)addSection:(KSOFormSection *)section;
+- (void)addSection:(KSOFormSection *)section animation:(UITableViewRowAnimation)animation;
 - (void)addSections:(NSArray<KSOFormSection *> *)sections;
+- (void)addSections:(NSArray<KSOFormSection *> *)sections animation:(UITableViewRowAnimation)animation;
 
 - (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary;
+- (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary animation:(UITableViewRowAnimation)animation;
 - (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries;
+- (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries animation:(UITableViewRowAnimation)animation;
 
 - (void)insertSection:(KSOFormSection *)section atIndex:(NSUInteger)index;
+- (void)insertSection:(KSOFormSection *)section atIndex:(NSUInteger)index animation:(UITableViewRowAnimation)animation;
 - (void)insertSections:(NSArray<KSOFormSection *> *)sections atIndexes:(NSIndexSet *)indexes;
+- (void)insertSections:(NSArray<KSOFormSection *> *)sections atIndexes:(NSIndexSet *)indexes animation:(UITableViewRowAnimation)animation;
 
 - (void)removeSection:(KSOFormSection *)section;
+- (void)removeSection:(KSOFormSection *)section animation:(UITableViewRowAnimation)animation;
 - (void)removeSections:(NSArray<KSOFormSection *> *)sections;
+- (void)removeSections:(NSArray<KSOFormSection *> *)sections animation:(UITableViewRowAnimation)animation;
 
 - (void)replaceSection:(KSOFormSection *)oldSection withSection:(KSOFormSection *)newSection;
+- (void)replaceSection:(KSOFormSection *)oldSection withSection:(KSOFormSection *)newSection animation:(UITableViewRowAnimation)animation;
 
 @end
 

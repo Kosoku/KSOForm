@@ -70,28 +70,54 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
     return [self initWithDictionary:dictionary model:nil];
 }
 
+- (void)performUpdates:(dispatch_block_t)updates {
+    [self.model.tableView beginUpdates];
+    
+    updates();
+    
+    [self.model.tableView endUpdates];
+}
+
 - (void)addRow:(KSOFormRow *)row {
     [self addRows:@[row]];
+}
+- (void)addRow:(KSOFormRow *)row animation:(UITableViewRowAnimation)animation; {
+    [self addRows:@[row] animation:animation];
 }
 - (void)addRows:(NSArray<KSOFormRow *> *)rows; {
     [self insertRows:rows atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_rows.count, rows.count)]];
 }
+- (void)addRows:(NSArray<KSOFormRow *> *)rows animation:(UITableViewRowAnimation)animation; {
+    [self insertRows:rows atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_rows.count, rows.count)] animation:animation];
+}
 
 - (void)addRowFromDictionary:(NSDictionary<NSString *,id> *)dictionary; {
     [self addRow:[[KSOFormRow alloc] initWithDictionary:dictionary section:self]];
+}
+- (void)addRowFromDictionary:(NSDictionary<NSString *,id> *)dictionary animation:(UITableViewRowAnimation)animation; {
+    [self addRow:[[KSOFormRow alloc] initWithDictionary:dictionary section:self] animation:animation];
 }
 - (void)addRowsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries; {
     [self addRows:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
         return [[KSOFormRow alloc] initWithDictionary:object section:self];
     }]];
 }
+- (void)addRowsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries animation:(UITableViewRowAnimation)animation; {
+    [self addRows:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
+        return [[KSOFormRow alloc] initWithDictionary:object section:self];
+    }] animation:animation];
+}
 
 - (void)insertRow:(KSOFormRow *)row atIndex:(NSUInteger)index; {
     [self insertRows:@[row] atIndexes:[NSIndexSet indexSetWithIndex:index]];
 }
+- (void)insertRow:(KSOFormRow *)row atIndex:(NSUInteger)index animation:(UITableViewRowAnimation)animation; {
+    [self insertRows:@[row] atIndexes:[NSIndexSet indexSetWithIndex:index] animation:animation];
+}
 - (void)insertRows:(NSArray<KSOFormRow *> *)rows atIndexes:(NSIndexSet *)indexes; {
-    [self.model.tableView beginUpdates];
-    
+    [self insertRows:rows atIndexes:indexes animation:UITableViewRowAnimationNone];
+}
+- (void)insertRows:(NSArray<KSOFormRow *> *)rows atIndexes:(NSIndexSet *)indexes animation:(UITableViewRowAnimation)animation; {
     NSInteger section = [self.model.sections indexOfObject:self];
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     
@@ -105,17 +131,19 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
         [row setSection:self];
     }
     
-    [self.model.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
-    
-    [self.model.tableView endUpdates];
+    [self.model.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:animation];
 }
 
 - (void)removeRow:(KSOFormRow *)row; {
     [self removeRows:@[row]];
 }
+- (void)removeRow:(KSOFormRow *)row animation:(UITableViewRowAnimation)animation; {
+    [self removeRows:@[row] animation:animation];
+}
 - (void)removeRows:(NSArray<KSOFormRow *> *)rows; {
-    [self.model.tableView beginUpdates];
-    
+    [self removeRows:rows animation:UITableViewRowAnimationNone];
+}
+- (void)removeRows:(NSArray<KSOFormRow *> *)rows animation:(UITableViewRowAnimation)animation; {
     NSInteger section = [self.model.sections indexOfObject:self];
     NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
@@ -130,14 +158,13 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
     
     [_rows removeObjectsAtIndexes:indexes];
     
-    [self.model.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-    
-    [self.model.tableView endUpdates];
+    [self.model.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:animation];
 }
 
 - (void)replaceRow:(KSOFormRow *)oldRow withRow:(KSOFormRow *)newRow; {
-    [self.model.tableView beginUpdates];
-    
+    [self replaceRow:oldRow withRow:newRow animation:UITableViewRowAnimationNone];
+}
+- (void)replaceRow:(KSOFormRow *)oldRow withRow:(KSOFormRow *)newRow animation:(UITableViewRowAnimation)animation; {
     NSUInteger index = [_rows indexOfObject:oldRow];
     
     [_rows replaceObjectAtIndex:index withObject:newRow];
@@ -145,9 +172,7 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
     [oldRow setSection:nil];
     [newRow setSection:self];
     
-    [self.model.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
-    
-    [self.model.tableView endUpdates];
+    [self.model.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:animation];
 }
 #pragma mark Properties
 - (BOOL)wantsHeaderView {
