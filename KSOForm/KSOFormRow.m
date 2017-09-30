@@ -99,7 +99,7 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
 }
 
 - (instancetype)init {
-    return [self initWithDictionary:nil section:nil];
+    return [self initWithDictionary:nil];
 }
 
 @synthesize autocapitalizationType=_autocapitalizationType;
@@ -115,11 +115,9 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
 @synthesize secureTextEntry=_secureTextEntry;
 @synthesize textContentType=_textContentType;
 
-- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary section:(KSOFormSection *)section {
+- (instancetype)initWithDictionary:(NSDictionary<KSOFormRowKey, id> *)dictionary {
     if (!(self = [super init]))
         return nil;
-    
-    _section = section;
     
     _identifier = [[NSUUID UUID] UUIDString];
     
@@ -195,9 +193,6 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     _buttonAccessibilityHint = dictionary[KSOFormRowKeyButtonAccessibilityHint];
     
     return self;
-}
-- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
-    return [self initWithDictionary:dictionary section:nil];
 }
 
 - (BOOL)isEditable {

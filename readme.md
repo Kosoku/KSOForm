@@ -10,6 +10,7 @@
 - `UIImageView`
 - `UILabel`
 - `UITextField`
+- `UITextView`
 - `UISwitch`
 - `UIPickerView`
 - `UIDatePicker`

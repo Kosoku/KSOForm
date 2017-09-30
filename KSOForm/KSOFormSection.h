@@ -14,56 +14,9 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <UIKit/UIKit.h>
+#import <KSOForm/KSOFormSectionDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-/**
- String type that should be used for keys of a dictionary used to initialize the receiver.
- */
-typedef NSString* KSOFormSectionKey NS_EXTENSIBLE_STRING_ENUM;
-
-/**
- The KSOFormRow objects owned by the receiver. These can be either KSOFormRow objects or NSDictionary objects.
- 
- @see rows
- */
-FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyRows;
-/**
- The title of the section header in the UITableView displaying the form.
- 
- @see headerTitle
- */
-FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderTitle;
-/**
- The title of the section footer in the UITableView displaying the form.
- 
- @see footerTitle
- */
-FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterTitle;
-/**
- The attributed title of the section header in the UITableView displaying the form.
- 
- @see headerAttributedTitle
- */
-FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderAttributedTitle;
-/**
- The attributed title of the section footer in the UITableView displaying the form.
- 
- @see footerAttributedTitle
- */
-FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle;
-/**
- The custom section header class that should be used for this section.
- 
- @see headerViewClass
- */
-FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderViewClass;
-/**
- The custom section footer class that should be used for this section.
- 
- @see footerViewClass
- */
-FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterViewClass;
 
 @class KSOFormRow,KSOFormModel;
 
@@ -127,20 +80,57 @@ FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterViewClass;
  */
 @property (readonly,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 
-- (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary model:(nullable KSOFormModel *)model NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary;
+/**
+ The designated initializer. Pass a dictionary using the KSOFormSectionKey keys above.
+ 
+ @param dictionary The dictionary contains KSOFormSectionKey keys and appropriate values
+ @return The initialized instance
+ */
+- (instancetype)initWithDictionary:(nullable NSDictionary<KSOFormSectionKey, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
-- (void)performUpdates:(nullable NS_NOESCAPE dispatch_block_t)updates;
+/**
+ Perform batch updates to the rows owned by the receiver. All calls to the add/insert/remove/replace methods will be animated at the same time.
+ 
+ @param updates The block of updates to perform
+ */
+- (void)performUpdates:(NS_NOESCAPE dispatch_block_t)updates;
 
+/**
+ Add the *row* without animation.
+ 
+ @param row The row to add
+ */
 - (void)addRow:(KSOFormRow *)row;
+/**
+ Add the *row* using the specified *animation*.
+ 
+ @param row The row to add
+ @param animation The animation to use
+ */
 - (void)addRow:(KSOFormRow *)row animation:(UITableViewRowAnimation)animation;
+/**
+ Adds the *rows* without animation.
+ 
+ @param rows The rows to add
+ */
 - (void)addRows:(NSArray<KSOFormRow *> *)rows;
+/**
+ Adds the *rows* using the specified *animation*.
+ 
+ @param rows The rows to add
+ @param animation The animation to use
+ */
 - (void)addRows:(NSArray<KSOFormRow *> *)rows animation:(UITableViewRowAnimation)animation;
 
-- (void)addRowFromDictionary:(NSDictionary<NSString *,id> *)dictionary;
-- (void)addRowFromDictionary:(NSDictionary<NSString *,id> *)dictionary animation:(UITableViewRowAnimation)animation;
-- (void)addRowsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries;
-- (void)addRowsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries animation:(UITableViewRowAnimation)animation;
+/**
+ Add the row from *dictionary* without animation.
+ 
+ @param dictionary The dictionary from which to create a row
+ */
+- (void)addRowFromDictionary:(NSDictionary<KSOFormSectionKey, id> *)dictionary;
+- (void)addRowFromDictionary:(NSDictionary<KSOFormSectionKey, id> *)dictionary animation:(UITableViewRowAnimation)animation;
+- (void)addRowsFromDictionaries:(NSArray<NSDictionary<KSOFormSectionKey, id> *> *)dictionaries;
+- (void)addRowsFromDictionaries:(NSArray<NSDictionary<KSOFormSectionKey, id> *> *)dictionaries animation:(UITableViewRowAnimation)animation;
 
 - (void)insertRow:(KSOFormRow *)row atIndex:(NSUInteger)index;
 - (void)insertRow:(KSOFormRow *)row atIndex:(NSUInteger)index animation:(UITableViewRowAnimation)animation;

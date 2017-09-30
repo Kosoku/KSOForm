@@ -116,19 +116,19 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 }
 
 - (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary; {
-    [self addSection:[[KSOFormSection alloc] initWithDictionary:dictionary model:self]];
+    [self addSection:[[KSOFormSection alloc] initWithDictionary:dictionary]];
 }
 - (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary animation:(UITableViewRowAnimation)animation; {
-    [self addSection:[[KSOFormSection alloc] initWithDictionary:dictionary model:self] animation:animation];
+    [self addSection:[[KSOFormSection alloc] initWithDictionary:dictionary] animation:animation];
 }
 - (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries; {
     [self addSections:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
-        return [[KSOFormSection alloc] initWithDictionary:object model:self];
+        return [[KSOFormSection alloc] initWithDictionary:object];
     }]];
 }
 - (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries animation:(UITableViewRowAnimation)animation; {
     [self addSections:[dictionaries KQS_map:^id _Nullable(NSDictionary<NSString *,id> * _Nonnull object, NSInteger index) {
-        return [[KSOFormSection alloc] initWithDictionary:object model:self];
+        return [[KSOFormSection alloc] initWithDictionary:object];
     }] animation:animation];
 }
 

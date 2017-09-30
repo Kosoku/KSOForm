@@ -14,6 +14,7 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <UIKit/UIKit.h>
+#import <KSOForm/KSOFormSectionDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -103,9 +104,9 @@ UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRows;
  The designated initializer. Pass a dictionary using the KSOFormModelKey keys above.
  
  @param dictionary The dictionary contains KSOFormModelKey keys and appropriate values
- @return The initialize instance
+ @return The initialized instance
  */
-- (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDictionary:(nullable NSDictionary<KSOFormModelKey, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns the corresponding KSOFormRow object for the provided *indexPath* or nil if the section or row of the *indexPath* is out of bounds.
@@ -127,7 +128,7 @@ UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRows;
  
  @param updates The block of updates to perform
  */
-- (void)performUpdates:(nullable NS_NOESCAPE dispatch_block_t)updates;
+- (void)performUpdates:(NS_NOESCAPE dispatch_block_t)updates;
 
 /**
  Adds the section without animation.
@@ -161,27 +162,27 @@ UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRows;
  
  @param dictionary The dictionary from which to create a section
  */
-- (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary;
+- (void)addSectionFromDictionary:(NSDictionary<KSOFormSectionKey, id> *)dictionary;
 /**
  Add the section from *dictionary* using the specified *animation*.
  
  @param dictionary The dictionary from which to create a section
  @param animation The animation to use
  */
-- (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary animation:(UITableViewRowAnimation)animation;
+- (void)addSectionFromDictionary:(NSDictionary<KSOFormSectionKey, id> *)dictionary animation:(UITableViewRowAnimation)animation;
 /**
  Add the sections from *dictionaries* without animation.
  
  @param dictionaries The dictionaries from which to create sections
  */
-- (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries;
+- (void)addSectionsFromDictionaries:(NSArray<NSDictionary<KSOFormSectionKey, id> *> *)dictionaries;
 /**
  Add the sections from *dictionaries* using the specified *animation*.
  
  @param dictionaries The dictionaries from which to create sections
  @param animation The animation to use
  */
-- (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries animation:(UITableViewRowAnimation)animation;
+- (void)addSectionsFromDictionaries:(NSArray<NSDictionary<KSOFormSectionKey, id> *> *)dictionaries animation:(UITableViewRowAnimation)animation;
 
 /**
  Insert the *section* at *index* without animation.
