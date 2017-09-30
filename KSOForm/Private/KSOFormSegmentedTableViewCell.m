@@ -65,7 +65,7 @@
             [self.trailingView insertSegmentWithImage:obj atIndex:idx animated:NO];
         }
         else {
-            [self.trailingView insertSegmentWithTitle:obj atIndex:idx animated:NO];
+            [self.trailingView insertSegmentWithTitle:formRow.valueFormatter == nil ? obj : [formRow.valueFormatter stringForObjectValue:obj]  atIndex:idx animated:NO];
         }
     }];
     

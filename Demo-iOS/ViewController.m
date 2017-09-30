@@ -179,7 +179,14 @@
                                               }];
     [controlsModel.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyType: @(KSOFormRowTypeSegmented),
                                                                    KSOFormRowKeyTitle: @"Segmented",
-                                                                   KSOFormRowKeySegmentedItems: @[@"First",@"Second",@"Third",@"Fourth"]
+                                                                   KSOFormRowKeySegmentedItems: @[@1,@2,@3,@4],
+                                                                   KSOFormRowKeyValueFormatter: ({
+        NSNumberFormatter *retval = [[NSNumberFormatter alloc] init];
+        
+        [retval setNumberStyle:NSNumberFormatterOrdinalStyle];
+        
+        retval;
+    })
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
                                                                    KSOFormRowKeyTitle: @"Toggle Something"
