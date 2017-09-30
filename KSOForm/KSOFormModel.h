@@ -122,41 +122,201 @@ UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRows;
  */
 - (nullable NSIndexPath *)indexPathForRow:(KSOFormRow *)formRow;
 
+/**
+ Perform batch updates to the sections/rows owned by the receiver. All calls to the add/insert/remove/replace methods will be animated at the same time.
+ 
+ @param updates The block of updates to perform
+ */
 - (void)performUpdates:(nullable NS_NOESCAPE dispatch_block_t)updates;
 
+/**
+ Adds the section without animation.
+ 
+ @param section The section to add
+ */
 - (void)addSection:(KSOFormSection *)section;
+/**
+ Adds the section using the specified *animation*.
+ 
+ @param section The section to add
+ @param animation The animation to use
+ */
 - (void)addSection:(KSOFormSection *)section animation:(UITableViewRowAnimation)animation;
+/**
+ Adds the sections without animation.
+ 
+ @param sections The sections to add
+ */
 - (void)addSections:(NSArray<KSOFormSection *> *)sections;
+/**
+ Adds the sections using the specified *animation*.
+ 
+ @param sections The sections to add
+ @param animation The animation to use
+ */
 - (void)addSections:(NSArray<KSOFormSection *> *)sections animation:(UITableViewRowAnimation)animation;
 
+/**
+ Add the section from *dictionary* without animation.
+ 
+ @param dictionary The dictionary from which to create a section
+ */
 - (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary;
+/**
+ Add the section from *dictionary* using the specified *animation*.
+ 
+ @param dictionary The dictionary from which to create a section
+ @param animation The animation to use
+ */
 - (void)addSectionFromDictionary:(NSDictionary<NSString *,id> *)dictionary animation:(UITableViewRowAnimation)animation;
+/**
+ Add the sections from *dictionaries* without animation.
+ 
+ @param dictionaries The dictionaries from which to create sections
+ */
 - (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries;
+/**
+ Add the sections from *dictionaries* using the specified *animation*.
+ 
+ @param dictionaries The dictionaries from which to create sections
+ @param animation The animation to use
+ */
 - (void)addSectionsFromDictionaries:(NSArray<NSDictionary<NSString *,id> *> *)dictionaries animation:(UITableViewRowAnimation)animation;
 
+/**
+ Insert the *section* at *index* without animation.
+ 
+ @param section The section to insert
+ @param index The index to insert at
+ */
 - (void)insertSection:(KSOFormSection *)section atIndex:(NSUInteger)index;
+/**
+ Insert the *section* at *index* using the specified *animation*.
+ 
+ @param section The section to insert
+ @param index The index to insert at
+ @param animation The animation to use
+ */
 - (void)insertSection:(KSOFormSection *)section atIndex:(NSUInteger)index animation:(UITableViewRowAnimation)animation;
+/**
+ Insert the *sections* at *indexes* without animation.
+ 
+ @param sections The sections to insert
+ @param indexes The indexes to insert at
+ */
 - (void)insertSections:(NSArray<KSOFormSection *> *)sections atIndexes:(NSIndexSet *)indexes;
+/**
+ Insert the *sections* at *indexes* using the specified *animation*.
+ 
+ @param sections The sections to insert
+ @param indexes The indexes to insert at
+ @param animation The animation to use
+ */
 - (void)insertSections:(NSArray<KSOFormSection *> *)sections atIndexes:(NSIndexSet *)indexes animation:(UITableViewRowAnimation)animation;
 
+/**
+ Removes the *section* without animation.
+ 
+ @param section The section to remove
+ */
 - (void)removeSection:(KSOFormSection *)section;
+/**
+ Removes the *section* using the specified *animation*.
+ 
+ @param section The section to remove
+ @param animation The animation to use
+ */
 - (void)removeSection:(KSOFormSection *)section animation:(UITableViewRowAnimation)animation;
+/**
+ Removes the *sections* without animation.
+ 
+ @param sections The sections to remove
+ */
 - (void)removeSections:(NSArray<KSOFormSection *> *)sections;
+/**
+ Removes the *sections* using the specified *animation*.
+ 
+ @param sections The sections to remove
+ @param animation The animation to use
+ */
 - (void)removeSections:(NSArray<KSOFormSection *> *)sections animation:(UITableViewRowAnimation)animation;
 
+/**
+ Replaces *oldSection* with *newSection* without animation.
+ 
+ @param oldSection The section to replace
+ @param newSection The new section
+ */
 - (void)replaceSection:(KSOFormSection *)oldSection withSection:(KSOFormSection *)newSection;
+/**
+ Replaces *oldSection* with *newSection* using the specified *animation*.
+ 
+ @param oldSection The section to replace
+ @param newSection The new section
+ @param animation The animation to use
+ */
 - (void)replaceSection:(KSOFormSection *)oldSection withSection:(KSOFormSection *)newSection animation:(UITableViewRowAnimation)animation;
 
 @end
 
+/**
+ Adds support for keyed subscripting to KSOFormModel instances. You can set and get their properties like you would an instance of NSDictionary.
+ 
+ For example:
+ 
+     KSOFormModel *model = ...;
+ 
+     // set the title
+     model[KSOFormModelKeyTitle] = @"New Title";
+ */
 @interface KSOFormModel (KSOFormModelKeyedSubscripting)
+/**
+ Return the value for the provided *key*.
+ 
+ @param key The form model key
+ @return The corresponding value for key
+ */
 - (nullable id)objectForKeyedSubscript:(KSOFormModelKey)key;
+/**
+ Set the value of *key* to *obj*.
+ 
+ @param obj The obj to set as the value
+ @param key The key to use when setting the value
+ */
 - (void)setObject:(nullable id)obj forKeyedSubscript:(KSOFormModelKey)key;
 @end
 
+/**
+ Adds support for indexed subscripting to KSOFormModel instances. You can get and replace their KSOFormSection objects as you would objects in an NSMutableArray object.
+ 
+ For example:
+ 
+     KSOFormModel *model = ...;
+     KSOFormSection *section = ...;
+ 
+     // replace section at index 2 with section
+     model[2] = section;
+ */
 @interface KSOFormModel (KSOFormModelIndexedSubscripting)
-- (KSOFormSection *)objectAtIndexedSubscript:(NSUInteger)idx;
-- (void)setObject:(KSOFormSection *)obj atIndexedSubscript:(NSUInteger)idx;
+/**
+ Return the KSOFormSection at the provided *index*.
+ 
+     KSOFormModel *model = ...;
+ 
+     // return the section at index 1
+     KSOFormSection *section = model[1];
+ 
+ @param index The index of the KSOFormSection to return
+ @return The section
+ */
+- (KSOFormSection *)objectAtIndexedSubscript:(NSUInteger)index;
+/**
+ This calls through to replaceSection:withSection:, passing *obj* and self[index] respectively.
+ 
+ @param obj The new section
+ @param index The index of the section to replace
+ */
+- (void)setObject:(KSOFormSection *)obj atIndexedSubscript:(NSUInteger)index;
 @end
 
 NS_ASSUME_NONNULL_END

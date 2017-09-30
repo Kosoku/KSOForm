@@ -203,10 +203,10 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 @end
 
 @implementation KSOFormModel (KSOFormModelIndexedSubscripting)
-- (KSOFormSection *)objectAtIndexedSubscript:(NSUInteger)idx {
-    return self.sections[idx];
+- (KSOFormSection *)objectAtIndexedSubscript:(NSUInteger)index {
+    return self.sections[index];
 }
-- (void)setObject:(KSOFormSection *)obj atIndexedSubscript:(NSUInteger)idx {
-    [self replaceSection:self.sections[idx] withSection:obj];
+- (void)setObject:(KSOFormSection *)obj atIndexedSubscript:(NSUInteger)index {
+    [self replaceSection:self.sections[index] withSection:obj];
 }
 @end
