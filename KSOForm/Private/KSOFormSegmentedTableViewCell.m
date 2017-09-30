@@ -81,5 +81,12 @@
     if (formTheme.textColor != nil) {
         [self.trailingView setTintColor:formTheme.textColor];
     }
+    
+    if (formTheme.valueTextStyle == nil) {
+        [NSObject KDI_unregisterDynamicTypeObject:self.trailingView];
+    }
+    else {
+        [NSObject KDI_registerDynamicTypeObject:self.trailingView forTextStyle:formTheme.valueTextStyle];
+    }
 }
 @end
