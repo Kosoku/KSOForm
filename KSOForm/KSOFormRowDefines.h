@@ -63,7 +63,11 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
     /**
      The trailing view is a UISegmentedControl.
      */
-    KSOFormRowTypeSegmented
+    KSOFormRowTypeSegmented,
+    /**
+     The trailing view is a UILabel showing the current selection. Tapping the row pushes a new form allowing the user to make a new selection.
+     */
+    KSOFormRowTypeOptions
 };
 
 typedef NS_ENUM(NSInteger, KSOFormRowAction) {

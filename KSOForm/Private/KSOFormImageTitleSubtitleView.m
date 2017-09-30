@@ -20,7 +20,8 @@
 @interface KSOFormImageTitleSubtitleView ()
 @property (strong,nonatomic) UIStackView *verticalStackView, *horizontalStackView;
 @property (strong,nonatomic) UIImageView *imageView;
-@property (strong,nonatomic) UILabel *titleLabel, *subtitleLabel;
+@property (strong,nonatomic) KDILabel *titleLabel;
+@property (strong,nonatomic) UILabel *subtitleLabel;
 @end
 
 @implementation KSOFormImageTitleSubtitleView
@@ -46,14 +47,13 @@
     [_imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_horizontalStackView insertArrangedSubview:_imageView atIndex:0];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+    _titleLabel = [[KDILabel alloc] initWithFrame:CGRectZero];
     [_titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_titleLabel setBorderWidthRespectsScreenScale:YES];
     [_verticalStackView addArrangedSubview:_titleLabel];
     
     _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [_subtitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_subtitleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
     [_verticalStackView addArrangedSubview:_subtitleLabel];
     
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _horizontalStackView}]];
@@ -82,6 +82,7 @@
     
     [self.titleLabel setFont:_formTheme.titleFont];
     [self.titleLabel setTextColor:_formTheme.titleColor];
+    [self.titleLabel setBorderColor:_formTheme.textColor ?: self.tintColor];
     
     [self.subtitleLabel setFont:_formTheme.subtitleFont];
     [self.subtitleLabel setTextColor:_formTheme.subtitleColor];
@@ -98,6 +99,17 @@
     }
     else {
         [NSObject KDI_registerDynamicTypeObject:self.subtitleLabel forTextStyle:_formTheme.subtitleTextStyle];
+    }
+}
+
+- (void)setShowTitleBorder:(BOOL)showTitleBorder {
+    _showTitleBorder = showTitleBorder;
+    
+    if (_showTitleBorder) {
+        [self.titleLabel setBorderOptions:KDIBorderOptionsBottom];
+    }
+    else {
+        [self.titleLabel setBorderOptions:KDIBorderOptionsNone];
     }
 }
 

@@ -344,6 +344,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     KSOFormRow *formRow = [self.model rowForIndexPath:indexPath];
+    
     UIViewController *viewController = nil;
     
     if (formRow.actionViewControllerClass != Nil) {

@@ -18,4 +18,6 @@
 
 @interface KSOFormImageTitleSubtitleView : UIView <KSOFormRowView>
 
+@property (assign,nonatomic) BOOL showTitleBorder;
+
 @end
