@@ -16,9 +16,13 @@
 #import <KSOForm/KSOFormSection.h>
 #import <KSOForm/KSOFormTheme.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol KSOFormSectionView <NSObject>
 @required
-@property (strong,nonatomic) KSOFormSection *formSection;
+@property (strong,nonatomic,nullable) KSOFormSection *formSection;
 @optional
-@property (strong,nonatomic) KSOFormTheme *formTheme;
+@property (strong,nonatomic,nullable) KSOFormTheme *formTheme;
 @end
+
+NS_ASSUME_NONNULL_END

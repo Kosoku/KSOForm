@@ -16,9 +16,13 @@
 #import <KSOForm/KSOFormRow.h>
 #import <KSOForm/KSOFormTheme.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol KSOFormRowView <NSObject>
 @required
-@property (strong,nonatomic) KSOFormRow *formRow;
+@property (strong,nonatomic,nullable) KSOFormRow *formRow;
 @optional
-@property (strong,nonatomic) KSOFormTheme *formTheme;
+@property (strong,nonatomic,nullable) KSOFormTheme *formTheme;
 @end
+
+NS_ASSUME_NONNULL_END

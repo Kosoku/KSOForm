@@ -23,7 +23,7 @@ typedef BOOL(^KSOFormRowValueDataSourceShouldChangeValueBlock)(KSOFormRow *row, 
 
 @protocol KSOFormRowValueDataSource <NSObject>
 @optional
-@property (readonly,copy,nonatomic) KSOFormRowValueDataSourceShouldChangeValueBlock shouldChangeValueBlock;
+@property (readonly,copy,nonatomic,nullable) KSOFormRowValueDataSourceShouldChangeValueBlock shouldChangeValueBlock;
 @end
 
 NS_ASSUME_NONNULL_END

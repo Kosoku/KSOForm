@@ -15,5 +15,9 @@
 
 #import <KSOForm/KSOFormPickerViewRow.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSString (KSOFormPickerViewRowExtensions) <KSOFormPickerViewRow>
 @end
+
+NS_ASSUME_NONNULL_END

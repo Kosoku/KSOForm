@@ -15,7 +15,12 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol KSOFormPickerViewRow <NSObject>
 @required
 @property (readonly,nonatomic) NSString *formPickerViewRowTitle;
 @end
+
+NS_ASSUME_NONNULL_END
+
