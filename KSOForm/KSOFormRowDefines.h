@@ -20,16 +20,49 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Enum for possible form row types.
+ */
 typedef NS_ENUM(NSInteger, KSOFormRowType) {
+    /**
+     The trailing view is a UILabel.
+     */
     KSOFormRowTypeLabel = 0,
+    /**
+     The trailing view is a UITextField.
+     */
     KSOFormRowTypeText,
+    /**
+     The trailing view is a UITextView.
+     */
     KSOFormRowTypeTextMultiline,
+    /**
+     The trailing view is a UISwitch.
+     */
     KSOFormRowTypeSwitch,
+    /**
+     The trailing view is a KDIPickerViewButton.
+     */
     KSOFormRowTypePickerView,
+    /**
+     The trailing view is a KDIDatePickerButton.
+     */
     KSOFormRowTypeDatePicker,
+    /**
+     The trailing view is a UIStepper.
+     */
     KSOFormRowTypeStepper,
+    /**
+     The trailing view is a UISlider.
+     */
     KSOFormRowTypeSlider,
+    /**
+     The leading view is a UIButton. The trailing view is nil.
+     */
     KSOFormRowTypeButton,
+    /**
+     The trailing view is a UISegmentedControl.
+     */
     KSOFormRowTypeSegmented
 };
 
