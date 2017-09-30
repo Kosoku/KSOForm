@@ -73,6 +73,10 @@
     [super setFormTheme:formTheme];
     
     [self.leadingView setFormTheme:formTheme];
+    
+    if (formTheme.textColor != nil) {
+        [self.trailingView setOnTintColor:formTheme.textColor];
+    }
 }
 
 @end

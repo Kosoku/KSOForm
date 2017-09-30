@@ -132,6 +132,7 @@
         KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
         
         [theme setKeyboardAppearance:UIKeyboardAppearanceDark];
+        [theme setTextColor:KDIColorHexadecimal(@"276695")];
         
         [self setTheme:theme];
         
