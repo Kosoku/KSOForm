@@ -61,11 +61,11 @@
     [self.trailingView removeAllSegments];
     
     [formRow.segmentedItems enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:UIImage.class]) {
-            [self.trailingView insertSegmentWithImage:obj atIndex:idx animated:NO];
+        if ([obj respondsToSelector:@selector(formRowSegmentedItemImage)]) {
+            [self.trailingView insertSegmentWithImage:[obj formRowSegmentedItemImage] atIndex:idx animated:NO];
         }
         else {
-            [self.trailingView insertSegmentWithTitle:formRow.valueFormatter == nil ? obj : [formRow.valueFormatter stringForObjectValue:obj]  atIndex:idx animated:NO];
+            [self.trailingView insertSegmentWithTitle:formRow.valueFormatter == nil ? [obj formRowSegmentedItemTitle] : [formRow.valueFormatter stringForObjectValue:obj]  atIndex:idx animated:NO];
         }
     }];
     

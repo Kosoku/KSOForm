@@ -1,8 +1,8 @@
 //
-//  KSOForm.h
-//  KSOForm
+//  KSOFormRowSegmentedItem.h
+//  KSOForm-iOS
 //
-//  Created by William Towe on 9/24/17.
+//  Created by William Towe on 9/30/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -15,29 +15,19 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for KSOForm.
-FOUNDATION_EXPORT double KSOFormVersionNumber;
+NS_ASSUME_NONNULL_BEGIN
 
-//! Project version string for KSOForm.
-FOUNDATION_EXPORT const unsigned char KSOFormVersionString[];
+// implement one of the two properties
+@protocol KSOFormRowSegmentedItem <NSObject>
+@optional
+@property (readonly,nonatomic,nullable) UIImage *formRowSegmentedItemImage;
+@property (readonly,nonatomic,nullable) NSString *formRowSegmentedItemTitle;
+@end
 
-// In this header, you should import all the public headers of your framework using statements like #import <KSOForm/PublicHeader.h>
+@interface UIImage (KSOFormRowSegmentedItemExtensions) <KSOFormRowSegmentedItem>
+@end
 
-#import <KSOForm/KSOFormModelDefines.h>
-#import <KSOForm/KSOFormSectionDefines.h>
-#import <KSOForm/KSOFormRowDefines.h>
+@interface NSString (KSOFormRowSegmentedItemExtensions) <KSOFormRowSegmentedItem>
+@end
 
-#import <KSOForm/KSOFormRowView.h>
-#import <KSOForm/KSOFormSectionView.h>
-#import <KSOForm/KSOFormRowValueDataSource.h>
-#import <KSOForm/KSOFormPickerViewRow.h>
-#import <KSOForm/KSOFormRowSegmentedItem.h>
-#import <KSOForm/NSString+KSOFormPickerViewRowExtensions.h>
-#import <KSOForm/KSOFormRowActionDelegate.h>
-
-#import <KSOForm/KSOFormModel.h>
-#import <KSOForm/KSOFormSection.h>
-#import <KSOForm/KSOFormRow.h>
-#import <KSOForm/KSOFormTheme.h>
-
-#import <KSOForm/KSOFormTableViewController.h>
+NS_ASSUME_NONNULL_END

@@ -17,6 +17,7 @@
 #import <KSOForm/KSOFormRowDefines.h>
 #import <KSOForm/KSOFormRowValueDataSource.h>
 #import <KSOForm/KSOFormPickerViewRow.h>
+#import <KSOForm/KSOFormRowSegmentedItem.h>
 #import <KSOForm/KSOFormRowActionDelegate.h>
 #import <KSOTextValidation/KSOTextValidator.h>
 #import <KSOTextValidation/KSOTextFormatter.h>
@@ -42,8 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,nullable) id value;
 @property (readonly,nonatomic,nullable) NSString *formattedValue;
 @property (copy,nonatomic,nullable) NSString *valueKey;
+// this only formats read only value, to format as the user types, use textFormatter property
 @property (strong,nonatomic,nullable) __kindof NSFormatter *valueFormatter;
-@property (weak,nonatomic,nullable ) NSObject<KSOFormRowValueDataSource> *valueDataSource;
+@property (weak,nonatomic,nullable) NSObject<KSOFormRowValueDataSource> *valueDataSource;
 @property (copy,nonatomic,nullable) KSOFormRowShouldChangeValueBlock shouldChangeValueBlock;
 @property (copy,nonatomic,nullable) KSOFormRowDidChangeValueBlock didChangeValueBlock;
 
@@ -78,8 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,nullable) UIImage *sliderMaximumValueImage;
 
 @property (copy,nonatomic,nullable) KDIUIControlBlock controlBlock;
-// NSString or UIImage
-@property (copy,nonatomic,nullable) NSArray *segmentedItems;
+@property (copy,nonatomic,nullable) NSArray<id<KSOFormRowSegmentedItem> > *segmentedItems;
 
 @property (assign,nonatomic) KSOFormRowAction action;
 @property (weak,nonatomic,nullable) id<KSOFormRowActionDelegate> actionDelegate;
