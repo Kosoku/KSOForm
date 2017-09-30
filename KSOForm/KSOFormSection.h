@@ -142,31 +142,148 @@ NS_ASSUME_NONNULL_BEGIN
  @param dictionaries The dictionaries form which to create rows
  */
 - (void)addRowsFromDictionaries:(NSArray<NSDictionary<KSOFormRowKey, id> *> *)dictionaries;
+/**
+ Add the rows from *dictionaries* using the specified *animation*.
+ 
+ @param dictionaries The dictionaries form which to create rows
+ @param animation The animation to use
+ */
 - (void)addRowsFromDictionaries:(NSArray<NSDictionary<KSOFormRowKey, id> *> *)dictionaries animation:(UITableViewRowAnimation)animation;
 
+/**
+ Inserts the *row* at *index* without animation.
+ 
+ @param row The row to add
+ @param index The index to insert at
+ */
 - (void)insertRow:(KSOFormRow *)row atIndex:(NSUInteger)index;
+/**
+ Inserts the *row* at *index* using the specified *animation*.
+ 
+ @param row The row to insert
+ @param index The index to insert at
+ @param animation The animation to use
+ */
 - (void)insertRow:(KSOFormRow *)row atIndex:(NSUInteger)index animation:(UITableViewRowAnimation)animation;
+/**
+ Inserts the *rows* at *indexes* without animation.
+ 
+ @param rows The rows to insert
+ @param indexes The indexes to insert
+ */
 - (void)insertRows:(NSArray<KSOFormRow *> *)rows atIndexes:(NSIndexSet *)indexes;
+/**
+ Inserts the *rows* at *indexes* using the specified *animation*.
+ 
+ @param rows The rows to insert
+ @param indexes The indexes to insert
+ @param animation The animation to use
+ */
 - (void)insertRows:(NSArray<KSOFormRow *> *)rows atIndexes:(NSIndexSet *)indexes animation:(UITableViewRowAnimation)animation;
 
+/**
+ Removes *row* without animation.
+ 
+ @param row The row to remove
+ */
 - (void)removeRow:(KSOFormRow *)row;
+/**
+ Removes *row* using the specified *animation*.
+ 
+ @param row The row to remove
+ @param animation The animation to use
+ */
 - (void)removeRow:(KSOFormRow *)row animation:(UITableViewRowAnimation)animation;
+/**
+ Removes the *rows* without animation.
+ 
+ @param rows The rows the remove
+ */
 - (void)removeRows:(NSArray<KSOFormRow *> *)rows;
+/**
+ Removes *rows* using the specified *animation*.
+ 
+ @param rows The rows to remove
+ @param animation The animation to use
+ */
 - (void)removeRows:(NSArray<KSOFormRow *> *)rows animation:(UITableViewRowAnimation)animation;
 
+/**
+ Replaces the *oldRow* with *newRow* without animation.
+ 
+ @param oldRow The row to replace
+ @param newRow The new row
+ */
 - (void)replaceRow:(KSOFormRow *)oldRow withRow:(KSOFormRow *)newRow;
+/**
+ Replaces *oldRow* with *newRow* using the specified *animation*.
+ 
+ @param oldRow The row to replace
+ @param newRow The new row
+ @param animation The animation to use
+ */
 - (void)replaceRow:(KSOFormRow *)oldRow withRow:(KSOFormRow *)newRow animation:(UITableViewRowAnimation)animation;
 
 @end
 
+/**
+ Adds support for keyed subscripting to KSFormSection instances. You can set and get their properties like you would an instance of NSDictionary.
+ 
+ For example:
+ 
+     KSFormSection *section = ...;
+ 
+     // set the title
+     model[KSOFormSectionKeyHeaderTitle] = @"New Header Title";
+ */
 @interface KSOFormSection (KSOFormSectionKeyedSubscripting)
+/**
+ Return the value for the provided *key*.
+ 
+ @param key The form section key
+ @return The corresponding value for key
+ */
 - (nullable id)objectForKeyedSubscript:(KSOFormSectionKey)key;
+/**
+ Set the value of *key* to *obj*.
+ 
+ @param obj The obj to set as the value
+ @param key The key to use when setting the value
+ */
 - (void)setObject:(nullable id)obj forKeyedSubscript:(KSOFormSectionKey)key;
 @end
 
+/**
+ Adds support for indexed subscripting to KSOFormSection instances. You can get and replace their KSOFormRow objects as you would objects in an NSMutableArray object.
+ 
+ For example:
+ 
+     KSOFormSection *section = ...;
+     KSOFormRow *row = ...;
+ 
+     // replace row at index 2 with row
+     section[2] = row;
+ */
 @interface KSOFormSection (KSOFormSectionIndexedSubscripting)
-- (KSOFormRow *)objectAtIndexedSubscript:(NSUInteger)idx;
-- (void)setObject:(KSOFormRow *)obj atIndexedSubscript:(NSUInteger)idx;
+/**
+ Return the KSOFormRow at the provided *index*.
+ 
+ KSOFormSection *section = ...;
+ 
+ // return the section at index 1
+ KSOFormRow *row = section[1];
+ 
+ @param index The index of the KSOFormRow to return
+ @return The section
+ */
+- (KSOFormRow *)objectAtIndexedSubscript:(NSUInteger)index;
+/**
+ This calls through to replaceRow:withRow:, passing *obj* and self[index] respectively.
+ 
+ @param obj The new section
+ @param index The index of the section to replace
+ */
+- (void)setObject:(KSOFormRow *)obj atIndexedSubscript:(NSUInteger)index;
 @end
 
 NS_ASSUME_NONNULL_END

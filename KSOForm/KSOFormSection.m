@@ -198,10 +198,10 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
 @end
 
 @implementation KSOFormSection (KSOFormSectionIndexedSubscripting)
-- (KSOFormRow *)objectAtIndexedSubscript:(NSUInteger)idx; {
-    return self.rows[idx];
+- (KSOFormRow *)objectAtIndexedSubscript:(NSUInteger)index; {
+    return self.rows[index];
 }
-- (void)setObject:(KSOFormRow *)obj atIndexedSubscript:(NSUInteger)idx; {
-    
+- (void)setObject:(KSOFormRow *)obj atIndexedSubscript:(NSUInteger)index; {
+    [self replaceRow:self.rows[index] withRow:obj];
 }
 @end
