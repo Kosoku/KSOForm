@@ -23,14 +23,20 @@ FOUNDATION_EXPORT const unsigned char KSOFormVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <KSOForm/PublicHeader.h>
 
-#import <KSOForm/KSOFormModel.h>
-#import <KSOForm/KSOFormSection.h>
-#import <KSOForm/KSOFormRow.h>
-#import <KSOForm/KSOFormTheme.h>
-#import <KSOForm/KSOFormTableViewController.h>
+#import <KSOForm/KSOFormModelDefines.h>
+#import <KSOForm/KSOFormSectionDefines.h>
+#import <KSOForm/KSOFormRowDefines.h>
+
 #import <KSOForm/KSOFormRowView.h>
 #import <KSOForm/KSOFormSectionView.h>
 #import <KSOForm/KSOFormRowValueDataSource.h>
 #import <KSOForm/KSOFormPickerViewRow.h>
 #import <KSOForm/NSString+KSOFormPickerViewRowExtensions.h>
 #import <KSOForm/KSOFormRowActionDelegate.h>
+
+#import <KSOForm/KSOFormModel.h>
+#import <KSOForm/KSOFormSection.h>
+#import <KSOForm/KSOFormRow.h>
+#import <KSOForm/KSOFormTheme.h>
+
+#import <KSOForm/KSOFormTableViewController.h>

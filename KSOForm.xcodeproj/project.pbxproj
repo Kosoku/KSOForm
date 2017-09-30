@@ -28,6 +28,7 @@
 		073AE1471F7C10DF00C77C66 /* KSOFormRow+KSOExtensionsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 073AE1451F7C10DF00C77C66 /* KSOFormRow+KSOExtensionsPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		074EDBA91F8009E7001A029D /* KSOFormSectionDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 074EDBA81F8009E7001A029D /* KSOFormSectionDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		074EDBAB1F800AB9001A029D /* KSOFormRowDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 074EDBAA1F800AB9001A029D /* KSOFormRowDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		074EDBAD1F800FF7001A029D /* KSOFormModelDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 074EDBAC1F800FF7001A029D /* KSOFormModelDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0781957A1F7E1F3F00BC136B /* BluetoothTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078195791F7E1F3F00BC136B /* BluetoothTableViewController.m */; };
 		07952D9D1F7892AE006C2A75 /* KSOForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952D9B1F7892AE006C2A75 /* KSOForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07952DA61F789627006C2A75 /* KSOFormSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 07952DA41F789627006C2A75 /* KSOFormSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -148,6 +149,7 @@
 		073AE1451F7C10DF00C77C66 /* KSOFormRow+KSOExtensionsPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KSOFormRow+KSOExtensionsPrivate.h"; sourceTree = "<group>"; };
 		074EDBA81F8009E7001A029D /* KSOFormSectionDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormSectionDefines.h; sourceTree = "<group>"; };
 		074EDBAA1F800AB9001A029D /* KSOFormRowDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormRowDefines.h; sourceTree = "<group>"; };
+		074EDBAC1F800FF7001A029D /* KSOFormModelDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormModelDefines.h; sourceTree = "<group>"; };
 		078195781F7E1F3F00BC136B /* BluetoothTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BluetoothTableViewController.h; sourceTree = "<group>"; };
 		078195791F7E1F3F00BC136B /* BluetoothTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BluetoothTableViewController.m; sourceTree = "<group>"; };
 		07952D981F7892AE006C2A75 /* KSOForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -397,6 +399,7 @@
 		07952DA31F789573006C2A75 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				074EDBAC1F800FF7001A029D /* KSOFormModelDefines.h */,
 				07952DD11F789D21006C2A75 /* KSOFormModel.h */,
 				07952DD21F789D21006C2A75 /* KSOFormModel.m */,
 				074EDBA81F8009E7001A029D /* KSOFormSectionDefines.h */,
@@ -514,6 +517,7 @@
 				073AE1471F7C10DF00C77C66 /* KSOFormRow+KSOExtensionsPrivate.h in Headers */,
 				07CCBAD81F7D667F00AED8AA /* KSOFormTableViewFooterView.h in Headers */,
 				07952DAE1F789681006C2A75 /* KSOFormTableViewController.h in Headers */,
+				074EDBAD1F800FF7001A029D /* KSOFormModelDefines.h in Headers */,
 				07CCBAB71F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h in Headers */,
 				07952DD31F789D21006C2A75 /* KSOFormModel.h in Headers */,
 				079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */,

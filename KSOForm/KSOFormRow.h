@@ -24,8 +24,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-
 @class KSOFormSection,KSOFormModel;
 
 @interface KSOFormRow : NSObject <UITextInputTraits>

@@ -15,6 +15,7 @@
 
 #import <UIKit/UIKit.h>
 #import <KSOForm/KSOFormSectionDefines.h>
+#import <KSOForm/KSOFormRowDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -127,10 +128,21 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param dictionary The dictionary from which to create a row
  */
-- (void)addRowFromDictionary:(NSDictionary<KSOFormSectionKey, id> *)dictionary;
-- (void)addRowFromDictionary:(NSDictionary<KSOFormSectionKey, id> *)dictionary animation:(UITableViewRowAnimation)animation;
-- (void)addRowsFromDictionaries:(NSArray<NSDictionary<KSOFormSectionKey, id> *> *)dictionaries;
-- (void)addRowsFromDictionaries:(NSArray<NSDictionary<KSOFormSectionKey, id> *> *)dictionaries animation:(UITableViewRowAnimation)animation;
+- (void)addRowFromDictionary:(NSDictionary<KSOFormRowKey, id> *)dictionary;
+/**
+ Add the row from *dictionary* using the specified *animation*.
+ 
+ @param dictionary The dictionary from which to create a row
+ @param animation The animation to use
+ */
+- (void)addRowFromDictionary:(NSDictionary<KSOFormRowKey, id> *)dictionary animation:(UITableViewRowAnimation)animation;
+/**
+ Add the rows from *dictionaries* without animation.
+ 
+ @param dictionaries The dictionaries form which to create rows
+ */
+- (void)addRowsFromDictionaries:(NSArray<NSDictionary<KSOFormRowKey, id> *> *)dictionaries;
+- (void)addRowsFromDictionaries:(NSArray<NSDictionary<KSOFormRowKey, id> *> *)dictionaries animation:(UITableViewRowAnimation)animation;
 
 - (void)insertRow:(KSOFormRow *)row atIndex:(NSUInteger)index;
 - (void)insertRow:(KSOFormRow *)row atIndex:(NSUInteger)index animation:(UITableViewRowAnimation)animation;
