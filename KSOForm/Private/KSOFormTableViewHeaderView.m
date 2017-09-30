@@ -40,8 +40,8 @@
             if ([keyPath isEqualToString:@kstKeypath(self,formSection.headerTitle)] ||
                 [keyPath isEqualToString:@kstKeypath(self,formSection.headerAttributedTitle)]) {
                 
-                if (self.formSection.footerAttributedTitle == nil) {
-                    [self.formSectionView setText:self.formSection.headerTitle];
+                if (self.formSection.headerAttributedTitle == nil) {
+                    [self.formSectionView setText:self.formSection.headerTitle.uppercaseString];
                 }
                 else {
                     [self.formSectionView setAttributedText:self.formSection.headerAttributedTitle];
