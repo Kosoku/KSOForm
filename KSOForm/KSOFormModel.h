@@ -29,41 +29,97 @@ typedef NSString* KSOFormModelKey NS_EXTENSIBLE_STRING_ENUM;
  */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyTitle;
 /**
- The backgroundView of the owning KSOFormTableViewController.
+ The backgroundView of the UITableView displaying the form.
  
- @see backgroundView
+ @see [UITableView backgroundView]
  */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyBackgroundView;
 /**
- The tableHeaderView of the owning KSOFormTableViewController.
+ The tableHeaderView of the UITableView displaying the form.
  
- @see headerView
+ @see [UITableView tableHeaderView]
  */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyHeaderView;
 /**
- The tableFooterView of the owning KSOFormTableViewController.
+ The tableFooterView of the UITableView displaying the form.
  
- @see footerView
+ @see [UITableView tableFooterView]
  */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyFooterView;
+/**
+ The KSOFormSection objects owned by the receiver. These can be either KSOFormSection objects or NSDictionary objects.
+ 
+ @see sections
+ */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeySections;
+/**
+ The KSOFormRow objects owned by the receiver. If this key is present and KSOFormModelKeySections is not, a single KSOFormSection object will be created and passed these rows.
+ 
+ @see [KSOFormSection rows]
+ */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRows;
 
 @class KSOFormSection,KSOFormRow;
 
+/**
+ KSOFormModel is the root of a form object displayed by an owning KSOFormTableViewController object. It represents the root of the form tree. Modifying any of its properties will update the display of the form appropriately.
+ */
 @interface KSOFormModel : NSObject
 
+/**
+ The title of the owning KSOFormTableViewController object.
+ 
+ @see [UIViewController title]
+ */
 @property (copy,nonatomic,nullable) NSString *title;
 
+/**
+ The backgroundView of the owning UITableView displaying the form.
+ 
+ @see [UITableView backgroundView]
+ */
 @property (strong,nonatomic,nullable) __kindof UIView *backgroundView;
+/**
+ The tableHeaderView of the UITableView displaying the form.
+ 
+ @see [UITableView tableHeaderView]
+ */
 @property (strong,nonatomic,nullable) __kindof UIView *headerView;
+/**
+ The tableFooterView of the UITableView displaying the form.
+ 
+ @see [UITableView tableFooterView]
+ */
 @property (strong,nonatomic,nullable) __kindof UIView *footerView;
 
+/**
+ The KSOFormSection objects owned by the receiver. Accessing this property always returns a copy of the underlying NSMutableArray that contains the objects. To add/remove sections after creation, use the various public methods below.
+ 
+ @see KSOFormSection
+ */
 @property (readonly,copy,nonatomic) NSArray<KSOFormSection *> *sections;
 
+/**
+ The designated initializer. Pass a dictionary using the KSOFormModelKey keys above.
+ 
+ @param dictionary The dictionary contains KSOFormModelKey keys and appropriate values
+ @return The initialize instance
+ */
 - (instancetype)initWithDictionary:(nullable NSDictionary<NSString *,id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
+/**
+ Returns the corresponding KSOFormRow object for the provided *indexPath* or nil if the section or row of the *indexPath* is out of bounds.
+ 
+ @param indexPath The index path for which to return a row
+ @return The form row
+ */
 - (nullable KSOFormRow *)rowForIndexPath:(NSIndexPath *)indexPath;
+/**
+ Returns the corresponding NSIndexPath object for the provided *formRow* or nil if the *formRow* is not owned by the receiver.
+ 
+ @param formRow The form row for which to return a index path
+ @return The index path
+ */
 - (nullable NSIndexPath *)indexPathForRow:(KSOFormRow *)formRow;
 
 - (void)addSection:(KSOFormSection *)section;

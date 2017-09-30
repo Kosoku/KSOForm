@@ -68,6 +68,11 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 }
 
 - (KSOFormRow *)rowForIndexPath:(NSIndexPath *)indexPath {
+    if (self.sections.count < indexPath.section ||
+        self.sections[indexPath.section].rows.count < indexPath.row) {
+        
+        return nil;
+    }
     return self.sections[indexPath.section].rows[indexPath.row];
 }
 - (NSIndexPath *)indexPathForRow:(KSOFormRow *)formRow {
