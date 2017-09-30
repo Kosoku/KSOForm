@@ -165,5 +165,7 @@
     
     [self.formRow.section.model.tableView beginUpdates];
     [self.formRow.section.model.tableView endUpdates];
+    
+    [self.trailingView scrollRangeToVisible:self.trailingView.selectedRange];
 }
 @end
