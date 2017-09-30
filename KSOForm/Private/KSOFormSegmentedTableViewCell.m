@@ -76,6 +76,8 @@
     
     [self.leadingView setFormTheme:formTheme];
     
+    [self.trailingView setTitleTextAttributes:@{NSFontAttributeName: formTheme.valueFont} forState:UIControlStateNormal];
+    
     if (formTheme.textColor != nil) {
         [self.trailingView setTintColor:formTheme.textColor];
     }
