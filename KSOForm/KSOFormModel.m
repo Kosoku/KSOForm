@@ -25,8 +25,6 @@ KSOFormModelKey const KSOFormModelKeyTitle = @"title";
 KSOFormModelKey const KSOFormModelKeyBackgroundView = @"backgroundView";
 KSOFormModelKey const KSOFormModelKeyHeaderView = @"headerView";
 KSOFormModelKey const KSOFormModelKeyFooterView = @"footerView";
-KSOFormModelKey const KSOFormModelKeyCellIdentifiersToCellNibs = @"cellIdentifiersToCellNibs";
-KSOFormModelKey const KSOFormModelKeyHeaderFooterViewIdentifiersToHeaderFooterViewNibs = @"headerFooterViewIdentifiersToHeaderFooterViewNibs";
 KSOFormModelKey const KSOFormModelKeySections = @"sections";
 KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 
@@ -48,8 +46,6 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     if (!(self = [super init]))
         return nil;
     
-    _cellIdentifiersToCellNibs = dictionary[KSOFormModelKeyCellIdentifiersToCellNibs];
-    _headerFooterViewIdentifiersToHeaderFooterViewNibs = dictionary[KSOFormModelKeyHeaderFooterViewIdentifiersToHeaderFooterViewNibs];
     _title = dictionary[KSOFormModelKeyTitle];
     _backgroundView = dictionary[KSOFormModelKeyBackgroundView];
     _headerView = dictionary[KSOFormModelKeyHeaderView];

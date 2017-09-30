@@ -17,14 +17,35 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ String type that should be used for keys of a dictionary used to initialize the receiver.
+ */
 typedef NSString* KSOFormModelKey NS_EXTENSIBLE_STRING_ENUM;
 
+/**
+ The title of the owning KSOFormTableViewController.
+ 
+ @see title
+ */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyTitle;
+/**
+ The backgroundView of the owning KSOFormTableViewController.
+ 
+ @see backgroundView
+ */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyBackgroundView;
+/**
+ The tableHeaderView of the owning KSOFormTableViewController.
+ 
+ @see headerView
+ */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyHeaderView;
+/**
+ The tableFooterView of the owning KSOFormTableViewController.
+ 
+ @see footerView
+ */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyFooterView;
-UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyCellIdentifiersToCellNibs;
-UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyHeaderFooterViewIdentifiersToHeaderFooterViewNibs;
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeySections;
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRows;
 
@@ -33,9 +54,6 @@ UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRows;
 @interface KSOFormModel : NSObject
 
 @property (copy,nonatomic,nullable) NSString *title;
-
-@property (copy,nonatomic,nullable) NSDictionary<NSString *, UINib *> *cellIdentifiersToCellNibs;
-@property (copy,nonatomic,nullable) NSDictionary<NSString *, UINib *> *headerFooterViewIdentifiersToHeaderFooterViewNibs;
 
 @property (strong,nonatomic,nullable) __kindof UIView *backgroundView;
 @property (strong,nonatomic,nullable) __kindof UIView *headerView;

@@ -27,8 +27,6 @@ KSOFormSectionKey const KSOFormSectionKeyHeaderAttributedTitle = @"headerAttribu
 KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle = @"footerAttributedTitle";
 KSOFormSectionKey const KSOFormSectionKeyHeaderViewClass = @"headerViewClass";
 KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
-KSOFormSectionKey const KSOFormSectionKeyHeaderViewIdentifier = @"headerViewIdentifier";
-KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier = @"footerViewIdentifier";
 
 @interface KSOFormSection ()
 @property (readwrite,weak,nonatomic) KSOFormModel *model;
@@ -57,8 +55,6 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier = @"footerViewIden
     _footerAttributedTitle = dictionary[KSOFormSectionKeyFooterAttributedTitle];
     _headerViewClass = dictionary[KSOFormSectionKeyHeaderViewClass];
     _footerViewClass = dictionary[KSOFormSectionKeyFooterViewClass];
-    _headerViewIdentifier = dictionary[KSOFormSectionKeyHeaderViewIdentifier];
-    _footerViewIdentifier = dictionary[KSOFormSectionKeyFooterViewIdentifier];
     _rows = [[NSMutableArray alloc] init];
     
     if ([[dictionary[KSOFormSectionKeyRows] firstObject] isKindOfClass:NSDictionary.class]) {
@@ -157,14 +153,12 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier = @"footerViewIden
 - (BOOL)wantsHeaderView {
     return (self.headerTitle != nil ||
             self.headerAttributedTitle != nil ||
-            self.headerViewClass != Nil ||
-            self.headerViewIdentifier != nil);
+            self.headerViewClass != Nil);
 }
 - (BOOL)wantsFooterView {
     return (self.footerTitle != nil ||
             self.footerAttributedTitle != nil ||
-            self.footerViewClass != Nil ||
-            self.footerViewIdentifier != nil);
+            self.footerViewClass != Nil);
 }
 
 - (NSArray<KSOFormRow *> *)rows {

@@ -90,7 +90,7 @@
     
     kstWeakify(self);
     
-    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title),@kstKeypath(self,model.cellIdentifiersToCellNibs),@kstKeypath(self,model.headerFooterViewIdentifiersToHeaderFooterViewNibs)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         if ([keyPath isEqualToString:@kstKeypath(self,model)]) {
             [self.model setTableView:self.tableView];
@@ -103,16 +103,6 @@
         }
         else if ([keyPath isEqualToString:@kstKeypath(self,model.title)]) {
             [self setTitle:self.model.title];
-        }
-        else if ([keyPath isEqualToString:@kstKeypath(self,model.cellIdentifiersToCellNibs)]) {
-            [self.model.cellIdentifiersToCellNibs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, UINib * _Nonnull obj, BOOL * _Nonnull stop) {
-                [self.tableView registerNib:obj forCellReuseIdentifier:key];
-            }];
-        }
-        else if ([keyPath isEqualToString:@kstKeypath(self,model.headerFooterViewIdentifiersToHeaderFooterViewNibs)]) {
-            [self.model.headerFooterViewIdentifiersToHeaderFooterViewNibs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, UINib * _Nonnull obj, BOOL * _Nonnull stop) {
-                [self.tableView registerNib:obj forHeaderFooterViewReuseIdentifier:key];
-            }];
         }
     }];
     
@@ -210,9 +200,16 @@
             
             retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(formRow.cellClass) forIndexPath:indexPath];
         }
-    }
-    else if (formRow.cellIdentifier != nil) {
-        retval = [tableView dequeueReusableCellWithIdentifier:formRow.cellIdentifier forIndexPath:indexPath];
+        
+        if (retval == nil) {
+            UINib *nib = [UINib nibWithNibName:NSStringFromClass(formRow.cellClass) bundle:[NSBundle bundleForClass:formRow.cellClass]];
+            
+            if (nib != nil) {
+                [tableView registerNib:nib forCellReuseIdentifier:NSStringFromClass(formRow.cellClass)];
+                
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(formRow.cellClass) forIndexPath:indexPath];
+            }
+        }
     }
     else {
         switch (formRow.type) {
@@ -285,16 +282,9 @@
                 }
             }
         }
-        else if (formSection.headerViewIdentifier != nil) {
-            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:formSection.headerViewIdentifier];
-        }
         else {
             retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewHeaderView.class)];
         }
-        
-//        if (tableView.style == UITableViewStyleGrouped) {
-//            [retval setLayoutMargins:UIEdgeInsetsMake(11, 20, 11, 20)];
-//        }
         
         NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view header view must conform to KSOFormSectionView protocol!");
         
@@ -330,16 +320,9 @@
                 }
             }
         }
-        else if (formSection.footerViewIdentifier != nil) {
-            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:formSection.footerViewIdentifier];
-        }
         else {
             retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewFooterView.class)];
         }
-        
-//        if (tableView.style == UITableViewStyleGrouped) {
-//            [retval setLayoutMargins:UIEdgeInsetsMake(11, 20, 11, 20)];
-//        }
         
         NSAssert([retval conformsToProtocol:@protocol(KSOFormSectionView)], @"table view footer view must conform to KSOFormSectionView protocol!");
         

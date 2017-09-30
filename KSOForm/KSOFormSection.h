@@ -26,8 +26,6 @@ FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderAttributedTitle
 FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle;
 FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderViewClass;
 FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterViewClass;
-FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderViewIdentifier;
-FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier;
 
 @class KSOFormRow,KSOFormModel;
 
@@ -48,8 +46,6 @@ FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterViewIdentifier;
 
 @property (strong,nonatomic,nullable) Class headerViewClass;
 @property (strong,nonatomic,nullable) Class footerViewClass;
-@property (copy,nonatomic,nullable) NSString *headerViewIdentifier;
-@property (copy,nonatomic,nullable) NSString *footerViewIdentifier;
 
 @property (readonly,copy,nonatomic) NSArray<KSOFormRow *> *rows;
 
