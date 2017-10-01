@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'Ditko'
+  s.name             = 'KSOForm'
   s.version          = '0.1.0'
   s.summary          = 'KSOForm is a iOS framework for creating Settings app like views.'
 
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = 'https://github.com/Kosoku/KSOForm'
-  s.screenshots      = ['https://github.com/Kosoku/KSOForm/raw/master/screenshots/iOS-1.png','https://github.com/Kosoku/KSOForm/raw/master/screenshots/iOS-2.png','https://github.com/KSOForm/Ditko/raw/master/screenshots/iOS-3.png']
+  s.screenshots      = ['https://github.com/Kosoku/KSOForm/raw/master/screenshots/iOS-1.png','https://github.com/Kosoku/KSOForm/raw/master/screenshots/iOS-2.png','https://github.com/Kosoku/KSOForm/raw/master/screenshots/iOS-3.png']
   s.license          = { :type => 'BSD', :file => 'license.txt' }
   s.author           = { 'William Towe' => 'willbur1984@gmail.com' }
   s.source           = { :git => 'https://github.com/Kosoku/KSOForm.git', :tag => s.version.to_s }
