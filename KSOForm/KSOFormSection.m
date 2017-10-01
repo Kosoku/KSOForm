@@ -26,7 +26,9 @@ KSOFormSectionKey const KSOFormSectionKeyFooterTitle = @"footerTitle";
 KSOFormSectionKey const KSOFormSectionKeyHeaderAttributedTitle = @"headerAttributedTitle";
 KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle = @"footerAttributedTitle";
 KSOFormSectionKey const KSOFormSectionKeyHeaderViewClass = @"headerViewClass";
+KSOFormSectionKey const KSOFormSectionKeyHeaderViewClassBundle = @"headerViewClassBundle";
 KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
+KSOFormSectionKey const KSOFormSectionKeyFooterViewClassBundle = @"footerViewClassBundle";
 
 @interface KSOFormSection ()
 @property (readwrite,weak,nonatomic) KSOFormModel *model;
@@ -53,7 +55,9 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewClass = @"footerViewClass";
     _headerAttributedTitle = dictionary[KSOFormSectionKeyHeaderAttributedTitle];
     _footerAttributedTitle = dictionary[KSOFormSectionKeyFooterAttributedTitle];
     _headerViewClass = dictionary[KSOFormSectionKeyHeaderViewClass];
+    _headerViewClassBundle = dictionary[KSOFormSectionKeyHeaderViewClassBundle];
     _footerViewClass = dictionary[KSOFormSectionKeyFooterViewClass];
+    _footerViewClassBundle = dictionary[KSOFormSectionKeyFooterViewClassBundle];
     _rows = [[NSMutableArray alloc] init];
     
     if ([[dictionary[KSOFormSectionKeyRows] firstObject] isKindOfClass:NSDictionary.class]) {

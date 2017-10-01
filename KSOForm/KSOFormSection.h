@@ -70,9 +70,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong,nonatomic,nullable) Class headerViewClass;
 /**
+ Get the custom header view class used to create the header view from a XIB.
+ */
+@property (strong,nonatomic,nullable) NSBundle *headerViewClassBundle;
+/**
  Get the custom footer view class used to display the receiver.
  */
 @property (strong,nonatomic,nullable) Class footerViewClass;
+/**
+ Get the custom footer view class used to create the footer view from a XIB.
+ */
+@property (strong,nonatomic,nullable) NSBundle *footerViewClassBundle;
 
 /**
  The KSOFormRow objects owned by the receiver. Accessing this property always returns a copy of the underlying NSMutableArray that contains the objects. To add/remove rows after creation, use the various public methods below.

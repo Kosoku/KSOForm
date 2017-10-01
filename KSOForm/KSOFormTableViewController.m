@@ -263,23 +263,20 @@
     
     if (formSection.wantsHeaderView) {
         if (formSection.headerViewClass != Nil) {
-            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.headerViewClass)];
+            NSString *identifier = NSStringFromClass(formSection.headerViewClass);
             
-            if (retval == nil) {
-                [self.tableView registerClass:formSection.headerViewClass forHeaderFooterViewReuseIdentifier:NSStringFromClass(formSection.headerViewClass)];
-                
-                retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.headerViewClass)];
-            }
-            
-            if (retval == nil) {
-                UINib *nib = [UINib nibWithNibName:NSStringFromClass(formSection.headerViewClass) bundle:[NSBundle bundleForClass:formSection.headerViewClass]];
-                
-                if (nib != nil) {
-                    [self.tableView registerNib:nib forHeaderFooterViewReuseIdentifier:NSStringFromClass(formSection.headerViewClass)];
-                    
-                    retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.headerViewClass)];
+            if (![self.formHeaderViewIdentifiers containsObject:identifier]) {
+                if (formSection.headerViewClassBundle == nil) {
+                    [tableView registerClass:formSection.headerViewClass forCellReuseIdentifier:identifier];
                 }
+                else {
+                    [tableView registerNib:[UINib nibWithNibName:identifier bundle:formSection.headerViewClassBundle] forCellReuseIdentifier:identifier];
+                }
+                
+                [self.formHeaderViewIdentifiers addObject:identifier];
             }
+            
+            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifier];
         }
         else {
             retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewHeaderView.class)];
@@ -301,23 +298,20 @@
     
     if (formSection.wantsFooterView) {
         if (formSection.footerViewClass != Nil) {
-            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.footerViewClass)];
+            NSString *identifier = NSStringFromClass(formSection.footerViewClass);
             
-            if (retval == nil) {
-                [self.tableView registerClass:formSection.footerViewClass forHeaderFooterViewReuseIdentifier:NSStringFromClass(formSection.footerViewClass)];
-                
-                retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.footerViewClass)];
-            }
-            
-            if (retval == nil) {
-                UINib *nib = [UINib nibWithNibName:NSStringFromClass(formSection.footerViewClass) bundle:[NSBundle bundleForClass:formSection.footerViewClass]];
-                
-                if (nib != nil) {
-                    [self.tableView registerNib:nib forHeaderFooterViewReuseIdentifier:NSStringFromClass(formSection.footerViewClass)];
-                    
-                    retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(formSection.footerViewClass)];
+            if (![self.formFooterViewIdentifiers containsObject:identifier]) {
+                if (formSection.footerViewClassBundle == nil) {
+                    [tableView registerClass:formSection.footerViewClass forCellReuseIdentifier:identifier];
                 }
+                else {
+                    [tableView registerNib:[UINib nibWithNibName:identifier bundle:formSection.footerViewClassBundle] forCellReuseIdentifier:identifier];
+                }
+                
+                [self.formFooterViewIdentifiers addObject:identifier];
             }
+            
+            retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifier];
         }
         else {
             retval = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(KSOFormTableViewFooterView.class)];

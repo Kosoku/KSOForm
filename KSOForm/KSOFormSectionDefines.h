@@ -62,11 +62,23 @@ FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterAttributedTitle
  */
 FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderViewClass;
 /**
+ The custom section header class bundle used to create the header view from a XIB.
+ 
+ @see [KSOFormSection headerViewClassBundle]
+ */
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyHeaderViewClassBundle;
+/**
  The custom section footer class that should be used for this section.
  
  @see footerViewClass
  */
 FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterViewClass;
+/**
+ The custom section footer class bundle that should be used to create the footer view from a XIB.
+ 
+ @see footerViewClassBundle
+ */
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyFooterViewClassBundle;
 
 NS_ASSUME_NONNULL_END
 
