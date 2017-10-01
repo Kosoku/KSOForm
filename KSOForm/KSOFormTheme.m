@@ -92,7 +92,7 @@
     _headerTitleTextStyle = UIFontTextStyleFootnote;
     _footerTitleTextStyle = UIFontTextStyleFootnote;
     _titleTextStyle = UIFontTextStyleBody;
-    _subtitleTextStyle = UIFontTextStyleFootnote;
+    _subtitleTextStyle = UIFontTextStyleCaption1;
     _valueTextStyle = UIFontTextStyleBody;
     
     return self;
@@ -160,7 +160,7 @@
     return [UIFont systemFontOfSize:17.0];
 }
 + (UIFont *)_defaultSubtitleFont; {
-    return [UIFont systemFontOfSize:13.0];
+    return [UIFont systemFontOfSize:12.0];
 }
 + (UIFont *)_defaultValueFont; {
     return [UIFont systemFontOfSize:17.0];

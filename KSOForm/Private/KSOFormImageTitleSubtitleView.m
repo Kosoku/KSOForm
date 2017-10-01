@@ -102,6 +102,10 @@
     }
 }
 
+- (UIView *)leadingSeparatorView {
+    return self.titleLabel;
+}
+
 - (void)setShowTitleBorder:(BOOL)showTitleBorder {
     _showTitleBorder = showTitleBorder;
     

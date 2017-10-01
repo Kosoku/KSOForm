@@ -181,11 +181,14 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueShouldChangeBlock;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock;
 
 /**
- The image of the receiver.
+ The image of the receiver. Aligned to the leading edge.
  
  @see [KSOFormRow image]
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyImage;
+/**
+ The title of the receiver. Aligned to the leading edge.
+ */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTitle;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySubtitle;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellAccessoryType;
