@@ -27,79 +27,251 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class KSOFormSection,KSOFormModel;
 
+/**
+ KSOFormRow represents a single row in the form and is owned by a KSOFormSection.
+ */
 @interface KSOFormRow : NSObject <UITextInputTraits>
 
+/**
+ The section that owns the receiver.
+ 
+ @see KSOFormSection
+ */
 @property (readonly,weak,nonatomic) KSOFormSection *section;
 
+/**
+ The identifier of the receiver. The identifier is created during initialization and cannot be changed.
+ */
 @property (readonly,copy,nonatomic) NSString *identifier;
 
+/**
+ The type of the receiver.
+ 
+ @see KSOFormRowType
+ */
 @property (readonly,assign,nonatomic) KSOFormRowType type;
 
+/**
+ Whether the receiver is enabled. If NO, it will disable any control bound to the receiver (e.g. UISwitch).
+ */
 @property (assign,nonatomic,getter=isEnabled) BOOL enabled;
+/**
+ Whether the receiver can be edited by the user.
+ */
 @property (readonly,nonatomic,getter=isEditable) BOOL editable;
+/**
+ Whether the receiver can be selected by the user.
+ */
 @property (readonly,nonatomic,getter=isSelectable) BOOL selectable;
+/**
+ Whether the receiver is selected.
+ */
 @property (readonly,nonatomic,getter=isSelected) BOOL selected;
 
+/**
+ The value managed by the receiver. Updating this will update any views bound to the receiver.
+ */
 @property (strong,nonatomic,nullable) id value;
+/**
+ The formatted value, which will use valueFormatter is non-nil, otherwise returns the description of value.
+ */
 @property (readonly,nonatomic,nullable) NSString *formattedValue;
+/**
+ The value key to use when reading and writing the value from the valueDataSource.
+ */
 @property (copy,nonatomic,nullable) NSString *valueKey;
-// this only formats read only value, to format as the user types, use textFormatter property
+/**
+ The formatter to use to generate formattedValue. This does not format text as the user types, use textFormatter instead.
+ */
 @property (strong,nonatomic,nullable) __kindof NSFormatter *valueFormatter;
+/**
+ The value data source used to read and write value.
+ */
 @property (weak,nonatomic,nullable) NSObject<KSOFormRowValueDataSource> *valueDataSource;
+/**
+ The block to invoke to accept/reject changes to value.
+ */
 @property (copy,nonatomic,nullable) KSOFormRowShouldChangeValueBlock shouldChangeValueBlock;
+/**
+ The block to invoke after value has changed.
+ */
 @property (copy,nonatomic,nullable) KSOFormRowDidChangeValueBlock didChangeValueBlock;
 
+/**
+ The image, aligned to the leading edge.
+ */
 @property (strong,nonatomic,nullable) UIImage *image;
+/**
+ The title, aligned to the trailing edge of image.
+ */
 @property (copy,nonatomic,nullable) NSString *title;
+/**
+ The subtitle, aligned to the trailing edge of image, underneath title.
+ */
 @property (copy,nonatomic,nullable) NSString *subtitle;
+/**
+ The cell accessory type.
+ 
+ The default is KSOFormRowCellAccessoryTypeAutomatic.
+ */
 @property (assign,nonatomic) KSOFormRowCellAccessoryType cellAccessoryType;
 
+/**
+ The placeholder text.
+ */
 @property (copy,nonatomic,nullable) NSString *placeholder;
+/**
+ The minimum number of lines for multiline text.
+ */
 @property (assign,nonatomic) NSUInteger minimumNumberOfLines;
+/**
+ The maximum number of lines for multiline text.
+ */
 @property (assign,nonatomic) NSUInteger maximumNumberOfLines;
+/**
+ The text validator for validating value if it is text.
+ */
 @property (strong,nonatomic,nullable) id<KSOTextValidator> textValidator;
-// NSFormatter works here as well
+/**
+ The text formatter for formatting value if it is text.
+ */
 @property (strong,nonatomic,nullable) id<KSOTextFormatter> textFormatter;
 
+/**
+ The picker view columns and rows.
+ */
 @property (copy,nonatomic,nullable) NSArray<NSArray<id<KSOFormPickerViewRow> > *> *pickerViewColumnsAndRows;
+/**
+ The picker view rows. Use this to specify a single column.
+ */
 @property (copy,nonatomic,nullable) NSArray<id<KSOFormPickerViewRow> > *pickerViewRows;
+/**
+ The string used to join selected components for display.
+ */
 @property (copy,nonatomic,nullable) NSString *pickerViewSelectedComponentsJoinString;
 
+/**
+ The date picker mode.
+ */
 @property (assign,nonatomic) UIDatePickerMode datePickerMode;
+/**
+ The date picker minimum date.
+ */
 @property (copy,nonatomic,nullable) NSDate *datePickerMinimumDate;
+/**
+ The date picker maximum date.
+ */
 @property (copy,nonatomic,nullable) NSDate *datePickerMaximumDate;
+/**
+ The date formatter used to format the date picker date for display.
+ */
 @property (strong,nonatomic,nullable) NSDateFormatter *datePickerDateFormatter;
 
+/**
+ The stepper minimum value.
+ */
 @property (assign,nonatomic) double stepperMinimumValue;
+/**
+ The stepper maximum value.
+ */
 @property (assign,nonatomic) double stepperMaximumValue;
+/**
+ The stepper step value.
+ */
 @property (assign,nonatomic) double stepperStepValue;
 
+/**
+ The slider minimum value.
+ */
 @property (assign,nonatomic) float sliderMinimumValue;
+/**
+ The slider maximum value.
+ */
 @property (assign,nonatomic) float sliderMaximumValue;
+/**
+ The slider minimum value image.
+ */
 @property (strong,nonatomic,nullable) UIImage *sliderMinimumValueImage;
+/**
+ The slider maximun value image.
+ */
 @property (strong,nonatomic,nullable) UIImage *sliderMaximumValueImage;
 
+/**
+ The block to invoke when a control is tapped (e.g. UIButton).
+ */
 @property (copy,nonatomic,nullable) KDIUIControlBlock controlBlock;
+
+/**
+ The segmented control items.
+ */
 @property (copy,nonatomic,nullable) NSArray<id<KSOFormRowSegmentedItem> > *segmentedItems;
 
+/**
+ The form row action, whether to push or present the new view controller.
+ */
 @property (assign,nonatomic) KSOFormRowAction action;
+/**
+ The action delegate that can determine what is pushed or presented.
+ */
 @property (weak,nonatomic,nullable) id<KSOFormRowActionDelegate> actionDelegate;
+/**
+ The action model to assign to the new form table view controller.
+ */
 @property (strong,nonatomic,nullable) KSOFormModel *actionModel;
+/**
+ The action view controller class to push or present.
+ */
 @property (strong,nonatomic,nullable) Class actionViewControllerClass;
 
+/**
+ The table view cell class to use when displaying the receiver.
+ */
 @property (strong,nonatomic,nullable) Class cellClass;
-@property (copy,nonatomic,nullable) NSString *cellIdentifier;
-@property (copy,nonatomic,nullable) NSString *headerFooterViewIdentifier;
 
+/**
+ The accessibility label for the image.
+ */
 @property (copy,nonatomic,nullable) NSString *imageAccessibilityLabel;
+/**
+ The accessibility hint for the button.
+ */
 @property (copy,nonatomic,nullable) NSString *buttonAccessibilityHint;
 
+/**
+ The designated initializer. Pass a dictionary using the KSOFormRowKey keys above.
+ 
+ @param dictionary The dictionary used to create the receiver
+ @return The initialized instance
+ */
 - (instancetype)initWithDictionary:(nullable NSDictionary<KSOFormRowKey, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
 @end
 
+/**
+ Adds support for keyed subscripting to KSFormRow instances. You can set and get their properties like you would an instance of NSDictionary.
+ 
+ For example:
+ 
+     KSFormRow *row = ...;
+ 
+     // set the placeholder
+     row[KSOFormRowKeyPlaceholder] = @"Placeholder Text";
+ */
 @interface KSOFormRow (KSOFormRowKeyedSubscripting)
+/**
+ Return the value for the provided *key*.
+ 
+ @param key The form row key
+ @return The corresponding value for key
+ */
 - (nullable id)objectForKeyedSubscript:(KSOFormRowKey)key;
+/**
+ Set the value of *key* to *obj*.
+ 
+ @param obj The obj to set as the value
+ @param key The key to use when setting the value
+ */
 - (void)setObject:(nullable id)obj forKeyedSubscript:(KSOFormRowKey)key;
 @end
 
