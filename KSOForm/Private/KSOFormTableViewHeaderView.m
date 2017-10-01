@@ -53,7 +53,9 @@
             }
             
             if ([keyPath isEqualToString:@kstKeypath(self,formTheme)]) {
-                if (self.formSection.headerAttributedTitle == nil) {
+                if (self.formSection.headerAttributedTitle == nil ||
+                    [self.formSection.headerAttributedTitle attribute:NSForegroundColorAttributeName atIndex:0 effectiveRange:NULL] == nil) {
+                    
                     [self.formSectionView setTextColor:self.formTheme.headerTitleColor];
                 }
                 [self.formSectionView setFont:self.formTheme.headerTitleFont];
