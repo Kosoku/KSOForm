@@ -70,36 +70,121 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
     KSOFormRowTypeOptions
 };
 
+/**
+ Enum for possible action values. This controls whether the action view controller is pushed or presented modally.
+ */
 typedef NS_ENUM(NSInteger, KSOFormRowAction) {
+    /**
+     The action view controller is pushed onto the navigation stack.
+     */
     KSOFormRowActionPush = 0,
+    /**
+     The action view controller is presented modally wrapped in a UINavigationController.
+     */
     KSOFormRowActionPresent
 };
 
+/**
+ Enum for possible cell accessory types.
+ */
 typedef NS_ENUM(NSInteger, KSOFormRowCellAccessoryType) {
+    /**
+     No cell accessory type.
+     */
     KSOFormRowCellAccessoryTypeNone = UITableViewCellAccessoryNone,
+    /**
+     The disclosure chevron.
+     */
     KSOFormRowCellAccessoryTypeDisclosureIndicator = UITableViewCellAccessoryDisclosureIndicator,
+    /**
+     The detail button and disclosure chevron.
+     */
     KSOFormRowCellAccessoryTypeDetailDisclosureButton = UITableViewCellAccessoryDetailDisclosureButton,
+    /**
+     The checkmark.
+     */
     KSOFormRowCellAccessoryTypeCheckmark = UITableViewCellAccessoryCheckmark,
+    /**
+     The detail button.
+     */
     KSOFormRowCellAccessoryTypeDetailButton = UITableViewCellAccessoryDetailButton,
+    /**
+     Determine the cell accessory type automatically. This is the default.
+     */
     KSOFormRowCellAccessoryTypeAutomatic = NSIntegerMax
 };
 
 @class KSOFormRow;
 
+/**
+ Block that is invoked when the receiver value is about to change. The block should return YES to allow the change, otherwise NO.
+ 
+ @param row The row whose value ia about to change
+ @param value The new value
+ @param error The error that will be displayed to the user if the change is rejected
+ */
 typedef BOOL(^KSOFormRowShouldChangeValueBlock)(KSOFormRow *row, id _Nullable value, NSError **error);
+/**
+ Block that is invoked when the receiver value changes.
+ 
+ @param row The row whose value changed
+ @param value The new value
+ */
 typedef void(^KSOFormRowDidChangeValueBlock)(KSOFormRow *row, id _Nullable value);
 
+/**
+ String type that should be used for keys of a dictionary used to initialize the receiver.
+ */
 typedef NSString* KSOFormRowKey NS_EXTENSIBLE_STRING_ENUM;
 
-// value related
+/**
+ The type of the receiver. Must be one of the KSOFormRowType values.
+ 
+ @see [KSOFormRow type]
+ */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyType;
+/**
+ The value of the receiver. Should be appropriate for the type, unless a valueFormatter is provided.
+ 
+ @see [KSOFormRow value]
+ */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValue;
+/**
+ The value key of the receiver. This will be used to read/write the value from the valueDataSource.
+ 
+ @see [KSOFormRow valueKey]
+ */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueKey;
+/**
+ The value formatter used to format value for display. Must be a subclass of NSFormatter.
+ 
+ @see [KSOFormRow valueFormatter]
+ */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueFormatter;
+/**
+ The value data source used to retrieve value using valueKey.
+ 
+ @see [KSOFormRow valueDataSource]
+ */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueDataSource;
+/**
+ The value should change block that is invoked before the value is set to allow the change.
+ 
+ @see [KSOFormRow valueShouldChangeBlock]
+ */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueShouldChangeBlock;
+/**
+ The value did change block that is invoked after the value is set.
+ 
+ @see [KSOFormRow valueDidChangeBlock]
+ */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock;
-// secondary properties
+
+/**
+ The image of the receiver.
+ 
+ @see [KSOFormRow image]
+ */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyImage;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTitle;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySubtitle;
