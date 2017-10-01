@@ -18,6 +18,28 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ Enum for possible first responder styles. This affects how first responder status is indicated within the form.
+ */
+typedef NS_ENUM(NSInteger, KSOFormThemeFirstResponderStyle) {
+    /**
+     No indication is made (excluding system indicators like keyboard, caret, etc.).
+     */
+    KSOFormThemeFirstResponderStyleNone = 0,
+    /**
+     The cells backgroundView is animated to/from firstResponderColor and UIColor.clear.
+     */
+    KSOFormThemeFirstResponderStyleBackgroundView,
+    /**
+     The cells title is underlined using firstResponderColor.
+     */
+    KSOFormThemeFirstResponderStyleUnderlineTitle,
+    /**
+     A custom view should be provided within the cells contentView that conforms to KSOFormThemeFirstResponderIndicatorView. Its shouldIndicateFirstResponder property will be set appropriately.
+     */
+    KSOFormThemeFirstResponderStyleCustom
+};
+
+/**
  KSOFormTheme controls the appearance of form UI elements. To create your own theme, copy the defaultTheme and modify its properties.
  */
 @interface KSOFormTheme : NSObject <NSCopying>
@@ -143,6 +165,21 @@ NS_ASSUME_NONNULL_BEGIN
  The default is UIKeyboardAppearanceDefault.
  */
 @property (assign,nonatomic) UIKeyboardAppearance keyboardAppearance;
+
+/**
+ The style used to indicate first responder status.
+ 
+ The default is KSOFormThemeFirstResponderStyleBackgroundView.
+ 
+ @see KSOFormThemeFirstResponderStyle
+ */
+@property (assign,nonatomic) KSOFormThemeFirstResponderStyle firstResponderStyle;
+/**
+ The color used to indicate first responder status.
+ 
+ The default is nil, which means use the current tintColor.
+ */
+@property (strong,nonatomic,nullable) UIColor *firstResponderColor;
 
 /**
  The designated initializer.

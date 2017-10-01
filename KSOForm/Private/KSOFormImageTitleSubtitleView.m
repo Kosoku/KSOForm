@@ -82,7 +82,7 @@
     
     [self.titleLabel setFont:_formTheme.titleFont];
     [self.titleLabel setTextColor:_formTheme.titleColor];
-    [self.titleLabel setBorderColor:_formTheme.textColor ?: self.tintColor];
+    [self.titleLabel setBorderColor:_formTheme.firstResponderColor ?: self.tintColor];
     
     [self.subtitleLabel setFont:_formTheme.subtitleFont];
     [self.subtitleLabel setTextColor:_formTheme.subtitleColor];
@@ -106,10 +106,11 @@
     return self.titleLabel;
 }
 
-- (void)setShowTitleBorder:(BOOL)showTitleBorder {
-    _showTitleBorder = showTitleBorder;
+@synthesize shouldIndicateFirstResponder=_shouldIndicateFirstResponder;
+- (void)setShouldIndicateFirstResponder:(BOOL)shouldIndicateFirstResponder {
+    _shouldIndicateFirstResponder = shouldIndicateFirstResponder;
     
-    if (_showTitleBorder) {
+    if (_shouldIndicateFirstResponder) {
         [self.titleLabel setBorderOptions:KDIBorderOptionsBottom];
     }
     else {

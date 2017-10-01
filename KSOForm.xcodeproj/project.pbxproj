@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0711B17F1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0711B17E1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0711B1811F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0711B1801F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m */; };
 		0712E4E81F78E0BE00F0E223 /* Ditko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0712E4E91F78E0BE00F0E223 /* Ditko.framework */; };
 		0712E4EA1F78E0C200F0E223 /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0712E4EB1F78E0C200F0E223 /* Loki.framework */; };
 		0712E4EC1F78E0C600F0E223 /* Stanley.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0712E4ED1F78E0C600F0E223 /* Stanley.framework */; };
@@ -139,6 +141,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0711B17E1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormThemeFirstResponderIndicatorView.h; sourceTree = "<group>"; };
+		0711B1801F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormThemeFirstResponderIndicatorView.m; sourceTree = "<group>"; };
 		0712E4E91F78E0BE00F0E223 /* Ditko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ditko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0712E4EB1F78E0C200F0E223 /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0712E4ED1F78E0C600F0E223 /* Stanley.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Stanley.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -414,6 +418,8 @@
 				074EDBAA1F800AB9001A029D /* KSOFormRowDefines.h */,
 				07952DA81F789654006C2A75 /* KSOFormRow.h */,
 				07952DA91F789654006C2A75 /* KSOFormRow.m */,
+				0711B17E1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h */,
+				0711B1801F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m */,
 				071ED0331F78D6AB00778F22 /* KSOFormTheme.h */,
 				071ED0341F78D6AB00778F22 /* KSOFormTheme.m */,
 				07952DAC1F789681006C2A75 /* KSOFormTableViewController.h */,
@@ -533,6 +539,7 @@
 				079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */,
 				07CCBAD11F7D659E00AED8AA /* KSOFormSectionView.h in Headers */,
 				07952DD71F78A01F006C2A75 /* KSOFormRowTableViewCell.h in Headers */,
+				0711B17F1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h in Headers */,
 				07CCBADD1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.h in Headers */,
 				079E19261F7998B400743988 /* KSOFormRowValueDataSource.h in Headers */,
 				079A1B431F7ADE9300C9F9BB /* KSOFormPickerViewRow.h in Headers */,
@@ -652,6 +659,7 @@
 			files = (
 				07952DDC1F78A1C6006C2A75 /* KSOFormLabelTableViewCell.m in Sources */,
 				079A1B571F7B478400C9F9BB /* KSOFormButtonTableViewCell.m in Sources */,
+				0711B1811F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m in Sources */,
 				074EDBB51F8050DD001A029D /* KSOFormPickerViewRow.m in Sources */,
 				07CCBAD51F7D663900AED8AA /* KSOFormTableViewHeaderView.m in Sources */,
 				07952DAB1F789654006C2A75 /* KSOFormRow.m in Sources */,

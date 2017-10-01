@@ -16,7 +16,6 @@
 #import "KSOFormTextTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
 
-#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
 #import <KSOTextValidation/KSOTextValidation.h>
@@ -50,11 +49,6 @@
     } forControlEvents:UIControlEventAllEditingEvents];
     [self.trailingView setDelegate:self];
     [self.contentView addSubview:self.trailingView];
-    
-    [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self.trailingView block:^(NSNotification * _Nonnull notification) {
-        kstStrongify(self);
-        [self.leadingView setShowTitleBorder:self.trailingView.isFirstResponder];
-    }];
     
     return self;
 }

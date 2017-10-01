@@ -68,6 +68,9 @@
     
     retval->_keyboardAppearance = _keyboardAppearance;
     
+    retval->_firstResponderStyle = _firstResponderStyle;
+    retval->_firstResponderColor = _firstResponderColor;
+    
     return retval;
 }
 
@@ -94,6 +97,8 @@
     _titleTextStyle = UIFontTextStyleBody;
     _subtitleTextStyle = UIFontTextStyleCaption1;
     _valueTextStyle = UIFontTextStyleBody;
+    
+    _firstResponderStyle = KSOFormThemeFirstResponderStyleBackgroundView;
     
     return self;
 }

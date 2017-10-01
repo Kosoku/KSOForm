@@ -16,7 +16,6 @@
 #import "KSOFormDatePickerTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
 
-#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
 
@@ -46,11 +45,6 @@
         [self.formRow setValue:self.trailingView.date];
     } forControlEvents:UIControlEventValueChanged];
     [self.contentView addSubview:self.trailingView];
-    
-    [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self.trailingView block:^(NSNotification * _Nonnull notification) {
-        kstStrongify(self);
-        [self.leadingView setShowTitleBorder:self.trailingView.isFirstResponder];
-    }];
     
     return self;
 }
