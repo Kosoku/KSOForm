@@ -19,10 +19,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class KSOFormRow;
 
+/**
+ Block that is invoked to allow/deny changes to the KSOFormRow objects value.
+ 
+ @param row The row whose value is about to change
+ @param value The new value
+ @param error An error to display to the user if the change is not allowed
+ @return YES if the change is allowed, otherwise NO
+ */
 typedef BOOL(^KSOFormRowValueDataSourceShouldChangeValueBlock)(KSOFormRow *row, id _Nullable value, NSError **error);
 
 @protocol KSOFormRowValueDataSource <NSObject>
 @optional
+/**
+ Return a block used to validate changes to the KSOFormRow value.
+ */
 @property (readonly,copy,nonatomic,nullable) KSOFormRowValueDataSourceShouldChangeValueBlock shouldChangeValueBlock;
 @end
 

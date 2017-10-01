@@ -17,16 +17,34 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// implement one of the two properties
+/**
+ Protocol for an object that represents a single item in a UISegmentedControl.
+ */
 @protocol KSOFormRowSegmentedItem <NSObject>
 @optional
+/**
+ The image for the item.
+ 
+ @warning Either formRowSegmentedItemImage or formRowSegmentedItemTitle must be non-nil
+ */
 @property (readonly,nonatomic,nullable) UIImage *formRowSegmentedItemImage;
+/**
+ The title for the item.
+ 
+ @warning Either formRowSegmentedItemImage or formRowSegmentedItemTitle must be non-nil
+ */
 @property (readonly,nonatomic,nullable) NSString *formRowSegmentedItemTitle;
 @end
 
+/**
+ Adds support for KSOFormRowSegmentedItem to UIImage.
+ */
 @interface UIImage (KSOFormRowSegmentedItemExtensions) <KSOFormRowSegmentedItem>
 @end
 
+/**
+ Adds support for KSOFormRowSegmentedItem to NSString.
+ */
 @interface NSString (KSOFormRowSegmentedItemExtensions) <KSOFormRowSegmentedItem>
 @end
 

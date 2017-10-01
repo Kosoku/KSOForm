@@ -17,15 +17,30 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Protocol for an object that represents a single row within a UIPickerView.
+ */
 @protocol KSOFormPickerViewRow <NSObject>
 @optional
+/**
+ The title for the picker view row.
+ */
 @property (readonly,nonatomic) NSString *formPickerViewRowTitle;
+/**
+ The attributed title for the picker view row. If this is implemented, it is preferred over formPickerViewRowTitle.
+ */
 @property (readonly,nonatomic) NSAttributedString *formPickerViewRowAttributedTitle;
 @end
 
+/**
+ Adds support for KSOFormPickerViewRow to NSString.
+ */
 @interface NSString (KSOFormPickerViewRowExtensions) <KSOFormPickerViewRow>
 @end
 
+/**
+ Adds support for KSOFormPickerViewRow to NSAttributedString.
+ */
 @interface NSAttributedString (KSOFormPickerViewRowExtensions) <KSOFormPickerViewRow>
 @end
 

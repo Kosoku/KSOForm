@@ -18,10 +18,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Protocol for an object that displays a single KSOFormSection object.
+ */
 @protocol KSOFormSectionView <NSObject>
 @required
+/**
+ The form section to display.
+ */
 @property (strong,nonatomic,nullable) KSOFormSection *formSection;
 @optional
+/**
+ The form theme to control display.
+ */
 @property (strong,nonatomic,nullable) KSOFormTheme *formTheme;
 @end
 

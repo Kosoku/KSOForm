@@ -18,10 +18,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Protocol for an object used to display a single KSOFormRow object.
+ */
 @protocol KSOFormRowView <NSObject>
 @required
+/**
+ The form row to display.
+ */
 @property (strong,nonatomic,nullable) KSOFormRow *formRow;
 @optional
+/**
+ The form theme to control appearance.
+ */
 @property (strong,nonatomic,nullable) KSOFormTheme *formTheme;
 @end
 

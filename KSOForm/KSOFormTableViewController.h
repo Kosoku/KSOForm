@@ -19,10 +19,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class KSOFormModel,KSOFormTheme;
 
+/**
+ KSOFormTableViewController manages the display of a single KSOFormModel object. If you add/remove/replace the sections/rows of the KSOFormModel owned by the receiver, it will automatically update the appropriate UI. The default appearance matches the display of the Settings app.
+ */
 @interface KSOFormTableViewController : UITableViewController
 
+/**
+ The theme controlling the appearance of the receiver.
+ 
+ The default is KSOFormTheme.defaultTheme.
+ 
+ @see KSOFormTheme
+ */
 @property (strong,nonatomic,null_resettable) KSOFormTheme *theme;
 
+/**
+ The form model displayed by the receiver. Settings this causes the entire table view to reload. Use the add/remove/replace methods in KSOFormModel and KSOFormSection for more granular updates.
+ 
+ @see KSOFormModel
+ */
 @property (strong,nonatomic,nullable) KSOFormModel *model;
 
 @end
