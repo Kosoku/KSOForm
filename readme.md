@@ -23,11 +23,13 @@ It can push or modally present additional forms and custom view controller class
 
 Demo icons by [Glyphish](http://www.glyphish.com/).
 
+![iOS](screenshots/iOS.gif)
+
 ### Installation
 
 You can install *KSOForm* using [cocoapods](https://cocoapods.org/), [Carthage](https://github.com/Carthage/Carthage), or as a framework.
 
-When installing as a framework, ensure you also link to [Stanley](https://github.com/Kosoku/Stanley), [Ditko](https://github.com/Kosoku/Ditko), [Loki](https://github.com/Kosoku/Loki), [Agamotto](https://github.com/Kosoku/Agamotto), [Quicksilver](https://github.com/Kosoku/Quicksilver), [KSOTooltip](https://github.com/Kosoku/KSOTooltip), and [KSOTextValidation](https://github.com/Kosoku/KSOTextValidation) as *KSOForm* relies on them.
+When installing as a framework, ensure you also link to [Stanley](https://github.com/Kosoku/Stanley), [Ditko](https://github.com/Kosoku/Ditko), [Loki](https://github.com/Kosoku/Loki), [Agamotto](https://github.com/Kosoku/Agamotto), [Quicksilver](https://github.com/Kosoku/Quicksilver), [KSOTooltip](https://github.com/Kosoku/KSOTooltip), [KSOFontAwesomeExtensions](https://github.com/Kosoku/KSOFontAwesomeExtensions), and [KSOTextValidation](https://github.com/Kosoku/KSOTextValidation) as *KSOForm* relies on them.
 
 ### Dependencies
 
@@ -40,3 +42,4 @@ Third party:
 - [Quicksilver](https://github.com/Kosoku/Quicksilver)
 - [KSOTooltip](https://github.com/Kosoku/KSOTooltip)
 - [KSOTextValidation](https://github.com/Kosoku/KSOTextValidation)
+- [KSOFontAwesomeExtensions](https://github.com/Kosoku/KSOFontAwesomeExtensions)
