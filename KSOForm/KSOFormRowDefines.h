@@ -188,8 +188,15 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyImage;
 /**
  The title of the receiver. Aligned to the leading edge.
+ 
+ @see [KSOFormRow title]
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTitle;
+/**
+ The subtitle of the receiver. Aligned to the leading edge.
+ 
+ @see [KSOFormRow subtitle]
+ */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySubtitle;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellAccessoryType;
 // text properties
