@@ -55,7 +55,7 @@
                     }
                     
                     [UIView animateWithDuration:KSOFormThemeFirstResponderIndicatorViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-                        [self.backgroundView setBackgroundColor:self.formTheme.firstResponderColor ?: [self.tintColor colorWithAlphaComponent:0.5]];
+                        [self.backgroundView setBackgroundColor:self.formTheme.firstResponderColor ?: [self.tintColor colorWithAlphaComponent:0.1]];
                     } completion:nil];
                 }
                 else {

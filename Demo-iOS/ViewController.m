@@ -119,7 +119,7 @@
     
     KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
     
-    [theme setKeyboardAppearance:UIKeyboardAppearanceDark];
+    [theme setSubtitleColor:KDIColorRandomRGB()];
     
     [self setTheme:theme];
     
