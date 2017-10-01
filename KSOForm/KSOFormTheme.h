@@ -17,8 +17,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ KSOFormTheme controls the appearance of form UI elements. To create your own theme, copy the defaultTheme and modify its properties.
+ */
 @interface KSOFormTheme : NSObject <NSCopying>
 
+/**
+ The default theme.
+ */
 @property (class,readonly,nonatomic) KSOFormTheme *defaultTheme;
 
 /**
@@ -26,26 +32,116 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (readonly,copy,nonatomic) NSString *identifier;
 
+/**
+ The header title color, used to display section header text.
+ 
+ The default is UIColor.grayColor.
+ */
 @property (strong,nonatomic,null_resettable) UIColor *headerTitleColor;
+/**
+ The footer title color, used to display section footer text.
+ 
+ The default is UIColor.grayColor.
+ */
 @property (strong,nonatomic,null_resettable) UIColor *footerTitleColor;
+/**
+ The title color, used to display the title property of KSOFormRow objects.
+ 
+ The default is UIColor.blackColor.
+ */
 @property (strong,nonatomic,null_resettable) UIColor *titleColor;
+/**
+ The subtitle color, used to display the subtitle property of KSOFormRow objects.
+ 
+ The default is UIColor.grayColor.
+ */
 @property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
+/**
+ The value color, used to display the formatted value of KSOFormRow objects.
+ 
+ The default is UIColor.lightGrayColor.
+ */
 @property (strong,nonatomic,null_resettable) UIColor *valueColor;
+/**
+ The text color, used to display the value of KSOFormRow objects when it is editable (i.e. inside a control that requires user interaction to change).
+ 
+ The default is nil, which means use the current tintColor.
+ */
 @property (strong,nonatomic,nullable) UIColor *textColor;
+/**
+ The text selection color, used to display the caret and selection indicator.
+ 
+ The default is nil, which means use the current tintColor.
+ */
 @property (strong,nonatomic,nullable) UIColor *textSelectionColor;
 
+/**
+ The header title font, used to display section header text.
+ 
+ The default is [UIFont systemFontOfSize:13.0].
+ */
 @property (strong,nonatomic,null_resettable) UIFont *headerTitleFont;
+/**
+ The footer title font, used to display section footer text.
+ 
+ The default is [UIFont systemFontOfSize:13.0].
+ */
 @property (strong,nonatomic,null_resettable) UIFont *footerTitleFont;
+/**
+ The title font, used to display the title of KSOFormRow objects.
+ 
+ The default is [UIFont systemFontOfSize:17.0].
+ */
 @property (strong,nonatomic,null_resettable) UIFont *titleFont;
+/**
+ The subtitle font, used to display the subtitle of KSOFormRow objects.
+ 
+ The default is [UIFont systemFontOfSize:12.0].
+ */
 @property (strong,nonatomic,null_resettable) UIFont *subtitleFont;
+/**
+ The value font, used to display the value of KSOFormRow objects when formatted as text.
+ 
+ The default is [UIFont systemFontOfSize:17.0].
+ */
 @property (strong,nonatomic,null_resettable) UIFont *valueFont;
 
-@property (strong,nonatomic,nullable) UIFontTextStyle headerTitleTextStyle;
-@property (strong,nonatomic,nullable) UIFontTextStyle footerTitleTextStyle;
-@property (strong,nonatomic,nullable) UIFontTextStyle titleTextStyle;
-@property (strong,nonatomic,nullable) UIFontTextStyle subtitleTextStyle;
-@property (strong,nonatomic,nullable) UIFontTextStyle valueTextStyle;
+/**
+ The header title text style. Setting this to non-nil will cause the display to automatically update in response to the user changing their preferred text size in General -> Accessibility -> Larger Text.
+ 
+ The default is UIFontTextStyleFootnote.
+ */
+@property (copy,nonatomic,nullable) UIFontTextStyle headerTitleTextStyle;
+/**
+ The footer title text style. Setting this to non-nil will cause the display to automatically update in response to the user changing their preferred text size in General -> Accessibility -> Larger Text.
+ 
+ The default is UIFontTextStyleFootnote.
+ */
+@property (copy,nonatomic,nullable) UIFontTextStyle footerTitleTextStyle;
+/**
+ The title text style. Setting this to non-nil will cause the display to automatically update in response to the user changing their preferred text size in General -> Accessibility -> Larger Text.
+ 
+ The default is UIFontTextStyleBody.
+ */
+@property (copy,nonatomic,nullable) UIFontTextStyle titleTextStyle;
+/**
+ The subtitle text style. Setting this to non-nil will cause the display to automatically update in response to the user changing their preferred text size in General -> Accessibility -> Larger Text.
+ 
+ The default is UIFontTextStyleCaption1.
+ */
+@property (copy,nonatomic,nullable) UIFontTextStyle subtitleTextStyle;
+/**
+ The value text style. Setting this to non-nil will cause the display to automatically update in response to the user changing their preferred text size in General -> Accessibility -> Larger Text.
+ 
+ The default is UIFontTextStyleBody.
+ */
+@property (copy,nonatomic,nullable) UIFontTextStyle valueTextStyle;
 
+/**
+ The keyboard appearance for all text controls in the form. This can be overriden for each KSOFormRow object.
+ 
+ The default is UIKeyboardAppearanceDefault.
+ */
 @property (assign,nonatomic) UIKeyboardAppearance keyboardAppearance;
 
 /**
