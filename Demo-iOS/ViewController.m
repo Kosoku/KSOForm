@@ -134,6 +134,9 @@
                                                                    KSOFormRowKeySubtitle: @"Subtitle",
                                                                    KSOFormRowKeyValue: @"Value"},
                                                                  @{KSOFormRowKeyTitle: @"Title",
+                                                                   KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                                                                   KSOFormRowKeyValue: @"Value"},
+                                                                 @{KSOFormRowKeyTitle: @"Title",
                                                                    KSOFormRowKeySubtitle: @"Subtitle",
                                                                    KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
                                                                    KSOFormRowKeyValue: @"Value"}]];
