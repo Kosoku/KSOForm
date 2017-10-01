@@ -228,6 +228,10 @@ NS_ASSUME_NONNULL_BEGIN
  The table view cell class to use when displaying the receiver.
  */
 @property (strong,nonatomic,nullable) Class cellClass;
+/**
+ The table view cell class bundle to use for cells that should be created from a XIB.
+ */
+@property (strong,nonatomic,nullable) NSBundle *cellClassBundle;
 
 /**
  The accessibility label for the image.

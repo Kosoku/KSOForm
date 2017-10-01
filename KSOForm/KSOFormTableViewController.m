@@ -37,6 +37,7 @@
 #import <Quicksilver/Quicksilver.h>
 
 @interface KSOFormTableViewController ()
+@property (strong,nonatomic) NSMutableSet<NSString *> *formCellIdentifiers, *formHeaderViewIdentifiers, *formFooterViewIdentifiers;
 
 - (void)_KSOFormTableViewControllerInit;
 @end
@@ -193,23 +194,20 @@
     UITableViewCell<KSOFormRowView> *retval = nil;
     
     if (formRow.cellClass != Nil) {
-        retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(formRow.cellClass) forIndexPath:indexPath];
+        NSString *identifier = NSStringFromClass(formRow.cellClass);
         
-        if (retval == nil) {
-            [tableView registerClass:formRow.cellClass forCellReuseIdentifier:NSStringFromClass(formRow.cellClass)];
-            
-            retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(formRow.cellClass) forIndexPath:indexPath];
-        }
-        
-        if (retval == nil) {
-            UINib *nib = [UINib nibWithNibName:NSStringFromClass(formRow.cellClass) bundle:[NSBundle bundleForClass:formRow.cellClass]];
-            
-            if (nib != nil) {
-                [tableView registerNib:nib forCellReuseIdentifier:NSStringFromClass(formRow.cellClass)];
-                
-                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(formRow.cellClass) forIndexPath:indexPath];
+        if (![self.formCellIdentifiers containsObject:identifier]) {
+            if (formRow.cellClassBundle == nil) {
+                [tableView registerClass:formRow.cellClass forCellReuseIdentifier:identifier];
             }
+            else {
+                [tableView registerNib:[UINib nibWithNibName:identifier bundle:formRow.cellClassBundle] forCellReuseIdentifier:identifier];
+            }
+            
+            [self.formCellIdentifiers addObject:identifier];
         }
+        
+        retval = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     }
     else {
         switch (formRow.type) {
@@ -381,6 +379,10 @@
 }
 #pragma mark *** Private Methods ***
 - (void)_KSOFormTableViewControllerInit; {
+    _formCellIdentifiers = [[NSMutableSet alloc] init];
+    _formHeaderViewIdentifiers = [[NSMutableSet alloc] init];
+    _formFooterViewIdentifiers = [[NSMutableSet alloc] init];
+    
     _theme = KSOFormTheme.defaultTheme;
 }
 

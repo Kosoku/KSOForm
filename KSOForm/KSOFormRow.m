@@ -79,6 +79,7 @@ KSOFormRowKey const KSOFormRowKeyActionModel = @"actionModel";
 KSOFormRowKey const KSOFormRowKeyActionViewControllerClass = @"actionViewController";
 
 KSOFormRowKey const KSOFormRowKeyCellClass = @"cellClass";
+KSOFormRowKey const KSOFormRowKeyCellClassBundle = @"cellClassBundle";
 
 KSOFormRowKey const KSOFormRowKeyImageAccessibilityLabel = @"imageAccessibilityLabel";
 KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibilityHint";
@@ -190,6 +191,7 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     _actionViewControllerClass = dictionary[KSOFormRowKeyActionViewControllerClass];
     
     _cellClass = dictionary[KSOFormRowKeyCellClass];
+    _cellClassBundle = dictionary[KSOFormRowKeyCellClassBundle];
     
     _imageAccessibilityLabel = dictionary[KSOFormRowKeyImageAccessibilityLabel];
     _buttonAccessibilityHint = dictionary[KSOFormRowKeyButtonAccessibilityHint];

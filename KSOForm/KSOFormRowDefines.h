@@ -435,6 +435,12 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyActionViewControllerClass;
  @see [KSOFormRow cellClass]
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellClass;
+/**
+ The table view cell class bundle, used for cells that should be created from a XIB.
+ 
+ @see [KSOFormRow cellClassBundle]
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellClassBundle;
 
 /**
  The accessibility label for the image.

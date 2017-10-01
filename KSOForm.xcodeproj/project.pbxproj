@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0711B17F1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0711B17E1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0711B1811F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0711B1801F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m */; };
+		0711B18B1F818E6900DCE131 /* ImagePickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0711B18A1F818E6900DCE131 /* ImagePickerTableViewCell.m */; };
 		0712E4E81F78E0BE00F0E223 /* Ditko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0712E4E91F78E0BE00F0E223 /* Ditko.framework */; };
 		0712E4EA1F78E0C200F0E223 /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0712E4EB1F78E0C200F0E223 /* Loki.framework */; };
 		0712E4EC1F78E0C600F0E223 /* Stanley.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0712E4ED1F78E0C600F0E223 /* Stanley.framework */; };
@@ -143,6 +144,8 @@
 /* Begin PBXFileReference section */
 		0711B17E1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormThemeFirstResponderIndicatorView.h; sourceTree = "<group>"; };
 		0711B1801F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormThemeFirstResponderIndicatorView.m; sourceTree = "<group>"; };
+		0711B1891F818E6900DCE131 /* ImagePickerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagePickerTableViewCell.h; sourceTree = "<group>"; };
+		0711B18A1F818E6900DCE131 /* ImagePickerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerTableViewCell.m; sourceTree = "<group>"; };
 		0712E4E91F78E0BE00F0E223 /* Ditko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ditko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0712E4EB1F78E0C200F0E223 /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0712E4ED1F78E0C600F0E223 /* Stanley.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Stanley.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -446,6 +449,8 @@
 				07952DBC1F789BD0006C2A75 /* ViewController.m */,
 				07CCBADF1F7DA0CB00AED8AA /* HeaderViewWithProgress.h */,
 				07CCBAE01F7DA0CB00AED8AA /* HeaderViewWithProgress.m */,
+				0711B1891F818E6900DCE131 /* ImagePickerTableViewCell.h */,
+				0711B18A1F818E6900DCE131 /* ImagePickerTableViewCell.m */,
 				07CCBAC11F7D577B00AED8AA /* CustomTableViewCell.h */,
 				07CCBAC21F7D577B00AED8AA /* CustomTableViewCell.m */,
 				07CCBAC71F7D592400AED8AA /* CustomTableViewCell.xib */,
@@ -691,6 +696,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07952DBD1F789BD0006C2A75 /* ViewController.m in Sources */,
+				0711B18B1F818E6900DCE131 /* ImagePickerTableViewCell.m in Sources */,
 				07952DC81F789BD0006C2A75 /* main.m in Sources */,
 				07CCBAE11F7DA0CB00AED8AA /* HeaderViewWithProgress.m in Sources */,
 				07952DBA1F789BD0006C2A75 /* AppDelegate.m in Sources */,

@@ -16,6 +16,7 @@
 #import "ViewController.h"
 #import "MapViewController.h"
 #import "BluetoothTableViewController.h"
+#import "ImagePickerTableViewCell.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
@@ -287,6 +288,7 @@
                                                                    KSOFormRowKeyActionDelegate: self
                                                                    }]];
     [model.sections.lastObject addRow:self.bluetoothRow];
+    [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyCellClass: ImagePickerTableViewCell.class}];
     
     [self setModel:model];
 }
