@@ -71,6 +71,9 @@
 #pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
+- (BOOL)wantsTrailingViewTopBottomLayoutMargins {
+    return NO;
+}
 #pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];

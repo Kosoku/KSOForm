@@ -23,7 +23,8 @@
 
 @property (readonly,nonatomic) BOOL wantsLeadingViewCenteredVertically;
 @property (readonly,nonatomic) NSNumber *leadingToTrailingMargin;
-@property (readonly,nonatomic) BOOL trailingViewWantsTopBottomLayoutMargins;
+@property (readonly,nonatomic) BOOL wantsLeadingViewTopBottomLayoutMargins;
+@property (readonly,nonatomic) BOOL wantsTrailingViewTopBottomLayoutMargins;
 @property (readonly,nonatomic) CGFloat minimumTrailingViewHeight;
 
 @end

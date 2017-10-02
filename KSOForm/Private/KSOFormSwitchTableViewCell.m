@@ -60,7 +60,7 @@
 #pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
-- (BOOL)trailingViewWantsTopBottomLayoutMargins {
+- (BOOL)wantsTrailingViewTopBottomLayoutMargins {
     return NO;
 }
 #pragma mark -

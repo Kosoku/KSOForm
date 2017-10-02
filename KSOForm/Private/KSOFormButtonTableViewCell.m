@@ -55,6 +55,9 @@
 }
 #pragma mark -
 @dynamic leadingView;
+- (BOOL)wantsLeadingViewTopBottomLayoutMargins {
+    return NO;
+}
 #pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
