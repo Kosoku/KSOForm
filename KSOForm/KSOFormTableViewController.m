@@ -37,9 +37,10 @@
 #import <Quicksilver/Quicksilver.h>
 
 @interface KSOFormTableViewController ()
-@property (strong,nonatomic) NSMutableSet<NSString *> *formCellIdentifiers, *formHeaderViewIdentifiers, *formFooterViewIdentifiers;
+@property (strong,nonatomic) NSMutableSet<NSString *> *formCellIdentifiers;
+@property (strong,nonatomic) NSMutableSet<NSString *> *formHeaderViewIdentifiers;
+@property (strong,nonatomic) NSMutableSet<NSString *> *formFooterViewIdentifiers;
 
-- (void)_KSOFormTableViewControllerInit;
 @end
 
 @implementation KSOFormTableViewController
@@ -48,7 +49,7 @@
     if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
         return nil;
     
-    [self _KSOFormTableViewControllerInit];
+    [self setup];
     
     return self;
 }
@@ -56,7 +57,7 @@
     if (!(self = [super initWithCoder:aDecoder]))
         return nil;
     
-    [self _KSOFormTableViewControllerInit];
+    [self setup];
     
     return self;
 }
@@ -64,7 +65,7 @@
     if (!(self = [super initWithStyle:style]))
         return nil;
     
-    [self _KSOFormTableViewControllerInit];
+    [self setup];
     
     return self;
 }
@@ -367,17 +368,16 @@
     }
 }
 #pragma mark *** Public Methods ***
-#pragma mark Properties
-- (void)setTheme:(KSOFormTheme *)theme {
-    _theme = theme ?: KSOFormTheme.defaultTheme;
-}
-#pragma mark *** Private Methods ***
-- (void)_KSOFormTableViewControllerInit; {
+- (void)setup {
     _formCellIdentifiers = [[NSMutableSet alloc] init];
     _formHeaderViewIdentifiers = [[NSMutableSet alloc] init];
     _formFooterViewIdentifiers = [[NSMutableSet alloc] init];
     
     _theme = KSOFormTheme.defaultTheme;
+}
+#pragma mark Properties
+- (void)setTheme:(KSOFormTheme *)theme {
+    _theme = theme ?: KSOFormTheme.defaultTheme;
 }
 
 @end

@@ -40,6 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong,nonatomic,nullable) KSOFormModel *model;
 
+/**
+ Perform any setup before the receiver's view is loaded. For example, create and set the KSOFormModel your subclass will display. You must call super.
+ */
+- (void)setup NS_REQUIRES_SUPER;
+
 @end
 
 NS_ASSUME_NONNULL_END
