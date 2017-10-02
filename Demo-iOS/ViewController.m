@@ -115,14 +115,22 @@
 
 @implementation ViewController
 
++ (void)initialize {
+    if (self == ViewController.class) {
+        KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
+        
+        [theme setTitleColor:KDIColorRandomRGB()];
+        [theme setSubtitleColor:KDIColorRandomRGB()];
+        [theme setValueColor:KDIColorRandomRGB()];
+        [theme setTextColor:KDIColorRandomRGB()];
+        [theme setTextSelectionColor:theme.textColor];
+        
+        [KSOFormTheme setDefaultTheme:theme];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    KSOFormTheme *theme = [KSOFormTheme.defaultTheme copy];
-    
-    [theme setSubtitleColor:KDIColorRandomRGB()];
-    
-    [self setTheme:theme];
     
     KSOFormModel *readOnlyModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Read Only Values"}];
     

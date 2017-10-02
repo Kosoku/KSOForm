@@ -44,7 +44,9 @@
         
         [[UIViewController KDI_viewControllerForPresenting] KDI_presentImagePickerController:controller barButtonItem:nil sourceView:self sourceRect:CGRectZero permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES completion:^(NSDictionary<NSString *,id> * _Nullable info) {
             kstStrongify(self);
-            [self.thumbnailImageView setImage:info.KDI_image];
+            if (info != nil) {
+                [self.thumbnailImageView setImage:info.KDI_image];
+            }
         }];
     } forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_button];
@@ -86,6 +88,10 @@
     }
     else {
         [NSObject KDI_registerDynamicTypeObject:self.button.titleLabel forTextStyle:_formTheme.titleTextStyle];
+    }
+    
+    if (formTheme.textColor != nil) {
+        [self.button setTintColor:formTheme.textColor];
     }
 }
 
