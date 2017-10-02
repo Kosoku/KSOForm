@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,null_resettable) KSOFormTheme *theme;
 
 /**
- The form model displayed by the receiver. Settings this causes the entire table view to reload. Use the add/remove/replace methods in KSOFormModel and KSOFormSection for more granular updates.
+ The form model displayed by the receiver. Setting this causes the entire table view to reload. Use the add/remove/replace methods in KSOFormModel and KSOFormSection for more granular updates.
  
  @see KSOFormModel
  */
