@@ -17,6 +17,8 @@
 
 #import <Ditko/Ditko.h>
 
+#import <objc/runtime.h>
+
 @interface KSOFormTheme ()
 @property (readwrite,copy,nonatomic) NSString *identifier;
 
@@ -103,8 +105,12 @@
     return self;
 }
 
+static void const *kDefaultThemeKey = &kDefaultThemeKey;
 + (KSOFormTheme *)defaultTheme {
-    return [[KSOFormTheme alloc] initWithIdentifier:@"com.kosoku.ksoform.theme.default"];
+    return objc_getAssociatedObject(self, kDefaultThemeKey) ?: [[KSOFormTheme alloc] initWithIdentifier:@"com.kosoku.ksoform.theme.default"];
+}
++ (void)setDefaultTheme:(KSOFormTheme *)defaultTheme {
+    objc_setAssociatedObject(self, kDefaultThemeKey, defaultTheme, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)setHeaderTitleColor:(UIColor *)headerTitleColor {

@@ -45,9 +45,11 @@ typedef NS_ENUM(NSInteger, KSOFormThemeFirstResponderStyle) {
 @interface KSOFormTheme : NSObject <NSCopying>
 
 /**
- The default theme.
+ Set and get the default theme.
+ 
+ The default is an appropriately configured theme.
  */
-@property (class,readonly,nonatomic) KSOFormTheme *defaultTheme;
+@property (class,strong,nonatomic,null_resettable) KSOFormTheme *defaultTheme;
 
 /**
  Get the identifier of the receiver. Useful for debugging purposes.
