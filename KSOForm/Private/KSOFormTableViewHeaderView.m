@@ -41,7 +41,7 @@
                 [keyPath isEqualToString:@kstKeypath(self,formSection.headerAttributedTitle)]) {
                 
                 if (self.formSection.headerAttributedTitle == nil) {
-                    [self.formSectionView setText:self.formSection.headerTitle.uppercaseString];
+                    [self.formSectionView setText:[self.formSection.headerTitle localizedUppercaseString]];
                 }
                 else {
                     [self.formSectionView setAttributedText:self.formSection.headerAttributedTitle];
