@@ -22,6 +22,7 @@
 #import <KSOTextValidation/KSOTextValidator.h>
 #import <KSOTextValidation/KSOTextFormatter.h>
 #import <Ditko/UIControl+KDIExtensions.h>
+#import <Ditko/KDIDatePickerButton.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -170,6 +171,12 @@ NS_ASSUME_NONNULL_BEGIN
  The date formatter used to format the date picker date for display.
  */
 @property (strong,nonatomic,nullable) NSDateFormatter *datePickerDateFormatter;
+/**
+ The date title block used to format the date picker date for display. If this block returns nil, it falls back to the formatted date using datePickerDateFormatter.
+ 
+ @see KDIDatePickerButtonDateTitleBlock
+ */
+@property (copy,nonatomic,nullable) KDIDatePickerButtonDateTitleBlock datePickerDateTitleBlock;
 
 /**
  The stepper minimum value.

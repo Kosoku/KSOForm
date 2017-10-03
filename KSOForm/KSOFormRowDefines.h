@@ -360,6 +360,12 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyDatePickerMaximumDate;
  @see [KDIDatePickerButton dateFormatter]
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter;
+/**
+ The date title block used to format the date picker date for display.
+ 
+ @see [KDIDatePickerButton dateTitleBlock]
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyDatePickerDateTitleBlock;
 
 /**
  The minimum value.

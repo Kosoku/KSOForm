@@ -89,6 +89,7 @@
     [self.trailingView setMinimumDate:formRow.datePickerMinimumDate];
     [self.trailingView setMaximumDate:formRow.datePickerMaximumDate];
     [self.trailingView setDateFormatter:formRow.datePickerDateFormatter];
+    [self.trailingView setDateTitleBlock:formRow.datePickerDateTitleBlock];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];

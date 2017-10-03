@@ -61,6 +61,7 @@ KSOFormRowKey const KSOFormRowKeyDatePickerMode = @"datePickerMode";
 KSOFormRowKey const KSOFormRowKeyDatePickerMinimumDate = @"datePickerMinimumDate";
 KSOFormRowKey const KSOFormRowKeyDatePickerMaximumDate = @"datePickerMaximumDate";
 KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter = @"datePickerDateFormatter";
+KSOFormRowKey const KSOFormRowKeyDatePickerDateTitleBlock = @"datePickerDateTitleBlock";
 
 KSOFormRowKey const KSOFormRowKeyMinimumValue = @"minimumValue";
 KSOFormRowKey const KSOFormRowKeyMaximumValue = @"maximumValue";
@@ -173,6 +174,7 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     _datePickerMinimumDate = dictionary[KSOFormRowKeyDatePickerMinimumDate];
     _datePickerMaximumDate = dictionary[KSOFormRowKeyDatePickerMaximumDate];
     _datePickerDateFormatter = dictionary[KSOFormRowKeyDatePickerDateFormatter];
+    _datePickerDateTitleBlock = dictionary[KSOFormRowKeyDatePickerDateTitleBlock];
     
     _stepperMinimumValue = [dictionary[KSOFormRowKeyMinimumValue] doubleValue];
     _stepperMaximumValue = [dictionary[KSOFormRowKeyMaximumValue] doubleValue];
