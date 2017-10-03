@@ -132,7 +132,21 @@
 - (NSAttributedString *)pickerViewButton:(KDIPickerViewButton *)pickerViewButton attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     id<KSOFormPickerViewRow> pickerViewRow = self.formRow.pickerViewColumnsAndRows.count > 0 ? self.formRow.pickerViewColumnsAndRows[component][row] : self.formRow.pickerViewRows[row];
     
-    return [pickerViewRow respondsToSelector:@selector(formPickerViewRowAttributedTitle)] ? pickerViewRow.formPickerViewRowAttributedTitle : [[NSAttributedString alloc] initWithString:pickerViewRow.formPickerViewRowTitle ?: @""];
+    if ([pickerViewRow conformsToProtocol:@protocol(KSOFormPickerViewRow)]) {
+        return [pickerViewRow respondsToSelector:@selector(formPickerViewRowAttributedTitle)] ? pickerViewRow.formPickerViewRowAttributedTitle : [[NSAttributedString alloc] initWithString:pickerViewRow.formPickerViewRowTitle ?: @""];
+    }
+    else {
+        NSString *title = [pickerViewRow description];
+        
+        if (self.formRow.valueFormatter != nil) {
+            title = [self.formRow.valueFormatter stringForObjectValue:pickerViewRow];
+        }
+        else if (self.formRow.valueTransformer != nil) {
+            title = [self.formRow.valueTransformer transformedValue:pickerViewRow];
+        }
+        
+        return [[NSAttributedString alloc] initWithString:title ?: @""];
+    }
 }
 #pragma mark KDIPickerViewButtonDelegate
 - (void)pickerViewButton:(KDIPickerViewButton *)pickerViewButton didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
