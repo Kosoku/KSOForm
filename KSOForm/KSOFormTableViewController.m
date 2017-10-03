@@ -342,7 +342,7 @@
     UIViewController *viewController = nil;
     
     if (formRow.actionViewControllerClass != Nil) {
-        if ([formRow.actionViewControllerClass isKindOfClass:UITableViewController.class]) {
+        if ([formRow.actionViewControllerClass isSubclassOfClass:UITableViewController.class]) {
             viewController = [[formRow.actionViewControllerClass alloc] initWithStyle:self.tableView.style];
         }
         else {
