@@ -342,7 +342,12 @@
     UIViewController *viewController = nil;
     
     if (formRow.actionViewControllerClass != Nil) {
-        viewController = [[formRow.actionViewControllerClass alloc] initWithNibName:nil bundle:nil];
+        if ([formRow.actionViewControllerClass isKindOfClass:UITableViewController.class]) {
+            viewController = [[formRow.actionViewControllerClass alloc] initWithStyle:self.tableView.style];
+        }
+        else {
+            viewController = [[formRow.actionViewControllerClass alloc] initWithNibName:nil bundle:nil];
+        }
     }
     else if (formRow.actionModel != nil) {
         viewController = [[KSOFormTableViewController alloc] initWithStyle:self.tableView.style];
