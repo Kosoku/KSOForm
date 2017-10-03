@@ -92,20 +92,19 @@
     
     kstWeakify(self);
     
-    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,model.title)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
-        if ([keyPath isEqualToString:@kstKeypath(self,model)]) {
-            [self.model setTableView:self.tableView];
-            
-            [self.tableView reloadData];
-            
-            [self.tableView setBackgroundView:self.model.backgroundView];
-            [self.tableView setTableHeaderView:self.model.headerView];
-            [self.tableView setTableFooterView:self.model.footerView];
-        }
-        else if ([keyPath isEqualToString:@kstKeypath(self,model.title)]) {
-            [self setTitle:self.model.title];
-        }
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,model)]) {
+                [self.model setTableView:self.tableView];
+                
+                [self.tableView reloadData];
+                
+                [self.tableView setBackgroundView:self.model.backgroundView];
+                [self.tableView setTableHeaderView:self.model.headerView];
+                [self.tableView setTableFooterView:self.model.footerView];
+            }
+        });
     }];
     
     [self KAG_addObserverForNotificationNames:@[KDINextPreviousInputAccessoryViewNotificationNext,KDINextPreviousInputAccessoryViewNotificationPrevious] object:nil block:^(NSNotification * _Nonnull notification) {
@@ -379,6 +378,16 @@
     _formFooterViewIdentifiers = [[NSMutableSet alloc] init];
     
     _theme = KSOFormTheme.defaultTheme;
+    
+    kstWeakify(self);
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model.title)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,model.title)]) {
+                [self setTitle:self.model.title];
+            }
+        });
+    }];
 }
 #pragma mark Properties
 - (void)setTheme:(KSOFormTheme *)theme {
