@@ -41,6 +41,7 @@
     [_verticalStackView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_verticalStackView setAxis:UILayoutConstraintAxisVertical];
     [_verticalStackView setAlignment:UIStackViewAlignmentLeading];
+    [_verticalStackView setSpacing:2.0];
     [_horizontalStackView addArrangedSubview:_verticalStackView];
     
     _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -54,6 +55,7 @@
     
     _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [_subtitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_subtitleLabel setNumberOfLines:0];
     [_verticalStackView addArrangedSubview:_subtitleLabel];
     
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _horizontalStackView}]];

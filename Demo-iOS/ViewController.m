@@ -124,6 +124,7 @@
         [theme setValueColor:KDIColorRandomRGB()];
         [theme setTextColor:KDIColorRandomRGB()];
         [theme setTextSelectionColor:theme.textColor];
+        [theme setFirstResponderColor:[KDIColorRandomRGB() colorWithAlphaComponent:0.1]];
         
         [KSOFormTheme setDefaultTheme:theme];
     }
@@ -201,7 +202,8 @@
     })
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeSwitch),
-                                                                   KSOFormRowKeyTitle: @"Toggle Something"
+                                                                   KSOFormRowKeyTitle: @"Toggle Something",
+                                                                   KSOFormRowKeySubtitle: @"This is a subtitle that should wrap because it is too long to fit on a single line"
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
                                                                    KSOFormRowKeyTitle: @"Picker View",
