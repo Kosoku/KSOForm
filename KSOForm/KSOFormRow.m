@@ -76,7 +76,7 @@ KSOFormRowKey const KSOFormRowKeySegmentedItems = @"segmentedItems";
 KSOFormRowKey const KSOFormRowKeyAction = @"action";
 KSOFormRowKey const KSOFormRowKeyActionDelegate = @"actionDelegate";
 KSOFormRowKey const KSOFormRowKeyActionModel = @"actionModel";
-KSOFormRowKey const KSOFormRowKeyActionViewControllerClass = @"actionViewController";
+KSOFormRowKey const KSOFormRowKeyActionViewControllerClass = @"actionViewControllerClass";
 
 KSOFormRowKey const KSOFormRowKeyCellClass = @"cellClass";
 KSOFormRowKey const KSOFormRowKeyCellClassBundle = @"cellClassBundle";
