@@ -162,6 +162,12 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueKey;
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueFormatter;
 /**
+ The value transformer used to format value for display. Must be a subclass of NSValueTransformer. This should not be used to format text input, like UITextField or UITextView. Use KSOFormRowKeyValueFormatter key instead.
+ 
+ @see [KSOFormRow valueTransformer]
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueTransformer;
+/**
  The value data source used to retrieve value using valueKey.
  
  @see [KSOFormRow valueDataSource]

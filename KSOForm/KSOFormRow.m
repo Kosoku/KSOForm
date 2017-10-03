@@ -24,6 +24,7 @@ KSOFormRowKey const KSOFormRowKeyType = @"type";
 KSOFormRowKey const KSOFormRowKeyValue = @"value";
 KSOFormRowKey const KSOFormRowKeyValueKey = @"valueKey";
 KSOFormRowKey const KSOFormRowKeyValueFormatter = @"valueFormatter";
+KSOFormRowKey const KSOFormRowKeyValueTransformer = @"valueTransformer";
 KSOFormRowKey const KSOFormRowKeyValueDataSource = @"valueDataSource";
 KSOFormRowKey const KSOFormRowKeyValueShouldChangeBlock = @"valueShouldChangeBlock";
 KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock = @"valueDidChangeBlock";
@@ -133,6 +134,7 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     _value = dictionary[KSOFormRowKeyValue];
     _valueKey = dictionary[KSOFormRowKeyValueKey];
     _valueFormatter = dictionary[KSOFormRowKeyValueFormatter];
+    _valueTransformer = dictionary[KSOFormRowKeyValueTransformer];
     _valueDataSource = dictionary[KSOFormRowKeyValueDataSource];
     _shouldChangeValueBlock = dictionary[KSOFormRowKeyValueShouldChangeBlock];
     _didChangeValueBlock = dictionary[KSOFormRowKeyValueDidChangeBlock];
@@ -265,7 +267,7 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     }
 }
 - (NSString *)formattedValue {
-    return self.valueFormatter == nil ? [self.value description] : [self.valueFormatter stringForObjectValue:self.value];
+    return self.valueFormatter == nil ? (self.valueTransformer == nil ? [self.value description] : [self.valueTransformer transformedValue:self.value]) : [self.valueFormatter stringForObjectValue:self.value];
 }
 
 - (KSOFormRowCellAccessoryType)cellAccessoryType {

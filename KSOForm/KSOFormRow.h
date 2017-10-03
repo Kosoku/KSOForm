@@ -85,6 +85,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong,nonatomic,nullable) __kindof NSFormatter *valueFormatter;
 /**
+ The transformer to use to generate formattedValue if valueFormatter is nil. This should be used to transform read only values for display. For example, transforming a list of enum values to strings. The transformedValue of the receiver should return an NSString.
+ */
+@property (strong,nonatomic,nullable) __kindof NSValueTransformer *valueTransformer;
+/**
  The value data source used to read and write value.
  */
 @property (weak,nonatomic,nullable) NSObject<KSOFormRowValueDataSource> *valueDataSource;
