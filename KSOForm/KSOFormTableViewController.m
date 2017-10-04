@@ -267,10 +267,10 @@
             
             if (![self.formHeaderViewIdentifiers containsObject:identifier]) {
                 if (formSection.headerViewClassBundle == nil) {
-                    [tableView registerClass:formSection.headerViewClass forCellReuseIdentifier:identifier];
+                    [tableView registerClass:formSection.headerViewClass forHeaderFooterViewReuseIdentifier:identifier];
                 }
                 else {
-                    [tableView registerNib:[UINib nibWithNibName:identifier bundle:formSection.headerViewClassBundle] forCellReuseIdentifier:identifier];
+                    [tableView registerNib:[UINib nibWithNibName:identifier bundle:formSection.headerViewClassBundle] forHeaderFooterViewReuseIdentifier:identifier];
                 }
                 
                 [self.formHeaderViewIdentifiers addObject:identifier];
@@ -302,10 +302,10 @@
             
             if (![self.formFooterViewIdentifiers containsObject:identifier]) {
                 if (formSection.footerViewClassBundle == nil) {
-                    [tableView registerClass:formSection.footerViewClass forCellReuseIdentifier:identifier];
+                    [tableView registerClass:formSection.footerViewClass forHeaderFooterViewReuseIdentifier:identifier];
                 }
                 else {
-                    [tableView registerNib:[UINib nibWithNibName:identifier bundle:formSection.footerViewClassBundle] forCellReuseIdentifier:identifier];
+                    [tableView registerNib:[UINib nibWithNibName:identifier bundle:formSection.footerViewClassBundle] forHeaderFooterViewReuseIdentifier:identifier];
                 }
                 
                 [self.formFooterViewIdentifiers addObject:identifier];
