@@ -105,6 +105,33 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)performUpdates:(NS_NOESCAPE dispatch_block_t)updates;
 
 /**
+ Reloads the section without animation.
+ 
+ @param section The section to reload
+ */
+- (void)reloadSection:(KSOFormSection *)section;
+/**
+ Reloads the *section* using the specified *animation*.
+ 
+ @param section The section to reload
+ @param animation The animation to use
+ */
+- (void)reloadSection:(KSOFormSection *)section animation:(UITableViewRowAnimation)animation;
+/**
+ Reloads the *sections* without animation.
+ 
+ @param sections The sections to reload
+ */
+- (void)reloadSections:(NSArray<KSOFormSection *> *)sections;
+/**
+ Reloads the *sections* using the specified *animation*.
+ 
+ @param sections The sections to reload
+ @param animation The animation to use
+ */
+- (void)reloadSections:(NSArray<KSOFormSection *> *)sections animation:(UITableViewRowAnimation)animation;
+
+/**
  Adds the section without animation.
  
  @param section The section to add

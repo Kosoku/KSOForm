@@ -79,6 +79,26 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewClassBundle = @"footerViewCla
     [self.model.tableView endUpdates];
 }
 
+- (void)reloadRow:(KSOFormRow *)row; {
+    [self reloadRows:@[row]];
+}
+- (void)reloadRow:(KSOFormRow *)row animation:(UITableViewRowAnimation)animation; {
+    [self reloadRows:@[row] animation:animation];
+}
+- (void)reloadRows:(NSArray<KSOFormRow *> *)rows; {
+    [self reloadRows:rows animation:UITableViewRowAnimationNone];
+}
+- (void)reloadRows:(NSArray<KSOFormRow *> *)rows animation:(UITableViewRowAnimation)animation; {
+    NSUInteger section = [self.model.sections indexOfObject:self];
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+    
+    for (KSOFormRow *row in rows) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:[_rows indexOfObject:row] inSection:section]];
+    }
+    
+    [self.model.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:animation];
+}
+
 - (void)addRow:(KSOFormRow *)row {
     [self addRows:@[row]];
 }

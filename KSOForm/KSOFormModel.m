@@ -123,6 +123,25 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     [self.tableView endUpdates];
 }
 
+- (void)reloadSection:(KSOFormSection *)section; {
+    [self reloadSections:@[section]];
+}
+- (void)reloadSection:(KSOFormSection *)section animation:(UITableViewRowAnimation)animation; {
+    [self reloadSections:@[section] animation:animation];
+}
+- (void)reloadSections:(NSArray<KSOFormSection *> *)sections; {
+    [self reloadSections:sections animation:UITableViewRowAnimationNone];
+}
+- (void)reloadSections:(NSArray<KSOFormSection *> *)sections animation:(UITableViewRowAnimation)animation; {
+    NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
+    
+    for (KSOFormSection *section in sections) {
+        [indexes addIndex:[_sections indexOfObject:section]];
+    }
+    
+    [self.tableView reloadSections:indexes withRowAnimation:animation];
+}
+
 - (void)addSection:(KSOFormSection *)section {
     [self addSections:@[section]];
 }

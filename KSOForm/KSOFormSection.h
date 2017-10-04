@@ -105,6 +105,33 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)performUpdates:(NS_NOESCAPE dispatch_block_t)updates;
 
 /**
+ Reload *row* without animation.
+ 
+ @param row The row to reload
+ */
+- (void)reloadRow:(KSOFormRow *)row;
+/**
+ Reload *row* using the specified *animation*.
+ 
+ @param row The row to reload
+ @param animation The animation to use
+ */
+- (void)reloadRow:(KSOFormRow *)row animation:(UITableViewRowAnimation)animation;
+/**
+ Reload *rows* without animation.
+ 
+ @param rows The rows to reload
+ */
+- (void)reloadRows:(NSArray<KSOFormRow *> *)rows;
+/**
+ Reload *rows* using the specified *animation*.
+ 
+ @param rows The rows to reload
+ @param animation The animation to use
+ */
+- (void)reloadRows:(NSArray<KSOFormRow *> *)rows animation:(UITableViewRowAnimation)animation;
+
+/**
  Add the *row* without animation.
  
  @param row The row to add
