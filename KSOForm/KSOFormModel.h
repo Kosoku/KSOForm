@@ -68,6 +68,21 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDictionary:(nullable NSDictionary<KSOFormModelKey, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
 /**
+ Returns the KSOFormSection object for the provided *identifier* or nil if a section with that identifier cannot be found.
+ 
+ @param identifier The section identifier
+ @return The section or nil
+ */
+- (nullable KSOFormSection *)sectionForIdentifier:(NSString *)identifier;
+/**
+ Returns the KSOFormRow object for the provided *identifier* or nil if the a row with that identifier cannot be found.
+ 
+ @param identifier The row identifier
+ @return The row or nil
+ */
+- (nullable KSOFormRow *)rowForIdentifier:(NSString *)identifier;
+
+/**
  Returns the corresponding KSOFormRow object for the provided *indexPath* or nil if the section or row of the *indexPath* is out of bounds.
  
  @param indexPath The index path for which to return a row

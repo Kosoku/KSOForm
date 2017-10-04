@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly,weak,nonatomic) KSOFormModel *model;
 
 /**
- Get the identifier of the section. The identifier is created during initialization and cannot be changed.
+ Get the identifier of the section. The identifier is created during initialization and cannot be changed. If you want to use a custom identifier, pass one using KSOFormSectionKeyIdentifier.
  */
 @property (readonly,copy,nonatomic) NSString *identifier;
 

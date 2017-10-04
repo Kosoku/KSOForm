@@ -138,6 +138,12 @@ typedef void(^KSOFormRowDidChangeValueBlock)(KSOFormRow *row, id _Nullable value
 typedef NSString* KSOFormRowKey NS_EXTENSIBLE_STRING_ENUM;
 
 /**
+ The identifier of the row. This allows to specify a custom identifier in order to refer to the row later.
+ 
+ @see [KSOFormRow identifier]
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyIdentifier;
+/**
  The type of the receiver. Must be one of the KSOFormRowType values.
  
  @see [KSOFormRow type]

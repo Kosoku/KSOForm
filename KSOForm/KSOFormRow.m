@@ -20,6 +20,7 @@
 #import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
 
+KSOFormRowKey const KSOFormRowKeyIdentifier = @"identifier";
 KSOFormRowKey const KSOFormRowKeyType = @"type";
 KSOFormRowKey const KSOFormRowKeyValue = @"value";
 KSOFormRowKey const KSOFormRowKeyValueKey = @"valueKey";
@@ -126,7 +127,7 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     if (!(self = [super init]))
         return nil;
     
-    _identifier = [[NSUUID UUID] UUIDString];
+    _identifier = dictionary[KSOFormRowKeyIdentifier] ?: [[NSUUID UUID] UUIDString];
     
     _type = [dictionary[KSOFormRowKeyType] integerValue];
     

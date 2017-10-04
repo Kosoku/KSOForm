@@ -26,6 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSString* KSOFormSectionKey NS_EXTENSIBLE_STRING_ENUM;
 
 /**
+ The identifier of the section. This allows you to specify a specific identifier to refer to the section later.
+ 
+ @see [KSOFormSection identifier]
+ */
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyIdentifier;
+/**
  The KSOFormRow objects owned by the receiver. These can be either KSOFormRow objects or NSDictionary objects.
  
  @see rows

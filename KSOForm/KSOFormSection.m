@@ -20,6 +20,7 @@
 #import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
 
+KSOFormSectionKey const KSOFormSectionKeyIdentifier = @"identifier";
 KSOFormSectionKey const KSOFormSectionKeyRows = @"rows";
 KSOFormSectionKey const KSOFormSectionKeyHeaderTitle = @"headerTitle";
 KSOFormSectionKey const KSOFormSectionKeyFooterTitle = @"footerTitle";
@@ -49,7 +50,7 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewClassBundle = @"footerViewCla
     if (!(self = [super init]))
         return nil;
     
-    _identifier = [[NSUUID UUID] UUIDString];
+    _identifier = dictionary[KSOFormSectionKeyIdentifier] ?: [[NSUUID UUID] UUIDString];
     _headerTitle = dictionary[KSOFormSectionKeyHeaderTitle];
     _footerTitle = dictionary[KSOFormSectionKeyFooterTitle];
     _headerAttributedTitle = dictionary[KSOFormSectionKeyHeaderAttributedTitle];

@@ -69,6 +69,25 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     return self;
 }
 
+- (KSOFormSection *)sectionForIdentifier:(NSString *)identifier {
+    for (KSOFormSection *section in self.sections) {
+        if ([section.identifier isEqualToString:identifier]) {
+            return section;
+        }
+    }
+    return nil;
+}
+- (KSOFormRow *)rowForIdentifier:(NSString *)identifier {
+    for (KSOFormSection *section in self.sections) {
+        for (KSOFormRow *row in section.rows) {
+            if ([row.identifier isEqualToString:identifier]) {
+                return row;
+            }
+        }
+    }
+    return nil;
+}
+
 - (KSOFormRow *)rowForIndexPath:(NSIndexPath *)indexPath {
     if (self.sections.count < indexPath.section ||
         self.sections[indexPath.section].rows.count < indexPath.row) {
