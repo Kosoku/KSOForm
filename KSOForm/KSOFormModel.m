@@ -55,11 +55,13 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     _sections = [[NSMutableArray alloc] init];
     
     if (dictionary[KSOFormModelKeySections] != nil) {
-        if ([[dictionary[KSOFormModelKeySections] firstObject] isKindOfClass:NSDictionary.class]) {
-            [self addSectionsFromDictionaries:dictionary[KSOFormModelKeySections]];
-        }
-        else if ([[dictionary[KSOFormModelKeySections] firstObject] isKindOfClass:KSOFormSection.class]) {
-            [self addSections:dictionary[KSOFormModelKeySections]];
+        for (id section in dictionary[KSOFormModelKeySections]) {
+            if ([section isKindOfClass:NSDictionary.class]) {
+                [self addSectionFromDictionary:section];
+            }
+            else if ([section isKindOfClass:KSOFormSection.class]) {
+                [self addSection:section];
+            }
         }
     }
     else if (dictionary[KSOFormModelKeyRows] != nil) {

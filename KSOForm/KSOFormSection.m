@@ -61,11 +61,13 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewClassBundle = @"footerViewCla
     _footerViewClassBundle = dictionary[KSOFormSectionKeyFooterViewClassBundle];
     _rows = [[NSMutableArray alloc] init];
     
-    if ([[dictionary[KSOFormSectionKeyRows] firstObject] isKindOfClass:NSDictionary.class]) {
-        [self addRowsFromDictionaries:dictionary[KSOFormSectionKeyRows]];
-    }
-    else if ([[dictionary[KSOFormSectionKeyRows] firstObject] isKindOfClass:KSOFormRow.class]) {
-        [self addRows:dictionary[KSOFormSectionKeyRows]];
+    for (id row in dictionary[KSOFormSectionKeyRows]) {
+        if ([row isKindOfClass:NSDictionary.class]) {
+            [self addRowFromDictionary:row];
+        }
+        else if ([row isKindOfClass:KSOFormRow.class]) {
+            [self addRow:row];
+        }
     }
     
     return self;
