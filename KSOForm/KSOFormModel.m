@@ -84,7 +84,7 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     return [retval copy];
 }
 - (KSOFormRow *)rowForIdentifier:(NSString *)identifier {
-    return [self rowsForIdentifiers:@[identifier]];
+    return [self rowsForIdentifiers:@[identifier]].firstObject;
 }
 - (NSArray<KSOFormRow *> *)rowsForIdentifiers:(NSArray<NSString *> *)identifiers; {
     NSMutableArray *retval = [[NSMutableArray alloc] init];
