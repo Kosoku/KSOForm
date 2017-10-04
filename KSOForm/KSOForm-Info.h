@@ -16,6 +16,6 @@
 #ifndef __KSO_FORM__
 #define __KSO_FORM__
 
-#define KSO_BUNDLE_SHORT_VERSION_STRING 0.7.4
+#define KSO_BUNDLE_SHORT_VERSION_STRING 0.7.5
 
 #endif
