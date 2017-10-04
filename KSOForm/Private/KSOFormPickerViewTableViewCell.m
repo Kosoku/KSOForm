@@ -83,10 +83,7 @@
     [self.trailingView setSelectedComponentsJoinString:formRow.pickerViewSelectedComponentsJoinString];
     [self.trailingView reloadData];
     
-    if ([formRow.value isKindOfClass:NSArray.class] &&
-        [(NSArray *)formRow.value KQS_all:^BOOL(id  _Nonnull object, NSInteger index) {
-        return [object conformsToProtocol:@protocol(KSOFormPickerViewRow)];
-    }]) {
+    if ([formRow.value isKindOfClass:NSArray.class]) {
         [(NSArray *)formRow.value enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSInteger row = [formRow.pickerViewColumnsAndRows[idx] indexOfObject:obj];
             
@@ -97,7 +94,7 @@
             [self.trailingView selectRow:row inComponent:idx];
         }];
     }
-    else if ([formRow.value conformsToProtocol:@protocol(KSOFormPickerViewRow)]) {
+    else {
         NSInteger row = [formRow.pickerViewRows indexOfObject:formRow.value];
         
         if (row != NSNotFound) {
