@@ -131,7 +131,6 @@
 }
 - (NSAttributedString *)pickerViewButton:(KDIPickerViewButton *)pickerViewButton attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     id<KSOFormPickerViewRow> pickerViewRow = self.formRow.pickerViewColumnsAndRows.count > 0 ? self.formRow.pickerViewColumnsAndRows[component][row] : self.formRow.pickerViewRows[row];
-    NSString *title = [pickerViewRow description];
     
     if (self.formRow.valueFormatter != nil) {
         return [[NSAttributedString alloc] initWithString:[self.formRow.valueFormatter stringForObjectValue:pickerViewRow] ?: @""];
