@@ -131,21 +131,19 @@
 }
 - (NSAttributedString *)pickerViewButton:(KDIPickerViewButton *)pickerViewButton attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     id<KSOFormPickerViewRow> pickerViewRow = self.formRow.pickerViewColumnsAndRows.count > 0 ? self.formRow.pickerViewColumnsAndRows[component][row] : self.formRow.pickerViewRows[row];
+    NSString *title = [pickerViewRow description];
     
-    if ([pickerViewRow conformsToProtocol:@protocol(KSOFormPickerViewRow)]) {
+    if (self.formRow.valueFormatter != nil) {
+        return [[NSAttributedString alloc] initWithString:[self.formRow.valueFormatter stringForObjectValue:pickerViewRow] ?: @""];
+    }
+    else if (self.formRow.valueTransformer != nil) {
+        return [[NSAttributedString alloc] initWithString:[self.formRow.valueTransformer transformedValue:pickerViewRow] ?: @""];
+    }
+    else if ([pickerViewRow conformsToProtocol:@protocol(KSOFormPickerViewRow)]) {
         return [pickerViewRow respondsToSelector:@selector(formPickerViewRowAttributedTitle)] ? pickerViewRow.formPickerViewRowAttributedTitle : [[NSAttributedString alloc] initWithString:pickerViewRow.formPickerViewRowTitle ?: @""];
     }
     else {
-        NSString *title = [pickerViewRow description];
-        
-        if (self.formRow.valueFormatter != nil) {
-            title = [self.formRow.valueFormatter stringForObjectValue:pickerViewRow];
-        }
-        else if (self.formRow.valueTransformer != nil) {
-            title = [self.formRow.valueTransformer transformedValue:pickerViewRow];
-        }
-        
-        return [[NSAttributedString alloc] initWithString:title ?: @""];
+        return [[NSAttributedString alloc] initWithString:[pickerViewRow description] ?: @""];
     }
 }
 #pragma mark KDIPickerViewButtonDelegate
