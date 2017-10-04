@@ -75,12 +75,26 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable KSOFormSection *)sectionForIdentifier:(NSString *)identifier;
 /**
+ Returns an array of KSOFormSection objects for the provided *identifiers*.
+ 
+ @param identifiers The array of section identifiers
+ @return The array of sections
+ */
+- (NSArray<KSOFormSection *> *)sectionsForIdentifiers:(NSArray<NSString *> *)identifiers;
+/**
  Returns the KSOFormRow object for the provided *identifier* or nil if the a row with that identifier cannot be found.
  
  @param identifier The row identifier
  @return The row or nil
  */
 - (nullable KSOFormRow *)rowForIdentifier:(NSString *)identifier;
+/**
+ Returns an array of KSOFormRow objects for the provided *identifiers*.
+ 
+ @param identifiers The array of row identifiers
+ @return The array of rows
+ */
+- (NSArray<KSOFormRow *> *)rowsForIdentifiers:(NSArray<NSString *> *)identifiers;
 
 /**
  Returns the corresponding KSOFormRow object for the provided *indexPath* or nil if the section or row of the *indexPath* is out of bounds.

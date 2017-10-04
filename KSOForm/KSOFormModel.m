@@ -70,22 +70,34 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
 }
 
 - (KSOFormSection *)sectionForIdentifier:(NSString *)identifier {
+    return [self sectionsForIdentifiers:@[identifier]].firstObject;
+}
+- (NSArray<KSOFormSection *> *)sectionsForIdentifiers:(NSArray<NSString *> *)identifiers; {
+    NSMutableArray *retval = [[NSMutableArray alloc] init];
+    
     for (KSOFormSection *section in self.sections) {
-        if ([section.identifier isEqualToString:identifier]) {
-            return section;
+        if ([identifiers containsObject:section.identifier]) {
+            [retval addObject:section];
         }
     }
-    return nil;
+    
+    return [retval copy];
 }
 - (KSOFormRow *)rowForIdentifier:(NSString *)identifier {
+    return [self rowsForIdentifiers:@[identifier]];
+}
+- (NSArray<KSOFormRow *> *)rowsForIdentifiers:(NSArray<NSString *> *)identifiers; {
+    NSMutableArray *retval = [[NSMutableArray alloc] init];
+    
     for (KSOFormSection *section in self.sections) {
         for (KSOFormRow *row in section.rows) {
-            if ([row.identifier isEqualToString:identifier]) {
-                return row;
+            if ([identifiers containsObject:row.identifier]) {
+                [retval addObject:row];
             }
         }
     }
-    return nil;
+    
+    return [retval copy];
 }
 
 - (KSOFormRow *)rowForIndexPath:(NSIndexPath *)indexPath {
