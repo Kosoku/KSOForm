@@ -119,6 +119,7 @@
 }
 - (void)beginEditingFormRow {
     [self.trailingView becomeFirstResponder];
+    [self.trailingView selectAll:nil];
 }
 #pragma mark UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

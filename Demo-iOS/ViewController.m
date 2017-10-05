@@ -133,6 +133,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setEmail:@"a@b.com"];
+    
     KSOFormModel *readOnlyModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Read Only Values"}];
     
     [readOnlyModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Read Only Values",
