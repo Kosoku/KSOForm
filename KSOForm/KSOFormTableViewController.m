@@ -110,8 +110,8 @@
     [self KAG_addObserverForNotificationNames:@[KDINextPreviousInputAccessoryViewNotificationNext,KDINextPreviousInputAccessoryViewNotificationPrevious] object:nil block:^(NSNotification * _Nonnull notification) {
         kstStrongify(self);
         
-        UITableViewCell<KSOFormRowView> *cell = [self.tableView.visibleCells KQS_find:^BOOL(__kindof UITableViewCell * _Nonnull object, NSInteger index) {
-            return object.isFirstResponder;
+        UITableViewCell<KSOFormRowView> *cell = [self.tableView.visibleCells KQS_find:^BOOL(__kindof UITableViewCell<KSOFormRowView> * _Nonnull object, NSInteger index) {
+            return [object respondsToSelector:@selector(isEditingFormRow)] && object.isEditingFormRow;
         }];
         
         if (cell == nil) {
@@ -175,7 +175,11 @@
         
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
         
-        [[self.tableView cellForRowAtIndexPath:indexPath] becomeFirstResponder];
+        cell = (UITableViewCell<KSOFormRowView> *)[self.tableView cellForRowAtIndexPath:indexPath];
+        
+        if ([cell respondsToSelector:@selector(beginEditingFormRow)]) {
+            [cell beginEditingFormRow];
+        }
     }];
 }
 #pragma mark UIScrollViewDelegate

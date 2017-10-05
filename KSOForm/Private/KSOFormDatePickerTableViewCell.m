@@ -93,8 +93,11 @@
 - (BOOL)canEditFormRow {
     return YES;
 }
+- (BOOL)isEditingFormRow {
+    return self.trailingView.isPresentingDatePicker;
+}
 - (void)beginEditingFormRow {
-    [self.trailingView becomeFirstResponder];
+    [self.trailingView presentDatePicker];
 }
 
 @end

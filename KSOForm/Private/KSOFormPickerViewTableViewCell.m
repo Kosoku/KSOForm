@@ -107,8 +107,11 @@
 - (BOOL)canEditFormRow {
     return YES;
 }
+- (BOOL)isEditingFormRow {
+    return self.trailingView.isPresentingPickerView;
+}
 - (void)beginEditingFormRow {
-    [self.trailingView becomeFirstResponder];
+    [self.trailingView presentPickerView];
 }
 #pragma mark KDIPickerViewButtonDataSource
 - (NSInteger)numberOfComponentsInPickerViewButton:(KDIPickerViewButton *)pickerViewButton {

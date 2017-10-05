@@ -47,6 +47,10 @@ FOUNDATION_EXTERN NSNotificationName const KSOFormRowViewNotificationDidEndEditi
  */
 @property (readonly,nonatomic) BOOL canEditFormRow;
 /**
+ Returns whether the receiver is editing the form row.
+ */
+@property (readonly,nonatomic,getter=isEditingFormRow) BOOL editingFormRow;
+/**
  Called to being editing the form row.
  */
 - (void)beginEditingFormRow;

@@ -115,6 +115,9 @@
 - (BOOL)canEditFormRow {
     return YES;
 }
+- (BOOL)isEditingFormRow {
+    return self.trailingView.isFirstResponder;
+}
 - (void)beginEditingFormRow {
     [self.trailingView becomeFirstResponder];
 }
