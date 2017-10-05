@@ -59,14 +59,6 @@
     [self.trailingView setRightViewEdgeInsets:UIEdgeInsetsMake(0, ceil(self.layoutMargins.right * 0.5), 0, 0)];
 }
 #pragma mark -
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    if (selected) {
-        [self.trailingView becomeFirstResponder];
-    }
-}
-#pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
 #pragma mark -

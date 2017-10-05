@@ -49,36 +49,12 @@
     return self;
 }
 #pragma mark -
-- (BOOL)canBecomeFirstResponder {
-    return [self.trailingView canBecomeFirstResponder];
-}
-- (BOOL)canResignFirstResponder {
-    return [self.trailingView canResignFirstResponder];
-}
-- (BOOL)isFirstResponder {
-    return [self.trailingView isFirstResponder];
-}
-- (BOOL)becomeFirstResponder {
-    return [self.trailingView becomeFirstResponder];
-}
-- (BOOL)resignFirstResponder {
-    return [self.trailingView resignFirstResponder];
-}
-#pragma mark -
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    if (selected) {
-        [self.trailingView becomeFirstResponder];
-    }
-}
-#pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
 - (BOOL)wantsTrailingViewTopBottomLayoutMargins {
     return NO;
 }
-#pragma mark -
+#pragma mark KSOFormRowView
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
     
@@ -108,4 +84,13 @@
         [NSObject KDI_registerDynamicTypeObject:self.trailingView.titleLabel forTextStyle:formTheme.valueTextStyle];
     }
 }
+- (BOOL)canEditFormRow {
+    return YES;
+}
+#pragma mark KSOFormRowViewEditing
+@synthesize editingFormRow=_editingFormRow;
+- (void)beginEditingFormRow {
+    [self.trailingView becomeFirstResponder];
+}
+
 @end

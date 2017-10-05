@@ -51,30 +51,6 @@
     return self;
 }
 #pragma mark -
-- (BOOL)canBecomeFirstResponder {
-    return [self.trailingView canBecomeFirstResponder];
-}
-- (BOOL)canResignFirstResponder {
-    return [self.trailingView canResignFirstResponder];
-}
-- (BOOL)isFirstResponder {
-    return [self.trailingView isFirstResponder];
-}
-- (BOOL)becomeFirstResponder {
-    return [self.trailingView becomeFirstResponder];
-}
-- (BOOL)resignFirstResponder {
-    return [self.trailingView resignFirstResponder];
-}
-#pragma mark -
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    if (selected) {
-        [self.trailingView becomeFirstResponder];
-    }
-}
-#pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
 - (BOOL)wantsLeadingViewCenteredVertically {
@@ -138,6 +114,14 @@
     else {
         [NSObject KDI_registerDynamicTypeObject:self.trailingView forTextStyle:formTheme.valueTextStyle];
     }
+}
+- (BOOL)canEditFormRow {
+    return YES;
+}
+#pragma mark KSOFormRowViewEditing
+@synthesize editingFormRow=_editingFormRow;
+- (void)beginEditingFormRow {
+    [self.trailingView becomeFirstResponder];
 }
 #pragma mark UITextViewDelegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {

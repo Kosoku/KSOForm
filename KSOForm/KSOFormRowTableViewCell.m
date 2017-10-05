@@ -15,6 +15,7 @@
 
 #import "KSOFormRowTableViewCell.h"
 #import "KSOFormThemeFirstResponderIndicatorView.h"
+#import "KSOFormRowViewEditing.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
@@ -38,49 +39,51 @@
         });
     }];
     
-    [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:nil block:^(NSNotification * _Nonnull notification) {
+    [self KAG_addObserverForNotificationNames:@[KSOFormRowViewEditingNotificationDidBeginEditing,KSOFormRowViewEditingNotificationDidEndEditing] object:nil block:^(NSNotification * _Nonnull notification) {
         kstStrongify(self);
-        if ([[self.contentView KDI_recursiveSubviews] KQS_none:^BOOL(__kindof UIView * _Nonnull object, NSInteger index) {
-            return [notification.object isEqual:object];
-        }]) {
-            return;
-        }
-        
-        switch (self.formTheme.firstResponderStyle) {
-            case KSOFormThemeFirstResponderStyleBackgroundView:
-                if ([notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder]) {
-                    if (self.backgroundView == nil) {
-                        [self setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];
-                        [self.backgroundView setBackgroundColor:UIColor.clearColor];
-                    }
-                    
-                    [UIView animateWithDuration:KSOFormThemeFirstResponderIndicatorViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-                        [self.backgroundView setBackgroundColor:self.formTheme.firstResponderColor ?: [self.tintColor colorWithAlphaComponent:0.1]];
-                    } completion:nil];
-                }
-                else {
-                    [UIView animateWithDuration:KSOFormThemeFirstResponderIndicatorViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-                        [self.backgroundView setBackgroundColor:UIColor.clearColor];
-                    } completion:nil];
-                }
-                break;
-            case KSOFormThemeFirstResponderStyleUnderlineTitle:
-            case KSOFormThemeFirstResponderStyleCustom: {
-                UIView<KSOFormThemeFirstResponderIndicatorView> *view = [[self.contentView KDI_recursiveSubviews] KQS_find:^BOOL(__kindof UIView * _Nonnull object, NSInteger index) {
-                    return [object conformsToProtocol:@protocol(KSOFormThemeFirstResponderIndicatorView)];
-                }];
-                
-                if ([notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder]) {
-                    [view setShouldIndicateFirstResponder:YES];
-                }
-                else {
-                    [view setShouldIndicateFirstResponder:NO];
-                }
+        KSTDispatchMainAsync(^{
+            if ([[self.contentView KDI_recursiveSubviews] KQS_none:^BOOL(__kindof UIView * _Nonnull object, NSInteger index) {
+                return [notification.object isEqual:object];
+            }]) {
+                return;
             }
-                break;
-            case KSOFormThemeFirstResponderStyleNone:
-                break;
-        }
+            
+            switch (self.formTheme.firstResponderStyle) {
+                case KSOFormThemeFirstResponderStyleBackgroundView:
+                    if ([notification.name isEqualToString:KSOFormRowViewEditingNotificationDidBeginEditing]) {
+                        if (self.backgroundView == nil) {
+                            [self setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];
+                            [self.backgroundView setBackgroundColor:UIColor.clearColor];
+                        }
+                        
+                        [UIView animateWithDuration:KSOFormThemeFirstResponderIndicatorViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                            [self.backgroundView setBackgroundColor:self.formTheme.firstResponderColor ?: [self.tintColor colorWithAlphaComponent:0.1]];
+                        } completion:nil];
+                    }
+                    else {
+                        [UIView animateWithDuration:KSOFormThemeFirstResponderIndicatorViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                            [self.backgroundView setBackgroundColor:UIColor.clearColor];
+                        } completion:nil];
+                    }
+                    break;
+                case KSOFormThemeFirstResponderStyleUnderlineTitle:
+                case KSOFormThemeFirstResponderStyleCustom: {
+                    UIView<KSOFormThemeFirstResponderIndicatorView> *view = [[self.contentView KDI_recursiveSubviews] KQS_find:^BOOL(__kindof UIView * _Nonnull object, NSInteger index) {
+                        return [object conformsToProtocol:@protocol(KSOFormThemeFirstResponderIndicatorView)];
+                    }];
+                    
+                    if ([notification.name isEqualToString:KSOFormRowViewEditingNotificationDidEndEditing]) {
+                        [view setShouldIndicateFirstResponder:YES];
+                    }
+                    else {
+                        [view setShouldIndicateFirstResponder:NO];
+                    }
+                }
+                    break;
+                case KSOFormThemeFirstResponderStyleNone:
+                    break;
+            }
+        });
     }];
     
     return self;
