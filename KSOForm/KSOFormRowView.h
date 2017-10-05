@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
  The form theme to control appearance.
  */
 @property (strong,nonatomic,nullable) KSOFormTheme *formTheme;
+
+@property (readonly,nonatomic) BOOL canEditFormRow;
 @end
 
 NS_ASSUME_NONNULL_END

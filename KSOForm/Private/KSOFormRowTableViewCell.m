@@ -88,5 +88,8 @@
 
 @synthesize formRow=_formRow;
 @synthesize formTheme=_formTheme;
+- (BOOL)canEditFormRow {
+    return NO;
+}
 
 @end
