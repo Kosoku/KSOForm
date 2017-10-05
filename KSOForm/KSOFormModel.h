@@ -65,6 +65,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,nullable) __kindof UIView *footerView;
 
 /**
+ Block that is invoked when the receiver is visible, this is invoked within the viewDidAppear: method. You could use this to begin editing a specific row, for example.
+ 
+ @see KSOFormModelDidAppearBlock
+ */
+@property (copy,nonatomic,nullable) KSOFormModelDidAppearBlock didAppearBlock;
+
+/**
  The KSOFormSection objects owned by the receiver. Accessing this property always returns a copy of the underlying NSMutableArray that contains the objects. To add/remove sections after creation, use the various public methods below.
  
  @see KSOFormSection
@@ -122,6 +129,13 @@ NS_ASSUME_NONNULL_BEGIN
  @return The index path
  */
 - (nullable NSIndexPath *)indexPathForRow:(KSOFormRow *)formRow;
+
+/**
+ Coordinates with the owning KSOFormTableViewController to begin editing the provided *row*. Does nothing if the row is not editable.
+ 
+ @param row The row to begin editing
+ */
+- (void)beginEditingRow:(KSOFormRow *)row;
 
 /**
  Perform batch updates to the sections/rows owned by the receiver. All calls to the add/insert/remove/replace methods will be animated at the same time.

@@ -17,6 +17,7 @@
 #import "KSOFormSection.h"
 #import "KSOFormSection+KSOExtensionsPrivate.h"
 #import "KSOFormRow.h"
+#import "KSOFormRowView.h"
 
 #import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
@@ -29,6 +30,7 @@ KSOFormModelKey const KSOFormModelKeyHeaderView = @"headerView";
 KSOFormModelKey const KSOFormModelKeyFooterView = @"footerView";
 KSOFormModelKey const KSOFormModelKeySections = @"sections";
 KSOFormModelKey const KSOFormModelKeyRows = @"rows";
+KSOFormModelKey const KSOFormModelKeyDidAppearBlock = @"didAppearBlock";
 
 @interface KSOFormModel ()
 @property (readwrite,copy,nonatomic) NSMutableArray<KSOFormSection *> *sections;
@@ -56,6 +58,7 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     _backgroundView = dictionary[KSOFormModelKeyBackgroundView];
     _headerView = dictionary[KSOFormModelKeyHeaderView];
     _footerView = dictionary[KSOFormModelKeyFooterView];
+    _didAppearBlock = dictionary[KSOFormModelKeyDidAppearBlock];
     _sections = [[NSMutableArray alloc] init];
     
     if (dictionary[KSOFormModelKeySections] != nil) {
@@ -131,6 +134,22 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
     }
     
     return retval;
+}
+
+- (void)beginEditingRow:(KSOFormRow *)row; {
+    if (!row.isEditable) {
+        return;
+    }
+    
+    NSIndexPath *indexPath = [self indexPathForRow:row];
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+    
+    UITableViewCell<KSOFormRowView> *cell = (UITableViewCell<KSOFormRowView> *)[self.tableView cellForRowAtIndexPath:indexPath];
+    
+    if ([cell respondsToSelector:@selector(beginEditingFormRow)]) {
+        [cell beginEditingFormRow];
+    }
 }
 
 - (void)performUpdates:(dispatch_block_t)updates {

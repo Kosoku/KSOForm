@@ -171,16 +171,15 @@
             return;
         }
         
-        NSIndexPath *indexPath = [self.model indexPathForRow:editableFormRow];
-        
-        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
-        
-        cell = (UITableViewCell<KSOFormRowView> *)[self.tableView cellForRowAtIndexPath:indexPath];
-        
-        if ([cell respondsToSelector:@selector(beginEditingFormRow)]) {
-            [cell beginEditingFormRow];
-        }
+        [self.model beginEditingRow:editableFormRow];
     }];
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (self.model.didAppearBlock != nil) {
+        self.model.didAppearBlock(self.model);
+    }
 }
 #pragma mark UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

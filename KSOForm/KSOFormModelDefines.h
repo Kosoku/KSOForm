@@ -20,6 +20,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class KSOFormModel;
+
+/**
+ Block that is invoked after the owning KSOFormTableViewController has been fully displayed. This happens within the viewDidAppear: method. You could use this block to begin editing a specific row, for example.
+ 
+ @param model The model that is visible
+ */
+typedef void(^KSOFormModelDidAppearBlock)(KSOFormModel *model);
+
 /**
  String type that should be used for keys of a dictionary used to initialize the receiver.
  */
@@ -43,6 +52,7 @@ UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyLeftBarButtonItems;
  @see [KSOFormModel rightBarButtonItems]
  */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRightBarButtonItems;
+
 /**
  The backgroundView of the UITableView displaying the form.
  
@@ -61,10 +71,18 @@ UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyHeaderView;
  @see [UITableView tableFooterView]
  */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyFooterView;
+
+/**
+ A block that is invoked within viewDidAppear:.
+ 
+ @see [KSOFormModel didAppearBlock]
+ */
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyDidAppearBlock;
+
 /**
  The KSOFormSection objects owned by the receiver. These can be either KSOFormSection objects or NSDictionary objects.
  
- @see sections
+ @see [KSOFormSection sections]
  */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeySections;
 /**
