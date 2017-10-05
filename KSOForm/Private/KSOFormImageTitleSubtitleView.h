@@ -16,8 +16,8 @@
 #import <UIKit/UIKit.h>
 #import "KSOFormRowView.h"
 #import "KSOFormLeadingView.h"
-#import "KSOFormThemeFirstResponderIndicatorView.h"
+#import "KSOFormThemeEditingIndicatorView.h"
 
-@interface KSOFormImageTitleSubtitleView : UIView <KSOFormRowView,KSOFormLeadingView,KSOFormThemeFirstResponderIndicatorView>
+@interface KSOFormImageTitleSubtitleView : UIView <KSOFormRowView,KSOFormLeadingView,KSOFormThemeEditingIndicatorView>
 
 @end

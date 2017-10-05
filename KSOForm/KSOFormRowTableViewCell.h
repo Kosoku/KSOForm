@@ -16,6 +16,11 @@
 #import <UIKit/UIKit.h>
 #import <KSOForm/KSOFormRowView.h>
 
+/**
+ This serves as the base class for all form table view cells displayed by a KSOFormTableViewController instance. Custom cells should subclass this class, but are not required to do so. By subclassing you gain automatic support for editing on cell selection and support for indicating that the cell is editing through the KSOFormThemeEditingIndicatorView protocol.
+ 
+ This class implements the formRow and formTheme properties as well as returning NO for canEditFormRow.
+ */
 @interface KSOFormRowTableViewCell : UITableViewCell <KSOFormRowView>
 
 @end

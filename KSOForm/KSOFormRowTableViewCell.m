@@ -14,7 +14,7 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "KSOFormRowTableViewCell.h"
-#import "KSOFormThemeFirstResponderIndicatorView.h"
+#import "KSOFormThemeEditingIndicatorView.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
@@ -54,20 +54,20 @@
                         [self.backgroundView setBackgroundColor:UIColor.clearColor];
                     }
                     
-                    [UIView animateWithDuration:KSOFormThemeFirstResponderIndicatorViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                    [UIView animateWithDuration:KSOFormThemeEditingIndicatorViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
                         [self.backgroundView setBackgroundColor:self.formTheme.firstResponderColor ?: [self.tintColor colorWithAlphaComponent:0.1]];
                     } completion:nil];
                 }
                 else {
-                    [UIView animateWithDuration:KSOFormThemeFirstResponderIndicatorViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                    [UIView animateWithDuration:KSOFormThemeEditingIndicatorViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
                         [self.backgroundView setBackgroundColor:UIColor.clearColor];
                     } completion:nil];
                 }
                 break;
             case KSOFormThemeFirstResponderStyleUnderlineTitle:
             case KSOFormThemeFirstResponderStyleCustom: {
-                UIView<KSOFormThemeFirstResponderIndicatorView> *view = [[self.contentView KDI_recursiveSubviews] KQS_find:^BOOL(__kindof UIView * _Nonnull object, NSInteger index) {
-                    return [object conformsToProtocol:@protocol(KSOFormThemeFirstResponderIndicatorView)];
+                UIView<KSOFormThemeEditingIndicatorView> *view = [[self.contentView KDI_recursiveSubviews] KQS_find:^BOOL(__kindof UIView * _Nonnull object, NSInteger index) {
+                    return [object conformsToProtocol:@protocol(KSOFormThemeEditingIndicatorView)];
                 }];
                 
                 if ([notification.name isEqualToString:KSOFormRowViewNotificationDidEndEditing]) {

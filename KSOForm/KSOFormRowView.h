@@ -18,7 +18,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Notification posted when the receiver begins editing. Post this when appropriate to get automatic support for indication of editing in the table view cell.
+ */
 FOUNDATION_EXTERN NSNotificationName const KSOFormRowViewNotificationDidBeginEditing;
+/**
+ Notification posted when the receiver ends editing. Post this when appropriate to get automatic support for indication of editing in the table view cell.
+ */
 FOUNDATION_EXTERN NSNotificationName const KSOFormRowViewNotificationDidEndEditing;
 
 /**
@@ -36,7 +42,13 @@ FOUNDATION_EXTERN NSNotificationName const KSOFormRowViewNotificationDidEndEditi
  */
 @property (strong,nonatomic,nullable) KSOFormTheme *formTheme;
 
+/**
+ Return whether the receiver supports editing the form row.
+ */
 @property (readonly,nonatomic) BOOL canEditFormRow;
+/**
+ Called to being editing the form row.
+ */
 - (void)beginEditingFormRow;
 @end
 

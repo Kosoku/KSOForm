@@ -35,7 +35,7 @@ FOUNDATION_EXPORT const unsigned char KSOFormVersionString[];
 #import <KSOForm/KSOFormPickerViewRow.h>
 #import <KSOForm/KSOFormRowSegmentedItem.h>
 #import <KSOForm/KSOFormRowActionDelegate.h>
-#import <KSOForm/KSOFormThemeFirstResponderIndicatorView.h>
+#import <KSOForm/KSOFormThemeEditingIndicatorView.h>
 
 // classes
 #import <KSOForm/KSOFormModel.h>

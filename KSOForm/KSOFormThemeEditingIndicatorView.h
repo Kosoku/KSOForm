@@ -18,12 +18,12 @@
 /**
  The animation duration you should use when indicating first responder status for the sake of consistency.
  */
-FOUNDATION_EXTERN NSTimeInterval const KSOFormThemeFirstResponderIndicatorViewAnimationDuration;
+FOUNDATION_EXTERN NSTimeInterval const KSOFormThemeEditingIndicatorViewAnimationDuration;
 
 /**
  Protocol for an object (usually a UIView subclass) that indicates first responder status.
  */
-@protocol KSOFormThemeFirstResponderIndicatorView <NSObject>
+@protocol KSOFormThemeEditingIndicatorView <NSObject>
 @required
 /**
  Set to YES when the receiver should indicate first responder status, otherwise NO.

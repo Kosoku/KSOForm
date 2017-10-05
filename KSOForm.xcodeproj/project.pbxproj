@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0711B17F1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0711B17E1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0711B17F1F81732E00DCE131 /* KSOFormThemeEditingIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0711B17E1F81732E00DCE131 /* KSOFormThemeEditingIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0711B1811F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0711B1801F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m */; };
 		0711B18B1F818E6900DCE131 /* ImagePickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0711B18A1F818E6900DCE131 /* ImagePickerTableViewCell.m */; };
 		0712E4E81F78E0BE00F0E223 /* Ditko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0712E4E91F78E0BE00F0E223 /* Ditko.framework */; };
@@ -141,7 +141,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0711B17E1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormThemeFirstResponderIndicatorView.h; sourceTree = "<group>"; };
+		0711B17E1F81732E00DCE131 /* KSOFormThemeEditingIndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormThemeEditingIndicatorView.h; sourceTree = "<group>"; };
 		0711B1801F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormThemeFirstResponderIndicatorView.m; sourceTree = "<group>"; };
 		0711B1891F818E6900DCE131 /* ImagePickerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagePickerTableViewCell.h; sourceTree = "<group>"; };
 		0711B18A1F818E6900DCE131 /* ImagePickerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerTableViewCell.m; sourceTree = "<group>"; };
@@ -418,7 +418,7 @@
 				074EDBAA1F800AB9001A029D /* KSOFormRowDefines.h */,
 				07952DA81F789654006C2A75 /* KSOFormRow.h */,
 				07952DA91F789654006C2A75 /* KSOFormRow.m */,
-				0711B17E1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h */,
+				0711B17E1F81732E00DCE131 /* KSOFormThemeEditingIndicatorView.h */,
 				0711B1801F81752B00DCE131 /* KSOFormThemeFirstResponderIndicatorView.m */,
 				071ED0331F78D6AB00778F22 /* KSOFormTheme.h */,
 				071ED0341F78D6AB00778F22 /* KSOFormTheme.m */,
@@ -539,7 +539,7 @@
 				074EDBB11F804E25001A029D /* KSOFormRowSegmentedItem.h in Headers */,
 				079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */,
 				07CCBAD11F7D659E00AED8AA /* KSOFormSectionView.h in Headers */,
-				0711B17F1F81732E00DCE131 /* KSOFormThemeFirstResponderIndicatorView.h in Headers */,
+				0711B17F1F81732E00DCE131 /* KSOFormThemeEditingIndicatorView.h in Headers */,
 				07CCBADD1F7D969200AED8AA /* KSOFormTableViewHeaderFooterTextView.h in Headers */,
 				079E19261F7998B400743988 /* KSOFormRowValueDataSource.h in Headers */,
 				079A1B431F7ADE9300C9F9BB /* KSOFormPickerViewRow.h in Headers */,
