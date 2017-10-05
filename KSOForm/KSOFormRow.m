@@ -207,6 +207,7 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
 - (BOOL)isEditable {
     return (self.isEnabled &&
             (self.type == KSOFormRowTypeText ||
+             self.type == KSOFormRowTypeTextMultiline ||
              self.type == KSOFormRowTypeDatePicker ||
              self.type == KSOFormRowTypePickerView));
 }

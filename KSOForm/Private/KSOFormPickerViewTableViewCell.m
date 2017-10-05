@@ -16,7 +16,9 @@
 #import "KSOFormPickerViewTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
 
+#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
+#import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
 
 @interface KSOFormPickerViewTableViewCell () <KDIPickerViewButtonDataSource,KDIPickerViewButtonDelegate>
@@ -30,6 +32,8 @@
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
         return nil;
     
+    kstWeakify(self);
+    
     [self setLeadingView:[[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero]];
     [self.leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
@@ -41,6 +45,11 @@
     [self.trailingView setDataSource:self];
     [self.trailingView setDelegate:self];
     [self.contentView addSubview:self.trailingView];
+    
+    [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self.trailingView block:^(NSNotification * _Nonnull notification) {
+        kstStrongify(self);
+        [NSNotificationCenter.defaultCenter postNotificationName:[notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder] ? KSOFormRowViewNotificationDidBeginEditing : KSOFormRowViewNotificationDidEndEditing object:notification.object];
+    }];
     
     return self;
 }
@@ -98,8 +107,6 @@
 - (BOOL)canEditFormRow {
     return YES;
 }
-#pragma mark KSOFormRowViewEditing
-@synthesize editingFormRow=_editingFormRow;
 - (void)beginEditingFormRow {
     [self.trailingView becomeFirstResponder];
 }

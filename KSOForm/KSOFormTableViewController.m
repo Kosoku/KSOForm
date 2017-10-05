@@ -338,6 +338,18 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     KSOFormRow *formRow = [self.model rowForIndexPath:indexPath];
+    
+    if (formRow.isEditable) {
+        UITableViewCell<KSOFormRowView> *cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        if ([cell respondsToSelector:@selector(canEditFormRow)] &&
+            [cell canEditFormRow] &&
+            [cell respondsToSelector:@selector(beginEditingFormRow)]) {
+            
+            [cell beginEditingFormRow];
+        }
+    }
+    
     UIViewController *viewController = nil;
     
     if (formRow.actionViewControllerClass != Nil) {

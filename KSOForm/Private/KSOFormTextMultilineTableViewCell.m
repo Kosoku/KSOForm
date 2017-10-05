@@ -18,6 +18,7 @@
 #import "KSOFormModel+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
 
+#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
 
@@ -34,6 +35,8 @@
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
         return nil;
     
+    kstWeakify(self);
+    
     [self setLeadingView:[[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero]];
     [self.leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
@@ -47,6 +50,11 @@
     [self.trailingView setBackgroundColor:UIColor.clearColor];
     [self.trailingView setDelegate:self];
     [self.contentView addSubview:self.trailingView];
+    
+    [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self.trailingView block:^(NSNotification * _Nonnull notification) {
+        kstStrongify(self);
+        [NSNotificationCenter.defaultCenter postNotificationName:[notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder] ? KSOFormRowViewNotificationDidBeginEditing : KSOFormRowViewNotificationDidEndEditing object:notification.object];
+    }];
     
     return self;
 }
@@ -118,8 +126,6 @@
 - (BOOL)canEditFormRow {
     return YES;
 }
-#pragma mark KSOFormRowViewEditing
-@synthesize editingFormRow=_editingFormRow;
 - (void)beginEditingFormRow {
     [self.trailingView becomeFirstResponder];
 }

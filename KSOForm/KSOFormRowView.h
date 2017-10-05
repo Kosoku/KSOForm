@@ -18,6 +18,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+FOUNDATION_EXTERN NSNotificationName const KSOFormRowViewNotificationDidBeginEditing;
+FOUNDATION_EXTERN NSNotificationName const KSOFormRowViewNotificationDidEndEditing;
+
 /**
  Protocol for an object used to display a single KSOFormRow object.
  */
@@ -34,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,nullable) KSOFormTheme *formTheme;
 
 @property (readonly,nonatomic) BOOL canEditFormRow;
+- (void)beginEditingFormRow;
 @end
 
 NS_ASSUME_NONNULL_END
