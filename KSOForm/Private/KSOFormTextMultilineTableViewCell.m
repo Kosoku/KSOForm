@@ -98,9 +98,6 @@
         [self.trailingView setSmartDashesType:formRow.smartDashesType];
         [self.trailingView setSmartInsertDeleteType:formRow.smartInsertDeleteType];
     }
-    
-//    [self.trailingView setKSO_textValidator:formRow.textValidator];
-//    [self.trailingView setKSO_textFormatter:formRow.textFormatter];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
@@ -109,8 +106,8 @@
     
     [self.trailingView setFont:formTheme.valueFont];
     [self.trailingView setTextColor:formTheme.textColor ?: self.tintColor];
-    [self.trailingView setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:self.formRow.placeholder ?: @"" attributes:@{NSForegroundColorAttributeName: formTheme.valueColor}]];
     [self.trailingView setKeyboardAppearance:formTheme.keyboardAppearance];
+    [self.trailingView setPlaceholderTextColor:formTheme.valueColor];
     
     if (formTheme.textSelectionColor != nil) {
         [self.trailingView setTintColor:formTheme.textSelectionColor];
