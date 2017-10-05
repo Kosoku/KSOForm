@@ -15,13 +15,15 @@
 
 #import "KSOFormImageTitleSubtitleView.h"
 
+#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
+#import <Stanley/Stanley.h>
 
 @interface KSOFormImageTitleSubtitleView ()
 @property (strong,nonatomic) UIStackView *verticalStackView, *horizontalStackView;
 @property (strong,nonatomic) UIImageView *imageView;
 @property (strong,nonatomic) KDILabel *titleLabel;
-@property (strong,nonatomic) UILabel *subtitleLabel;
+@property (strong,nonatomic) KDILabel *subtitleLabel;
 @end
 
 @implementation KSOFormImageTitleSubtitleView
@@ -53,7 +55,7 @@
     [_titleLabel setBorderWidthRespectsScreenScale:YES];
     [_verticalStackView addArrangedSubview:_titleLabel];
     
-    _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    _subtitleLabel = [[KDILabel alloc] initWithFrame:CGRectZero];
     [_subtitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_subtitleLabel setNumberOfLines:0];
     [_verticalStackView addArrangedSubview:_subtitleLabel];
@@ -61,23 +63,32 @@
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _horizontalStackView}]];
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": _horizontalStackView}]];
     
+    kstWeakify(self);
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.title),@kstKeypath(self,formRow.subtitle),@kstKeypath(self,formRow.image),@kstKeypath(self,formRow.imageAccessibilityLabel)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,formRow.image)]) {
+                [self.imageView setImage:self.formRow.image];
+                [self.imageView setHidden:self.formRow.image == nil];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.imageAccessibilityLabel)]) {
+                [self.imageView setAccessibilityLabel:self.formRow.imageAccessibilityLabel];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.title)]) {
+                [self.titleLabel setText:self.formRow.title];
+                [self.titleLabel setHidden:self.formRow.title == nil];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.subtitle)]) {
+                [self.subtitleLabel setText:self.formRow.subtitle];
+                [self.subtitleLabel setHidden:self.formRow.subtitle == nil];
+            }
+        });
+    }];
+    
     return self;
 }
 
 @synthesize formRow=_formRow;
-- (void)setFormRow:(KSOFormRow *)formRow {
-    _formRow = formRow;
-    
-    [self.imageView setImage:_formRow.image];
-    [self.imageView setAccessibilityLabel:_formRow.imageAccessibilityLabel];
-    [self.imageView setHidden:_formRow.image == nil];
-    
-    [self.titleLabel setText:_formRow.title];
-    [self.titleLabel setHidden:_formRow.title == nil];
-    
-    [self.subtitleLabel setText:_formRow.subtitle];
-    [self.subtitleLabel setHidden:_formRow.subtitle == nil];
-}
 @synthesize formTheme=_formTheme;
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     _formTheme = formTheme;
