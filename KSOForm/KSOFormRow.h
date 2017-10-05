@@ -261,6 +261,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithDictionary:(nullable NSDictionary<KSOFormRowKey, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
+/**
+ Reloads the receiver without animation.
+ */
+- (void)reload;
+/**
+ Reloads the receiver with the provided *animation*.
+ 
+ @param animation The animation to use
+ */
+- (void)reloadWithAnimation:(UITableViewRowAnimation)animation;
+
 @end
 
 /**

@@ -204,6 +204,13 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     return self;
 }
 
+- (void)reload; {
+    [self reloadWithAnimation:UITableViewRowAnimationNone];
+}
+- (void)reloadWithAnimation:(UITableViewRowAnimation)animation; {
+    [self.section reloadRow:self animation:animation];
+}
+
 - (BOOL)isEditable {
     return (self.isEnabled &&
             (self.type == KSOFormRowTypeText ||
