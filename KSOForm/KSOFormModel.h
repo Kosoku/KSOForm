@@ -32,6 +32,18 @@ NS_ASSUME_NONNULL_BEGIN
  @see [UIViewController title]
  */
 @property (copy,nonatomic,nullable) NSString *title;
+/**
+ The left bar button items of the KSOFormTableViewController object.
+ 
+ @see [UINavigationItem leftBarButtonItems]
+ */
+@property (copy,nonatomic,nullable) NSArray<UIBarButtonItem *> *leftBarButtonItems;
+/**
+ The right bar button items of the KSOFormTableViewController object.
+ 
+ @see [UINavigationItem rightBarButtonItems]
+ */
+@property (copy,nonatomic,nullable) NSArray<UIBarButtonItem *> *rightBarButtonItems;
 
 /**
  The backgroundView of the owning UITableView displaying the form.

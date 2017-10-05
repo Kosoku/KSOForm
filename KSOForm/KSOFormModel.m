@@ -22,6 +22,8 @@
 #import <Quicksilver/Quicksilver.h>
 
 KSOFormModelKey const KSOFormModelKeyTitle = @"title";
+KSOFormModelKey const KSOFormModelKeyLeftBarButtonItems = @"leftBarButtonItems";
+KSOFormModelKey const KSOFormModelKeyRightBarButtonItems = @"rightBarButtonItems";
 KSOFormModelKey const KSOFormModelKeyBackgroundView = @"backgroundView";
 KSOFormModelKey const KSOFormModelKeyHeaderView = @"headerView";
 KSOFormModelKey const KSOFormModelKeyFooterView = @"footerView";
@@ -49,6 +51,8 @@ KSOFormModelKey const KSOFormModelKeyRows = @"rows";
         return nil;
     
     _title = dictionary[KSOFormModelKeyTitle];
+    _leftBarButtonItems = dictionary[KSOFormModelKeyLeftBarButtonItems];
+    _rightBarButtonItems = dictionary[KSOFormModelKeyRightBarButtonItems];
     _backgroundView = dictionary[KSOFormModelKeyBackgroundView];
     _headerView = dictionary[KSOFormModelKeyHeaderView];
     _footerView = dictionary[KSOFormModelKeyFooterView];

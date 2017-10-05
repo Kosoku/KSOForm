@@ -396,11 +396,21 @@
     _theme = KSOFormTheme.defaultTheme;
     
     kstWeakify(self);
-    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model.title)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model.title),@kstKeypath(self,model.leftBarButtonItems),@kstKeypath(self,model.rightBarButtonItems)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
             if ([keyPath isEqualToString:@kstKeypath(self,model.title)]) {
                 [self setTitle:self.model.title];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,model.leftBarButtonItems)]) {
+                if (self.model.leftBarButtonItems != nil) {
+                    [self.navigationItem setLeftBarButtonItems:self.model.leftBarButtonItems];
+                }
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,model.rightBarButtonItems)]) {
+                if (self.model.rightBarButtonItems != nil) {
+                    [self.navigationItem setRightBarButtonItems:self.model.rightBarButtonItems];
+                }
             }
         });
     }];

@@ -28,9 +28,21 @@ typedef NSString* KSOFormModelKey NS_EXTENSIBLE_STRING_ENUM;
 /**
  The title of the owning KSOFormTableViewController.
  
- @see title
+ @see [KSOFormModel title]
  */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyTitle;
+/**
+ The left bar button items of the owning KSOFormTableViewController.
+ 
+ @see [KSOFormModel leftBarButtonItems]
+ */
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyLeftBarButtonItems;
+/**
+ The right bar button items of the owning KSOFormTableViewController.
+ 
+ @see [KSOFormModel rightBarButtonItems]
+ */
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyRightBarButtonItems;
 /**
  The backgroundView of the UITableView displaying the form.
  
