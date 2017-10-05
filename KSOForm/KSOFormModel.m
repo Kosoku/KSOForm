@@ -103,6 +103,9 @@ KSOFormModelKey const KSOFormModelKeyDidAppearBlock = @"didAppearBlock";
             if ([identifiers containsObject:row.identifier]) {
                 [retval addObject:row];
             }
+            if (row.actionModel != nil) {
+                [retval addObjectsFromArray:[row.actionModel rowsForIdentifiers:identifiers]];
+            }
         }
     }
     
