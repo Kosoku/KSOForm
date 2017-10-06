@@ -17,6 +17,7 @@
 #import "KSOFormImageTitleSubtitleView.h"
 #import "KSOFormRow+KSOExtensionsPrivate.h"
 
+#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
 #import <Loki/Loki.h>
@@ -48,13 +49,25 @@
     } forControlEvents:UIControlEventValueChanged];
     [self.contentView addSubview:self.trailingView];
     
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.value),@kstKeypath(self,formRow.enabled)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,formRow.value)]) {
+                [self.trailingView setValue:[self.formRow.value floatValue]];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
+                [self.trailingView setEnabled:self.formRow.isEnabled];
+            }
+        });
+    }];
+    
     return self;
 }
 #pragma mark -
 @dynamic leadingView;
 @dynamic trailingView;
 - (NSNumber *)leadingToTrailingMargin {
-    return @(32.0);
+    return @32.0;
 }
 #pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {
@@ -66,7 +79,6 @@
     [self.trailingView setMaximumValue:formRow.sliderMaximumValue];
     [self.trailingView setMinimumValueImage:formRow.sliderMinimumValueImage];
     [self.trailingView setMaximumValueImage:formRow.sliderMaximumValueImage];
-    [self.trailingView setValue:[formRow.value floatValue]];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];

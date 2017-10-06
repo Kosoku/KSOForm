@@ -17,6 +17,7 @@
 #import "KSOFormImageTitleSubtitleView.h"
 #import "KSOFormRow+KSOExtensionsPrivate.h"
 
+#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
 
@@ -61,6 +62,19 @@
     } forControlEvents:UIControlEventValueChanged];
     [self.trailingView addArrangedSubview:self.stepper];
     
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.value),@kstKeypath(self,formRow.enabled)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,formRow.value)]) {
+                [self.stepper setValue:[self.formRow.value doubleValue]];
+                [self.valueLabel setText:self.formRow.formattedValue];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
+                [self.stepper setEnabled:self.formRow.isEnabled];
+            }
+        });
+    }];
+    
     return self;
 }
 #pragma mark -
@@ -75,9 +89,6 @@
     [self.stepper setMinimumValue:formRow.stepperMinimumValue];
     [self.stepper setMaximumValue:formRow.stepperMaximumValue];
     [self.stepper setStepValue:formRow.stepperStepValue];
-    [self.stepper setValue:[formRow.value doubleValue]];
-    
-    [self.valueLabel setText:formRow.formattedValue];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];

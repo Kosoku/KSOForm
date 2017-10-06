@@ -16,6 +16,7 @@
 #import "KSOFormButtonTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
 
+#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
 
@@ -43,6 +44,18 @@
     } forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.leadingView];
     
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.title),@kstKeypath(self,formRow.enabled)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,formRow.title)]) {
+                [self.leadingView setTitle:self.formRow.title forState:UIControlStateNormal];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
+                [self.trailingView setEnabled:self.formRow.isEnabled];
+            }
+        });
+    }];
+    
     return self;
 }
 #pragma mark -
@@ -62,7 +75,6 @@
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
     
-    [self.leadingView setTitle:formRow.title forState:UIControlStateNormal];
     [self.leadingView setAccessibilityHint:formRow.buttonAccessibilityHint];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {

@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong,nonatomic,nullable) id value;
 /**
- The formatted value, which will use valueFormatter is non-nil, otherwise returns the description of value.
+ The formatted value, which will use valueFormatter if non-nil, otherwise returns the description of value.
  */
 @property (readonly,nonatomic,nullable) NSString *formattedValue;
 /**

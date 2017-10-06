@@ -45,6 +45,41 @@
     [self.trailingView setDelegate:self];
     [self.contentView addSubview:self.trailingView];
     
+    kstWeakify(self);
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.value),@kstKeypath(self,formRow.enabled),@kstKeypath(self,formRow.pickerViewColumnsAndRows),@kstKeypath(self,formRow.pickerViewRows)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,formRow.pickerViewColumnsAndRows)] ||
+                [keyPath isEqualToString:@kstKeypath(self,formRow.pickerViewRows)]) {
+                
+                [self.trailingView reloadData];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
+                [self.trailingView setEnabled:self.formRow.isEnabled];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.value)]) {
+                if ([self.formRow.value isKindOfClass:NSArray.class]) {
+                    [(NSArray *)self.formRow.value enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        NSInteger row = [self.formRow.pickerViewColumnsAndRows[idx] indexOfObject:obj];
+                        
+                        if (row == NSNotFound) {
+                            return;
+                        }
+                        
+                        [self.trailingView selectRow:row inComponent:idx];
+                    }];
+                }
+                else {
+                    NSInteger row = [self.formRow.pickerViewRows indexOfObject:self.formRow.value];
+                    
+                    if (row != NSNotFound) {
+                        [self.trailingView selectRow:row inComponent:0];
+                    }
+                }
+            }
+        });
+    }];
+    
     [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self.trailingView block:^(NSNotification * _Nonnull notification) {
         [NSNotificationCenter.defaultCenter postNotificationName:[notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder] ? KSOFormRowViewNotificationDidBeginEditing : KSOFormRowViewNotificationDidEndEditing object:notification.object];
     }];
@@ -64,26 +99,6 @@
     [self.leadingView setFormRow:formRow];
     
     [self.trailingView setSelectedComponentsJoinString:formRow.pickerViewSelectedComponentsJoinString];
-    [self.trailingView reloadData];
-    
-    if ([formRow.value isKindOfClass:NSArray.class]) {
-        [(NSArray *)formRow.value enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSInteger row = [formRow.pickerViewColumnsAndRows[idx] indexOfObject:obj];
-            
-            if (row == NSNotFound) {
-                return;
-            }
-            
-            [self.trailingView selectRow:row inComponent:idx];
-        }];
-    }
-    else {
-        NSInteger row = [formRow.pickerViewRows indexOfObject:formRow.value];
-        
-        if (row != NSNotFound) {
-            [self.trailingView selectRow:row inComponent:0];
-        }
-    }
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];

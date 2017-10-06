@@ -50,6 +50,22 @@
     [self.trailingView setDelegate:self];
     [self.contentView addSubview:self.trailingView];
     
+    kstWeakify(self);
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.value),@kstKeypath(self,formRow.enabled),@kstKeypath(self,formRow.placeholder)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,formRow.value)]) {
+                [self.trailingView setText:self.formRow.value];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
+                [self.trailingView setUserInteractionEnabled:self.formRow.isEnabled];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.placeholder)]) {
+                [self.trailingView setPlaceholder:self.formRow.placeholder];
+            }
+        });
+    }];
+    
     [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self.trailingView block:^(NSNotification * _Nonnull notification) {
         [NSNotificationCenter.defaultCenter postNotificationName:[notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder] ? KSOFormRowViewNotificationDidBeginEditing : KSOFormRowViewNotificationDidEndEditing object:notification.object];
     }];
@@ -82,8 +98,6 @@
     
     [self.leadingView setFormRow:formRow];
     
-    [self.trailingView setText:formRow.value];
-    [self.trailingView setPlaceholder:formRow.placeholder];
     [self.trailingView setKeyboardType:formRow.keyboardType];
     [self.trailingView setKeyboardAppearance:formRow.keyboardAppearance];
     [self.trailingView setAutocapitalizationType:formRow.autocapitalizationType];

@@ -48,6 +48,18 @@
     } forControlEvents:UIControlEventValueChanged];
     [self.contentView addSubview:self.trailingView];
     
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.value),@kstKeypath(self,formRow.enabled)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,formRow.value)]) {
+                [self.trailingView setDate:self.formRow.value];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
+                [self.trailingView setEnabled:self.formRow.isEnabled];
+            }
+        });
+    }];
+    
     [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self.trailingView block:^(NSNotification * _Nonnull notification) {
         [NSNotificationCenter.defaultCenter postNotificationName:[notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder] ? KSOFormRowViewNotificationDidBeginEditing : KSOFormRowViewNotificationDidEndEditing object:notification.object];
     }];
@@ -66,7 +78,6 @@
     
     [self.leadingView setFormRow:formRow];
     
-    [self.trailingView setDate:formRow.value];
     [self.trailingView setMode:formRow.datePickerMode];
     [self.trailingView setMinimumDate:formRow.datePickerMinimumDate];
     [self.trailingView setMaximumDate:formRow.datePickerMaximumDate];

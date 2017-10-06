@@ -22,6 +22,7 @@
 
 KSOFormRowKey const KSOFormRowKeyIdentifier = @"identifier";
 KSOFormRowKey const KSOFormRowKeyType = @"type";
+KSOFormRowKey const KSOFormRowKeyEnabled = @"enabled";
 KSOFormRowKey const KSOFormRowKeyValue = @"value";
 KSOFormRowKey const KSOFormRowKeyValueKey = @"valueKey";
 KSOFormRowKey const KSOFormRowKeyValueFormatter = @"valueFormatter";
@@ -131,7 +132,7 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     
     _type = [dictionary[KSOFormRowKeyType] integerValue];
     
-    _enabled = YES;
+    _enabled = dictionary[KSOFormRowKeyEnabled] == nil ? YES : [dictionary[KSOFormRowKeyEnabled] boolValue];
     
     _value = dictionary[KSOFormRowKeyValue];
     _valueKey = dictionary[KSOFormRowKeyValueKey];

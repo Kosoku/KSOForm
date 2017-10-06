@@ -17,6 +17,7 @@
 #import "KSOFormImageTitleSubtitleView.h"
 #import "KSOFormRow+KSOExtensionsPrivate.h"
 
+#import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
 
@@ -48,6 +49,30 @@
     } forControlEvents:UIControlEventValueChanged];
     [self.contentView addSubview:self.trailingView];
     
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.value),@kstKeypath(self,formRow.enabled),@kstKeypath(self,formRow.segmentedItems)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([keyPath isEqualToString:@kstKeypath(self,formRow.value)]) {
+                [self.trailingView setSelectedSegmentIndex:[self.formRow.value integerValue]];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
+                [self.trailingView setEnabled:self.formRow.isEnabled];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,formRow.segmentedItems)]) {
+                [self.trailingView removeAllSegments];
+                
+                [self.formRow.segmentedItems enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([obj respondsToSelector:@selector(formRowSegmentedItemImage)]) {
+                        [self.trailingView insertSegmentWithImage:[obj formRowSegmentedItemImage] atIndex:idx animated:NO];
+                    }
+                    else {
+                        [self.trailingView insertSegmentWithTitle:self.formRow.valueFormatter == nil ? [obj formRowSegmentedItemTitle] : [self.formRow.valueFormatter stringForObjectValue:obj] atIndex:idx animated:NO];
+                    }
+                }];
+            }
+        });
+    }];
+    
     return self;
 }
 #pragma mark -
@@ -58,19 +83,6 @@
     [super setFormRow:formRow];
     
     [self.leadingView setFormRow:formRow];
-    
-    [self.trailingView removeAllSegments];
-    
-    [formRow.segmentedItems enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj respondsToSelector:@selector(formRowSegmentedItemImage)]) {
-            [self.trailingView insertSegmentWithImage:[obj formRowSegmentedItemImage] atIndex:idx animated:NO];
-        }
-        else {
-            [self.trailingView insertSegmentWithTitle:formRow.valueFormatter == nil ? [obj formRowSegmentedItemTitle] : [formRow.valueFormatter stringForObjectValue:obj]  atIndex:idx animated:NO];
-        }
-    }];
-    
-    [self.trailingView setSelectedSegmentIndex:[formRow.value integerValue]];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];

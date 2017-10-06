@@ -150,6 +150,12 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyIdentifier;
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyType;
 /**
+ Whether the row is enabled. This affects any controls bound to the row (e.g. UISwitch).
+ 
+ @see [KSOFormRow enabled]
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyEnabled;
+/**
  The value of the receiver. Should be appropriate for the type, unless a valueFormatter is provided. Aligned to the trailing edge.
  
  @see [KSOFormRow value]

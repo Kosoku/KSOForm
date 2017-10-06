@@ -124,7 +124,7 @@
 //        [theme setValueColor:KDIColorRandomRGB()];
 //        [theme setTextColor:KDIColorRandomRGB()];
 //        [theme setTextSelectionColor:theme.textColor];
-        [theme setFirstResponderColor:[KDIColorRandomRGB() colorWithAlphaComponent:0.1]];
+//        [theme setFirstResponderColor:[KDIColorRandomRGB() colorWithAlphaComponent:0.1]];
         
         [KSOFormTheme setDefaultTheme:theme];
     }
