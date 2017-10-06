@@ -15,6 +15,7 @@
 
 #import "KSOFormTextTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
+#import "KSOFormRow+KSOExtensionsPrivate.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
@@ -46,7 +47,7 @@
     [self.trailingView setInputAccessoryView:[[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:self.trailingView]];
     [self.trailingView KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
-        [self.formRow setValue:self.trailingView.text];
+        [self.formRow setValue:self.trailingView.text notify:YES];
     } forControlEvents:UIControlEventAllEditingEvents];
     [self.trailingView setDelegate:self];
     [self.contentView addSubview:self.trailingView];

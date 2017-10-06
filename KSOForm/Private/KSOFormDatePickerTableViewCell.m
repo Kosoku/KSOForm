@@ -15,6 +15,7 @@
 
 #import "KSOFormDatePickerTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
+#import "KSOFormRow+KSOExtensionsPrivate.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
@@ -43,7 +44,7 @@
     [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.trailingView KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
-        [self.formRow setValue:self.trailingView.date];
+        [self.formRow setValue:self.trailingView.date notify:YES];
     } forControlEvents:UIControlEventValueChanged];
     [self.contentView addSubview:self.trailingView];
     

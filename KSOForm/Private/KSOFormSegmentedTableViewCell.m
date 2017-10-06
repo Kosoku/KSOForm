@@ -15,6 +15,7 @@
 
 #import "KSOFormSegmentedTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
+#import "KSOFormRow+KSOExtensionsPrivate.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
@@ -43,7 +44,7 @@
     [self.trailingView setApportionsSegmentWidthsByContent:YES];
     [self.trailingView KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
-        [self.formRow setValue:@(self.trailingView.selectedSegmentIndex)];
+        [self.formRow setValue:@(self.trailingView.selectedSegmentIndex) notify:YES];
     } forControlEvents:UIControlEventValueChanged];
     [self.contentView addSubview:self.trailingView];
     

@@ -15,6 +15,7 @@
 
 #import "KSOFormSwitchTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
+#import "KSOFormRow+KSOExtensionsPrivate.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
@@ -43,7 +44,7 @@
     [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.trailingView KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
-        [self.formRow setValue:@(self.trailingView.isOn)];
+        [self.formRow setValue:@(self.trailingView.isOn) notify:YES];
     } forControlEvents:UIControlEventValueChanged];
     [self.contentView addSubview:self.trailingView];
     

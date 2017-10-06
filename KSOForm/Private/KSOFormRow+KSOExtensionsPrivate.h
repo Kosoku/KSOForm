@@ -19,4 +19,6 @@
 
 @interface KSOFormRow (KSOExtensionsPrivate)
 @property (readwrite,weak,nonatomic) KSOFormSection *section;
+
+- (void)setValue:(id)value notify:(BOOL)notify;
 @end

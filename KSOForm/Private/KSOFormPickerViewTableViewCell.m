@@ -15,6 +15,7 @@
 
 #import "KSOFormPickerViewTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
+#import "KSOFormRow+KSOExtensionsPrivate.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
@@ -147,10 +148,10 @@
         
         [temp replaceObjectAtIndex:component withObject:pickerViewRow];
         
-        [self.formRow setValue:[temp copy]];
+        [self.formRow setValue:[temp copy] notify:YES];
     }
     else {
-        [self.formRow setValue:self.formRow.pickerViewRows[row]];
+        [self.formRow setValue:self.formRow.pickerViewRows[row] notify:YES];
     }
 }
 @end

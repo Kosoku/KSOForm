@@ -15,6 +15,7 @@
 
 #import "KSOFormStepperTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
+#import "KSOFormRow+KSOExtensionsPrivate.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
@@ -55,7 +56,7 @@
     [self.stepper setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.stepper KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
-        [self.formRow setValue:@(self.stepper.value)];
+        [self.formRow setValue:@(self.stepper.value) notify:YES];
         [self.valueLabel setText:self.formRow.formattedValue];
     } forControlEvents:UIControlEventValueChanged];
     [self.trailingView addArrangedSubview:self.stepper];

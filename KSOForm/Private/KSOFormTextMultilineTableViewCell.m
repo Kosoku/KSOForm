@@ -16,6 +16,7 @@
 #import "KSOFormTextMultilineTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
 #import "KSOFormModel+KSOExtensionsPrivate.h"
+#import "KSOFormRow+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
 
 #import <Agamotto/Agamotto.h>
@@ -137,7 +138,7 @@
     return YES;
 }
 - (void)textViewDidChange:(UITextView *)textView {
-    [self.formRow setValue:self.trailingView.text];
+    [self.formRow setValue:self.trailingView.text notify:YES];
     [self setHeight:[textView sizeThatFits:CGSizeMake(CGRectGetWidth(textView.frame), CGFLOAT_MAX)].height];
 }
 #pragma mark *** Private Methods ***

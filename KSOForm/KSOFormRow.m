@@ -233,6 +233,9 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     return self.valueKey != nil && self.valueDataSource != nil ? [self.valueDataSource valueForKey:self.valueKey] : _value;;
 }
 - (void)setValue:(id)value {
+    [self setValue:value notify:NO];
+}
+- (void)setValue:(id)value notify:(BOOL)notify; {
     if (self.shouldChangeValueBlock != nil) {
         NSError *outError;
         if (!self.shouldChangeValueBlock(self,value,&outError)) {
@@ -259,7 +262,8 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     _value = value;
     
     if (self.valueKey != nil &&
-        self.valueDataSource != nil) {
+        self.valueDataSource != nil &&
+        [self.valueDataSource respondsToSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@%@:",[self.valueKey substringToIndex:1],[self.valueKey substringFromIndex:1]])]) {
         
         [self.valueDataSource setValue:_value forKey:self.valueKey];
     }
@@ -273,10 +277,13 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
         }
     }
     
-    if (self.didChangeValueBlock != nil) {
-        self.didChangeValueBlock(self,_value);
+    if (notify) {
+        if (self.didChangeValueBlock != nil) {
+            self.didChangeValueBlock(self,_value);
+        }
     }
 }
+
 - (NSString *)formattedValue {
     return self.valueFormatter == nil ? (self.valueTransformer == nil ? [self.value description] : [self.valueTransformer transformedValue:self.value]) : [self.valueFormatter stringForObjectValue:self.value];
 }
