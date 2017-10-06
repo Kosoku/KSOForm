@@ -194,6 +194,7 @@
                                               }];
     [controlsModel.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyType: @(KSOFormRowTypeSegmented),
                                                                    KSOFormRowKeyTitle: @"Segmented",
+                                                                   KSOFormRowKeyValue: @2,
                                                                    KSOFormRowKeySegmentedItems: @[@1,@2,@3,@4],
                                                                    KSOFormRowKeyValueFormatter: ({
         NSNumberFormatter *retval = [[NSNumberFormatter alloc] init];
@@ -209,6 +210,7 @@
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypePickerView),
                                                                    KSOFormRowKeyTitle: @"Picker View",
+                                                                   KSOFormRowKeyValue: @[@"Blue",@"Two"],
                                                                    KSOFormRowKeyPickerViewColumnsAndRows: @[@[@"Red",@"Green",@"Blue"],@[@"One",@"Two",@"Three"]],
                                                                    KSOFormRowKeyPickerViewSelectedComponentsJoinString: @", "
                                                                    },

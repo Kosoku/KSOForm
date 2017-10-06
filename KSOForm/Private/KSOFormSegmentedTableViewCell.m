@@ -53,7 +53,11 @@
         kstStrongify(self);
         KSTDispatchMainAsync(^{
             if ([keyPath isEqualToString:@kstKeypath(self,formRow.value)]) {
-                [self.trailingView setSelectedSegmentIndex:[self.formRow.value integerValue]];
+                NSInteger index = [self.formRow.value integerValue];
+                
+                if (index < self.trailingView.numberOfSegments) {
+                    [self.trailingView setSelectedSegmentIndex:index];
+                }
             }
             else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
                 [self.trailingView setEnabled:self.formRow.isEnabled];
@@ -69,6 +73,12 @@
                         [self.trailingView insertSegmentWithTitle:self.formRow.valueFormatter == nil ? [obj formRowSegmentedItemTitle] : [self.formRow.valueFormatter stringForObjectValue:obj] atIndex:idx animated:NO];
                     }
                 }];
+                
+                NSInteger index = [self.formRow.value integerValue];
+                
+                if (index < self.trailingView.numberOfSegments) {
+                    [self.trailingView setSelectedSegmentIndex:index];
+                }
             }
         });
     }];
