@@ -155,7 +155,7 @@ static void const *kDefaultThemeKey = &kDefaultThemeKey;
     return UIColor.blackColor;
 }
 + (UIColor *)_defaultSubtitleColor; {
-    return UIColor.blackColor;
+    return UIColor.darkGrayColor;
 }
 + (UIColor *)_defaultValueColor; {
     return UIColor.lightGrayColor;
