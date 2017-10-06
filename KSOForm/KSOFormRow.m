@@ -263,7 +263,7 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     
     if (self.valueKey != nil &&
         self.valueDataSource != nil &&
-        [self.valueDataSource respondsToSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@%@:",[self.valueKey substringToIndex:1],[self.valueKey substringFromIndex:1]])]) {
+        [self.valueDataSource respondsToSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@%@:",[self.valueKey substringToIndex:1].uppercaseString,[self.valueKey substringFromIndex:1]])]) {
         
         [self.valueDataSource setValue:_value forKey:self.valueKey];
     }
