@@ -93,6 +93,8 @@
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     _formTheme = formTheme;
     
+    [self.imageView setTintColor:_formTheme.titleColor];
+    
     [self.titleLabel setFont:_formTheme.titleFont];
     [self.titleLabel setTextColor:_formTheme.titleColor];
     [self.titleLabel setBorderColor:_formTheme.firstResponderColor ?: self.tintColor];
