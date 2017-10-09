@@ -77,7 +77,7 @@ typedef NS_ENUM(NSInteger, KSOFormThemeFirstResponderStyle) {
 /**
  The subtitle color, used to display the subtitle property of KSOFormRow objects.
  
- The default is UIColor.grayColor.
+ The default is UIColor.darkGrayColor.
  */
 @property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
 /**

@@ -253,6 +253,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (copy,nonatomic,nullable) NSString *buttonAccessibilityHint;
 
+@property (copy,nonatomic,nullable) UIColor *themeTextColor;
+
 /**
  The designated initializer. Pass a dictionary using the KSOFormRowKey keys above.
  

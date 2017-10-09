@@ -88,6 +88,8 @@ KSOFormRowKey const KSOFormRowKeyCellClassBundle = @"cellClassBundle";
 KSOFormRowKey const KSOFormRowKeyImageAccessibilityLabel = @"imageAccessibilityLabel";
 KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibilityHint";
 
+KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
+
 @interface KSOFormRow ()
 @property (readwrite,weak,nonatomic) KSOFormSection *section;
 @property (readwrite,copy,nonatomic) NSString *identifier;
@@ -201,6 +203,8 @@ KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibility
     
     _imageAccessibilityLabel = dictionary[KSOFormRowKeyImageAccessibilityLabel];
     _buttonAccessibilityHint = dictionary[KSOFormRowKeyButtonAccessibilityHint];
+    
+    _themeTextColor = dictionary[KSOFormRowKeyThemeTextColor];
     
     return self;
 }

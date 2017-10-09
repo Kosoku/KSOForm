@@ -92,5 +92,9 @@
     if (formTheme.textColor != nil) {
         [self.leadingView setTintColor:formTheme.textColor];
     }
+    
+    if (self.formRow.themeTextColor != nil) {
+        [self.leadingView setTintColor:self.formRow.themeTextColor];
+    }
 }
 @end

@@ -479,6 +479,13 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyImageAccessibilityLabel;
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint;
 
+/**
+ Override the theme text color for the row. For example, to tint a button red instead of the default blue.
+ 
+ @see [KSOFormRow themeTextColor]
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyThemeTextColor;
+
 NS_ASSUME_NONNULL_END
 
 #endif

@@ -251,9 +251,16 @@
                                                                    KSOFormRowKeySliderMaximumValueImage: [UIImage imageNamed:@"socket"]
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeButton),
-                                                                   KSOFormRowKeyTitle: @"Show Alert",
+                                                                   KSOFormRowKeyTitle: @"Show Alert…",
                                                                    KSOFormRowKeyControlBlock: ^(__kindof UIControl *control, UIControlEvents controlEvents){
         [UIAlertController KDI_presentAlertControllerWithTitle:@"Oh Noes!" message:@"Did you see that Morty?!?" cancelButtonTitle:nil otherButtonTitles:nil completion:nil];
+    }
+                                                                   },
+                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeButton),
+                                                                   KSOFormRowKeyTitle: @"Delete Things…",
+                                                                   KSOFormRowKeyThemeTextColor: UIColor.redColor,
+                                                                   KSOFormRowKeyControlBlock: ^(__kindof UIControl *control, UIControlEvents controlEvents){
+        [UIAlertController KDI_presentAlertControllerWithTitle:@"Oh Noes!" message:@"Did you see that Morty?!?" cancelButtonTitle:nil otherButtonTitles:@[@"Delete"] completion:nil];
     }
                                                                    }]];
     
