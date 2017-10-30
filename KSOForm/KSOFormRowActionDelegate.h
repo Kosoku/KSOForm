@@ -20,22 +20,22 @@ NS_ASSUME_NONNULL_BEGIN
 @class KSOFormRow,KSOFormModel;
 
 /**
- Protocol for an object that vends increasingly specialize objects for displaying additional UI when KSFormRow objects are interacted with by the user. The methods are checked for implementation and non-nil returns values from top to bottom. The first non-nil return value is used.
+ Protocol for an object that vends increasingly specialize objects for displaying additional UI when KSFormRow objects are interacted with by the user. The methods are checked for implementation and non-nil return values from top to bottom. The first non-nil return value is used.
  */
 @protocol KSOFormRowActionDelegate <NSObject>
 @optional
 /**
  The KSOFormModel to use when creating a new form table view controller to push or present.
  */
-- (KSOFormModel *)actionFormModelForFormRow:(KSOFormRow *)formRow;
+- (nullable KSOFormModel *)actionFormModelForFormRow:(KSOFormRow *)formRow;
 /**
  The view controller class to use when creating a view controller to push or present.
  */
-- (Class)actionViewControllerClassForFormRow:(KSOFormRow *)formRow;
+- (nullable Class)actionViewControllerClassForFormRow:(KSOFormRow *)formRow;
 /**
  The view controller to push or present.
  */
-- (__kindof UIViewController *)actionViewControllerForFormRow:(KSOFormRow *)formRow;
+- (nullable __kindof UIViewController *)actionViewControllerForFormRow:(KSOFormRow *)formRow;
 @end
 
 NS_ASSUME_NONNULL_END
