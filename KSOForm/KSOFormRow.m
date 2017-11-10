@@ -151,7 +151,7 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     
     _placeholder = dictionary[KSOFormRowKeyPlaceholder];
     _minimumNumberOfLines = [dictionary[KSOFormRowKeyMinimumNumberOfLines] unsignedIntegerValue];
-    _maximumNumberOfLines = [dictionary[KSOFormRowKeyMaximumNumberOfLines] unsignedIntegerValue];
+    _maximumNumberOfLines = dictionary[KSOFormRowKeyMaximumNumberOfLines] == nil ? 3 : [dictionary[KSOFormRowKeyMaximumNumberOfLines] unsignedIntegerValue];
     _textValidator = dictionary[KSOFormRowKeyTextValidator];
     _textFormatter = dictionary[KSOFormRowKeyTextFormatter];
     

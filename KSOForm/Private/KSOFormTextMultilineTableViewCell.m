@@ -26,8 +26,6 @@
 @interface KSOFormTextMultilineTableViewCell () <UITextViewDelegate>
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
 @property (strong,nonatomic) KDITextView *trailingView;
-
-@property (assign,nonatomic) CGFloat height;
 @end
 
 @implementation KSOFormTextMultilineTableViewCell
@@ -79,18 +77,7 @@
     return NO;
 }
 - (CGFloat)minimumTrailingViewHeight {
-    CGFloat lineHeight = MAX(self.height, ceil(self.trailingView.font.lineHeight));
-    CGFloat retval = lineHeight;
-    
-    if (self.formRow.minimumNumberOfLines > 0) {
-        retval = lineHeight * self.formRow.minimumNumberOfLines;
-    }
-    
-    if (self.formRow.maximumNumberOfLines > 0) {
-        retval = lineHeight * self.formRow.maximumNumberOfLines;
-    }
-    
-    return retval;
+    return self.trailingView.intrinsicContentSize.height;
 }
 #pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {
@@ -105,6 +92,8 @@
     [self.trailingView setSpellCheckingType:formRow.spellCheckingType];
     [self.trailingView setSecureTextEntry:formRow.isSecureTextEntry];
     [self.trailingView setTextContentType:formRow.textContentType];
+    [self.trailingView setMinimumNumberOfLines:formRow.minimumNumberOfLines];
+    [self.trailingView setMaximumNumberOfLines:formRow.maximumNumberOfLines];
     if (@available(iOS 11.0, *)) {
         [self.trailingView setSmartQuotesType:formRow.smartQuotesType];
         [self.trailingView setSmartDashesType:formRow.smartDashesType];
@@ -153,22 +142,10 @@
 }
 - (void)textViewDidChange:(UITextView *)textView {
     [self.formRow setValue:self.trailingView.text notify:YES];
-    [self setHeight:[textView sizeThatFits:CGSizeMake(CGRectGetWidth(textView.frame), CGFLOAT_MAX)].height];
-}
-#pragma mark *** Private Methods ***
-#pragma mark Properties
-- (void)setHeight:(CGFloat)height {
-    if (_height == height) {
-        return;
-    }
-    
-    _height = height;
     
     [self setNeedsUpdateConstraints];
     
     [self.formRow.section.model.tableView beginUpdates];
     [self.formRow.section.model.tableView endUpdates];
-    
-    [self.trailingView scrollRangeToVisible:self.trailingView.selectedRange];
 }
 @end
