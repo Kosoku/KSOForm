@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KSOForm'
-  s.version          = '0.20.1'
+  s.version          = '0.20.2'
   s.summary          = 'KSOForm is a iOS framework for creating Settings app like views.'
 
 # This description is used to generate tags and improve search results.
