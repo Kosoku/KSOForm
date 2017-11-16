@@ -54,6 +54,7 @@ KSOFormModelKey const KSOFormModelKeyDidAppearBlock = @"didAppearBlock";
         return nil;
     
     _title = dictionary[KSOFormModelKeyTitle];
+    _titleView = dictionary[KSOFormModelKeyTitleView];
     _leftBarButtonItems = dictionary[KSOFormModelKeyLeftBarButtonItems];
     _rightBarButtonItems = dictionary[KSOFormModelKeyRightBarButtonItems];
     _backgroundView = dictionary[KSOFormModelKeyBackgroundView];
