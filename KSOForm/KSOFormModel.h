@@ -33,6 +33,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (copy,nonatomic,nullable) NSString *title;
 /**
+ The titleView of the owning KSOFormTableViewController object.
+ 
+ @see [UIViewController titleView]
+ */
+@property (strong,nonatomic,nullable) __kindof UIView *titleView;
+/**
  The left bar button items of the KSOFormTableViewController object.
  
  @see [UINavigationItem leftBarButtonItems]

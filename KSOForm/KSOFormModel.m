@@ -23,6 +23,7 @@
 #import <Quicksilver/Quicksilver.h>
 
 KSOFormModelKey const KSOFormModelKeyTitle = @"title";
+KSOFormModelKey const KSOFormModelKeyTitleView = @"titleView";
 KSOFormModelKey const KSOFormModelKeyLeftBarButtonItems = @"leftBarButtonItems";
 KSOFormModelKey const KSOFormModelKeyRightBarButtonItems = @"rightBarButtonItems";
 KSOFormModelKey const KSOFormModelKeyBackgroundView = @"backgroundView";

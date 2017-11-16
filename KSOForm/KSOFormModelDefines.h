@@ -41,6 +41,12 @@ typedef NSString* KSOFormModelKey NS_EXTENSIBLE_STRING_ENUM;
  */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyTitle;
 /**
+ The titleView of the owning KSOFormTableViewController. This overrides KSOFormModelKeyTitle if non-nil.
+ 
+ @see [KSOFormModel titleView]
+ */
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyTitleView;
+/**
  The left bar button items of the owning KSOFormTableViewController.
  
  @see [KSOFormModel leftBarButtonItems]
