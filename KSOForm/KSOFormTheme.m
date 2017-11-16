@@ -48,6 +48,9 @@
 - (id)copyWithZone:(NSZone *)zone {
     KSOFormTheme *retval = [[KSOFormTheme alloc] initWithIdentifier:[NSString stringWithFormat:@"%@.copy",self.identifier]];
     
+    retval->_backgroundColor = _backgroundColor;
+    retval->_cellBackgroundColor = _cellBackgroundColor;
+    
     retval->_headerTitleColor = _headerTitleColor;
     retval->_footerTitleColor = _footerTitleColor;
     retval->_titleColor = _titleColor;

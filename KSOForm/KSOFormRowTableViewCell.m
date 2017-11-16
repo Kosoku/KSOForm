@@ -88,6 +88,13 @@
 
 @synthesize formRow=_formRow;
 @synthesize formTheme=_formTheme;
+- (void)setFormTheme:(KSOFormTheme *)formTheme {
+    _formTheme = formTheme;
+    
+    if (_formTheme.cellBackgroundColor != nil) {
+        self.backgroundColor = _formTheme.cellBackgroundColor;
+    }
+}
 - (BOOL)canEditFormRow {
     return NO;
 }

@@ -57,6 +57,19 @@ typedef NS_ENUM(NSInteger, KSOFormThemeFirstResponderStyle) {
 @property (readonly,copy,nonatomic) NSString *identifier;
 
 /**
+ The background color of the form view.
+ 
+ The default is the system default for a grouped table view.
+ */
+@property (strong,nonatomic,nullable) UIColor *backgroundColor;
+/**
+ The cell background color for each row in the form.
+ 
+ The default is the system default for a UITableViewCell instance.
+ */
+@property (strong,nonatomic,nullable) UIColor *cellBackgroundColor;
+
+/**
  The header title color, used to display section header text.
  
  The default is UIColor.grayColor.

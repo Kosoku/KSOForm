@@ -92,7 +92,7 @@
     
     kstWeakify(self);
     
-    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model),@kstKeypath(self,theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
             if ([keyPath isEqualToString:@kstKeypath(self,model)]) {
@@ -103,6 +103,11 @@
                 [self.tableView setBackgroundView:self.model.backgroundView];
                 [self.tableView setTableHeaderView:self.model.headerView];
                 [self.tableView setTableFooterView:self.model.footerView];
+            }
+            else if ([keyPath isEqualToString:@kstKeypath(self,theme)]) {
+                if (self.theme.backgroundColor != nil) {
+                    [self.tableView setBackgroundColor:self.theme.backgroundColor];
+                }
             }
         });
     }];
