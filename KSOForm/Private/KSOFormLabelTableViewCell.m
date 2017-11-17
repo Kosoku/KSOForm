@@ -48,7 +48,9 @@
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.value)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
-            [self.trailingView setText:self.formRow.formattedValue];
+            NSString *text = self.formRow.formattedValue;
+            
+            [self.trailingView setText:text.length == 0 ? self.formRow.placeholder : text];
         });
     }];
     
