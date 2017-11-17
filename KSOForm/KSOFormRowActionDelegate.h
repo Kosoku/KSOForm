@@ -26,16 +26,31 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 /**
  The KSOFormModel to use when creating a new form table view controller to push or present.
+ 
+ @param formRow The form row for which to take action
+ @return The form model
  */
 - (nullable KSOFormModel *)actionFormModelForFormRow:(KSOFormRow *)formRow;
 /**
  The view controller class to use when creating a view controller to push or present.
+ 
+ @param formRow The form row for which to take action
+ @return The view controller class
  */
 - (nullable Class)actionViewControllerClassForFormRow:(KSOFormRow *)formRow;
 /**
  The view controller to push or present.
+ 
+ @param formRow The form row for which to take action
+ @return The view controller
  */
 - (nullable __kindof UIViewController *)actionViewControllerForFormRow:(KSOFormRow *)formRow;
+/**
+ Allows the delegate to handle the action itself.
+ 
+ @param formRow The form row for which to take action
+ */
+- (void)executeActionForFormRow:(KSOFormRow *)formRow;
 @end
 
 NS_ASSUME_NONNULL_END

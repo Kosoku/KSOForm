@@ -377,6 +377,9 @@
     else if ([formRow.actionDelegate respondsToSelector:@selector(actionViewControllerForFormRow:)]) {
         viewController = [formRow.actionDelegate actionViewControllerForFormRow:formRow];
     }
+    else if ([formRow.actionDelegate respondsToSelector:@selector(executeActionForFormRow:)]) {
+        [formRow.actionDelegate executeActionForFormRow:formRow];
+    }
     
     if (viewController != nil) {
         switch (formRow.action) {
@@ -384,7 +387,7 @@
                 [self.navigationController pushViewController:viewController animated:YES];
                 break;
             case KSOFormRowActionPresent:
-                [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
+                [self presentViewController:viewController animated:YES completion:nil];
                 break;
             default:
                 break;
