@@ -50,6 +50,7 @@
     
     retval->_backgroundColor = _backgroundColor;
     retval->_cellBackgroundColor = _cellBackgroundColor;
+    retval->_cellSelectedBackgroundColor = _cellSelectedBackgroundColor;
     
     retval->_headerTitleColor = _headerTitleColor;
     retval->_footerTitleColor = _footerTitleColor;

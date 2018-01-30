@@ -68,6 +68,12 @@ typedef NS_ENUM(NSInteger, KSOFormThemeFirstResponderStyle) {
  The default is the system default for a UITableViewCell instance.
  */
 @property (strong,nonatomic,nullable) UIColor *cellBackgroundColor;
+/**
+ The cell selected background color for each row in the form. If this is nil the default UITableViewCell selected style is used with the default background color.
+ 
+ The default is nil.
+ */
+@property (strong,nonatomic,nullable) UIColor *cellSelectedBackgroundColor;
 
 /**
  The header title color, used to display section header text.

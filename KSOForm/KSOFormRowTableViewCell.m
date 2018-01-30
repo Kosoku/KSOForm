@@ -94,6 +94,15 @@
     if (_formTheme.cellBackgroundColor != nil) {
         self.backgroundColor = _formTheme.cellBackgroundColor;
     }
+    if (_formTheme.cellSelectedBackgroundColor != nil) {
+        self.selectedBackgroundView = ({
+            UIView *retval = [[UIView alloc] initWithFrame:CGRectZero];
+            
+            retval.backgroundColor = _formTheme.cellSelectedBackgroundColor;
+            
+            retval;
+        });
+    }
 }
 - (BOOL)canEditFormRow {
     return NO;
