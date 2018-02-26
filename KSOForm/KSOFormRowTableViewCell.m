@@ -15,6 +15,8 @@
 
 #import "KSOFormRowTableViewCell.h"
 #import "KSOFormThemeEditingIndicatorView.h"
+#import "KSOFormRow.h"
+#import "KSOFormTheme.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>

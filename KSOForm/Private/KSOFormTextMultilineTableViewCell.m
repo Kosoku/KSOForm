@@ -18,6 +18,8 @@
 #import "KSOFormModel+KSOExtensionsPrivate.h"
 #import "KSOFormRow+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
+#import "KSOFormRow.h"
+#import "KSOFormTheme.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>

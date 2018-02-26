@@ -15,6 +15,7 @@
 
 #import <UIKit/UIKit.h>
 #import <KSOForm/KSOFormRowDefines.h>
+#import <KSOForm/KSOFormRowView.h>
 #import <KSOForm/KSOFormRowValueDataSource.h>
 #import <KSOForm/KSOFormPickerViewRow.h>
 #import <KSOForm/KSOFormRowSegmentedItem.h>
@@ -120,6 +121,12 @@ NS_ASSUME_NONNULL_BEGIN
  The default is KSOFormRowCellAccessoryTypeAutomatic.
  */
 @property (assign,nonatomic) KSOFormRowCellAccessoryType cellAccessoryType;
+/**
+ The cell trailing view.
+ 
+ The default is nil.
+ */
+@property (strong,nonatomic) __kindof UIView<KSOFormRowView> *cellTrailingView;
 
 /**
  The placeholder text.

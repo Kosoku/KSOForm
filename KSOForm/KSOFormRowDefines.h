@@ -222,6 +222,12 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySubtitle;
  @see [KSOFormRow cellAccessoryType]
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellAccessoryType;
+/**
+ The cell trailing view of the receiver. Must be a subclass over UIView and conform to the KSOFormRowView protocol.
+ 
+ @see [KSOFormRow cellTrailingView]
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellTrailingView;
 
 /**
  The placeholder text of the text field or text view.

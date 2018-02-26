@@ -16,6 +16,8 @@
 #import "KSOFormSegmentedTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
 #import "KSOFormRow+KSOExtensionsPrivate.h"
+#import "KSOFormRow.h"
+#import "KSOFormTheme.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
