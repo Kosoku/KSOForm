@@ -260,6 +260,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (copy,nonatomic,nullable) NSString *buttonAccessibilityHint;
 
+/**
+ The theme title color for the row. Overrides the color from the KSOFormTheme.
+ */
+@property (copy,nonatomic,nullable) UIColor *themeTitleColor;
+/**
+ The theme text color for the row. Overrides the color from the KSOFormTheme.
+ */
 @property (copy,nonatomic,nullable) UIColor *themeTextColor;
 
 /**

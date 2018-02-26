@@ -17,6 +17,7 @@
 #import "MapViewController.h"
 #import "BluetoothTableViewController.h"
 #import "ImagePickerTableViewCell.h"
+#import "ImagePickerView.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
@@ -310,6 +311,7 @@
                                                                    }]];
     [model.sections.lastObject addRow:self.bluetoothRow];
     [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyCellClass: ImagePickerTableViewCell.class}];
+    [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Cell Trailing View…", KSOFormRowKeyCellTrailingView: [[ImagePickerView alloc] initWithFrame:CGRectZero], KSOFormRowKeyThemeTitleColor: self.view.tintColor}];
     
     [self setModel:model];
 }

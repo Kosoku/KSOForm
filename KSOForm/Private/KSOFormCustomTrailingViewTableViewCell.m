@@ -30,6 +30,10 @@
     return self;
 }
 
+- (BOOL)wantsTrailingViewTopBottomLayoutMargins {
+    return NO;
+}
+
 - (BOOL)canEditFormRow {
     return self.trailingView.canEditFormRow;
 }
@@ -48,7 +52,13 @@
     
     [self.leadingView setFormRow:formRow];
     
-    [self.contentView addSubview:formRow.cellTrailingView];
+    if (formRow.cellTrailingView == nil) {
+        [formRow.cellTrailingView removeFromSuperview];
+    }
+    else {
+        [self setTrailingView:formRow.cellTrailingView];
+        [self.contentView addSubview:self.trailingView];
+    }
     
     [self.trailingView setFormRow:formRow];
 }

@@ -91,6 +91,13 @@
 }
 
 @synthesize formRow=_formRow;
+- (void)setFormRow:(KSOFormRow *)formRow {
+    _formRow = formRow;
+    
+    if (_formRow.themeTitleColor != nil) {
+        [self.titleLabel setTextColor:_formRow.themeTitleColor];
+    }
+}
 @synthesize formTheme=_formTheme;
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     _formTheme = formTheme;
@@ -98,7 +105,9 @@
     [self.imageView setTintColor:_formTheme.titleColor];
     
     [self.titleLabel setFont:_formTheme.titleFont];
-    [self.titleLabel setTextColor:_formTheme.titleColor];
+    if (self.formRow.themeTitleColor == nil) {
+        [self.titleLabel setTextColor:_formTheme.titleColor];
+    }
     [self.titleLabel setBorderColor:_formTheme.firstResponderColor ?: self.tintColor];
     
     [self.subtitleLabel setFont:_formTheme.subtitleFont];

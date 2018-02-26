@@ -89,6 +89,7 @@ KSOFormRowKey const KSOFormRowKeyCellClassBundle = @"cellClassBundle";
 KSOFormRowKey const KSOFormRowKeyImageAccessibilityLabel = @"imageAccessibilityLabel";
 KSOFormRowKey const KSOFormRowKeyButtonAccessibilityHint = @"buttonAccessibilityHint";
 
+KSOFormRowKey const KSOFormRowKeyThemeTitleColor = @"themeTitleColor";
 KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 
 @interface KSOFormRow ()
@@ -206,6 +207,7 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     _imageAccessibilityLabel = dictionary[KSOFormRowKeyImageAccessibilityLabel];
     _buttonAccessibilityHint = dictionary[KSOFormRowKeyButtonAccessibilityHint];
     
+    _themeTitleColor = dictionary[KSOFormRowKeyThemeTitleColor];
     _themeTextColor = dictionary[KSOFormRowKeyThemeTextColor];
     
     return self;
@@ -223,7 +225,9 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
             (self.type == KSOFormRowTypeText ||
              self.type == KSOFormRowTypeTextMultiline ||
              self.type == KSOFormRowTypeDatePicker ||
-             self.type == KSOFormRowTypePickerView));
+             self.type == KSOFormRowTypePickerView ||
+             ([self.cellTrailingView respondsToSelector:@selector(canEditFormRow)] &&
+              self.cellTrailingView.canEditFormRow)));
 }
 - (BOOL)isSelectable {
     return (self.isEditable ||
