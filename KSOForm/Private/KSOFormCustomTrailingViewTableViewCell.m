@@ -46,20 +46,23 @@
 
 @dynamic leadingView;
 @dynamic trailingView;
+- (void)setTrailingView:(__kindof UIView *)trailingView {
+    [self.trailingView removeFromSuperview];
+    
+    [super setTrailingView:trailingView];
+    
+    if (trailingView != nil) {
+        [self.contentView addSubview:trailingView];
+        [self setNeedsUpdateConstraints];
+    }
+}
 
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
     
     [self.leadingView setFormRow:formRow];
     
-    if (formRow.cellTrailingView == nil) {
-        [formRow.cellTrailingView removeFromSuperview];
-    }
-    else {
-        [self setTrailingView:formRow.cellTrailingView];
-        [self.contentView addSubview:self.trailingView];
-    }
-    
+    [self setTrailingView:formRow.cellTrailingView];
     [self.trailingView setFormRow:formRow];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
