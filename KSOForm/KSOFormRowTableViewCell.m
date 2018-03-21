@@ -36,7 +36,9 @@
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.cellAccessoryType)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
-            [self setAccessoryType:(UITableViewCellAccessoryType)self.formRow.cellAccessoryType];
+            if (self.accessoryView == nil) {
+                [self setAccessoryType:(UITableViewCellAccessoryType)self.formRow.cellAccessoryType];
+            }
         });
     }];
     

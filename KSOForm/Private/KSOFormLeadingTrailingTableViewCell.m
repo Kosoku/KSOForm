@@ -52,7 +52,9 @@
         
         NSNumber *right = @(self.layoutMargins.right);
         
-        if (self.accessoryType != UITableViewCellAccessoryNone) {
+        if (self.accessoryType != UITableViewCellAccessoryNone ||
+            self.accessoryView != nil) {
+            
             right = @0.0;
         }
         

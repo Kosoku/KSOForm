@@ -25,7 +25,7 @@
 
 @interface KSOFormSwitchTableViewCell ()
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
-@property (strong,nonatomic) UISwitch *trailingView;
+@property (strong,nonatomic) UISwitch *switchControl;
 @end
 
 @implementation KSOFormSwitchTableViewCell
@@ -41,20 +41,19 @@
     [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.contentView addSubview:self.leadingView];
     
-    [self setTrailingView:[[UISwitch alloc] initWithFrame:CGRectZero]];
-    [self.trailingView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [self.trailingView KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+    [self setSwitchControl:[[UISwitch alloc] initWithFrame:CGRectZero]];
+    [self.switchControl KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
-        [self.formRow setValue:@(self.trailingView.isOn) notify:YES];
+        [self.formRow setValue:@(self.switchControl.isOn) notify:YES];
     } forControlEvents:UIControlEventValueChanged];
-    [self.contentView addSubview:self.trailingView];
+    [self.switchControl sizeToFit];
+    [self setAccessoryView:self.switchControl];
     
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.enabled),@kstKeypath(self,formRow.value)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
-            [self.trailingView setEnabled:self.formRow.enabled];
-            [self.trailingView setOn:[self.formRow.value boolValue]];
+            [self.switchControl setEnabled:self.formRow.enabled];
+            [self.switchControl setOn:[self.formRow.value boolValue]];
         });
     }];
     
@@ -62,10 +61,6 @@
 }
 #pragma mark -
 @dynamic leadingView;
-@dynamic trailingView;
-- (BOOL)wantsTrailingViewTopBottomLayoutMargins {
-    return NO;
-}
 #pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
@@ -78,7 +73,7 @@
     [self.leadingView setFormTheme:formTheme];
     
     if (formTheme.textColor != nil) {
-        [self.trailingView setOnTintColor:formTheme.textColor];
+        [self.switchControl setOnTintColor:formTheme.textColor];
     }
 }
 
