@@ -5,7 +5,7 @@
 [![Platform](http://img.shields.io/cocoapods/p/KSOForm.svg)]()
 [![License](http://img.shields.io/cocoapods/l/KSOForm.svg)](https://github.com/Kosoku/KSOForm/blob/master/license.txt)
 
-*KSOForm* is an iOS framework for constructing and displaying views similar to Settings app or the Add Event sheet in the Calendar app. It provides value classes (`KSOFormModel`, `KSOFormSection`, and `KSOFormRow`) that represent a form. It also provides a `UITableViewController` subclass, `KSOFormTableViewController` that owns and displays an instance of `KSOFormModel`. It provides default classes that handle the display of the following controls:
+*KSOForm* is an iOS/tvOS framework for constructing and displaying views similar to Settings app or the Add Event sheet in the Calendar app. It provides value classes (`KSOFormModel`, `KSOFormSection`, and `KSOFormRow`) that represent a form. It also provides a `UITableViewController` subclass, `KSOFormTableViewController` that owns and displays an instance of `KSOFormModel`. It provides default classes that handle the display of the following controls:
 
 - `UIImageView`
 - `UILabel`
