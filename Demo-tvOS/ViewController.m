@@ -20,32 +20,7 @@
 #import <KSOTextValidation/KSOTextValidation.h>
 #import <KSOForm/KSOForm.h>
 #import <Loki/Loki.h>
-
-@interface TableBackgroundView : UIView
-@property (strong,nonatomic) UIImageView *imageView;
-@end
-
-@implementation TableBackgroundView
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (!(self = [super initWithFrame:frame]))
-        return nil;
-    
-    [self setImageView:[[UIImageView alloc] initWithImage:[UIImage KLO_imageWithPDFNamed:@"kosoku-logo" size:CGSizeMake(128, 128)].KDI_templateImage]];
-    [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.imageView setTintColor:KDIColorW(0.1)];
-    [self addSubview:self.imageView];
-    
-    [self sizeToFit];
-    
-    return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    [self.imageView setFrame:self.bounds];
-}
-@end
+#import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 
 @interface TableHeaderView : UIView
 @property (strong,nonatomic) UIImageView *imageView;
@@ -56,22 +31,16 @@
     if (!(self = [super initWithFrame:frame]))
         return nil;
     
-    [self setImageView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kosoku-logo"]]];
+    [self setImageView:[[UIImageView alloc] initWithImage:[UIImage KLO_imageWithPDFNamed:@"kosoku-logo" size:CGSizeMake(128, 128)].KDI_templateImage]];
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    self.imageView.tintColor = KDIColorW(0.1);
     [self addSubview:self.imageView];
     
-    [self sizeToFit];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.imageView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view]-|" options:0 metrics:nil views:@{@"view": self.imageView}]];
     
     return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    [self.imageView setFrame:CGRectMake(0, 8, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - 8)];
-}
-- (CGSize)sizeThatFits:(CGSize)size {
-    return CGSizeMake(CGRectGetWidth(UIScreen.mainScreen.bounds), 50 + 8);
 }
 @end
 
@@ -117,6 +86,8 @@
     
     [self setEmail:@"a@b.com"];
     
+    CGSize imageSize = CGSizeMake(24, 24);
+    
     KSOFormModel *readOnlyModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Read Only Values"}];
     
     [readOnlyModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Read Only Values",
@@ -128,11 +99,11 @@
                                                                    KSOFormRowKeySubtitle: @"Subtitle",
                                                                    KSOFormRowKeyValue: @"Value"},
                                                                  @{KSOFormRowKeyTitle: @"Title",
-                                                                   KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                                                                   KSOFormRowKeyImage: [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf26c" size:imageSize].KDI_templateImage,
                                                                    KSOFormRowKeyValue: @"Value"},
                                                                  @{KSOFormRowKeyTitle: @"Title",
                                                                    KSOFormRowKeySubtitle: @"Subtitle",
-                                                                   KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                                                                   KSOFormRowKeyImage: [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf26c" size:imageSize].KDI_templateImage,
                                                                    KSOFormRowKeyValue: @"Value"}]];
     KSOFormModel *textModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Text Entry"}];
     
@@ -202,7 +173,14 @@
                                                                    }]];
     
     KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS",
-                                                                     KSOFormModelKeyHeaderView: [[TableHeaderView alloc] initWithFrame:CGRectZero]
+                                                                     KSOFormModelKeyHeaderView: ({
+        UIView *retval = [[TableHeaderView alloc] initWithFrame:CGRectZero];
+        CGSize size = [retval systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        
+        retval.frame = CGRectMake(0, 0, size.width, size.height);
+        
+        retval;
+    })
                                                                      }];
     
     [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title",
