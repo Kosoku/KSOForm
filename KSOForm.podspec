@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KSOForm'
-  s.version          = '0.25.2'
+  s.version          = '0.26.0'
   s.summary          = 'KSOForm is a iOS framework for creating Settings app like views.'
 
 # This description is used to generate tags and improve search results.
@@ -29,11 +29,13 @@ Pod::Spec.new do |s|
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
+  s.tvos.deployment_target = '10.0'
   
   s.requires_arc = true
 
   s.source_files = 'KSOForm/**/*.{h,m}'
   s.exclude_files = 'KSOForm/KSOForm-Info.h'
+  s.tvos.exclude_files = 'KSOForm/Private/KSOFormTextMultilineTableViewCell.{h,m}', 'KSOForm/Private/KSOFormSwitchTableViewCell.{h,m}', 'KSOForm/Private/KSOFormPickerViewTableViewCell.{h,m}', 'KSOForm/Private/KSOFormDatePickerTableViewCell.{h,m}', 'KSOForm/Private/KSOFormStepperTableViewCell.{h,m}', 'KSOForm/Private/KSOFormSliderTableViewCell.{h,m}'
   s.private_header_files = 'KSOForm/Private/*.h'
   
   s.dependency 'Ditko'
