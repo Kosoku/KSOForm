@@ -56,6 +56,8 @@ KSOFormRowKey const KSOFormRowKeyEnablesReturnKeyAutomatically = @"enablesReturn
 KSOFormRowKey const KSOFormRowKeySecureTextEntry = @"secureTextEntry";
 KSOFormRowKey const KSOFormRowKeyTextContentType = @"textContentType";
 
+KSOFormRowKey const KSOFormRowKeyOptionRows = @"optionRows";
+
 KSOFormRowKey const KSOFormRowKeyPickerViewColumnsAndRows = @"pickerViewColumnsAndRows";
 KSOFormRowKey const KSOFormRowKeyPickerViewRows = @"pickerViewRows";
 KSOFormRowKey const KSOFormRowKeyPickerViewSelectedComponentsJoinString = @"pickerViewSelectedComponentsJoinString";
@@ -161,7 +163,7 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     _autocapitalizationType = [dictionary[KSOFormRowKeyAutocapitalizationType] integerValue];
     _autocorrectionType = [dictionary[KSOFormRowKeyAutocorrectionType] integerValue];
     _spellCheckingType = [dictionary[KSOFormRowKeySpellCheckingType] integerValue];
-    if (@available(iOS 11.0, *)) {
+    if (@available(iOS 11.0, tvOS 11.0, *)) {
         _smartQuotesType = [dictionary[KSOFormRowKeySmartQuotesType] integerValue];
         _smartDashesType = [dictionary[KSOFormRowKeySmartDashesType] integerValue];
         _smartInsertDeleteType = [dictionary[KSOFormRowKeySmartInsertDeleteType] integerValue];
@@ -173,6 +175,9 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     _secureTextEntry = [dictionary[KSOFormRowKeySecureTextEntry] boolValue];
     _textContentType = dictionary[KSOFormRowKeyTextContentType];
     
+    _optionRows = dictionary[KSOFormRowKeyOptionRows];
+    
+#if (!TARGET_OS_TV)
     _pickerViewColumnsAndRows = dictionary[KSOFormRowKeyPickerViewColumnsAndRows];
     _pickerViewRows = dictionary[KSOFormRowKeyPickerViewRows];
     _pickerViewSelectedComponentsJoinString = dictionary[KSOFormRowKeyPickerViewSelectedComponentsJoinString];
@@ -191,6 +196,7 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     _sliderMaximumValue = [dictionary[KSOFormRowKeyMaximumValue] floatValue];
     _sliderMinimumValueImage = dictionary[KSOFormRowKeySliderMinimumValueImage];
     _sliderMaximumValueImage = dictionary[KSOFormRowKeySliderMaximumValueImage];
+#endif
     
     _controlBlock = dictionary[KSOFormRowKeyControlBlock];
     
@@ -223,9 +229,11 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 - (BOOL)isEditable {
     return (self.isEnabled &&
             (self.type == KSOFormRowTypeText ||
+#if (!TARGET_OS_TV)
              self.type == KSOFormRowTypeTextMultiline ||
              self.type == KSOFormRowTypeDatePicker ||
              self.type == KSOFormRowTypePickerView ||
+#endif
              ([self.cellTrailingView respondsToSelector:@selector(canEditFormRow)] &&
               self.cellTrailingView.canEditFormRow)));
 }
@@ -316,6 +324,7 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     return _cellAccessoryType;
 }
 
+#if (!TARGET_OS_TV)
 - (double)stepperMaximumValue {
     return _stepperMaximumValue > 0.0 ? _stepperMaximumValue : 1.0;
 }
@@ -326,12 +335,13 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 - (float)sliderMaximumValue {
     return _sliderMaximumValue > 0.0 ? _sliderMaximumValue : 1.0;
 }
+#endif
 
 - (KSOFormModel *)actionModel {
     if (self.type == KSOFormRowTypeOptions &&
         _actionModel == nil) {
         
-        _actionModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyRows: [self.pickerViewRows KQS_map:^id _Nullable(id<KSOFormPickerViewRow>  _Nonnull object, NSInteger index) {
+        _actionModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyRows: [self.optionRows KQS_map:^id _Nullable(id<KSOFormPickerViewRow>  _Nonnull object, NSInteger index) {
             return [[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: [object formPickerViewRowTitle]}];
         }], KSOFormModelKeyTitle: self.title}];
         

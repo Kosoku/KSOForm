@@ -23,7 +23,9 @@
 #import <KSOTextValidation/KSOTextValidator.h>
 #import <KSOTextValidation/KSOTextFormatter.h>
 #import <Ditko/UIControl+KDIExtensions.h>
+#if (!TARGET_OS_TV)
 #import <Ditko/KDIDatePickerButton.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -150,6 +152,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,nullable) id<KSOTextFormatter> textFormatter;
 
 /**
+ The option rows to display when pushing from a KSOFormRowTypeOptions row.
+ */
+@property (copy,nonatomic,nullable) NSArray<id<KSOFormPickerViewRow>> *optionRows;
+
+#if (!TARGET_OS_TV)
+/**
  The picker view columns and rows.
  */
 @property (copy,nonatomic,nullable) NSArray<NSArray<id<KSOFormPickerViewRow> > *> *pickerViewColumnsAndRows;
@@ -161,7 +169,9 @@ NS_ASSUME_NONNULL_BEGIN
  The string used to join selected components for display.
  */
 @property (copy,nonatomic,nullable) NSString *pickerViewSelectedComponentsJoinString;
+#endif
 
+#if (!TARGET_OS_TV)
 /**
  The date picker mode.
  */
@@ -184,7 +194,9 @@ NS_ASSUME_NONNULL_BEGIN
  @see KDIDatePickerButtonDateTitleBlock
  */
 @property (copy,nonatomic,nullable) KDIDatePickerButtonDateTitleBlock datePickerDateTitleBlock;
+#endif
 
+#if (!TARGET_OS_TV)
 /**
  The stepper minimum value.
  */
@@ -197,7 +209,9 @@ NS_ASSUME_NONNULL_BEGIN
  The stepper step value.
  */
 @property (assign,nonatomic) double stepperStepValue;
+#endif
 
+#if (!TARGET_OS_TV)
 /**
  The slider minimum value.
  */
@@ -214,6 +228,7 @@ NS_ASSUME_NONNULL_BEGIN
  The slider maximun value image.
  */
 @property (strong,nonatomic,nullable) UIImage *sliderMaximumValueImage;
+#endif
 
 /**
  The block to invoke when a control is tapped (e.g. UIButton).

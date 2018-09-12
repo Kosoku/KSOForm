@@ -46,7 +46,9 @@
     [self.trailingView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.trailingView setTextAlignment:NSTextAlignmentRight];
+#if (!TARGET_OS_TV)
     [self.trailingView setInputAccessoryView:[[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:self.trailingView]];
+#endif
     [self.trailingView KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
         [self.formRow setValue:self.trailingView.text notify:YES];
@@ -97,7 +99,7 @@
     [self.trailingView setSpellCheckingType:formRow.spellCheckingType];
     [self.trailingView setSecureTextEntry:formRow.isSecureTextEntry];
     [self.trailingView setTextContentType:formRow.textContentType];
-    if (@available(iOS 11.0, *)) {
+    if (@available(iOS 11.0, tvOS 11.0, *)) {
         [self.trailingView setSmartQuotesType:formRow.smartQuotesType];
         [self.trailingView setSmartDashesType:formRow.smartDashesType];
         [self.trailingView setSmartInsertDeleteType:formRow.smartInsertDeleteType];

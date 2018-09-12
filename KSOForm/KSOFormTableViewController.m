@@ -17,20 +17,22 @@
 #import "KSOFormCustomTrailingViewTableViewCell.h"
 #import "KSOFormLabelTableViewCell.h"
 #import "KSOFormTextTableViewCell.h"
-#import "KSOFormSwitchTableViewCell.h"
-#import "KSOFormPickerViewTableViewCell.h"
-#import "KSOFormDatePickerTableViewCell.h"
-#import "KSOFormStepperTableViewCell.h"
-#import "KSOFormSliderTableViewCell.h"
 #import "KSOFormButtonTableViewCell.h"
 #import "KSOFormSegmentedTableViewCell.h"
-#import "KSOFormTextMultilineTableViewCell.h"
 #import "KSOFormTableViewHeaderView.h"
 #import "KSOFormTableViewFooterView.h"
 #import "KSOFormModel+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
 #import "KSOFormTheme.h"
+#if (!TARGET_OS_TV)
+#import "KSOFormSwitchTableViewCell.h"
+#import "KSOFormPickerViewTableViewCell.h"
+#import "KSOFormDatePickerTableViewCell.h"
+#import "KSOFormStepperTableViewCell.h"
+#import "KSOFormSliderTableViewCell.h"
+#import "KSOFormTextMultilineTableViewCell.h"
+#endif
 
 #import <Ditko/Ditko.h>
 #import <Agamotto/Agamotto.h>
@@ -78,14 +80,16 @@
     [self.tableView registerClass:KSOFormCustomTrailingViewTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormCustomTrailingViewTableViewCell.class)];
     [self.tableView registerClass:KSOFormLabelTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormLabelTableViewCell.class)];
     [self.tableView registerClass:KSOFormTextTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormTextTableViewCell.class)];
+    [self.tableView registerClass:KSOFormButtonTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class)];
+    [self.tableView registerClass:KSOFormSegmentedTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSegmentedTableViewCell.class)];
+#if (!TARGET_OS_TV)
     [self.tableView registerClass:KSOFormSwitchTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSwitchTableViewCell.class)];
     [self.tableView registerClass:KSOFormPickerViewTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormPickerViewTableViewCell.class)];
     [self.tableView registerClass:KSOFormDatePickerTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormDatePickerTableViewCell.class)];
     [self.tableView registerClass:KSOFormStepperTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormStepperTableViewCell.class)];
     [self.tableView registerClass:KSOFormSliderTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class)];
-    [self.tableView registerClass:KSOFormButtonTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class)];
-    [self.tableView registerClass:KSOFormSegmentedTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSegmentedTableViewCell.class)];
     [self.tableView registerClass:KSOFormTextMultilineTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormTextMultilineTableViewCell.class)];
+#endif
     
     [self.tableView setEstimatedSectionHeaderHeight:32.0];
     [self.tableView setEstimatedSectionFooterHeight:32.0];
@@ -114,6 +118,7 @@
         });
     }];
     
+#if (!TARGET_OS_TV)
     [self KAG_addObserverForNotificationNames:@[KDINextPreviousInputAccessoryViewNotificationNext,KDINextPreviousInputAccessoryViewNotificationPrevious] object:nil block:^(NSNotification * _Nonnull notification) {
         kstStrongify(self);
         
@@ -180,6 +185,7 @@
         
         [self.model beginEditingRow:editableFormRow];
     }];
+#endif
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -231,6 +237,13 @@
             case KSOFormRowTypeText:
                 retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormTextTableViewCell.class) forIndexPath:indexPath];
                 break;
+            case KSOFormRowTypeButton:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypeSegmented:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSegmentedTableViewCell.class) forIndexPath:indexPath];
+                break;
+#if (!TARGET_OS_TV)
             case KSOFormRowTypeTextMultiline:
                 retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormTextMultilineTableViewCell.class) forIndexPath:indexPath];
                 break;
@@ -249,12 +262,7 @@
             case KSOFormRowTypeSlider:
                 retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class) forIndexPath:indexPath];
                 break;
-            case KSOFormRowTypeButton:
-                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormButtonTableViewCell.class) forIndexPath:indexPath];
-                break;
-            case KSOFormRowTypeSegmented:
-                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSegmentedTableViewCell.class) forIndexPath:indexPath];
-                break;
+#endif
             default:
                 break;
         }

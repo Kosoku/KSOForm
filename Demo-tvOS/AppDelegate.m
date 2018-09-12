@@ -1,8 +1,8 @@
 //
-//  KSOFormTableViewHeaderFooterTextView.m
-//  KSOForm-iOS
+//  AppDelegate.m
+//  Demo-tvOS
 //
-//  Created by William Towe on 9/28/17.
+//  Created by William Towe on 9/12/18.
 //  Copyright © 2018 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -13,26 +13,21 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import "KSOFormTableViewHeaderFooterTextView.h"
+#import "AppDelegate.h"
+#import "ViewController.h"
 
-@implementation KSOFormTableViewHeaderFooterTextView
+@interface AppDelegate ()
 
-- (instancetype)initWithFrame:(CGRect)frame textContainer:(NSTextContainer *)textContainer {
-    if (!(self = [super initWithFrame:frame textContainer:textContainer]))
-        return nil;
+@end
+
+@implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self setWindow:[[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds]];
+    [self.window setRootViewController:[[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] initWithStyle:UITableViewStyleGrouped]]];
+    [self.window makeKeyAndVisible];
     
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self setBackgroundColor:UIColor.clearColor];
-    [self setScrollEnabled:NO];
-    [self setContentInset:UIEdgeInsetsZero];
-#if (!TARGET_OS_TV)
-    [self setEditable:NO];
-#endif
-    [self setSelectable:YES];
-    [self setTextContainerInset:UIEdgeInsetsZero];
-    [self.textContainer setLineFragmentPadding:0.0];
-    
-    return self;
+    return YES;
 }
 
 @end

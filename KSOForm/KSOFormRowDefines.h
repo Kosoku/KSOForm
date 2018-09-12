@@ -33,6 +33,19 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
      */
     KSOFormRowTypeText,
     /**
+     The leading view is a UIButton. The trailing view is nil.
+     */
+    KSOFormRowTypeButton,
+    /**
+     The trailing view is a UISegmentedControl.
+     */
+    KSOFormRowTypeSegmented,
+    /**
+     The trailing view is a UILabel showing the current selection. Tapping the row pushes a new form allowing the user to make a new selection.
+     */
+    KSOFormRowTypeOptions,
+#if (!TARGET_OS_TV)
+    /**
      The trailing view is a UITextView.
      */
     KSOFormRowTypeTextMultiline,
@@ -55,19 +68,8 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
     /**
      The trailing view is a UISlider.
      */
-    KSOFormRowTypeSlider,
-    /**
-     The leading view is a UIButton. The trailing view is nil.
-     */
-    KSOFormRowTypeButton,
-    /**
-     The trailing view is a UISegmentedControl.
-     */
-    KSOFormRowTypeSegmented,
-    /**
-     The trailing view is a UILabel showing the current selection. Tapping the row pushes a new form allowing the user to make a new selection.
-     */
-    KSOFormRowTypeOptions
+    KSOFormRowTypeSlider
+#endif
 };
 
 /**
@@ -99,7 +101,9 @@ typedef NS_ENUM(NSInteger, KSOFormRowCellAccessoryType) {
     /**
      The detail button and disclosure chevron.
      */
+#if (!TARGET_OS_TV)
     KSOFormRowCellAccessoryTypeDetailDisclosureButton = UITableViewCellAccessoryDetailDisclosureButton,
+#endif
     /**
      The checkmark.
      */
@@ -107,7 +111,9 @@ typedef NS_ENUM(NSInteger, KSOFormRowCellAccessoryType) {
     /**
      The detail button.
      */
+#if (!TARGET_OS_TV)
     KSOFormRowCellAccessoryTypeDetailButton = UITableViewCellAccessoryDetailButton,
+#endif
     /**
      Determine the cell accessory type automatically. This is the default.
      */
@@ -336,6 +342,14 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySecureTextEntry;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTextContentType;
 
 /**
+ The rows to display when pushing from a KSOFormRowTypeOptions row.
+ 
+ @see [KSOFormRow optionRows]
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyOptionRows;
+
+#if (!TARGET_OS_TV)
+/**
  The picker view columns and rows. Use this to specify multiple columns.
  
  @see [KSOFormRow pickerViewColumnsAndRows]
@@ -353,7 +367,9 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyPickerViewRows;
  @see [KDIPickerViewButton selectedComponentsJoinString]
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyPickerViewSelectedComponentsJoinString;
+#endif
 
+#if (!TARGET_OS_TV)
 /**
  The date picker mode.
  
@@ -384,7 +400,9 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyDatePickerDateFormatter;
  @see [KDIDatePickerButton dateTitleBlock]
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyDatePickerDateTitleBlock;
+#endif
 
+#if (!TARGET_OS_TV)
 /**
  The minimum value.
  
@@ -419,6 +437,7 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySliderMinimumValueImage;
  @see [UISlider maximumValueImage]
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySliderMaximumValueImage;
+#endif
 
 /**
  The block that should be invoked when the control is tapped (e.g. UIButton tap).

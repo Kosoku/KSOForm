@@ -100,9 +100,11 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+#if (!TARGET_OS_TV)
     UIView *view = self.leadingView.leadingSeparatorView;
     
     [self setSeparatorInset:UIEdgeInsetsMake(0, CGRectGetMinX([self convertRect:view.bounds fromView:view]), 0, 0)];
+#endif
 }
 
 - (BOOL)wantsLeadingViewCenteredVertically {
