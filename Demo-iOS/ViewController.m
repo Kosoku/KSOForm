@@ -22,32 +22,8 @@
 #import <Stanley/Stanley.h>
 #import <KSOTextValidation/KSOTextValidation.h>
 #import <KSOForm/KSOForm.h>
-
-@interface TableBackgroundView : UIView
-@property (strong,nonatomic) UIImageView *imageView;
-@end
-
-@implementation TableBackgroundView
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (!(self = [super initWithFrame:frame]))
-        return nil;
-    
-    [self setImageView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kosoku-logo"].KDI_templateImage]];
-    [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.imageView setTintColor:[KDIColorHexadecimal(@"ebebf0") KDI_colorByAdjustingBrightnessBy:0.05]];
-    [self addSubview:self.imageView];
-    
-    [self sizeToFit];
-    
-    return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    [self.imageView setFrame:self.bounds];
-}
-@end
+#import <Loki/Loki.h>
+#import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 
 @interface TableHeaderView : UIView
 @property (strong,nonatomic) UIImageView *imageView;
@@ -58,22 +34,16 @@
     if (!(self = [super initWithFrame:frame]))
         return nil;
     
-    [self setImageView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kosoku-logo"]]];
-    [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self setImageView:[[UIImageView alloc] initWithImage:[UIImage KLO_imageWithPDFNamed:@"kosoku-logo" size:CGSizeMake(96, 96)].KDI_templateImage]];
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.imageView.contentMode = UIViewContentModeCenter;
+    self.imageView.tintColor = KDIColorW(0.1);
     [self addSubview:self.imageView];
     
-    [self sizeToFit];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.imageView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view]-|" options:0 metrics:nil views:@{@"view": self.imageView}]];
     
     return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    [self.imageView setFrame:CGRectMake(0, 8, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - 8)];
-}
-- (CGSize)sizeThatFits:(CGSize)size {
-    return CGSizeMake(CGRectGetWidth(UIScreen.mainScreen.bounds), 50 + 8);
 }
 @end
 
@@ -135,6 +105,8 @@
     
     [self setEmail:@"a@b.com"];
     
+    CGSize imageSize = CGSizeMake(24, 24);
+    
     KSOFormModel *readOnlyModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Read Only Values"}];
     
     [readOnlyModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Read Only Values",
@@ -146,11 +118,11 @@
                                                                    KSOFormRowKeySubtitle: @"Subtitle",
                                                                    KSOFormRowKeyValue: @"Value"},
                                                                  @{KSOFormRowKeyTitle: @"Title",
-                                                                   KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                                                                   KSOFormRowKeyImage: [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf641" size:imageSize].KDI_templateImage,
                                                                    KSOFormRowKeyValue: @"Value"},
                                                                  @{KSOFormRowKeyTitle: @"Title",
                                                                    KSOFormRowKeySubtitle: @"Subtitle",
-                                                                   KSOFormRowKeyImage: [UIImage imageNamed:@"recycle"],
+                                                                   KSOFormRowKeyImage: [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf641" size:imageSize].KDI_templateImage,
                                                                    KSOFormRowKeyValue: @"Value"}]];
     KSOFormModel *textModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Text Entry"}];
     
@@ -216,7 +188,7 @@
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeOptions),
                                                                    KSOFormRowKeyTitle: @"Options",
-                                                                   KSOFormRowKeyPickerViewRows: @[@"Red",@"Green",@"Blue"],
+                                                                   KSOFormRowKeyOptionRows: @[@"Red",@"Green",@"Blue"],
                                                                    KSOFormRowKeyValue: @"Red"
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeDatePicker),
@@ -247,8 +219,8 @@
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeSlider),
                                                                    KSOFormRowKeyTitle: @"Slider",
-                                                                   KSOFormRowKeySliderMinimumValueImage: [UIImage imageNamed:@"bag"],
-                                                                   KSOFormRowKeySliderMaximumValueImage: [UIImage imageNamed:@"socket"]
+                                                                   KSOFormRowKeySliderMinimumValueImage: [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf042" size:imageSize].KDI_templateImage,
+                                                                   KSOFormRowKeySliderMaximumValueImage: [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf042" size:imageSize].KDI_templateImage
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeButton),
                                                                    KSOFormRowKeyTitle: @"Show Alert…",
@@ -265,7 +237,14 @@
                                                                    }]];
     
     KSOFormModel *model = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Demo-iOS",
-                                                                     KSOFormModelKeyHeaderView: [[TableHeaderView alloc] initWithFrame:CGRectZero]
+                                                                     KSOFormModelKeyHeaderView: ({
+        UIView *retval = [[TableHeaderView alloc] initWithFrame:CGRectZero];
+        CGSize size = [retval systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        
+        retval.frame = CGRectMake(0, 0, size.width, size.height);
+        
+        retval;
+    })
                                                                      }];
     
     [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title",

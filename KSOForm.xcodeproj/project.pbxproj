@@ -106,6 +106,8 @@
 		0727FBA32148F7EB0053C2D6 /* KSOFormButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079A1B551F7B478400C9F9BB /* KSOFormButtonTableViewCell.m */; };
 		0727FBA42148F8030053C2D6 /* KSOFormSegmentedTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 079A1B581F7B5A0B00C9F9BB /* KSOFormSegmentedTableViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0727FBA52148F8090053C2D6 /* KSOFormSegmentedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079A1B591F7B5A0B00C9F9BB /* KSOFormSegmentedTableViewCell.m */; };
+		072FB69B21498BC6003CFAAC /* kosoku-logo.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 072FB69A21498BC6003CFAAC /* kosoku-logo.pdf */; };
+		072FB69C21498BC6003CFAAC /* kosoku-logo.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 072FB69A21498BC6003CFAAC /* kosoku-logo.pdf */; };
 		073AE1401F7C033200C77C66 /* KSOFormRowActionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 073AE13F1F7C033200C77C66 /* KSOFormRowActionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		073AE1431F7C108200C77C66 /* KSOFormSection+KSOExtensionsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 073AE1411F7C108200C77C66 /* KSOFormSection+KSOExtensionsPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		073AE1471F7C10DF00C77C66 /* KSOFormRow+KSOExtensionsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 073AE1451F7C10DF00C77C66 /* KSOFormRow+KSOExtensionsPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -178,7 +180,6 @@
 		07CCBABB1F7CC2F900AED8AA /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBABA1F7CC2F900AED8AA /* MapViewController.m */; };
 		07CCBAC51F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CCBAC41F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework */; };
 		07CCBAC61F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07CCBAC41F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		07CCBACB1F7D60FE00AED8AA /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07CCBACA1F7D60FE00AED8AA /* FontAwesome.ttf */; };
 		07CCBACE1F7D64D900AED8AA /* KSOFormTableViewHeaderFooterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07CCBACC1F7D64D900AED8AA /* KSOFormTableViewHeaderFooterView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07CCBACF1F7D64D900AED8AA /* KSOFormTableViewHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBACD1F7D64D900AED8AA /* KSOFormTableViewHeaderFooterView.m */; };
 		07CCBAD11F7D659E00AED8AA /* KSOFormSectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07CCBAD01F7D659E00AED8AA /* KSOFormSectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -283,6 +284,7 @@
 		0727FB632148F6630053C2D6 /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0727FB662148F66B0053C2D6 /* Ditko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ditko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0727FB692148F6780053C2D6 /* Quicksilver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quicksilver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		072FB69A21498BC6003CFAAC /* kosoku-logo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "kosoku-logo.pdf"; sourceTree = "<group>"; };
 		073AE13F1F7C033200C77C66 /* KSOFormRowActionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormRowActionDelegate.h; sourceTree = "<group>"; };
 		073AE1411F7C108200C77C66 /* KSOFormSection+KSOExtensionsPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KSOFormSection+KSOExtensionsPrivate.h"; sourceTree = "<group>"; };
 		073AE1451F7C10DF00C77C66 /* KSOFormRow+KSOExtensionsPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KSOFormRow+KSOExtensionsPrivate.h"; sourceTree = "<group>"; };
@@ -356,7 +358,6 @@
 		07CCBAB91F7CC2F900AED8AA /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		07CCBABA1F7CC2F900AED8AA /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		07CCBAC41F7D58D300AED8AA /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		07CCBACA1F7D60FE00AED8AA /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		07CCBACC1F7D64D900AED8AA /* KSOFormTableViewHeaderFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormTableViewHeaderFooterView.h; sourceTree = "<group>"; };
 		07CCBACD1F7D64D900AED8AA /* KSOFormTableViewHeaderFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormTableViewHeaderFooterView.m; sourceTree = "<group>"; };
 		07CCBAD01F7D659E00AED8AA /* KSOFormSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormSectionView.h; sourceTree = "<group>"; };
@@ -650,7 +651,7 @@
 				07CCBABA1F7CC2F900AED8AA /* MapViewController.m */,
 				078195781F7E1F3F00BC136B /* BluetoothTableViewController.h */,
 				078195791F7E1F3F00BC136B /* BluetoothTableViewController.m */,
-				07CCBACA1F7D60FE00AED8AA /* FontAwesome.ttf */,
+				072FB69A21498BC6003CFAAC /* kosoku-logo.pdf */,
 				07952DC11F789BD0006C2A75 /* Assets.xcassets */,
 				07952DC31F789BD0006C2A75 /* LaunchScreen.storyboard */,
 				07952DC61F789BD0006C2A75 /* Info.plist */,
@@ -928,6 +929,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0727FB402148F5580053C2D6 /* Assets.xcassets in Resources */,
+				072FB69C21498BC6003CFAAC /* kosoku-logo.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,7 +946,7 @@
 			files = (
 				07952DC51F789BD0006C2A75 /* LaunchScreen.storyboard in Resources */,
 				07952DC21F789BD0006C2A75 /* Assets.xcassets in Resources */,
-				07CCBACB1F7D60FE00AED8AA /* FontAwesome.ttf in Resources */,
+				072FB69B21498BC6003CFAAC /* kosoku-logo.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

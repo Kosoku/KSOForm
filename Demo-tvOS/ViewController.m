@@ -19,6 +19,7 @@
 #import <Stanley/Stanley.h>
 #import <KSOTextValidation/KSOTextValidation.h>
 #import <KSOForm/KSOForm.h>
+#import <Loki/Loki.h>
 
 @interface TableBackgroundView : UIView
 @property (strong,nonatomic) UIImageView *imageView;
@@ -29,9 +30,9 @@
     if (!(self = [super initWithFrame:frame]))
         return nil;
     
-    [self setImageView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kosoku-logo"].KDI_templateImage]];
+    [self setImageView:[[UIImageView alloc] initWithImage:[UIImage KLO_imageWithPDFNamed:@"kosoku-logo" size:CGSizeMake(128, 128)].KDI_templateImage]];
     [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.imageView setTintColor:[KDIColorHexadecimal(@"ebebf0") KDI_colorByAdjustingBrightnessBy:0.05]];
+    [self.imageView setTintColor:KDIColorW(0.1)];
     [self addSubview:self.imageView];
     
     [self sizeToFit];
