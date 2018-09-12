@@ -219,6 +219,10 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     return self;
 }
 
++ (instancetype)formRowWithDictionary:(NSDictionary<KSOFormRowKey,id> *)dictionary {
+    return [[self alloc] initWithDictionary:dictionary];
+}
+
 - (void)reload; {
     [self reloadWithAnimation:UITableViewRowAnimationNone];
 }

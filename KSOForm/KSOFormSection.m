@@ -73,6 +73,10 @@ KSOFormSectionKey const KSOFormSectionKeyFooterViewClassBundle = @"footerViewCla
     return self;
 }
 
++ (instancetype)formSectionWithDictionary:(NSDictionary<KSOFormSectionKey,id> *)dictionary {
+    return [[self alloc] initWithDictionary:dictionary];
+}
+
 - (void)performUpdates:(dispatch_block_t)updates {
     [self.model.tableView beginUpdates];
     

@@ -93,6 +93,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDictionary:(nullable NSDictionary<KSOFormModelKey, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
 /**
+ Convenience initializer that calls initWithDictionary:.
+ */
++ (instancetype)formModelWithDictionary:(nullable NSDictionary<KSOFormModelKey, id> *)dictionary;
+
+/**
  Returns the KSOFormSection object for the provided *identifier* or nil if a section with that identifier cannot be found.
  
  @param identifier The section identifier

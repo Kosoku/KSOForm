@@ -98,6 +98,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDictionary:(nullable NSDictionary<KSOFormSectionKey, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
 /**
+ Convenience initializer that calls initWithDictionary:.
+ */
++ (instancetype)formSectionWithDictionary:(nullable NSDictionary<KSOFormSectionKey, id> *)dictionary;
+
+/**
  Perform batch updates to the rows owned by the receiver. All calls to the add/insert/remove/replace methods will be animated at the same time.
  
  @param updates The block of updates to perform

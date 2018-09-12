@@ -293,6 +293,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDictionary:(nullable NSDictionary<KSOFormRowKey, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
 /**
+ Convenience initializer that calls initWithDictionary:.
+ */
++ (instancetype)formRowWithDictionary:(nullable NSDictionary<KSOFormRowKey, id> *)dictionary;
+
+/**
  Reloads the receiver without animation.
  */
 - (void)reload;

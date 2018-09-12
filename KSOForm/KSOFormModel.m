@@ -80,6 +80,10 @@ KSOFormModelKey const KSOFormModelKeyDidAppearBlock = @"didAppearBlock";
     return self;
 }
 
++ (instancetype)formModelWithDictionary:(NSDictionary<KSOFormModelKey,id> *)dictionary {
+    return [[self alloc] initWithDictionary:dictionary];
+}
+
 - (KSOFormSection *)sectionForIdentifier:(NSString *)identifier {
     return [self sectionsForIdentifiers:@[identifier]].firstObject;
 }
