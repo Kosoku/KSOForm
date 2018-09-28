@@ -32,6 +32,12 @@ typedef NSString* KSOFormSectionKey NS_EXTENSIBLE_STRING_ENUM;
  */
 FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyIdentifier;
 /**
+ The context associated with the section. This can be any object and is not retained by the section itself.
+ 
+ @see [KSOFormSection context]
+ */
+FOUNDATION_EXTERN KSOFormSectionKey const KSOFormSectionKeyContext;
+/**
  The KSOFormRow objects owned by the receiver. These can be either KSOFormRow objects or NSDictionary objects.
  
  @see rows

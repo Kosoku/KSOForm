@@ -21,6 +21,7 @@
 #import <Quicksilver/Quicksilver.h>
 
 KSOFormRowKey const KSOFormRowKeyIdentifier = @"identifier";
+KSOFormRowKey const KSOFormRowKeyContext = @"context";
 KSOFormRowKey const KSOFormRowKeyType = @"type";
 KSOFormRowKey const KSOFormRowKeyEnabled = @"enabled";
 KSOFormRowKey const KSOFormRowKeyValue = @"value";
@@ -135,6 +136,8 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
         return nil;
     
     _identifier = dictionary[KSOFormRowKeyIdentifier] ?: [[NSUUID UUID] UUIDString];
+    
+    _context = dictionary[KSOFormRowKeyContext];
     
     _type = [dictionary[KSOFormRowKeyType] integerValue];
     

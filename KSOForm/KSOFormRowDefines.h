@@ -150,6 +150,12 @@ typedef NSString* KSOFormRowKey NS_EXTENSIBLE_STRING_ENUM;
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyIdentifier;
 /**
+ The context associated with the row. This can be any object and is not retained by the row itself.
+ 
+ @see [KSOFormRow context]
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyContext;
+/**
  The type of the receiver. Must be one of the KSOFormRowType values.
  
  @see [KSOFormRow type]

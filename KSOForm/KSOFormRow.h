@@ -49,6 +49,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly,copy,nonatomic) NSString *identifier;
 
 /**
+ Get the context associated with the receiver.
+ */
+@property (weak,nonatomic,nullable) id context;
+
+/**
  The type of the receiver.
  
  @see KSOFormRowType
