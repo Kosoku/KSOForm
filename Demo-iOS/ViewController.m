@@ -247,7 +247,7 @@
     })
                                                                      }];
     
-    [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title",
+    [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title that should wrap to multiple lines because it is too long",
                                       KSOFormSectionKeyFooterAttributedTitle: ({
         NSMutableAttributedString *retval = [[NSMutableAttributedString alloc] init];
         

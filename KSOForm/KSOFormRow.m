@@ -19,6 +19,7 @@
 
 #import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
+#import <Ditko/Ditko.h>
 
 KSOFormRowKey const KSOFormRowKeyIdentifier = @"identifier";
 KSOFormRowKey const KSOFormRowKeyContext = @"context";
@@ -231,6 +232,10 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 }
 - (void)reloadWithAnimation:(UITableViewRowAnimation)animation; {
     [self.section reloadRow:self animation:animation];
+}
+
+- (void)reloadHeightAnimated:(BOOL)animated; {
+    [self.section.model.tableView KDI_reloadHeightAnimated:animated];
 }
 
 - (BOOL)isEditable {

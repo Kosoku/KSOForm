@@ -147,7 +147,6 @@
     
     [self setNeedsUpdateConstraints];
     
-    [self.formRow.section.model.tableView beginUpdates];
-    [self.formRow.section.model.tableView endUpdates];
+    [self.formRow reloadHeightAnimated:NO];
 }
 @end

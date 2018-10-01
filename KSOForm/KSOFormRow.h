@@ -313,6 +313,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)reloadWithAnimation:(UITableViewRowAnimation)animation;
 
+- (void)reloadHeightAnimated:(BOOL)animated;
+
 @end
 
 /**
