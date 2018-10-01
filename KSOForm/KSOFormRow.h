@@ -313,6 +313,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)reloadWithAnimation:(UITableViewRowAnimation)animation;
 
+/**
+ Reloads the height of the row with or without animation.
+ 
+ @param animated Whether to animate the reload
+ */
 - (void)reloadHeightAnimated:(BOOL)animated;
 
 @end
