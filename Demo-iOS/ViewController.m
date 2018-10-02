@@ -24,6 +24,54 @@
 #import <KSOForm/KSOForm.h>
 #import <Loki/Loki.h>
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
+#import <KSOToken/KSOToken.h>
+#import <Agamotto/Agamotto.h>
+
+@interface TagTextView : KSOTokenTextView <KSOFormRowView>
+
+@end
+
+@implementation TagTextView
+
+- (instancetype)initWithFrame:(CGRect)frame textContainer:(NSTextContainer *)textContainer {
+    if (!(self = [super initWithFrame:frame textContainer:textContainer]))
+        return nil;
+    
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    self.backgroundColor = UIColor.clearColor;
+    self.textContainerInset = UIEdgeInsetsMake(8, 0, 8, 0);
+    self.textAlignment = NSTextAlignmentRight;
+    self.placeholder = @"Enter some tags";
+    
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_tagTextView_textDidChange:) name:UITextViewTextDidChangeNotification object:self];
+    
+    [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self block:^(NSNotification * _Nonnull notification) {
+        [NSNotificationCenter.defaultCenter postNotificationName:[notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder] ? KSOFormRowViewNotificationDidBeginEditing : KSOFormRowViewNotificationDidEndEditing object:notification.object];
+    }];
+    
+    return self;
+}
+
+@synthesize formRow=_formRow;
+- (void)setFormRow:(KSOFormRow *)formRow {
+    _formRow = formRow;
+}
+
+- (BOOL)canEditFormRow {
+    return self.canBecomeFirstResponder;
+}
+- (BOOL)isEditingFormRow {
+    return self.isFirstResponder;
+}
+- (void)beginEditingFormRow {
+    [self becomeFirstResponder];
+}
+
+- (void)_tagTextView_textDidChange:(NSNotification *)note {
+    [self.formRow reloadHeightAnimated:NO];
+}
+
+@end
 
 @interface TableHeaderView : UIView
 @property (strong,nonatomic) UIImageView *imageView;
@@ -289,6 +337,7 @@
                                                                    }]];
     [model.sections.lastObject addRow:self.bluetoothRow];
     [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tap to choose image…", KSOFormRowKeyCellTrailingView: [[ImagePickerView alloc] initWithFrame:CGRectZero], KSOFormRowKeyThemeTitleColor: self.view.tintColor}];
+    [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tags", KSOFormRowKeyCellTrailingView: [[TagTextView alloc] initWithFrame:CGRectZero textContainer:nil]}];
     
     [self setModel:model];
 }
