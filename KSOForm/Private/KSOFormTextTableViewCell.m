@@ -114,7 +114,7 @@
     [self.leadingView setFormTheme:formTheme];
     
     [self.trailingView setFont:formTheme.valueFont];
-    [self.trailingView setTextColor:formTheme.textColor ?: self.tintColor];
+    [self.trailingView setTextColor:self.formRow.isEnabled ? (formTheme.textColor ?: self.tintColor) : formTheme.valueColor];
     [self.trailingView setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:self.formRow.placeholder ?: @"" attributes:@{NSForegroundColorAttributeName: formTheme.valueColor}]];
     [self.trailingView setKeyboardAppearance:formTheme.keyboardAppearance];
     
