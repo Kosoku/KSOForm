@@ -68,16 +68,6 @@
 }
 
 - (void)_tagTextView_textDidChange:(NSNotification *)note {
-    UIView *view = self.superview;
-    
-    while (view != nil) {
-        if ([view isKindOfClass:UITableViewCell.class]) {
-            [view setNeedsUpdateConstraints];
-            break;
-        }
-        view = view.superview;
-    }
-    
     [self.formRow reloadHeightAnimated:NO];
 }
 

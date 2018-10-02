@@ -145,8 +145,6 @@
 - (void)textViewDidChange:(UITextView *)textView {
     [self.formRow setValue:self.trailingView.text notify:YES];
     
-    [self setNeedsUpdateConstraints];
-    
     [self.formRow reloadHeightAnimated:NO];
 }
 @end

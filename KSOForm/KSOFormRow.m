@@ -237,6 +237,8 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 }
 
 - (void)reloadHeightAnimated:(BOOL)animated; {
+    [[self.section.model.tableView cellForRowAtIndexPath:[self.section.model indexPathForRow:self]] setNeedsUpdateConstraints];
+    
     [self.section.model.tableView KDI_reloadHeightAnimated:animated];
 }
 
