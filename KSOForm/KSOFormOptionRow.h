@@ -1,8 +1,8 @@
 //
-//  KSOForm.h
+//  KSOFormOptionRow.h
 //  KSOForm
 //
-//  Created by William Towe on 9/24/17.
+//  Created by William Towe on 10/2/18.
 //  Copyright © 2018 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -15,33 +15,24 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for KSOForm.
-FOUNDATION_EXPORT double KSOFormVersionNumber;
+NS_ASSUME_NONNULL_BEGIN
 
-//! Project version string for KSOForm.
-FOUNDATION_EXPORT const unsigned char KSOFormVersionString[];
+@protocol KSOFormOptionRow <NSObject>
+@required
+@property (readonly,nonatomic) NSString *formOptionRowTitle;
+@optional
+@property (readonly,nonatomic,nullable) UIImage *formOptionRowImage;
+@property (readonly,nonatomic,nullable) NSString *formOptionRowSubtitle;
+@property (readonly,nonatomic,nullable) NSString *formOptionRowInfo;
+@end
 
-// In this header, you should import all the public headers of your framework using statements like #import <KSOForm/PublicHeader.h>
+@interface NSString (KSOFormOptionRowExtensions) <KSOFormOptionRow>
+@end
 
-// defines
-#import <KSOForm/KSOFormModelDefines.h>
-#import <KSOForm/KSOFormSectionDefines.h>
-#import <KSOForm/KSOFormRowDefines.h>
+@interface NSAttributedString (KSOFormOptionRowExtensions) <KSOFormOptionRow>
+@end
 
-// protocols
-#import <KSOForm/KSOFormRowView.h>
-#import <KSOForm/KSOFormSectionView.h>
-#import <KSOForm/KSOFormRowValueDataSource.h>
-#import <KSOForm/KSOFormOptionRow.h>
-#import <KSOForm/KSOFormPickerViewRow.h>
-#import <KSOForm/KSOFormRowSegmentedItem.h>
-#import <KSOForm/KSOFormRowActionDelegate.h>
-#import <KSOForm/KSOFormThemeEditingIndicatorView.h>
+@interface NSURL (KSOFormOptionRowExtensions) <KSOFormOptionRow>
+@end
 
-// classes
-#import <KSOForm/KSOFormModel.h>
-#import <KSOForm/KSOFormSection.h>
-#import <KSOForm/KSOFormRow.h>
-#import <KSOForm/KSOFormTheme.h>
-#import <KSOForm/KSOFormTableViewController.h>
-#import <KSOForm/KSOFormRowTableViewCell.h>
+NS_ASSUME_NONNULL_END

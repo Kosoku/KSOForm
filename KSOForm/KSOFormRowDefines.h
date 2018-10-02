@@ -44,6 +44,10 @@ typedef NS_ENUM(NSInteger, KSOFormRowType) {
      The trailing view is a UILabel showing the current selection. Tapping the row pushes a new form allowing the user to make a new selection.
      */
     KSOFormRowTypeOptions,
+    /**
+     The trailing view is a UIButton showing the current selection(s). Tapping the row presents a table view with a list of items and allows the user to make single or multiple selection.
+     */
+    KSOFormRowTypeOptionsInline,
 #if (!TARGET_OS_TV)
     /**
      The trailing view is a UITextView.
@@ -354,7 +358,7 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeySecureTextEntry;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyTextContentType;
 
 /**
- The rows to display when pushing from a KSOFormRowTypeOptions row.
+ The rows to display when pushing from a KSOFormRowTypeOptions row or presenting input from a KSOFormRowTypeOptionsInline row.
  
  @see [KSOFormRow optionRows]
  */

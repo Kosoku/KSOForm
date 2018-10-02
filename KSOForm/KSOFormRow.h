@@ -17,6 +17,7 @@
 #import <KSOForm/KSOFormRowDefines.h>
 #import <KSOForm/KSOFormRowView.h>
 #import <KSOForm/KSOFormRowValueDataSource.h>
+#import <KSOForm/KSOFormOptionRow.h>
 #import <KSOForm/KSOFormPickerViewRow.h>
 #import <KSOForm/KSOFormRowSegmentedItem.h>
 #import <KSOForm/KSOFormRowActionDelegate.h>
@@ -165,7 +166,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The option rows to display when pushing from a KSOFormRowTypeOptions row.
  */
-@property (copy,nonatomic,nullable) NSArray<id<KSOFormPickerViewRow>> *optionRows;
+@property (copy,nonatomic,nullable) NSArray<id<KSOFormOptionRow>> *optionRows;
 
 #if (!TARGET_OS_TV)
 /**

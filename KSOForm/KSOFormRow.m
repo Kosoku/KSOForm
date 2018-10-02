@@ -357,8 +357,8 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     if (self.type == KSOFormRowTypeOptions &&
         _actionModel == nil) {
         
-        _actionModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyRows: [self.optionRows KQS_map:^id _Nullable(id<KSOFormPickerViewRow>  _Nonnull object, NSInteger index) {
-            return [[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: [object formPickerViewRowTitle]}];
+        _actionModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyRows: [self.optionRows KQS_map:^id _Nullable(id<KSOFormOptionRow>  _Nonnull object, NSInteger index) {
+            return [[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: [object formOptionRowTitle]}];
         }], KSOFormModelKeyTitle: self.title}];
         
         [_actionModel setParentFormRow:self];
