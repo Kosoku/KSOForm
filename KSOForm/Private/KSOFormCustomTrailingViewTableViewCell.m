@@ -69,7 +69,9 @@
     [super setFormTheme:formTheme];
     
     [self.leadingView setFormTheme:formTheme];
-    [self.trailingView setFormTheme:formTheme];
+    if ([self.trailingView respondsToSelector:@selector(setFormTheme:)]) {
+        [self.trailingView setFormTheme:formTheme];
+    }
 }
 
 @end
