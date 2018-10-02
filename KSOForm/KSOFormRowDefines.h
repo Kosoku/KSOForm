@@ -240,6 +240,12 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellAccessoryType;
  @see [KSOFormRow cellTrailingView]
  */
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellTrailingView;
+/**
+ If [KSOFormRow cellTrailingView] is non-nil, determines whether the leading view should be centered vertically, which is the default. For example, the multiline text cell uses this (set to NO) to keep the title label aligned to the top edge.
+ 
+ @see [KSOFormRow wantsLeadingViewCenteredVertically]
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyCellWantsLeadingViewCenteredVertically;
 
 /**
  The placeholder text of the text field or text view.

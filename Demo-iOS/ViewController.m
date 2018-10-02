@@ -68,6 +68,16 @@
 }
 
 - (void)_tagTextView_textDidChange:(NSNotification *)note {
+    UIView *view = self.superview;
+    
+    while (view != nil) {
+        if ([view isKindOfClass:UITableViewCell.class]) {
+            [view setNeedsUpdateConstraints];
+            break;
+        }
+        view = view.superview;
+    }
+    
     [self.formRow reloadHeightAnimated:NO];
 }
 
@@ -337,7 +347,7 @@
                                                                    }]];
     [model.sections.lastObject addRow:self.bluetoothRow];
     [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tap to choose image…", KSOFormRowKeyCellTrailingView: [[ImagePickerView alloc] initWithFrame:CGRectZero], KSOFormRowKeyThemeTitleColor: self.view.tintColor}];
-    [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tags", KSOFormRowKeyCellTrailingView: [[TagTextView alloc] initWithFrame:CGRectZero textContainer:nil]}];
+    [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tags", KSOFormRowKeyCellTrailingView: [[TagTextView alloc] initWithFrame:CGRectZero textContainer:nil], KSOFormRowKeyCellWantsLeadingViewCenteredVertically: @NO}];
     
     [self setModel:model];
 }

@@ -33,6 +33,9 @@
 - (BOOL)wantsTrailingViewTopBottomLayoutMargins {
     return NO;
 }
+- (BOOL)wantsLeadingViewCenteredVertically {
+    return self.formRow.wantsLeadingViewCenteredVertically;
+}
 
 - (BOOL)canEditFormRow {
     return self.trailingView.canEditFormRow;

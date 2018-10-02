@@ -38,6 +38,7 @@ KSOFormRowKey const KSOFormRowKeyTitle = @"title";
 KSOFormRowKey const KSOFormRowKeySubtitle = @"subtitle";
 KSOFormRowKey const KSOFormRowKeyCellAccessoryType = @"cellAccessoryType";
 KSOFormRowKey const KSOFormRowKeyCellTrailingView = @"cellTrailingView";
+KSOFormRowKey const KSOFormRowKeyCellWantsLeadingViewCenteredVertically = @"wantsLeadingViewCenteredVertically";
 
 KSOFormRowKey const KSOFormRowKeyPlaceholder = @"placeholder";
 KSOFormRowKey const KSOFormRowKeyMinimumNumberOfLines = @"minimumNumberOfLines";
@@ -157,6 +158,7 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     _subtitle = dictionary[KSOFormRowKeySubtitle];
     _cellAccessoryType = dictionary[KSOFormRowKeyCellAccessoryType] == nil ? KSOFormRowCellAccessoryTypeAutomatic : [dictionary[KSOFormRowKeyCellAccessoryType] integerValue];
     _cellTrailingView = dictionary[KSOFormRowKeyCellTrailingView];
+    _wantsLeadingViewCenteredVertically = dictionary[KSOFormRowKeyCellWantsLeadingViewCenteredVertically] == nil ? YES :[dictionary[KSOFormRowKeyCellWantsLeadingViewCenteredVertically] boolValue];
     
     _placeholder = dictionary[KSOFormRowKeyPlaceholder];
     _minimumNumberOfLines = [dictionary[KSOFormRowKeyMinimumNumberOfLines] unsignedIntegerValue];

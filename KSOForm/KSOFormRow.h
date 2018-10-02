@@ -134,6 +134,12 @@ NS_ASSUME_NONNULL_BEGIN
  The default is nil.
  */
 @property (strong,nonatomic) __kindof UIView<KSOFormRowView> *cellTrailingView;
+/**
+ Whether to center the leading view vertically.
+ 
+ The default is YES.
+ */
+@property (assign,nonatomic) BOOL wantsLeadingViewCenteredVertically;
 
 /**
  The placeholder text.
