@@ -108,7 +108,7 @@
     [self.leadingView setFormTheme:formTheme];
     
     [self.trailingView setFont:formTheme.valueFont];
-    [self.trailingView setTextColor:formTheme.textColor ?: self.tintColor];
+    [self.trailingView setTextColor:self.formRow.isEnabled ? (formTheme.textColor ?: self.tintColor) : formTheme.textColor];
     [self.trailingView setKeyboardAppearance:formTheme.keyboardAppearance];
     [self.trailingView setPlaceholderTextColor:formTheme.valueColor];
     
