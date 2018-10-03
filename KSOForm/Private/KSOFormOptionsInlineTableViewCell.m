@@ -301,7 +301,7 @@
 }
 - (NSString *)_titleForSelectedFormOptionRows:(NSArray<id<KSOFormOptionRow>> *)rows; {
     if (KSTIsEmptyObject(rows)) {
-        return NSLocalizedStringWithDefaultValue(@"options-inline.title-empty", nil, NSBundle.KSO_formFrameworkBundle, @"\u2014", @"options inline title empty (em dash)");
+        return self.formRow.placeholder ?: NSLocalizedStringWithDefaultValue(@"options-inline.title-empty", nil, NSBundle.KSO_formFrameworkBundle, @"\u2014", @"options inline title empty (em dash)");
     }
     else {
         return [rows componentsJoinedByString:NSLocalizedStringWithDefaultValue(@"options-inline.title-join-string", nil, NSBundle.KSO_formFrameworkBundle, @", ", @"options inline title join string (e.g. x, y, z)")];
