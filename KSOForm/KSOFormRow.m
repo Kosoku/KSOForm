@@ -360,6 +360,9 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
                 return object;
             }] componentsJoinedByString:NSLocalizedStringWithDefaultValue(@"row.value.join-string", nil, NSBundle.KSO_formFrameworkBundle, @", ", @"row value join string (e.g. x, y, z)")];
         }
+        else if (KSTIsEmptyObject(value)) {
+            return NSLocalizedStringWithDefaultValue(@"row.value.empty", nil, NSBundle.KSO_formFrameworkBundle, @"\u2014", @"row value empty (em dash)");
+        }
         return [value description];
     }
 }
