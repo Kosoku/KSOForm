@@ -23,6 +23,7 @@
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
+#import <Quicksilver/Quicksilver.h>
 
 @interface KSOFormOptionsInlineButton : KDIButton <KDIUIResponder>
 @property (readwrite,nonatomic) UIView *inputView;
@@ -300,11 +301,19 @@
     return retval;
 }
 - (NSString *)_titleForSelectedFormOptionRows:(NSArray<id<KSOFormOptionRow>> *)rows; {
-    if (KSTIsEmptyObject(rows)) {
+    if (self.formRow.valueFormatter != nil) {
+        return [self.formRow.valueFormatter stringForObjectValue:rows];
+    }
+    else if (self.formRow.valueTransformer != nil) {
+        return [self.formRow.valueTransformer transformedValue:rows];
+    }
+    else if (KSTIsEmptyObject(rows)) {
         return self.formRow.placeholder ?: NSLocalizedStringWithDefaultValue(@"options-inline.title-empty", nil, NSBundle.KSO_formFrameworkBundle, @"\u2014", @"options inline title empty (em dash)");
     }
     else {
-        return [rows componentsJoinedByString:NSLocalizedStringWithDefaultValue(@"options-inline.title-join-string", nil, NSBundle.KSO_formFrameworkBundle, @", ", @"options inline title join string (e.g. x, y, z)")];
+        return [[rows KQS_map:^id _Nullable(id<KSOFormOptionRow>  _Nonnull object, NSInteger index) {
+            return object.formOptionRowTitle;
+        }] componentsJoinedByString:NSLocalizedStringWithDefaultValue(@"options-inline.title-join-string", nil, NSBundle.KSO_formFrameworkBundle, @", ", @"options inline title join string (e.g. x, y, z)")];
     }
 }
 - (void)_reloadTableWithSelectedFormOptionRows:(NSArray<id<KSOFormOptionRow>> *)rows; {
