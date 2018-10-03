@@ -239,6 +239,11 @@
                                                                    KSOFormRowKeyOptionRows: @[@"Red",@"Green",@"Blue"],
                                                                    KSOFormRowKeyValue: @"Red"
                                                                    },
+                                                                 @{KSOFormRowKeyType: @(KSOFormRowTypeOptionsInline),
+                                                                   KSOFormRowKeyTitle: @"Options Inline",
+                                                                   KSOFormRowKeyOptionRows: @[@"Red",@"Green",@"Blue"],
+                                                                   
+                                                                   },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeDatePicker),
                                                                    KSOFormRowKeyTitle: @"Date Picker",
                                                                    KSOFormRowKeyDatePickerMode: @(UIDatePickerModeDateAndTime),
@@ -295,7 +300,7 @@
     })
                                                                      }];
     
-    [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title that should wrap to multiple lines because it is too long",
+    [model addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Section header title",
                                       KSOFormSectionKeyFooterAttributedTitle: ({
         NSMutableAttributedString *retval = [[NSMutableAttributedString alloc] init];
         

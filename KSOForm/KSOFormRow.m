@@ -249,6 +249,7 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
              self.type == KSOFormRowTypeTextMultiline ||
              self.type == KSOFormRowTypeDatePicker ||
              self.type == KSOFormRowTypePickerView ||
+             self.type == KSOFormRowTypeOptionsInline ||
 #endif
              ([self.cellTrailingView respondsToSelector:@selector(canEditFormRow)] &&
               self.cellTrailingView.canEditFormRow)));

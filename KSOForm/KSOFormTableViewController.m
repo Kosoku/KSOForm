@@ -32,6 +32,7 @@
 #import "KSOFormStepperTableViewCell.h"
 #import "KSOFormSliderTableViewCell.h"
 #import "KSOFormTextMultilineTableViewCell.h"
+#import "KSOFormOptionsInlineTableViewCell.h"
 #endif
 
 #import <Ditko/Ditko.h>
@@ -89,6 +90,7 @@
     [self.tableView registerClass:KSOFormStepperTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormStepperTableViewCell.class)];
     [self.tableView registerClass:KSOFormSliderTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class)];
     [self.tableView registerClass:KSOFormTextMultilineTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormTextMultilineTableViewCell.class)];
+    [self.tableView registerClass:KSOFormOptionsInlineTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOFormOptionsInlineTableViewCell.class)];
 #endif
     
     [self.tableView setEstimatedSectionHeaderHeight:32.0];
@@ -261,6 +263,9 @@
                 break;
             case KSOFormRowTypeSlider:
                 retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormSliderTableViewCell.class) forIndexPath:indexPath];
+                break;
+            case KSOFormRowTypeOptionsInline:
+                retval = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(KSOFormOptionsInlineTableViewCell.class) forIndexPath:indexPath];
                 break;
 #endif
             default:
