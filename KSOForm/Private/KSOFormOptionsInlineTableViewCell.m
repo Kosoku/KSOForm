@@ -155,8 +155,6 @@
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
         return nil;
     
-    kstWeakify(self);
-    
     self.tableView = [[KSOFormOptionsInlineTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.allowsMultipleSelection = YES;
     self.tableView.dataSource = self;
