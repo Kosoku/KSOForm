@@ -422,11 +422,13 @@
             id currentValue = self.model.parentFormRow.value;
             NSMutableArray *newValue = [[NSMutableArray alloc] init];
             
-            if ([currentValue isKindOfClass:NSArray.class]) {
-                [newValue addObjectsFromArray:currentValue];
-            }
-            else {
-                [newValue addObject:currentValue];
+            if (!KSTIsEmptyObject(currentValue)) {
+                if ([currentValue isKindOfClass:NSArray.class]) {
+                    [newValue addObjectsFromArray:currentValue];
+                }
+                else {
+                    [newValue addObject:currentValue];
+                }
             }
             
             id selectedValue = self.model.parentFormRow.optionRows[indexPath.row];
