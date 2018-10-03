@@ -18,6 +18,7 @@
 #import "KSOFormRow+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
 #import "KSOFormTheme.h"
+#import "NSBundle+KSOFormExtensions.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Ditko/Ditko.h>
@@ -179,11 +180,11 @@
     });
     self.trailingView.inputAccessoryView = ({
         KDINextPreviousInputAccessoryView *retval = [[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:self.trailingView];
-        UIBarButtonItem *selectAllItem = [UIBarButtonItem KDI_barButtonItemWithTitle:@"All" style:UIBarButtonItemStylePlain block:^(__kindof UIBarButtonItem * _Nonnull barButtonItem) {
+        UIBarButtonItem *selectAllItem = [UIBarButtonItem KDI_barButtonItemWithTitle:NSLocalizedStringWithDefaultValue(@"options-inline.select-all", nil, NSBundle.KSO_formFrameworkBundle, @"All", @"options inline select all") style:UIBarButtonItemStylePlain block:^(__kindof UIBarButtonItem * _Nonnull barButtonItem) {
             kstStrongify(self);
             [self _selectAllFormOptionRows];
         }];
-        UIBarButtonItem *deselectAllItem = [UIBarButtonItem KDI_barButtonItemWithTitle:@"None" style:UIBarButtonItemStylePlain block:^(__kindof UIBarButtonItem * _Nonnull barButtonItem) {
+        UIBarButtonItem *deselectAllItem = [UIBarButtonItem KDI_barButtonItemWithTitle:NSLocalizedStringWithDefaultValue(@"options-inline.select-none", nil, NSBundle.KSO_formFrameworkBundle, @"None", @"options inline select none") style:UIBarButtonItemStylePlain block:^(__kindof UIBarButtonItem * _Nonnull barButtonItem) {
             kstStrongify(self);
             [self _deselectAllFormOptionRows];
         }];
@@ -308,10 +309,10 @@
 }
 - (NSString *)_titleForSelectedFormOptionRows:(NSArray<id<KSOFormOptionRow>> *)rows; {
     if (KSTIsEmptyObject(rows)) {
-        return @"\u2014";
+        return NSLocalizedStringWithDefaultValue(@"options-inline.title-empty", nil, NSBundle.KSO_formFrameworkBundle, @"\u2014", @"options inline title empty (em dash)");
     }
     else {
-        return [rows componentsJoinedByString:@", "];
+        return [rows componentsJoinedByString:NSLocalizedStringWithDefaultValue(@"options-inline.title-join-string", nil, NSBundle.KSO_formFrameworkBundle, @", ", @"options inline title join string (e.g. x, y, z)")];
     }
 }
 - (void)_reloadTableWithSelectedFormOptionRows:(NSArray<id<KSOFormOptionRow>> *)rows; {

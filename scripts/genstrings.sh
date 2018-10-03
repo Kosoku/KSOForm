@@ -1,0 +1,1 @@
+find $SRCROOT/KSOForm/ -name "*.m" | xargs genstrings -o $SRCROOT/KSOForm/en.lproj

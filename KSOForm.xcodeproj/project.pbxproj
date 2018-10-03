@@ -26,6 +26,12 @@
 		07190DAD216432A8002EF6A3 /* KSOFormOptionRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 07190DAB216432A8002EF6A3 /* KSOFormOptionRow.m */; };
 		07190DB5216439EB002EF6A3 /* KSOFormOptionsInlineTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 07190DB3216439EB002EF6A3 /* KSOFormOptionsInlineTableViewCell.h */; };
 		07190DB6216439EB002EF6A3 /* KSOFormOptionsInlineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07190DB4216439EB002EF6A3 /* KSOFormOptionsInlineTableViewCell.m */; };
+		07190DB921648AFA002EF6A3 /* NSBundle+KSOFormExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07190DB721648AFA002EF6A3 /* NSBundle+KSOFormExtensions.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		07190DBA21648AFA002EF6A3 /* NSBundle+KSOFormExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07190DB721648AFA002EF6A3 /* NSBundle+KSOFormExtensions.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		07190DBB21648AFA002EF6A3 /* NSBundle+KSOFormExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07190DB821648AFA002EF6A3 /* NSBundle+KSOFormExtensions.m */; };
+		07190DBC21648AFA002EF6A3 /* NSBundle+KSOFormExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07190DB821648AFA002EF6A3 /* NSBundle+KSOFormExtensions.m */; };
+		07190DC3216491F6002EF6A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07190DC1216491F6002EF6A3 /* Localizable.strings */; };
+		07190DC4216491F6002EF6A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07190DC1216491F6002EF6A3 /* Localizable.strings */; };
 		071ED02F1F78C6B900778F22 /* Quicksilver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071ED0301F78C6B900778F22 /* Quicksilver.framework */; };
 		071ED0311F78C6C800778F22 /* Quicksilver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071ED0301F78C6B900778F22 /* Quicksilver.framework */; };
 		071ED0321F78C6C800778F22 /* Quicksilver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 071ED0301F78C6B900778F22 /* Quicksilver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -270,6 +276,9 @@
 		07190DAB216432A8002EF6A3 /* KSOFormOptionRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormOptionRow.m; sourceTree = "<group>"; };
 		07190DB3216439EB002EF6A3 /* KSOFormOptionsInlineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormOptionsInlineTableViewCell.h; sourceTree = "<group>"; };
 		07190DB4216439EB002EF6A3 /* KSOFormOptionsInlineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormOptionsInlineTableViewCell.m; sourceTree = "<group>"; };
+		07190DB721648AFA002EF6A3 /* NSBundle+KSOFormExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+KSOFormExtensions.h"; sourceTree = "<group>"; };
+		07190DB821648AFA002EF6A3 /* NSBundle+KSOFormExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+KSOFormExtensions.m"; sourceTree = "<group>"; };
+		07190DC2216491F6002EF6A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		071ED0301F78C6B900778F22 /* Quicksilver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quicksilver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		071ED0331F78D6AB00778F22 /* KSOFormTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOFormTheme.h; sourceTree = "<group>"; };
 		071ED0341F78D6AB00778F22 /* KSOFormTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOFormTheme.m; sourceTree = "<group>"; };
@@ -623,6 +632,7 @@
 				07952D9C1F7892AE006C2A75 /* KSOForm-iOS-Info.plist */,
 				0727FB472148F5B20053C2D6 /* KSOForm-tvOS-Info.plist */,
 				07952DA21F789421006C2A75 /* KSOForm-Info.h */,
+				07190DC1216491F6002EF6A3 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -693,6 +703,8 @@
 				07CCBAB51F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h */,
 				073AE1411F7C108200C77C66 /* KSOFormSection+KSOExtensionsPrivate.h */,
 				073AE1451F7C10DF00C77C66 /* KSOFormRow+KSOExtensionsPrivate.h */,
+				07190DB721648AFA002EF6A3 /* NSBundle+KSOFormExtensions.h */,
+				07190DB821648AFA002EF6A3 /* NSBundle+KSOFormExtensions.m */,
 				079A1B5F1F7BED1200C9F9BB /* Base */,
 				07190DAE21643874002EF6A3 /* Options Inline */,
 				07732A231F7BEF280018E255 /* Label */,
@@ -761,6 +773,7 @@
 				0727FB732148F6F60053C2D6 /* KSOFormSectionDefines.h in Headers */,
 				0727FB7A2148F6F60053C2D6 /* KSOFormRowTableViewCell.h in Headers */,
 				0727FBA42148F8030053C2D6 /* KSOFormSegmentedTableViewCell.h in Headers */,
+				07190DBA21648AFA002EF6A3 /* NSBundle+KSOFormExtensions.h in Headers */,
 				0727FB902148F7240053C2D6 /* KSOFormLeadingTrailingTableViewCell.h in Headers */,
 				0727FB8E2148F7240053C2D6 /* KSOFormImageTitleSubtitleView.h in Headers */,
 				0727FB792148F6F60053C2D6 /* KSOFormTableViewController.h in Headers */,
@@ -805,6 +818,7 @@
 				074EDBAD1F800FF7001A029D /* KSOFormModelDefines.h in Headers */,
 				07CCBAB71F7CB6E300AED8AA /* KSOFormModel+KSOExtensionsPrivate.h in Headers */,
 				07952DD31F789D21006C2A75 /* KSOFormModel.h in Headers */,
+				07190DB921648AFA002EF6A3 /* NSBundle+KSOFormExtensions.h in Headers */,
 				074EDBB11F804E25001A029D /* KSOFormRowSegmentedItem.h in Headers */,
 				079E19231F79919000743988 /* KSOFormSwitchTableViewCell.h in Headers */,
 				07CCBAD11F7D659E00AED8AA /* KSOFormSectionView.h in Headers */,
@@ -828,10 +842,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0727FB2F2148F44E0053C2D6 /* Build configuration list for PBXNativeTarget "KSOForm-tvOS" */;
 			buildPhases = (
+				07190DC021648FC5002EF6A3 /* genstrings */,
 				0727FB232148F44D0053C2D6 /* Sources */,
 				0727FB242148F44D0053C2D6 /* Frameworks */,
 				0727FB252148F44D0053C2D6 /* Headers */,
 				0727FB262148F44D0053C2D6 /* Resources */,
+				07190DBF21648FA7002EF6A3 /* increment build number */,
 			);
 			buildRules = (
 			);
@@ -865,10 +881,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 07952D9E1F7892AE006C2A75 /* Build configuration list for PBXNativeTarget "KSOForm-iOS" */;
 			buildPhases = (
+				07190DBD21648F25002EF6A3 /* genstrings */,
 				07952D931F7892AE006C2A75 /* Sources */,
 				07952D941F7892AE006C2A75 /* Frameworks */,
 				07952D951F7892AE006C2A75 /* Headers */,
 				07952D961F7892AE006C2A75 /* Resources */,
+				07190DBE21648F82002EF6A3 /* increment build number */,
 			);
 			buildRules = (
 			);
@@ -952,6 +970,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07190DC4216491F6002EF6A3 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,6 +987,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07190DC3216491F6002EF6A3 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,6 +1002,81 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07190DBD21648F25002EF6A3 /* genstrings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = genstrings;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "scripts/./genstrings.sh\n";
+		};
+		07190DBE21648F82002EF6A3 /* increment build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "increment build number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "scripts/./increment_build_number.sh\n";
+		};
+		07190DBF21648FA7002EF6A3 /* increment build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "increment build number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "scripts/./increment_build_number.sh\n";
+		};
+		07190DC021648FC5002EF6A3 /* genstrings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = genstrings;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "scripts/./genstrings.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0727FB232148F44D0053C2D6 /* Sources */ = {
@@ -1002,6 +1097,7 @@
 				0727FB8A2148F70A0053C2D6 /* KSOFormRowSegmentedItem.m in Sources */,
 				0727FB842148F70A0053C2D6 /* KSOFormThemeFirstResponderIndicatorView.m in Sources */,
 				0727FB982148F7310053C2D6 /* KSOFormLeadingTrailingTableViewCell.m in Sources */,
+				07190DBC21648AFA002EF6A3 /* NSBundle+KSOFormExtensions.m in Sources */,
 				0727FBA52148F8090053C2D6 /* KSOFormSegmentedTableViewCell.m in Sources */,
 				07190DAD216432A8002EF6A3 /* KSOFormOptionRow.m in Sources */,
 				0727FB822148F70A0053C2D6 /* KSOFormSection.m in Sources */,
@@ -1041,6 +1137,7 @@
 				079A1B3E1F7AC7CA00C9F9BB /* KSOFormPickerViewTableViewCell.m in Sources */,
 				0712E4F71F78E6A400F0E223 /* KSOFormTextTableViewCell.m in Sources */,
 				077900131F85DE5D0077DB86 /* KSOFormRowTableViewCell.m in Sources */,
+				07190DBB21648AFA002EF6A3 /* NSBundle+KSOFormExtensions.m in Sources */,
 				07190DB6216439EB002EF6A3 /* KSOFormOptionsInlineTableViewCell.m in Sources */,
 				074EDBB91F809727001A029D /* KSOFormLeadingView.m in Sources */,
 				07CCBACF1F7D64D900AED8AA /* KSOFormTableViewHeaderFooterView.m in Sources */,
@@ -1091,6 +1188,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		07190DC1216491F6002EF6A3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07190DC2216491F6002EF6A3 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		07952DC31F789BD0006C2A75 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
