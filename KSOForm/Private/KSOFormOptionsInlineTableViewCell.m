@@ -156,7 +156,6 @@
         return nil;
     
     self.tableView = [[KSOFormOptionsInlineTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    self.tableView.allowsMultipleSelection = YES;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
