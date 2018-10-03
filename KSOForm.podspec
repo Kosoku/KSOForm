@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KSOForm'
-  s.version          = '0.31.1'
+  s.version          = '0.32.0'
   s.summary          = 'KSOForm is a iOS framework for creating Settings app like views.'
 
 # This description is used to generate tags and improve search results.
@@ -26,7 +26,6 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'BSD', :file => 'license.txt' }
   s.author           = { 'William Towe' => 'willbur1984@gmail.com' }
   s.source           = { :git => 'https://github.com/Kosoku/KSOForm.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
   s.tvos.deployment_target = '10.0'
@@ -35,8 +34,12 @@ Pod::Spec.new do |s|
 
   s.source_files = 'KSOForm/**/*.{h,m}'
   s.exclude_files = 'KSOForm/KSOForm-Info.h'
-  s.tvos.exclude_files = 'KSOForm/Private/KSOFormTextMultilineTableViewCell.{h,m}', 'KSOForm/Private/KSOFormSwitchTableViewCell.{h,m}', 'KSOForm/Private/KSOFormPickerViewTableViewCell.{h,m}', 'KSOForm/Private/KSOFormDatePickerTableViewCell.{h,m}', 'KSOForm/Private/KSOFormStepperTableViewCell.{h,m}', 'KSOForm/Private/KSOFormSliderTableViewCell.{h,m}'
+  s.tvos.exclude_files = 'KSOForm/Private/KSOFormTextMultilineTableViewCell.{h,m}', 'KSOForm/Private/KSOFormSwitchTableViewCell.{h,m}', 'KSOForm/Private/KSOFormPickerViewTableViewCell.{h,m}', 'KSOForm/Private/KSOFormDatePickerTableViewCell.{h,m}', 'KSOForm/Private/KSOFormStepperTableViewCell.{h,m}', 'KSOForm/Private/KSOFormSliderTableViewCell.{h,m}', 'KSOForm/Private/KSOFormOptionsInlineTableViewCell.{h,m}'
   s.private_header_files = 'KSOForm/Private/*.h'
+
+  s.resource_bundles = {
+    'KSOForm' => ['KSOForm/**/*.{lproj}']
+  }
   
   s.dependency 'Ditko'
   s.dependency 'Agamotto'
