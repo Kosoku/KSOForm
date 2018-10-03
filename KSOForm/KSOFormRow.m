@@ -347,7 +347,18 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
         id value = self.value;
         
         if ([value isKindOfClass:NSArray.class]) {
-            return [value componentsJoinedByString:NSLocalizedStringWithDefaultValue(@"row.value.join-string", nil, NSBundle.KSO_formFrameworkBundle, @", ", @"row value join string (e.g. x, y, z)")];
+            return [[value KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
+                if ([object conformsToProtocol:@protocol(KSOFormOptionRow)]) {
+                    return [object formOptionRowTitle];
+                }
+                else if ([object conformsToProtocol:@protocol(KSOFormPickerViewRow)]) {
+                    return [object formPickerViewRowTitle];
+                }
+                else if ([object conformsToProtocol:@protocol(KSOFormRowSegmentedItem)]) {
+                    return [object formRowSegmentedItemTitle];
+                }
+                return object;
+            }] componentsJoinedByString:NSLocalizedStringWithDefaultValue(@"row.value.join-string", nil, NSBundle.KSO_formFrameworkBundle, @", ", @"row value join string (e.g. x, y, z)")];
         }
         return [value description];
     }
