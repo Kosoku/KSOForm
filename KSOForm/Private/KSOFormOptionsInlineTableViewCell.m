@@ -138,6 +138,9 @@
 
 @property (strong,nonatomic) UITableView *tableView;
 
+@property (readonly,nonatomic) UIBarButtonItem *selectAllBarButtonItem;
+@property (readonly,nonatomic) UIBarButtonItem *selectNoneBarButtonItem;
+
 - (NSArray<id<KSOFormOptionRow>> *)_initiallySelectedFormOptionRows;
 - (NSArray<id<KSOFormOptionRow>> *)_selectedFormOptionRows;
 - (NSString *)_titleForSelectedFormOptionRows:(NSArray<id<KSOFormOptionRow>> *)rows;
@@ -178,26 +181,7 @@
         
         retval;
     });
-    self.trailingView.inputAccessoryView = ({
-        KDINextPreviousInputAccessoryView *retval = [[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:self.trailingView];
-        UIBarButtonItem *selectAllItem = [UIBarButtonItem KDI_barButtonItemWithTitle:NSLocalizedStringWithDefaultValue(@"options-inline.select-all", nil, NSBundle.KSO_formFrameworkBundle, @"All", @"options inline select all") style:UIBarButtonItemStylePlain block:^(__kindof UIBarButtonItem * _Nonnull barButtonItem) {
-            kstStrongify(self);
-            [self _selectAllFormOptionRows];
-        }];
-        UIBarButtonItem *deselectAllItem = [UIBarButtonItem KDI_barButtonItemWithTitle:NSLocalizedStringWithDefaultValue(@"options-inline.select-none", nil, NSBundle.KSO_formFrameworkBundle, @"None", @"options inline select none") style:UIBarButtonItemStylePlain block:^(__kindof UIBarButtonItem * _Nonnull barButtonItem) {
-            kstStrongify(self);
-            [self _deselectAllFormOptionRows];
-        }];
-        
-        retval.toolbarItems = @[retval.previousItem,
-                                retval.nextItem,
-                                [UIBarButtonItem KDI_flexibleSpaceBarButtonItem],
-                                deselectAllItem,
-                                selectAllItem,
-                                retval.doneItem];
-        
-        retval;
-    });
+    self.trailingView.inputAccessoryView = [[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:self.trailingView];
     [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.contentView addSubview:self.trailingView];
     
@@ -223,6 +207,10 @@
     
     [self.trailingView setTitle:[self _titleForSelectedFormOptionRows:rows] forState:UIControlStateNormal];
     [self _reloadTableWithSelectedFormOptionRows:rows];
+    
+    KDINextPreviousInputAccessoryView *inputAccessoryView = (KDINextPreviousInputAccessoryView *)self.trailingView.inputAccessoryView;
+    
+    inputAccessoryView.toolbarItems = formRow.allowsMultipleSelection ? @[inputAccessoryView.previousItem, inputAccessoryView.nextItem, [UIBarButtonItem KDI_flexibleSpaceBarButtonItem], self.selectNoneBarButtonItem, self.selectAllBarButtonItem, inputAccessoryView.doneItem] : @[inputAccessoryView.previousItem, inputAccessoryView.nextItem, [UIBarButtonItem KDI_flexibleSpaceBarButtonItem], inputAccessoryView.doneItem];
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
     [super setFormTheme:formTheme];
@@ -275,11 +263,13 @@
     [self.formRow setValue:rows notify:YES];
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *rows = [self _selectedFormOptionRows];
-    
-    [self.trailingView setTitle:[self _titleForSelectedFormOptionRows:rows] forState:UIControlStateNormal];
-    
-    [self.formRow setValue:rows notify:YES];
+    if (self.formRow.allowsMultipleSelection) {
+        NSArray *rows = [self _selectedFormOptionRows];
+        
+        [self.trailingView setTitle:[self _titleForSelectedFormOptionRows:rows] forState:UIControlStateNormal];
+        
+        [self.formRow setValue:rows notify:YES];
+    }
 }
 #pragma mark *** Private Methods ***
 - (NSArray<id<KSOFormOptionRow>> *)_initiallySelectedFormOptionRows; {
@@ -317,6 +307,7 @@
 }
 - (void)_reloadTableWithSelectedFormOptionRows:(NSArray<id<KSOFormOptionRow>> *)rows; {
     [self.tableView reloadData];
+    [self.tableView setAllowsMultipleSelection:self.formRow.allowsMultipleSelection];
     
     for (id row in rows) {
         NSInteger index = [self.formRow.optionRows indexOfObject:row];
@@ -349,6 +340,21 @@
     [self.trailingView setTitle:[self _titleForSelectedFormOptionRows:rows] forState:UIControlStateNormal];
     
     [self.formRow setValue:rows notify:YES];
+}
+
+- (UIBarButtonItem *)selectAllBarButtonItem {
+    kstWeakify(self);
+    return [UIBarButtonItem KDI_barButtonItemWithTitle:NSLocalizedStringWithDefaultValue(@"options-inline.select-all", nil, NSBundle.KSO_formFrameworkBundle, @"All", @"options inline select all") style:UIBarButtonItemStylePlain block:^(__kindof UIBarButtonItem * _Nonnull barButtonItem) {
+        kstStrongify(self);
+        [self _selectAllFormOptionRows];
+    }];
+}
+- (UIBarButtonItem *)selectNoneBarButtonItem {
+    kstWeakify(self);
+    return [UIBarButtonItem KDI_barButtonItemWithTitle:NSLocalizedStringWithDefaultValue(@"options-inline.select-none", nil, NSBundle.KSO_formFrameworkBundle, @"None", @"options inline select none") style:UIBarButtonItemStylePlain block:^(__kindof UIBarButtonItem * _Nonnull barButtonItem) {
+        kstStrongify(self);
+        [self _deselectAllFormOptionRows];
+    }];
 }
 
 @end

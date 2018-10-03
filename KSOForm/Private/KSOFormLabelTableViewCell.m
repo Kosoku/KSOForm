@@ -15,7 +15,6 @@
 
 #import "KSOFormLabelTableViewCell.h"
 #import "KSOFormImageTitleSubtitleView.h"
-#import "KSOFormModel+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
 #import "KSOFormRow.h"
 #import "KSOFormTheme.h"
@@ -52,21 +51,11 @@
         KSTDispatchMainAsync(^{
             NSString *text = self.formRow.formattedValue;
             
-            [self.trailingView setText:text.length == 0 ? self.formRow.placeholder : text];
+            [self.trailingView setText:KSTIsEmptyObject(text) ? self.formRow.placeholder : text];
         });
     }];
     
     return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    if (self.formRow.section.model.parentFormRow.type == KSOFormRowTypeOptions) {
-        if (selected) {
-            [self.formRow.section.model.parentFormRow setValue:self.formRow.title];
-        }
-    }
 }
 
 @dynamic leadingView;

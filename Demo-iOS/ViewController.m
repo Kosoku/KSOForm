@@ -242,7 +242,7 @@
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeOptionsInline),
                                                                    KSOFormRowKeyTitle: @"Options Inline",
                                                                    KSOFormRowKeyOptionRows: @[@"Red",@"Green",@"Blue"],
-                                                                   
+                                                                   KSOFormRowKeyValue: @"Red"
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeDatePicker),
                                                                    KSOFormRowKeyTitle: @"Date Picker",

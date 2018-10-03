@@ -23,7 +23,7 @@
 #import "KSOFormTableViewFooterView.h"
 #import "KSOFormModel+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
-#import "KSOFormRow.h"
+#import "KSOFormRow+KSOExtensionsPrivate.h"
 #import "KSOFormTheme.h"
 #if (!TARGET_OS_TV)
 #import "KSOFormSwitchTableViewCell.h"
@@ -111,6 +111,12 @@
                 [self.tableView setBackgroundView:self.model.backgroundView];
                 [self.tableView setTableHeaderView:self.model.headerView];
                 [self.tableView setTableFooterView:self.model.footerView];
+                
+                if (self.model.parentFormRow.type == KSOFormRowTypeOptions &&
+                    self.model.parentFormRow.allowsMultipleSelection) {
+                    
+                    [self.tableView setAllowsMultipleSelection:YES];
+                }
             }
             else if ([keyPath isEqualToString:@kstKeypath(self,theme)]) {
                 if (self.theme.backgroundColor != nil) {
@@ -409,6 +415,33 @@
                 break;
             default:
                 break;
+        }
+    }
+    else if (self.model.parentFormRow.type == KSOFormRowTypeOptions) {
+        if (self.model.parentFormRow.allowsMultipleSelection) {
+            id currentValue = self.model.parentFormRow.value;
+            NSMutableArray *newValue = [[NSMutableArray alloc] init];
+            
+            if ([currentValue isKindOfClass:NSArray.class]) {
+                [newValue addObjectsFromArray:currentValue];
+            }
+            else {
+                [newValue addObject:currentValue];
+            }
+            
+            id selectedValue = self.model.parentFormRow.optionRows[indexPath.row];
+            
+            if ([newValue containsObject:selectedValue]) {
+                [newValue removeObject:selectedValue];
+            }
+            else {
+                [newValue addObject:selectedValue];
+            }
+            
+            [self.model.parentFormRow setValue:newValue notify:YES];
+        }
+        else {
+            [self.model.parentFormRow setValue:self.model.parentFormRow.optionRows[indexPath.row] notify:YES];
         }
     }
 }

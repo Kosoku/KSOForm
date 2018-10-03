@@ -112,6 +112,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy,nonatomic,nullable) KSOFormRowDidChangeValueBlock didChangeValueBlock;
 
 /**
+ Whether the row allows multiple selection.
+ 
+ The default is YES.
+ */
+@property (assign,nonatomic) BOOL allowsMultipleSelection;
+
+/**
  The image, aligned to the leading edge.
  */
 @property (strong,nonatomic,nullable) UIImage *image;

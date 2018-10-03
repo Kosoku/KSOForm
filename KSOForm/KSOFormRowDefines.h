@@ -215,6 +215,11 @@ UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueShouldChangeBlock;
 UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock;
 
 /**
+ Whether to allow multiple selection for row types that permit it. Currently applies to KSOFormRowTypeOptions and KSOFormRowTypeOptionsInline row types.
+ */
+UIKIT_EXTERN KSOFormRowKey const KSOFormRowKeyAllowsMultipleSelection;
+
+/**
  The image of the receiver. Aligned to the leading edge.
  
  @see [KSOFormRow image]

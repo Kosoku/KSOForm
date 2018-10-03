@@ -16,6 +16,7 @@
 #import "KSOFormRow+KSOExtensionsPrivate.h"
 #import "KSOFormSection.h"
 #import "KSOFormModel+KSOExtensionsPrivate.h"
+#import "NSBundle+KSOFormExtensions.h"
 
 #import <Stanley/Stanley.h>
 #import <Quicksilver/Quicksilver.h>
@@ -32,6 +33,8 @@ KSOFormRowKey const KSOFormRowKeyValueTransformer = @"valueTransformer";
 KSOFormRowKey const KSOFormRowKeyValueDataSource = @"valueDataSource";
 KSOFormRowKey const KSOFormRowKeyValueShouldChangeBlock = @"valueShouldChangeBlock";
 KSOFormRowKey const KSOFormRowKeyValueDidChangeBlock = @"valueDidChangeBlock";
+
+KSOFormRowKey const KSOFormRowKeyAllowsMultipleSelection = @"allowsMultipleSelection";
 
 KSOFormRowKey const KSOFormRowKeyImage = @"image";
 KSOFormRowKey const KSOFormRowKeyTitle = @"title";
@@ -153,6 +156,8 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     _shouldChangeValueBlock = dictionary[KSOFormRowKeyValueShouldChangeBlock];
     _didChangeValueBlock = dictionary[KSOFormRowKeyValueDidChangeBlock];
     
+    _allowsMultipleSelection = dictionary[KSOFormRowKeyAllowsMultipleSelection] == nil ? YES : [dictionary[KSOFormRowKeyAllowsMultipleSelection] boolValue];
+    
     _image = dictionary[KSOFormRowKeyImage];
     _title = dictionary[KSOFormRowKeyTitle];
     _subtitle = dictionary[KSOFormRowKeySubtitle];
@@ -260,8 +265,19 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
             self.section.model.parentFormRow.type == KSOFormRowTypeOptions);
 }
 - (BOOL)isSelected {
-    return (self.section.model.parentFormRow.type == KSOFormRowTypeOptions &&
-            [self.title isEqualToString:self.section.model.parentFormRow.formattedValue]);
+    if (self.section.model.parentFormRow.type == KSOFormRowTypeOptions) {
+        id value = self.section.model.parentFormRow.value;
+        
+        if (!KSTIsEmptyObject(value)) {
+            if ([value isKindOfClass:NSArray.class]) {
+                return [value containsObject:self.context];
+            }
+            else {
+                return [value isEqual:self.context];
+            }
+        }
+    }
+    return NO;
 }
 
 @synthesize value=_value;
@@ -321,7 +337,20 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 }
 
 - (NSString *)formattedValue {
-    return self.valueFormatter == nil ? (self.valueTransformer == nil ? [self.value description] : [self.valueTransformer transformedValue:self.value]) : [self.valueFormatter stringForObjectValue:self.value];
+    if (self.valueFormatter != nil) {
+        return [self.valueFormatter stringForObjectValue:self.value];
+    }
+    else if (self.valueTransformer != nil) {
+        return [self.valueTransformer transformedValue:self.value];
+    }
+    else {
+        id value = self.value;
+        
+        if ([value isKindOfClass:NSArray.class]) {
+            return [value componentsJoinedByString:NSLocalizedStringWithDefaultValue(@"row.value.join-string", nil, NSBundle.KSO_formFrameworkBundle, @", ", @"row value join string (e.g. x, y, z)")];
+        }
+        return [value description];
+    }
 }
 
 - (KSOFormRowCellAccessoryType)cellAccessoryType {
@@ -359,9 +388,8 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
         _actionModel == nil) {
         
         _actionModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyRows: [self.optionRows KQS_map:^id _Nullable(id<KSOFormOptionRow>  _Nonnull object, NSInteger index) {
-            return [[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: [object formOptionRowTitle]}];
+            return [[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: object.formOptionRowTitle, KSOFormRowKeyContext: object}];
         }], KSOFormModelKeyTitle: self.title}];
-        
         [_actionModel setParentFormRow:self];
     }
     return [self.actionDelegate respondsToSelector:@selector(actionFormModelForFormRow:)] ? [self.actionDelegate actionFormModelForFormRow:self] : _actionModel;
