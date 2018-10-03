@@ -237,12 +237,14 @@
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeOptions),
                                                                    KSOFormRowKeyTitle: @"Options",
                                                                    KSOFormRowKeyOptionRows: @[@"Red",@"Green",@"Blue"],
-                                                                   KSOFormRowKeyValue: @"Red"
+                                                                   KSOFormRowKeyValue: @"Red",
+                                                                   KSOFormRowKeyEnabled: @NO
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeOptionsInline),
                                                                    KSOFormRowKeyTitle: @"Options Inline",
                                                                    KSOFormRowKeyOptionRows: @[@"Red",@"Green",@"Blue"],
-                                                                   KSOFormRowKeyValue: @"Red"
+                                                                   KSOFormRowKeyValue: @"Red",
+                                                                   KSOFormRowKeyEnabled: @NO
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeDatePicker),
                                                                    KSOFormRowKeyTitle: @"Date Picker",

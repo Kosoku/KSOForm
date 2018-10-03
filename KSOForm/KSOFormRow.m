@@ -261,8 +261,9 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 }
 - (BOOL)isSelectable {
     return (self.isEditable ||
-            self.cellAccessoryType == KSOFormRowCellAccessoryTypeDisclosureIndicator ||
-            self.section.model.parentFormRow.type == KSOFormRowTypeOptions);
+            (self.isEnabled &&
+             (self.cellAccessoryType == KSOFormRowCellAccessoryTypeDisclosureIndicator ||
+              self.section.model.parentFormRow.type == KSOFormRowTypeOptions)));
 }
 - (BOOL)isSelected {
     if (self.section.model.parentFormRow.type == KSOFormRowTypeOptions) {
@@ -366,10 +367,11 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 
 - (KSOFormRowCellAccessoryType)cellAccessoryType {
     if (_cellAccessoryType == KSOFormRowCellAccessoryTypeAutomatic) {
-        if (self.type == KSOFormRowTypeOptions ||
-            self.actionDelegate != nil ||
-            self.actionModel != nil ||
-            self.actionViewControllerClass != Nil) {
+        if (self.isEnabled &&
+            (self.type == KSOFormRowTypeOptions ||
+             self.actionDelegate != nil ||
+             self.actionModel != nil ||
+             self.actionViewControllerClass != Nil)) {
             
             return KSOFormRowCellAccessoryTypeDisclosureIndicator;
         }
@@ -396,6 +398,7 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 
 - (KSOFormModel *)actionModel {
     if (self.type == KSOFormRowTypeOptions &&
+        self.isEnabled &&
         _actionModel == nil) {
         
         _actionModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyRows: [self.optionRows KQS_map:^id _Nullable(id<KSOFormOptionRow>  _Nonnull object, NSInteger index) {
