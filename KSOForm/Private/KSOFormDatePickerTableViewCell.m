@@ -57,7 +57,8 @@
                 [self.trailingView setDate:self.formRow.value];
             }
             else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
-                [self.trailingView setEnabled:self.formRow.isEnabled];
+                [self.trailingView setUserInteractionEnabled:self.formRow.isEnabled];
+                [self.trailingView setTintColor:self.formRow.isEnabled ? self.formTheme.textColor : self.formTheme.valueColor];
             }
         });
     }];

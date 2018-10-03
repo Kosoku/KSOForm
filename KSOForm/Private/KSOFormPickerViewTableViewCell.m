@@ -57,7 +57,8 @@
                 [self.trailingView reloadData];
             }
             else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
-                [self.trailingView setEnabled:self.formRow.isEnabled];
+                [self.trailingView setUserInteractionEnabled:self.formRow.isEnabled];
+                [self.trailingView setTintColor:self.formRow.isEnabled ? self.formTheme.textColor : self.formTheme.valueColor];
             }
             else if ([keyPath isEqualToString:@kstKeypath(self,formRow.value)]) {
                 if ([self.formRow.value isKindOfClass:NSArray.class]) {

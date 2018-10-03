@@ -53,7 +53,8 @@
                 [self.leadingView setTitle:self.formRow.title forState:UIControlStateNormal];
             }
             else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
-                [self.trailingView setEnabled:self.formRow.isEnabled];
+                [self.trailingView setUserInteractionEnabled:self.formRow.isEnabled];
+                [self.trailingView setTintColor:self.formRow.isEnabled ? (self.formRow.themeTextColor ?: self.formTheme.textColor) : self.formTheme.valueColor];
             }
         });
     }];

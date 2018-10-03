@@ -202,7 +202,7 @@
     
     NSArray *rows = [self  _initiallySelectedFormOptionRows];
     
-    [self.trailingView setEnabled:formRow.isEnabled];
+    [self.trailingView setUserInteractionEnabled:formRow.isEnabled];
     [self.trailingView setTitle:[self _titleForSelectedFormOptionRows:rows] forState:UIControlStateNormal];
     [self _reloadTableWithSelectedFormOptionRows:rows];
     
@@ -218,6 +218,10 @@
     
     if (formTheme.textColor != nil) {
         [self.trailingView setTintColor:formTheme.textColor];
+    }
+    
+    if (!self.formRow.isEnabled) {
+        self.trailingView.tintColor = formTheme.valueColor;
     }
     
     if (formTheme.valueTextStyle == nil) {
