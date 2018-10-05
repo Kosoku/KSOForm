@@ -17,21 +17,45 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Protocol describing an object that can be displayed using a KSOFormRowTypeOptions or KSOFormRowTypeOptionsInline row.
+ */
 @protocol KSOFormOptionRow <NSObject>
 @required
+/**
+ The title of the option row. This will map to the KSOFormRowKeyValue of the pushed row.
+ */
 @property (readonly,nonatomic) NSString *formOptionRowTitle;
 @optional
+/**
+ The image of the option row. This will map to the KSOFormRowKeyImage of the pushed row.
+ */
 @property (readonly,nonatomic,nullable) UIImage *formOptionRowImage;
+/**
+ The subtitle of the option row. This will map to the KSOFormRowKeySubtitle of the pushed row.
+ */
 @property (readonly,nonatomic,nullable) NSString *formOptionRowSubtitle;
+/**
+ The info of the option row. This is only applicable when being presented as part of a KSOFormRowTypeOptionsInline row and will be aligned to the trailing edge, centered vertically.
+ */
 @property (readonly,nonatomic,nullable) NSString *formOptionRowInfo;
 @end
 
+/**
+ Add support for KSOFormOptionRow to NSString.
+ */
 @interface NSString (KSOFormOptionRowExtensions) <KSOFormOptionRow>
 @end
 
+/**
+ Add support for KSOFormOptionRow to NSAttributedString.
+ */
 @interface NSAttributedString (KSOFormOptionRowExtensions) <KSOFormOptionRow>
 @end
 
+/**
+ Add support for KSOFormOptionRow to NSURL.
+ */
 @interface NSURL (KSOFormOptionRowExtensions) <KSOFormOptionRow>
 @end
 
