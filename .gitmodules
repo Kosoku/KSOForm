@@ -25,3 +25,6 @@
 [submodule "Vendor/KSOToken"]
 	path = Vendor/KSOToken
 	url = https://github.com/Kosoku/KSOToken.git
+[submodule "Vendor/LoremIpsum"]
+	path = Vendor/LoremIpsum
+	url = https://github.com/lukaskubanek/LoremIpsum.git

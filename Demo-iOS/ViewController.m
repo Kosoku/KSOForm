@@ -17,6 +17,7 @@
 #import "MapViewController.h"
 #import "BluetoothTableViewController.h"
 #import "ImagePickerView.h"
+#import "LoremIpsum.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
@@ -55,6 +56,8 @@
 @synthesize formRow=_formRow;
 - (void)setFormRow:(KSOFormRow *)formRow {
     _formRow = formRow;
+    
+    self.representedObjects = formRow.value;
 }
 
 - (BOOL)canEditFormRow {
@@ -205,7 +208,13 @@
                                                                },
                                                              @{KSOFormRowKeyType: @(KSOFormRowTypeTextMultiline),
                                                                KSOFormRowKeyTitle: @"Notes",
-                                                               KSOFormRowKeyPlaceholder: @"Enter your notes"
+                                                               KSOFormRowKeyPlaceholder: @"Enter your notes",
+                                                               KSOFormRowKeyValue: LoremIpsum.paragraph
+                                                               },
+                                                             @{KSOFormRowKeyTitle: @"Tags",
+                                                               KSOFormRowKeyCellTrailingView: [[TagTextView alloc] initWithFrame:CGRectZero textContainer:nil],
+                                                               KSOFormRowKeyCellWantsLeadingViewCenteredVertically: @NO,
+                                                               KSOFormRowKeyValue: [[LoremIpsum wordsWithNumber:20] componentsSeparatedByCharactersInSet:NSCharacterSet.whitespaceCharacterSet]
                                                                }]];
     KSOFormModel *controlsModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Controls"}];
     
