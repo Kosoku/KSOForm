@@ -28,6 +28,30 @@
 #import <KSOToken/KSOToken.h>
 #import <Agamotto/Agamotto.h>
 
+@interface TagTextAttachment : KSOTokenDefaultTextAttachment
+
+@end
+
+@implementation TagTextAttachment
+
+- (instancetype)initWithRepresentedObject:(id<KSOTokenRepresentedObject>)representedObject text:(NSString *)text tokenTextView:(KSOTokenTextView *)tokenTextView {
+    if (!(self = [super initWithRepresentedObject:representedObject text:text tokenTextView:tokenTextView]))
+        return nil;
+    
+    self.tokenCornerRadius = 3.0;
+    self.tokenBackgroundColor = tokenTextView.tintColor;
+    self.tokenTextColor = self.tokenBackgroundColor.KDI_contrastingColor;
+    self.tokenHighlightedTextColor = self.tokenBackgroundColor;
+    self.tokenHighlightedBackgroundColor = self.tokenTextColor;
+    self.tokenDisabledBackgroundColor = tokenTextView.textColor;
+    self.tokenDisabledTextColor = self.tokenDisabledBackgroundColor.KDI_contrastingColor;
+    self.respondsToTintColorChanges = NO;
+    
+    return self;
+}
+
+@end
+
 @interface TagTextView : KSOTokenTextView <KSOFormRowView, KSOTokenTextViewDelegate>
 
 @end
@@ -44,27 +68,13 @@
     self.textAlignment = NSTextAlignmentRight;
     self.scrollEnabled = NO;
     self.placeholder = @"Enter some tags";
-    self.delegate = self;
-    [self setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    self.tokenTextAttachmentClass = TagTextAttachment.class;
     
     [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self block:^(NSNotification * _Nonnull notification) {
         [NSNotificationCenter.defaultCenter postNotificationName:[notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder] ? KSOFormRowViewNotificationDidBeginEditing : KSOFormRowViewNotificationDidEndEditing object:notification.object];
     }];
     
     return self;
-}
-
-- (void)textViewDidChange:(UITextView *)textView {
-    [super textViewDidChange:textView];
-
-    [self.formRow reloadHeightAnimated:NO completion:^{
-        [textView scrollRangeToVisible:textView.selectedRange];
-    }];
-}
-- (void)textViewDidChangeSelection:(UITextView *)textView {
-    [super textViewDidChangeSelection:textView];
-
-    [textView scrollRangeToVisible:textView.selectedRange];
 }
 
 @synthesize formRow=_formRow;
@@ -74,14 +84,63 @@
     self.representedObjects = formRow.value;
 }
 
+@end
+
+@interface TagScrollView : UIScrollView <KSOFormRowView, KSOTokenTextViewDelegate>
+@property (strong,nonatomic) TagTextView *textView;
+@end
+
+@implementation TagScrollView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (!(self = [super initWithFrame:frame]))
+        return nil;
+    
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    self.textView = [[TagTextView alloc] initWithFrame:CGRectZero textContainer:nil];
+    self.textView.delegate = self;
+    [self addSubview:self.textView];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.textView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.textView}]];
+    [NSLayoutConstraint activateConstraints:@[[self.textView.widthAnchor constraintEqualToAnchor:self.widthAnchor]]];
+    
+    NSLayoutConstraint *height = [self.heightAnchor constraintEqualToAnchor:self.textView.heightAnchor];
+    
+    height.priority = UILayoutPriorityDefaultLow;
+    
+    [NSLayoutConstraint activateConstraints:@[height]];
+    
+    return self;
+}
+
+@synthesize formRow=_formRow;
+- (void)setFormRow:(KSOFormRow *)formRow {
+    _formRow = formRow;
+    
+    self.textView.formRow = _formRow;
+}
+
 - (BOOL)canEditFormRow {
-    return self.canBecomeFirstResponder;
+    return self.textView.canBecomeFirstResponder;
 }
 - (BOOL)isEditingFormRow {
-    return self.isFirstResponder;
+    return self.textView.isFirstResponder;
 }
 - (void)beginEditingFormRow {
-    [self becomeFirstResponder];
+    [self.textView becomeFirstResponder];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+//    [self.formRow setValue:self.textView.text notify:YES];
+    
+    [self.formRow reloadHeightAnimated:NO];
+}
+- (void)textViewDidChangeSelection:(UITextView *)textView {
+    CGRect rect = [textView caretRectForPosition:textView.selectedTextRange.start];
+    
+    [self scrollRectToVisible:rect animated:NO];
 }
 
 @end
@@ -223,7 +282,7 @@
                                                                KSOFormRowKeyMaximumNumberOfLines: @5
                                                                },
                                                              @{KSOFormRowKeyTitle: @"Tags",
-                                                               KSOFormRowKeyCellTrailingView: [[TagTextView alloc] initWithFrame:CGRectZero textContainer:nil],
+                                                               KSOFormRowKeyCellTrailingView: [[TagScrollView alloc] initWithFrame:CGRectZero],
                                                                KSOFormRowKeyCellWantsLeadingViewCenteredVertically: @NO,
                                                                KSOFormRowKeyValue: [[LoremIpsum wordsWithNumber:20] componentsSeparatedByCharactersInSet:NSCharacterSet.whitespaceCharacterSet]
                                                                }]];
