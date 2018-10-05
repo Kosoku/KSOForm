@@ -242,7 +242,10 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 }
 
 - (void)reloadHeightAnimated:(BOOL)animated; {
-    [self.section.model.tableView KDI_reloadHeightAnimated:animated block:nil completion:nil];
+    [self reloadHeightAnimated:animated completion:nil];
+}
+- (void)reloadHeightAnimated:(BOOL)animated completion:(dispatch_block_t)completion {
+    [self.section.model.tableView KDI_reloadHeightAnimated:animated block:nil completion:completion];
 }
 
 - (BOOL)isEditable {

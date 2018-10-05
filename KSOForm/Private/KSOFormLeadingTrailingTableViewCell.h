@@ -26,5 +26,6 @@
 @property (readonly,nonatomic) BOOL wantsLeadingViewTopBottomLayoutMargins;
 @property (readonly,nonatomic) BOOL wantsTrailingViewTopBottomLayoutMargins;
 @property (readonly,nonatomic) CGFloat minimumTrailingViewHeight;
+@property (readonly,nonatomic) NSArray<NSLayoutConstraint *> *customLayoutConstraints;
 
 @end

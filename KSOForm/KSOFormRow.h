@@ -333,6 +333,13 @@ NS_ASSUME_NONNULL_BEGIN
  @param animated Whether to animate the reload
  */
 - (void)reloadHeightAnimated:(BOOL)animated;
+/**
+ Reloads the height of the row with or without animation and invokes completion when the reload is finished.
+ 
+ @param animated Whether to animate the reload
+ @param completion The block to invoke when the reload completes
+ */
+- (void)reloadHeightAnimated:(BOOL)animated completion:(nullable dispatch_block_t)completion;
 
 @end
 

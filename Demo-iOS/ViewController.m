@@ -28,7 +28,7 @@
 #import <KSOToken/KSOToken.h>
 #import <Agamotto/Agamotto.h>
 
-@interface TagTextView : KSOTokenTextView <KSOFormRowView>
+@interface TagTextView : KSOTokenTextView <KSOFormRowView, KSOTokenTextViewDelegate>
 
 @end
 
@@ -42,15 +42,29 @@
     self.backgroundColor = UIColor.clearColor;
     self.textContainerInset = UIEdgeInsetsMake(8, 0, 8, 0);
     self.textAlignment = NSTextAlignmentRight;
+    self.scrollEnabled = NO;
     self.placeholder = @"Enter some tags";
-    
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_tagTextView_textDidChange:) name:UITextViewTextDidChangeNotification object:self];
+    self.delegate = self;
+    [self setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     
     [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self block:^(NSNotification * _Nonnull notification) {
         [NSNotificationCenter.defaultCenter postNotificationName:[notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder] ? KSOFormRowViewNotificationDidBeginEditing : KSOFormRowViewNotificationDidEndEditing object:notification.object];
     }];
     
     return self;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    [super textViewDidChange:textView];
+
+    [self.formRow reloadHeightAnimated:NO completion:^{
+        [textView scrollRangeToVisible:textView.selectedRange];
+    }];
+}
+- (void)textViewDidChangeSelection:(UITextView *)textView {
+    [super textViewDidChangeSelection:textView];
+
+    [textView scrollRangeToVisible:textView.selectedRange];
 }
 
 @synthesize formRow=_formRow;
@@ -68,10 +82,6 @@
 }
 - (void)beginEditingFormRow {
     [self becomeFirstResponder];
-}
-
-- (void)_tagTextView_textDidChange:(NSNotification *)note {
-    [self.formRow reloadHeightAnimated:NO];
 }
 
 @end
@@ -209,7 +219,8 @@
                                                              @{KSOFormRowKeyType: @(KSOFormRowTypeTextMultiline),
                                                                KSOFormRowKeyTitle: @"Notes",
                                                                KSOFormRowKeyPlaceholder: @"Enter your notes",
-                                                               KSOFormRowKeyValue: LoremIpsum.paragraph
+                                                               KSOFormRowKeyValue: [LoremIpsum paragraphsWithNumber:2],
+                                                               KSOFormRowKeyMaximumNumberOfLines: @5
                                                                },
                                                              @{KSOFormRowKeyTitle: @"Tags",
                                                                KSOFormRowKeyCellTrailingView: [[TagTextView alloc] initWithFrame:CGRectZero textContainer:nil],

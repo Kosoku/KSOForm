@@ -27,7 +27,8 @@
 
 @interface KSOFormTextMultilineTableViewCell () <UITextViewDelegate>
 @property (strong,nonatomic) KSOFormImageTitleSubtitleView *leadingView;
-@property (strong,nonatomic) KDITextView *trailingView;
+@property (strong,nonatomic) UIScrollView *trailingView;
+@property (strong,nonatomic) KDITextView *textView;
 @end
 
 @implementation KSOFormTextMultilineTableViewCell
@@ -38,68 +39,99 @@
     
     [self setLeadingView:[[KSOFormImageTitleSubtitleView alloc] initWithFrame:CGRectZero]];
     [self.leadingView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.leadingView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.contentView addSubview:self.leadingView];
     
-    [self setTrailingView:[[KDITextView alloc] initWithFrame:CGRectZero]];
-    [self.trailingView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.trailingView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+    self.trailingView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.trailingView.backgroundColor = UIColor.clearColor;
     [self.trailingView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [self.trailingView setTextAlignment:NSTextAlignmentRight];
-    [self.trailingView setInputAccessoryView:[[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:self.trailingView]];
-    [self.trailingView setBackgroundColor:UIColor.clearColor];
-    [self.trailingView setDelegate:self];
     [self.contentView addSubview:self.trailingView];
+    
+    self.textView = [[KDITextView alloc] initWithFrame:CGRectZero];
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.textView.textAlignment = NSTextAlignmentRight;
+    self.textView.scrollEnabled = NO;
+    self.textView.backgroundColor = UIColor.clearColor;
+    self.textView.inputAccessoryView = [[KDINextPreviousInputAccessoryView alloc] initWithFrame:CGRectZero responder:self.textView];
+    self.textView.delegate = self;
+    [self.trailingView addSubview:self.textView];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.textView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.textView}]];
+    [NSLayoutConstraint activateConstraints:@[[self.textView.widthAnchor constraintEqualToAnchor:self.trailingView.widthAnchor]]];
+    
+    NSLayoutConstraint *height = [self.trailingView.heightAnchor constraintEqualToAnchor:self.textView.heightAnchor];
+    
+    height.priority = UILayoutPriorityDefaultLow;
+    
+    [NSLayoutConstraint activateConstraints:@[height]];
     
     kstWeakify(self);
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,formRow.value),@kstKeypath(self,formRow.enabled),@kstKeypath(self,formRow.placeholder)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
             if ([keyPath isEqualToString:@kstKeypath(self,formRow.value)]) {
-                [self.trailingView setText:self.formRow.value];
+                [self.textView setText:self.formRow.value];
             }
             else if ([keyPath isEqualToString:@kstKeypath(self,formRow.enabled)]) {
                 [self.trailingView setUserInteractionEnabled:self.formRow.isEnabled];
+                [self.textView setUserInteractionEnabled:self.formRow.isEnabled];
             }
             else if ([keyPath isEqualToString:@kstKeypath(self,formRow.placeholder)]) {
-                [self.trailingView setPlaceholder:self.formRow.placeholder];
+                [self.textView setPlaceholder:self.formRow.placeholder];
             }
         });
     }];
     
-    [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self.trailingView block:^(NSNotification * _Nonnull notification) {
+    [self KAG_addObserverForNotificationNames:@[KDIUIResponderNotificationDidBecomeFirstResponder,KDIUIResponderNotificationDidResignFirstResponder] object:self.textView block:^(NSNotification * _Nonnull notification) {
         [NSNotificationCenter.defaultCenter postNotificationName:[notification.name isEqualToString:KDIUIResponderNotificationDidBecomeFirstResponder] ? KSOFormRowViewNotificationDidBeginEditing : KSOFormRowViewNotificationDidEndEditing object:notification.object];
     }];
     
     return self;
 }
 #pragma mark -
+- (void)updateConstraints {
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
+    CGFloat lineHeight = ceil(self.textView.font.lineHeight);
+    
+    if (self.formRow.minimumNumberOfLines > 0) {
+        [temp addObject:[self.trailingView.heightAnchor constraintGreaterThanOrEqualToConstant:lineHeight * (CGFloat)self.formRow.minimumNumberOfLines]];
+    }
+    if (self.formRow.maximumNumberOfLines > 0) {
+        [temp addObject:[self.trailingView.heightAnchor constraintLessThanOrEqualToConstant:lineHeight * (CGFloat)self.formRow.maximumNumberOfLines]];
+    }
+    
+    self.trailingView.KDI_customConstraints = temp;
+    
+    [super updateConstraints];
+}
+
 @dynamic leadingView;
 @dynamic trailingView;
 - (BOOL)wantsLeadingViewCenteredVertically {
     return NO;
 }
-- (CGFloat)minimumTrailingViewHeight {
-    return self.trailingView.intrinsicContentSize.height;
-}
+
 #pragma mark -
 - (void)setFormRow:(KSOFormRow *)formRow {
     [super setFormRow:formRow];
     
     [self.leadingView setFormRow:formRow];
     
-    [self.trailingView setKeyboardType:formRow.keyboardType];
-    [self.trailingView setKeyboardAppearance:formRow.keyboardAppearance];
-    [self.trailingView setAutocapitalizationType:formRow.autocapitalizationType];
-    [self.trailingView setAutocorrectionType:formRow.autocorrectionType];
-    [self.trailingView setSpellCheckingType:formRow.spellCheckingType];
-    [self.trailingView setSecureTextEntry:formRow.isSecureTextEntry];
-    [self.trailingView setTextContentType:formRow.textContentType];
-    [self.trailingView setMinimumNumberOfLines:formRow.minimumNumberOfLines];
-    [self.trailingView setMaximumNumberOfLines:formRow.maximumNumberOfLines];
+    [self.textView setKeyboardType:formRow.keyboardType];
+    [self.textView setKeyboardAppearance:formRow.keyboardAppearance];
+    [self.textView setAutocapitalizationType:formRow.autocapitalizationType];
+    [self.textView setAutocorrectionType:formRow.autocorrectionType];
+    [self.textView setSpellCheckingType:formRow.spellCheckingType];
+    [self.textView setSecureTextEntry:formRow.isSecureTextEntry];
+    [self.textView setTextContentType:formRow.textContentType];
+//    [self.textView setMinimumNumberOfLines:formRow.minimumNumberOfLines];
+//    [self.textView setMaximumNumberOfLines:formRow.maximumNumberOfLines];
     if (@available(iOS 11.0, *)) {
-        [self.trailingView setSmartQuotesType:formRow.smartQuotesType];
-        [self.trailingView setSmartDashesType:formRow.smartDashesType];
-        [self.trailingView setSmartInsertDeleteType:formRow.smartInsertDeleteType];
+        [self.textView setSmartQuotesType:formRow.smartQuotesType];
+        [self.textView setSmartDashesType:formRow.smartDashesType];
+        [self.textView setSmartInsertDeleteType:formRow.smartInsertDeleteType];
     }
 }
 - (void)setFormTheme:(KSOFormTheme *)formTheme {
@@ -107,30 +139,30 @@
     
     [self.leadingView setFormTheme:formTheme];
     
-    [self.trailingView setFont:formTheme.valueFont];
-    [self.trailingView setTextColor:self.formRow.isEnabled ? (formTheme.textColor ?: self.tintColor) : formTheme.valueColor];
-    [self.trailingView setKeyboardAppearance:formTheme.keyboardAppearance];
-    [self.trailingView setPlaceholderTextColor:formTheme.valueColor];
+    [self.textView setFont:formTheme.valueFont];
+    [self.textView setTextColor:self.formRow.isEnabled ? (formTheme.textColor ?: self.tintColor) : formTheme.valueColor];
+    [self.textView setKeyboardAppearance:formTheme.keyboardAppearance];
+    [self.textView setPlaceholderTextColor:formTheme.valueColor];
     
     if (formTheme.textSelectionColor != nil) {
-        [self.trailingView setTintColor:formTheme.textSelectionColor];
+        [self.textView setTintColor:formTheme.textSelectionColor];
     }
     
     if (formTheme.valueTextStyle == nil) {
-        [NSObject KDI_unregisterDynamicTypeObject:self.trailingView];
+        [NSObject KDI_unregisterDynamicTypeObject:self.textView];
     }
     else {
-        [NSObject KDI_registerDynamicTypeObject:self.trailingView forTextStyle:formTheme.valueTextStyle];
+        [NSObject KDI_registerDynamicTypeObject:self.textView forTextStyle:formTheme.valueTextStyle];
     }
 }
 - (BOOL)canEditFormRow {
     return YES;
 }
 - (BOOL)isEditingFormRow {
-    return self.trailingView.isFirstResponder;
+    return self.textView.isFirstResponder;
 }
 - (void)beginEditingFormRow {
-    [self.trailingView becomeFirstResponder];
+    [self.textView becomeFirstResponder];
 }
 #pragma mark UITextViewDelegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -143,8 +175,14 @@
     return YES;
 }
 - (void)textViewDidChange:(UITextView *)textView {
-    [self.formRow setValue:self.trailingView.text notify:YES];
+    [self.formRow setValue:self.textView.text notify:YES];
     
     [self.formRow reloadHeightAnimated:NO];
 }
+- (void)textViewDidChangeSelection:(UITextView *)textView {
+    CGRect rect = [textView caretRectForPosition:textView.selectedTextRange.start];
+    
+    [self.trailingView scrollRectToVisible:rect animated:NO];
+}
+
 @end

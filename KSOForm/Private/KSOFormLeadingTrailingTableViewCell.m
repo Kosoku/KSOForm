@@ -86,6 +86,12 @@
         [constraints addObject:[NSLayoutConstraint constraintWithItem:self.leadingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     }
     
+    NSArray *customLayoutConstraints = self.customLayoutConstraints;
+    
+    if (!KSTIsEmptyObject(customLayoutConstraints)) {
+        [constraints addObjectsFromArray:customLayoutConstraints];
+    }
+    
     [NSLayoutConstraint activateConstraints:constraints];
     
     [self setActiveConstraints:constraints];
@@ -122,6 +128,9 @@
 }
 - (CGFloat)minimumTrailingViewHeight {
     return 0.0;
+}
+- (NSArray<NSLayoutConstraint *> *)customLayoutConstraints {
+    return nil;
 }
 
 @end
