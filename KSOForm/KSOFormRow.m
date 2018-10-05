@@ -400,7 +400,24 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
         _actionModel == nil) {
         
         _actionModel = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyRows: [self.optionRows KQS_map:^id _Nullable(id<KSOFormOptionRow>  _Nonnull object, NSInteger index) {
-            return [[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: object.formOptionRowTitle, KSOFormRowKeyContext: object}];
+            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{KSOFormRowKeyTitle: object.formOptionRowTitle, KSOFormRowKeyContext: object}];
+            
+            if ([object respondsToSelector:@selector(formOptionRowImage)]) {
+                id value = object.formOptionRowImage;
+                
+                if (value != nil) {
+                    dict[KSOFormRowKeyImage] = value;
+                }
+            }
+            if ([object respondsToSelector:@selector(formOptionRowSubtitle)]) {
+                id value = object.formOptionRowSubtitle;
+                
+                if (value != nil) {
+                    dict[KSOFormRowKeySubtitle] = value;
+                }
+            }
+            
+            return [[KSOFormRow alloc] initWithDictionary:dict];
         }], KSOFormModelKeyTitle: self.title}];
         [_actionModel setParentFormRow:self];
     }
