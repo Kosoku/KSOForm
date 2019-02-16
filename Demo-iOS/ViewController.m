@@ -423,7 +423,7 @@
                                                                    }]];
     [model.sections.lastObject addRow:self.bluetoothRow];
     [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tap to choose image…", KSOFormRowKeyCellTrailingView: [[ImagePickerView alloc] initWithFrame:CGRectZero], KSOFormRowKeyThemeTitleColor: self.view.tintColor}];
-    [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tags", KSOFormRowKeyCellTrailingView: [[TagTextView alloc] initWithFrame:CGRectZero textContainer:nil], KSOFormRowKeyCellWantsLeadingViewCenteredVertically: @NO}];
+    [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tags", KSOFormRowKeyCellTrailingView: [[TagScrollView alloc] initWithFrame:CGRectZero], KSOFormRowKeyCellWantsLeadingViewCenteredVertically: @NO}];
     
     [self setModel:model];
 }
