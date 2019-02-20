@@ -165,7 +165,7 @@ KSOFormModelKey const KSOFormModelKeyDidAppearBlock = @"didAppearBlock";
     }
 }
 
-- (void)performUpdates:(dispatch_block_t)updates {
+- (void)performUpdates:(NS_NOESCAPE dispatch_block_t)updates {
     [self.tableView beginUpdates];
     
     updates();
