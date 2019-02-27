@@ -367,11 +367,13 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
             
             value = @[value];
         }
+#if (!TARGET_OS_TV)
         if (self.type == KSOFormRowTypePickerView &&
             [value conformsToProtocol:@protocol(KSOFormPickerViewRow)]) {
             
             value = @[value];
         }
+#endif
         if (self.type == KSOFormRowTypeSegmented &&
             [value conformsToProtocol:@protocol(KSOFormRowSegmentedItem)]) {
             
