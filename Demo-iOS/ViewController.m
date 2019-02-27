@@ -295,6 +295,26 @@
     [controlsModel addSectionFromDictionary:@{KSOFormSectionKeyHeaderTitle: @"Control examples",
                                               KSOFormSectionKeyFooterTitle: @"Footer for control examples"
                                               }];
+    
+    UIImage*(^optionRowImageBlock)(UIColor *) = ^UIImage*(UIColor *color) {
+        CGSize size = CGSizeMake(32.0, 32.0);
+        
+        UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+        
+        [color setFill];
+        [[UIBezierPath bezierPathWithOvalInRect:CGRectMake(0.0, 0.0, size.width, size.height)] fill];
+        
+        UIImage *retval = UIGraphicsGetImageFromCurrentImageContext();
+        
+        UIGraphicsEndImageContext();
+        
+        return retval;
+    };
+    
+    NSArray *optionRows = @[[KSOFormRow formRowWithDictionary:@{KSOFormRowKeyTitle: @"Red", KSOFormRowKeySubtitle: @"The color red", KSOFormRowKeyImage: optionRowImageBlock(UIColor.redColor)}],
+                            [KSOFormRow formRowWithDictionary:@{KSOFormRowKeyTitle: @"Green", KSOFormRowKeySubtitle: @"The color green", KSOFormRowKeyImage: optionRowImageBlock(UIColor.greenColor)}],
+                            [KSOFormRow formRowWithDictionary:@{KSOFormRowKeyTitle: @"Blue", KSOFormRowKeySubtitle: @"The color blue", KSOFormRowKeyImage: optionRowImageBlock(UIColor.blueColor)}]];
+    
     [controlsModel.sections.lastObject addRowsFromDictionaries:@[@{KSOFormRowKeyType: @(KSOFormRowTypeSegmented),
                                                                    KSOFormRowKeyTitle: @"Segmented",
                                                                    KSOFormRowKeyValue: @2,
@@ -319,14 +339,14 @@
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeOptions),
                                                                    KSOFormRowKeyTitle: @"Options",
-                                                                   KSOFormRowKeyOptionRows: @[@"Red",@"Green",@"Blue"],
-                                                                   KSOFormRowKeyValue: @"Red",
+                                                                   KSOFormRowKeyOptionRows: optionRows,
+                                                                   KSOFormRowKeyValue: optionRows.firstObject,
                                                                    KSOFormRowKeyPlaceholder: @"N/A"
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeOptionsInline),
                                                                    KSOFormRowKeyTitle: @"Options Inline",
-                                                                   KSOFormRowKeyOptionRows: @[@"Red",@"Green",@"Blue"],
-                                                                   KSOFormRowKeyValue: @"Red",
+                                                                   KSOFormRowKeyOptionRows: optionRows,
+                                                                   KSOFormRowKeyValue: optionRows.firstObject,
                                                                    KSOFormRowKeyPlaceholder: @"N/A"
                                                                    },
                                                                  @{KSOFormRowKeyType: @(KSOFormRowTypeDatePicker),

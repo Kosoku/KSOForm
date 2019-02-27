@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  KSOFormRow represents a single row in the form and is owned by a KSOFormSection.
  */
-@interface KSOFormRow : NSObject <UITextInputTraits>
+@interface KSOFormRow : NSObject <KSOFormOptionRow, UITextInputTraits>
 
 /**
  The section that owns the receiver.

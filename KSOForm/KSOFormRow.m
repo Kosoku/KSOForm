@@ -140,6 +140,16 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 @synthesize secureTextEntry=_secureTextEntry;
 @synthesize textContentType=_textContentType;
 
+- (UIImage *)formOptionRowImage {
+    return self.image;
+}
+- (NSString *)formOptionRowTitle {
+    return self.title;
+}
+- (NSString *)formOptionRowSubtitle {
+    return self.subtitle;
+}
+
 - (instancetype)initWithDictionary:(NSDictionary<KSOFormRowKey, id> *)dictionary {
     if (!(self = [super init]))
         return nil;
@@ -351,6 +361,22 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
     }
     else {
         id value = self.value;
+        
+        if (self.type == KSOFormRowTypeOptions &&
+            [value conformsToProtocol:@protocol(KSOFormOptionRow)]) {
+            
+            value = @[value];
+        }
+        if (self.type == KSOFormRowTypePickerView &&
+            [value conformsToProtocol:@protocol(KSOFormPickerViewRow)]) {
+            
+            value = @[value];
+        }
+        if (self.type == KSOFormRowTypeSegmented &&
+            [value conformsToProtocol:@protocol(KSOFormRowSegmentedItem)]) {
+            
+            value = @[value];
+        }
         
         if ([value isKindOfClass:NSArray.class]) {
             return [[value KQS_map:^id _Nullable(id  _Nonnull object, NSInteger index) {
