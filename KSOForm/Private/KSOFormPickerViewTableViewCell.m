@@ -141,7 +141,20 @@
     return self.formRow.pickerViewColumnsAndRows.count > 0 ? self.formRow.pickerViewColumnsAndRows[component].count : self.formRow.pickerViewRows.count;
 }
 - (NSAttributedString *)pickerViewButton:(KDIPickerViewButton *)pickerViewButton attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    id<KSOFormPickerViewRow> pickerViewRow = self.formRow.pickerViewColumnsAndRows.count > 0 ? self.formRow.pickerViewColumnsAndRows[component][row] : self.formRow.pickerViewRows[row];
+    id<KSOFormPickerViewRow> pickerViewRow = nil;
+    
+    if (component < self.formRow.pickerViewColumnsAndRows.count &&
+        row < self.formRow.pickerViewColumnsAndRows[component].count) {
+        
+        pickerViewRow = self.formRow.pickerViewColumnsAndRows[component][row];
+    }
+    else if (row < self.formRow.pickerViewRows.count) {
+        pickerViewRow = self.formRow.pickerViewRows[row];
+    }
+    
+    if (pickerViewRow == nil) {
+        return nil;
+    }
     
     if (self.formRow.valueFormatter != nil) {
         return [[NSAttributedString alloc] initWithString:[self.formRow.valueFormatter stringForObjectValue:pickerViewRow] ?: @""];

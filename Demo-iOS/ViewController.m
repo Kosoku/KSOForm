@@ -32,6 +32,9 @@
 #import <KSOToken/KSOToken.h>
 #import <Agamotto/Agamotto.h>
 
+static NSString *const kBluetoothIdentifier = @"kBluetoothIdentifier";
+static NSString *const kLongFormIdentifier = @"kLongFormIdentifier";
+
 @interface TagTextAttachment : KSOTokenDefaultTextAttachment
 
 @end
@@ -443,17 +446,58 @@
                                                                    }]];
     [self setBluetoothRow:[[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyTitle: @"Bluetooth",
                                                                    KSOFormRowKeyValue: @"Unknown",
-                                                                   KSOFormRowKeyActionDelegate: self
+                                                                   KSOFormRowKeyActionDelegate: self,
+                                                                   KSOFormRowKeyIdentifier: kBluetoothIdentifier
                                                                    }]];
     [model.sections.lastObject addRow:self.bluetoothRow];
     [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tap to choose image…", KSOFormRowKeyCellTrailingView: [[ImagePickerView alloc] initWithFrame:CGRectZero], KSOFormRowKeyThemeTitleColor: self.view.tintColor}];
     [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tags", KSOFormRowKeyCellTrailingView: [[TagScrollView alloc] initWithFrame:CGRectZero], KSOFormRowKeyCellWantsLeadingViewCenteredVertically: @NO}];
+    [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Long Form",
+                                                      KSOFormRowKeyActionDelegate: self,
+                                                      KSOFormRowKeyIdentifier: kLongFormIdentifier
+                                                      }];
     
     [self setModel:model];
 }
 
+- (KSOFormModel *)actionFormModelForFormRow:(KSOFormRow *)formRow {
+    if ([formRow.identifier isEqualToString:kLongFormIdentifier]) {
+        KSOFormModel *retval = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Long Form"}];
+        
+        for (NSInteger i=0; i<10; i++) {
+            KSOFormSection *section = [[KSOFormSection alloc] init];
+            
+            section.headerTitle = [NSNumberFormatter localizedStringFromNumber:@(i) numberStyle:NSNumberFormatterSpellOutStyle];
+            
+            for (NSInteger j=0; j<10; j++) {
+                KSOFormRow *row = [[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyType: @(KSOFormRowTypePickerView)}];
+                
+                row.title = [NSNumberFormatter localizedStringFromNumber:@(j) numberStyle:NSNumberFormatterSpellOutStyle];
+                
+                NSMutableArray *optionRows = [[NSMutableArray alloc] init];
+                uint32_t count = arc4random_uniform(10) + 1;
+                
+                for (uint32_t o=0; o<count; o++) {
+                    [optionRows addObject:[NSNumberFormatter localizedStringFromNumber:@(o) numberStyle:NSNumberFormatterOrdinalStyle]];
+                }
+                
+                row.pickerViewRows = optionRows;
+                
+                [section addRow:row];
+            }
+            
+            [retval addSection:section];
+        }
+        
+        return retval;
+    }
+    return nil;
+}
 - (UIViewController *)actionViewControllerForFormRow:(KSOFormRow *)formRow {
-    return [[BluetoothTableViewController alloc] initWithFormRow:self.bluetoothRow];
+    if ([formRow.identifier isEqualToString:kBluetoothIdentifier]) {
+        return [[BluetoothTableViewController alloc] initWithFormRow:self.bluetoothRow];
+    }
+    return nil;
 }
 
 @end
