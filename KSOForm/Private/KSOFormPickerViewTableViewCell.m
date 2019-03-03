@@ -176,16 +176,14 @@
 #pragma mark KDIPickerViewButtonDelegate
 - (void)pickerViewButton:(KDIPickerViewButton *)pickerViewButton didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (self.formRow.pickerViewColumnsAndRows.count > 0) {
-        NSMutableArray *temp = [NSMutableArray arrayWithArray:self.formRow.value];
+        NSMutableArray *temp = [[NSMutableArray alloc] init];
         id<KSOFormPickerViewRow> pickerViewRow = self.formRow.pickerViewColumnsAndRows[component][row];
         
-        if (temp.count <= component) {
-            for (NSInteger i=0; i<=component; i++) {
-                [temp insertObject:NSNull.null atIndex:i];
-            }
+        for (NSInteger i=0; i<self.formRow.pickerViewColumnsAndRows.count; i++) {
+            NSInteger j = [self.trailingView selectedRowInComponent:i];
+            
+            [temp addObject:self.formRow.pickerViewColumnsAndRows[i][j]];
         }
-        
-        [temp replaceObjectAtIndex:component withObject:pickerViewRow];
         
         [self.formRow setValue:[temp copy] notify:YES];
     }
