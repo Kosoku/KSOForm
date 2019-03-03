@@ -475,9 +475,9 @@ static NSString *const kLongFormIdentifier = @"kLongFormIdentifier";
                 row.title = [NSNumberFormatter localizedStringFromNumber:@(j) numberStyle:NSNumberFormatterSpellOutStyle];
                 
                 NSMutableArray *optionRows = [[NSMutableArray alloc] init];
-                uint32_t count = arc4random_uniform(10) + 1;
+                NSInteger count = j + 1;
                 
-                for (uint32_t o=0; o<count; o++) {
+                for (NSInteger o=0; o<count; o++) {
                     [optionRows addObject:[NSNumberFormatter localizedStringFromNumber:@(o) numberStyle:NSNumberFormatterOrdinalStyle]];
                 }
                 
