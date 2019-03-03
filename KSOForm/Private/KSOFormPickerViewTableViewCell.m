@@ -177,7 +177,6 @@
 - (void)pickerViewButton:(KDIPickerViewButton *)pickerViewButton didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (self.formRow.pickerViewColumnsAndRows.count > 0) {
         NSMutableArray *temp = [[NSMutableArray alloc] init];
-        id<KSOFormPickerViewRow> pickerViewRow = self.formRow.pickerViewColumnsAndRows[component][row];
         
         for (NSInteger i=0; i<self.formRow.pickerViewColumnsAndRows.count; i++) {
             NSInteger j = [self.trailingView selectedRowInComponent:i];
