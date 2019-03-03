@@ -70,16 +70,20 @@
                         NSInteger row = [self.formRow.pickerViewColumnsAndRows[idx] indexOfObject:obj];
                         
                         if (row == NSNotFound) {
-                            return;
+                            [self.trailingView selectRow:0 inComponent:idx];
                         }
-                        
-                        [self.trailingView selectRow:row inComponent:idx];
+                        else {
+                            [self.trailingView selectRow:row inComponent:idx];
+                        }
                     }];
                 }
                 else {
                     NSInteger row = [self.formRow.pickerViewRows indexOfObject:self.formRow.value];
                     
-                    if (row != NSNotFound) {
+                    if (row == NSNotFound) {
+                        [self.trailingView selectRow:0 inComponent:0];
+                    }
+                    else {
                         [self.trailingView selectRow:row inComponent:0];
                     }
                 }
