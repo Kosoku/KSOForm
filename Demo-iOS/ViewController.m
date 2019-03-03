@@ -452,7 +452,7 @@ static NSString *const kLongFormIdentifier = @"kLongFormIdentifier";
     [model.sections.lastObject addRow:self.bluetoothRow];
     [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tap to choose image…", KSOFormRowKeyCellTrailingView: [[ImagePickerView alloc] initWithFrame:CGRectZero], KSOFormRowKeyThemeTitleColor: self.view.tintColor}];
     [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Tags", KSOFormRowKeyCellTrailingView: [[TagScrollView alloc] initWithFrame:CGRectZero], KSOFormRowKeyCellWantsLeadingViewCenteredVertically: @NO}];
-    [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Long Form",
+    [model.sections.lastObject addRowFromDictionary:@{KSOFormRowKeyTitle: @"Multiple Sections",
                                                       KSOFormRowKeyActionDelegate: self,
                                                       KSOFormRowKeyIdentifier: kLongFormIdentifier
                                                       }];
@@ -462,26 +462,92 @@ static NSString *const kLongFormIdentifier = @"kLongFormIdentifier";
 
 - (KSOFormModel *)actionFormModelForFormRow:(KSOFormRow *)formRow {
     if ([formRow.identifier isEqualToString:kLongFormIdentifier]) {
-        KSOFormModel *retval = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Long Form"}];
+        KSOFormModel *retval = [[KSOFormModel alloc] initWithDictionary:@{KSOFormModelKeyTitle: @"Multiple Sections"}];
         
         for (NSInteger i=0; i<10; i++) {
             KSOFormSection *section = [[KSOFormSection alloc] init];
             
-            section.headerTitle = [NSNumberFormatter localizedStringFromNumber:@(i) numberStyle:NSNumberFormatterSpellOutStyle];
+            section.headerTitle = [NSString stringWithFormat:@"Section header %@", [NSNumberFormatter localizedStringFromNumber:@(i) numberStyle:NSNumberFormatterDecimalStyle]];
+            section.footerTitle = [NSString stringWithFormat:@"Section footer %@", [NSNumberFormatter localizedStringFromNumber:@(i) numberStyle:NSNumberFormatterDecimalStyle]];
             
-            for (NSInteger j=0; j<10; j++) {
-                KSOFormRow *row = [[KSOFormRow alloc] initWithDictionary:@{KSOFormRowKeyType: @(KSOFormRowTypePickerView)}];
+            NSArray *types = @[@(KSOFormRowTypeLabel),
+                               @(KSOFormRowTypeText),
+                               @(KSOFormRowTypeButton),
+                               @(KSOFormRowTypeSegmented),
+                               @(KSOFormRowTypeOptions),
+                               @(KSOFormRowTypeOptionsInline),
+                               @(KSOFormRowTypeTextMultiline),
+                               @(KSOFormRowTypeSwitch),
+                               @(KSOFormRowTypePickerView),
+                               @(KSOFormRowTypeDatePicker),
+                               @(KSOFormRowTypeStepper),
+                               @(KSOFormRowTypeSlider)];
+            
+            for (NSNumber *type in types) {
+                KSOFormRow *row = [KSOFormRow formRowWithDictionary:@{KSOFormRowKeyType: type}];
                 
-                row.title = [NSNumberFormatter localizedStringFromNumber:@(j) numberStyle:NSNumberFormatterSpellOutStyle];
+                row.placeholder = @"Placeholder";
                 
-                NSMutableArray *optionRows = [[NSMutableArray alloc] init];
-                NSInteger count = j + 1;
-                
-                for (NSInteger o=0; o<count; o++) {
-                    [optionRows addObject:[NSNumberFormatter localizedStringFromNumber:@(o) numberStyle:NSNumberFormatterOrdinalStyle]];
+                switch ((KSOFormRowType)type.integerValue) {
+                    case KSOFormRowTypeLabel:
+                        row.title = @"Label";
+                        row.subtitle = @"Subtitle";
+                        row.image = [UIImage KSO_fontAwesomeRegularImageWithString:@"\uf2bb" size:CGSizeMake(25.0, 25.0)].KDI_templateImage;
+                        row.value = @"Value";
+                        break;
+                    case KSOFormRowTypeText:
+                        row.title = @"Text";
+                        row.value = @"Value";
+                        break;
+                    case KSOFormRowTypeButton:
+                        row.title = @"Button";
+                        row.controlBlock = ^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+                            [UIAlertController KDI_presentAlertControllerWithTitle:@"Alert" message:@"You tapped on the button!" cancelButtonTitle:nil otherButtonTitles:nil completion:nil];
+                        };
+                        break;
+                    case KSOFormRowTypeSegmented:
+                        row.title = @"Segmented";
+                        row.segmentedItems = @[@"Red", @"Green", @"Blue"];
+                        break;
+                    case KSOFormRowTypeOptions:
+                        row.title = @"Options";
+                        row.optionRows = @[@"Red", @"Green", @"Blue"];
+                        break;
+                    case KSOFormRowTypeOptionsInline:
+                        row.title = @"Options Inline";
+                        row.optionRows = @[@"Red", @"Green", @"Blue"];
+                        break;
+                    case KSOFormRowTypeTextMultiline:
+                        row.title = @"Text Multiline";
+                        row.value = @"Value";
+                        break;
+                    case KSOFormRowTypeSwitch:
+                        row.title = @"Switch";
+                        break;
+                    case KSOFormRowTypePickerView:
+                        row.title = @"Picker View";
+                        row.pickerViewColumnsAndRows = @[@[@"Red", @"Green", @"Blue"],
+                                                         @[@"One", @"Two", @"Three"]];
+                        break;
+                    case KSOFormRowTypeDatePicker:
+                        row.title = @"Date Picker";
+                        break;
+                    case KSOFormRowTypeStepper:
+                        row.title = @"Stepper";
+                        row.stepperStepValue = 1.0;
+                        row.stepperMinimumValue = -10.0;
+                        row.stepperMaximumValue = 10.0;
+                        break;
+                    case KSOFormRowTypeSlider:
+                        row.title = @"Slider";
+                        row.sliderMinimumValue = -1.0;
+                        row.sliderMaximumValue = 1.0;
+                        row.sliderMinimumValueImage = [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf027" size:CGSizeMake(25.0, 25.0)].KDI_templateImage;
+                        row.sliderMaximumValueImage = [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf028" size:CGSizeMake(25.0, 25.0)].KDI_templateImage;
+                        break;
+                    default:
+                        break;
                 }
-                
-                row.pickerViewRows = optionRows;
                 
                 [section addRow:row];
             }
