@@ -293,6 +293,12 @@
     return retval;
 }
 #pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return self.model.sections[section].wantsHeaderView ? UITableViewAutomaticDimension : CGFLOAT_MIN;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return self.model.sections[section].wantsFooterView ? UITableViewAutomaticDimension : CGFLOAT_MIN;
+}
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     KSOFormSection *formSection = self.model.sections[section];
     UITableViewHeaderFooterView<KSOFormSectionView> *retval = nil;
