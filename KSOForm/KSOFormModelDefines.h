@@ -27,6 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class KSOFormModel;
 
 /**
+ Block that is invoked immediately before owning KSOFormTableViewController is displayed. This happens within the viewWillAppear: method. You could use this block to adjust contentInsets for example.
+ 
+ @param model The model that is about to be visible
+ */
+typedef void(^KSOFormModelWillAppearBlock)(KSOFormModel *model);
+/**
  Block that is invoked after the owning KSOFormTableViewController has been fully displayed. This happens within the viewDidAppear: method. You could use this block to begin editing a specific row, for example.
  
  @param model The model that is visible
@@ -82,6 +88,12 @@ UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyHeaderView;
  */
 UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyFooterView;
 
+/**
+ A block that is invoked within viewWillAppear:.
+ 
+ @see [KSOFormModel willAppearBlock]
+ */
+UIKIT_EXTERN KSOFormModelKey const KSOFormModelKeyWillAppearBlock;
 /**
  A block that is invoked within viewDidAppear:.
  

@@ -35,6 +35,7 @@ KSOFormModelKey const KSOFormModelKeyHeaderView = @"headerView";
 KSOFormModelKey const KSOFormModelKeyFooterView = @"footerView";
 KSOFormModelKey const KSOFormModelKeySections = @"sections";
 KSOFormModelKey const KSOFormModelKeyRows = @"rows";
+KSOFormModelKey const KSOFormModelKeyWillAppearBlock = @"willAppearBlock";
 KSOFormModelKey const KSOFormModelKeyDidAppearBlock = @"didAppearBlock";
 
 @interface KSOFormModel ()
@@ -64,6 +65,7 @@ KSOFormModelKey const KSOFormModelKeyDidAppearBlock = @"didAppearBlock";
     _backgroundView = dictionary[KSOFormModelKeyBackgroundView];
     _headerView = dictionary[KSOFormModelKeyHeaderView];
     _footerView = dictionary[KSOFormModelKeyFooterView];
+    _willAppearBlock = dictionary[KSOFormModelKeyWillAppearBlock];
     _didAppearBlock = dictionary[KSOFormModelKeyDidAppearBlock];
     _sections = [[NSMutableArray alloc] init];
     

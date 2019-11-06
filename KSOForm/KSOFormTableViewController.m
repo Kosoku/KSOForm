@@ -199,6 +199,13 @@
     }];
 #endif
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.model.willAppearBlock != nil) {
+        self.model.willAppearBlock(self.model);
+    }
+}
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     

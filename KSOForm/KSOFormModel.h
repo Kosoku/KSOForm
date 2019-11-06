@@ -75,6 +75,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,nullable) __kindof UIView *footerView;
 
 /**
+ Block that is invoked immediately before the receiver is visible, this is invoked within the viewWillAppear: method. You could use this to adjust contentInsets for example.
+ 
+ @see KSOFormModelWillAppearBlock
+ */
+@property (copy,nonatomic,nullable) KSOFormModelWillAppearBlock willAppearBlock;
+/**
  Block that is invoked when the receiver is visible, this is invoked within the viewDidAppear: method. You could use this to begin editing a specific row, for example.
  
  @see KSOFormModelDidAppearBlock
