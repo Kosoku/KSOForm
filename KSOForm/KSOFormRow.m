@@ -276,6 +276,7 @@ KSOFormRowKey const KSOFormRowKeyThemeTextColor = @"themeTextColor";
 }
 - (BOOL)isSelectable {
     return (self.isEditable ||
+            self.actionDelegate != nil ||
             (self.isEnabled &&
              (self.cellAccessoryType == KSOFormRowCellAccessoryTypeDisclosureIndicator ||
               self.section.model.parentFormRow.type == KSOFormRowTypeOptions)));
