@@ -1,5 +1,7 @@
 ## KSOForm
 
+**This project is archived, we recommend you use [Eureka](https://github.com/xmartlabs/Eureka) instead.**
+
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Version](http://img.shields.io/cocoapods/v/KSOForm.svg)](http://cocoapods.org/?q=KSOForm)
 [![Platform](http://img.shields.io/cocoapods/p/KSOForm.svg)]()
