@@ -45,9 +45,9 @@ Pod::Spec.new do |s|
   s.dependency 'Ditko'
   s.dependency 'KSOFontAwesomeExtensions'
   s.dependency 'KSOTextValidation'
-  s.dependency 'KSOToken'
-  s.dependency 'KSOTooltip'
   s.dependency 'Loki'
   s.dependency 'Quicksilver'
   s.dependency 'Stanley'
+
+  s.ios.dependency 'KSOTooltip', '~> 3.0'
 end
