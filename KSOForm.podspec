@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KSOForm'
-  s.version          = '0.36.6'
+  s.version          = '1.0.0'
   s.summary          = 'KSOForm is a iOS framework for creating Settings app like views.'
 
 # This description is used to generate tags and improve search results.
@@ -27,8 +27,8 @@ Pod::Spec.new do |s|
   s.author           = { 'William Towe' => 'willbur1984@gmail.com' }
   s.source           = { :git => 'https://github.com/Kosoku/KSOForm.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '10.0'
-  s.tvos.deployment_target = '10.0'
+  s.ios.deployment_target = '13.0'
+  s.tvos.deployment_target = '13.0'
   
   s.requires_arc = true
 
@@ -41,8 +41,13 @@ Pod::Spec.new do |s|
     'KSOForm' => ['KSOForm/**/*.{lproj}']
   }
   
-  s.dependency 'Ditko'
   s.dependency 'Agamotto'
-  s.dependency 'Quicksilver'
+  s.dependency 'Ditko'
+  s.dependency 'KSOFontAwesomeExtensions'
   s.dependency 'KSOTextValidation'
+  s.dependency 'KSOToken'
+  s.dependency 'KSOTooltip'
+  s.dependency 'Loki'
+  s.dependency 'Quicksilver'
+  s.dependency 'Stanley'
 end
